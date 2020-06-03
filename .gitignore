@@ -1,5 +1,7 @@
-# Specific to this project
+# Specific to ide used for this project
 .idea/
+.vs/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
