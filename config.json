@@ -1,0 +1,20 @@
+{   
+    "DB" : {
+        "connexion" : {
+            "username" : "root",
+            "password" : ""
+        },
+
+        "setup" : {            
+            "name": "appname",
+            "characterSet" : "latin1",
+            "classification" : "latin1_general_ci"
+        },
+
+        "script" : {
+            "name": "appname",
+            "push" : false,
+            "pull" : false
+        }
+    }
+}
