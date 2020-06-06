@@ -1,17 +1,8 @@
 <?php ob_start(); 
-
-            $first = true;
-            foreach ($pageFill['errMsgs'] as $msg) {
-                if ($first) {
-                    $first = false;
-                }
-                else {
-                    echo '<br>';
-                }
-
-                echo htmlspecialchars($msg);
-            }
-
+    //open html balises here
+    echo htmlspecialchars($pageFill['errMsg']);
+    //close html balises here
 $pageFill['sectionContent'] = ob_get_clean();
+$pageFill['pageName'] = 'error';
 
 require("template.php");

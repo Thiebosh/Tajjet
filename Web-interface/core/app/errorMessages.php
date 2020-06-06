@@ -1,8 +1,8 @@
 <?php
 
 //affichage des messages d'erreur
-function display_error($errMsg) {
-    $pageFill['errMsgs'][] = $errMsg;//ajoute message d'erreur à la liste
+function display_error($path, $errMsg) {
+    $pageFill['errMsg'] = $errMsg;//ajoute message d'erreur à la liste
     require($path['resource'].'view/error.php');//appelle vue de l'erreur
     exit();//mets fin au script
 }
@@ -12,3 +12,5 @@ $errMsg['index']['configFile']['notSet']    = 'Fichier de configuration introuva
 $errMsg['index']['configFile']['notFull']   = 'Fichier de configuration incomplet ou incorrect.';
 
 $errMsg['index']['sqlFile']['notSet']   = 'Script sql introuvable.';
+
+$errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';

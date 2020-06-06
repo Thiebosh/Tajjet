@@ -6,15 +6,19 @@
         },
 
         "setup" : {            
-            "name": "appname",
+            "DBname": "appname",
             "characterSet" : "latin1",
             "classification" : "latin1_general_ci"
         },
 
         "script" : {
-            "name": "appname",
             "push" : false,
+            "fill" : true,
             "pull" : false
         }
+    },
+
+    "Python" : {
+        "executable" : "C:\\Users\\Thibaut Juzeau\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
     }
 }
