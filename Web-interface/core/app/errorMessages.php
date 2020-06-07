@@ -3,7 +3,7 @@
 //affichage des messages d'erreur
 function display_error($path, $errMsg) {
     $pageFill['errMsg'] = $errMsg;//ajoute message d'erreur à la liste
-    require($path['resource'].'view/error.php');//appelle vue de l'erreur
+    require($path['resource'].'view/error.phtml');//appelle vue de l'erreur
     exit();//mets fin au script
 }
 

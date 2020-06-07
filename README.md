@@ -17,7 +17,7 @@
 
 3. Installer les dépendances du projet via la commande : `pip install -r requirements.txt`(automatisation ?)
 
-4. Réaliser les manipulations suivantes pour autoriser l'appel de script Python par le serveur PHP :(uniquement pour phython cgi)
+4. Réaliser les manipulations suivantes pour autoriser l'appel de script Python par le serveur PHP :(à oublier : plus d'actualité)
 
     - Lancer Wamp et attendre que les trois services soient actifs
 
