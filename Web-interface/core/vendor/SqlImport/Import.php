@@ -1,5 +1,10 @@
 <?php
+namespace vendor\SqlImport;
 
+use PDO;
+use PDOException;
+use Exception;
+use Error;
 
 /**
  * PDO class to import sql from a .sql file

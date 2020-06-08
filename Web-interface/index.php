@@ -1,4 +1,10 @@
 <?php
+//namespace : uniquement si classe
+//appel selon 3 possibilités :
+//use vendor\SqlImport\Import; -> Import();
+//use vendor\SqlImport; -> SqlImport\Import();
+//vendor\SqlImport\Import();
+
 //point de depart de l'app :
 session_start();//initie ou recupere $_SUPERVARIABLES
 
@@ -46,7 +52,7 @@ if (!isset($_SESSION['initialize'])) {
         else {
             require_once($path['vendor'].'SqlImport/Import.php');
 
-            new Import($scriptName['sql'], 
+            new vendor\SqlImport\Import($scriptName['sql'], 
                         $config['DB']['connexion']['username'], 
                         $config['DB']['connexion']['password'], 
                         $config['DB']['setup']['DBname'], 
