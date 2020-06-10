@@ -37,7 +37,6 @@
 
     - En cas de problème, réappliquer la configuration intiale, enregistrée dans le fichier backup
     
-That's it, it should work. Just make sure to have correct shebang on top of python files which shows the location of where python.exe is. Mine is #!C:/Python3.6/python.exe
 
 
 ### Setup du fichier config.json
