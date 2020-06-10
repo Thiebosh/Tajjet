@@ -3,7 +3,7 @@
 //affichage des messages d'erreur
 function display_error($path, $errMsg) {
     $pageFill['errMsg'] = $errMsg;//ajoute message d'erreur a la liste
-    require($path['resource'].'view/error.phtml');//appelle vue de l'erreur
+    require(__DIR__."/../view/error.phtml");//appelle vue de l'erreur
     exit();//mets fin au script
 }
 
@@ -14,3 +14,5 @@ $errMsg['index']['configFile']['notFull']   = 'Fichier de configuration incomple
 $errMsg['index']['sqlFile']['notSet']   = 'Script sql introuvable.';
 
 $errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';
+
+$errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
