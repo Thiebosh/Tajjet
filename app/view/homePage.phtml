@@ -1,0 +1,18 @@
+<?php
+//1. met en variable contenu de page
+$pageFill['pageName'] = $pageName;
+
+ob_start(); 
+    //open html balises here
+    echo htmlspecialchars("page d'accueil");
+    //close html balises here
+$pageFill['sectionContent'] = ob_get_clean();
+
+
+//2. vide variables inutiles car utilisees (ne reste que $pageFill et $_SESSION)
+unset($pageName, $path, $scriptName, $errMsg, $_GET, $_POST);
+
+
+//3. appelle template
+require("common/template.phtml");
+exit();
