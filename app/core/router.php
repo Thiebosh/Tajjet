@@ -1,6 +1,8 @@
 <?php
 //routeur de l'app : selon l'url, redirige vers le bon controleur
 
+//couche utilisateur (connecté ou non) ?
+
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
@@ -41,22 +43,31 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
     }
 
-    $pageName = 'homePage';//page d'accueil, sait qu'elle existe
+    $pageName = 'home';//page d'accueil, sait qu'elle existe
 }
 else {//forcement a la fin, sinon existence de action pas verifiee
-    $pageName = (!empty($_GET['page'])) ? filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) : 'homePage';
+    $pageName = (!empty($_GET['page'])) ? filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) : 'home';
 
     //teste existence de page
     if (!file_exists(__DIR__."/../controller/$pageName.php")) display_error($path, $errMsg['router']['URL']['unknow']);
 }
 
 
-//3. vide variables inutiles s'il y en a puis appelle le controller
-//unset($var1, $var2);
+//3. appelle le controller, qui genere les variables pour la vue, et la vue
+try { 
+    //3.1. declare variables pour la vue
+    require(__DIR__."/../controller/$pageName.php");//sait qu'il existe
 
-try { require(__DIR__."/../controller/$pageName.php"); }//sait qu'il existe
+    //3.2. integre variables a la vue
+    require(__DIR__."/../view/$pageName.phtml");//cense exister
+
+    //3.3. vide variables inutiles car deja integrees (ne reste que $pageFill et $_SESSION)
+    unset($pageName, $path, $scriptName, $errMsg, $pageFill['pageName'], $_GET, $_POST);
+
+    //3.4. appelle template
+    require(__DIR__."/../view/common/template.phtml");
+}
 catch(Exception $erreur) {//appels bdd peut jeter des erreurs
     echo($erreur->getMessage().'<br>');
     echo('Fichier '.$erreur->getFile().', ligne '.$erreur->getLine());
-    exit();
 }

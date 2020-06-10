@@ -4,9 +4,9 @@ $pageFill['pageName'] = 'error';
 
 ob_start(); 
     //open html balises here
-    echo htmlspecialchars($pageFill['errMsg']);
+    echo(htmlspecialchars($pageFill['errMsg']));
     //close html balises here
-$pageFill['sectionContent'] = ob_get_clean();
+$sectionContent = ob_get_clean();
 
 
 //2. vide variables inutiles car utilisees (ne reste que $pageFill et $_SESSION)

@@ -42,6 +42,6 @@ else {//ok
 require_once($path['app'].'core/dbMonitoring.php');
 
 
-//3. vide variables inutiles s'il y en a puis appelle le routeur
-//unset($var1, $var2);
+//3. appelle le routeur et met fin au script
 require_once($path['app'].'core/router.php');
+exit();
