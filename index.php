@@ -39,7 +39,7 @@ else {//ok
 
 
 //3. monitoring de la bdd : mise a jour des donnees obsoletes
-//require_once($path['app'].'errorMessages.php');
+require_once($path['app'].'core/dbMonitoring.php');
 
 
 //3. vide variables inutiles s'il y en a puis appelle le routeur
