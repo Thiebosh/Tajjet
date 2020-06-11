@@ -1,43 +1,35 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php ob_start();?>
+    <?php?>
+        <article class="theme">
+        <h1><a href="page"><?=$pageFill['theme']?></a></h1>
+        <div>
+            <p><?=$pageFill['summary']?></p>
+            <p>Sources et temps de lecture estimé :
+                <ul>
+                    <?php for($i=1; $i<sizeof($pageFill['source'])+1;++$i) { ?>  <!--On va ici afficher chaque temps de lecture de l'article associé avec la source accessible en cliquant sur "Article"-->
 
-<head> 
-<meta charset="UTF-8">
-<title>News</title>
-
-</head>
-
-<body>
-
-    <section>
-        
-        <?php{?>
-            <article class="theme">
-            <h1><a href="page"><?=$theme['nom']?></a></h1>
+                    <li><a href="<?=$pageFill['source'][$i-1]['URL']?>">Article <?=$i?> </a> <?=$pageFill['source'][$i-1]   ['readingTime']?> min</li> <!--Ici, on va chercher dans un premier temps l'URL correspondant à l'article associé, et ce grâce à l'indice de l'itération
+                                                                                                                                                        Dans un second temps, on va chercher le temps de lecture estimé qui est un autre sous-champ de notre variable-->
+                    
+                    <?php } ?>
+                </ul>    
+            </p>
+        </div>
+        </article>
+        <div>
+            <p>Intéressé par un autre thème ?</p>
             <div>
-                <p>Résumé</p>
-                <p>Sources et temps de lecture estimé :
-                    <ul>
-                        <li><a href="page">Article 1 </a> (10 min)</li>
-                        <li><a href="page">Article 2 </a> (15 min)</li>
-                        
-                    </ul>    
-                </p>
+                <form>  <!--On crée une liste déroulante répertoriant les différents thèmes que l'utilisateur peut choisir-->
+                    <select name="Thème" size=1>
+                        <?php foreach ($pageFill['themeList'] as $theme) { ?> 
+                            <option><?=$theme?>
+                        <?php } ?>
+                    </select>
+
+                </form>
+
+                <a href="page">Go</a> <!--Bouton permettant de valider le choix de thème de l'utilisateur-->
             </div>
-            </article>
-            <div>
-                <p>Intéressé par un autre thème ?</p>
-                <div>
-                    <form>
-                        <select name="Thème" size=1>
-                            <?php foreach ($fillPage['themes'] as $theme) { echo("<option>$theme"); } ?>
-                        </select>
-
-                    </form>
-
-                    <a href="page">Go</a>
-                </div>
             
-            </div>
-    </section>
-
+        </div>
+<?php $sectionContent=ob_get_clean();
