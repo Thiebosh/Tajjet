@@ -1,18 +1,3 @@
-<?php
-//1. met en variable contenu de page
-$pageFill['pageName'] = 'error';
-
-ob_start(); 
-    //open html balises here
-    echo(htmlspecialchars($pageFill['errMsg']));
-    //close html balises here
-$sectionContent = ob_get_clean();
-
-
-//2. vide variables inutiles car utilisees (ne reste que $pageFill et $_SESSION)
-unset($path, $scriptName, $errMsg, $_GET, $_POST);
-
-
-//3. appelle template
-require("common/template.phtml");
-exit();
+<?php ob_start(); ?>
+    <?= htmlspecialchars($errMsg) ?>
+<?php $sectionContent = ob_get_clean(); ?>

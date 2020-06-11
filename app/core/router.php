@@ -62,7 +62,7 @@ try {
     require(__DIR__."/../view/$pageName.phtml");//cense exister
 
     //3.3. vide variables inutiles car deja integrees (ne reste que $pageFill et $_SESSION)
-    unset($pageName, $path, $scriptName, $errMsg, $pageFill['pageName'], $_GET, $_POST);
+    unset($path, $scriptName, $errMsg, $_GET, $_POST);
 
     //3.4. appelle template
     require(__DIR__."/../view/common/template.phtml");

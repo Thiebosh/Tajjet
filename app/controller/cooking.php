@@ -19,9 +19,9 @@ $pageFill['recipe'] = array(array("titre" => "préparation de cookies",
 $pageFill['userItems'] = array("name" => "carottes",
                                 "consommable" => true//necessaire ici?
                             );
-                                
+
 
 //3. transforme donnees (post traitement)
 for ($i = 0; $i < sizeof($pageFill)-1; ++$i) { 
-    $pageFill['recipe'][$i]["globalTime"] = $pageFill['recipe'][$i]["prepTime"]+$pageFill['recipe'][$i]["cookTime"];
+    $pageFill['recipe'][$i]["globalTime"] = $pageFill['recipe'][$i]["prepTime"] + $pageFill['recipe'][$i]["cookTime"];
 }

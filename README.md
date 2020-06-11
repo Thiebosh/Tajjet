@@ -17,27 +17,6 @@
 
 3. Installer les dépendances du projet via la commande : `pip install -r requirements.txt`(automatisation ?)
 
-4. Réaliser les manipulations suivantes pour autoriser l'appel de script Python par le serveur PHP :(à oublier : plus d'actualité)
-
-    - Lancer Wamp et attendre que les trois services soient actifs
-
-    - Opérer un clic gauche sur l'icone de Wamp, à gauche de la barre des tâches
-    
-    - Cliquer sur 'Apache', puis sur 'httpd.conf' (copier le contenu du fichier dans un fichier backup)
-    
-    - Ouvrir la barre de recherche (ctrl+f)
-    
-        - Chercher '<Directory />' : pour 'Require all', remplacer 'denied' par 'granted'
-        
-        - Chercher 'Options +Indexes +FollowSymLinks +Multiviews' : ajouter à la suite ' +ExecCGI'
-        
-        - Chercher 'AddHandler cgi-script .cgi' : décommenter la ligne (supprimer le #) et ajouter à la suite ' .py'
-
-    - Fermer le fichier, redémarrer Wamp (clic gauche - redémarrer les services)
-
-    - En cas de problème, réappliquer la configuration intiale, enregistrée dans le fichier backup
-    
-
 
 ### Setup du fichier config.json
 
