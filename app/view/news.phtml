@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head> 
+<meta charset="UTF-8">
+<title>News</title>
+
+</head>
+
+<body>
+
+    <section>
+        
+        <?php{?>
+            <article class="theme">
+            <h1><a href="page"><?=$theme['nom']?></a></h1>
+            <div>
+                <p>Résumé</p>
+                <p>Sources et temps de lecture estimé :
+                    <ul>
+                        <li><a href="page">Article 1 </a> (10 min)</li>
+                        <li><a href="page">Article 2 </a> (15 min)</li>
+                        
+                    </ul>    
+                </p>
+            </div>
+            </article>
+            <div>
+                <p>Intéressé par un autre thème ?</p>
+                <div>
+                    <form>
+                        <select name="Thème" size=1>
+                            <?php foreach ($fillPage['themes'] as $theme) { echo("<option>$theme"); } ?>
+                        </select>
+
+                    </form>
+
+                    <a href="page">Go</a>
+                </div>
+            
+            </div>
+    </section>
+

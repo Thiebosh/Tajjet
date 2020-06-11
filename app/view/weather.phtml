@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head> 
+<meta charset="UTF-8">
+<title>Connexion</title>
+
+</head>
+
+<body>
+
+    <section>
+        
+        <?php{?>
+            <article>
+
+                <h1>Météo de <?=$user['town']?></h1>   <!--Variable à modifier, elle va correspondre au champ ville des infos de l'utilisateur-->
+
+                <div>
+                    <?php foreach($liste as $meteo){?>
+                    <div class="jour">
+                        <h1><?=$meteo['day']?></h1>
+                        
+                    </div>
+
+
+                    
+                </div>
+
+            </article>
+    </section>
+
+</body>
