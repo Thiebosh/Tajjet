@@ -1,45 +1,30 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head> 
-<meta charset="UTF-8">
-<title>Sport</title>
-
-</head>
-
-<body>
-
-
-    <section>
-        <div>
-            <a href="page">Liste d'exercices</a>
-                <form method="post" action="index.php?page=recherche">
-                    <input type="text" name="search" placeholder="Rechercher un exercice">
-                    <input type="submit" class="buttonNav" value="Rechercher">
-                </form>
-            <a href="page">Exercices aléatoires</a>
+<?php ob_start();?>
         
-        </div>
+            <div>
+                <a href="page">Liste d'exercices</a> <!--Bouton qui redirige vers la page contenant tous les exercices-->
+                    <form method="post" action="index.php?page=recherche"><!--Au clic sur le bouton de recherche, l'utilisateur va être redirigé vers la page dédiée-->
+                        <input type="text" name="search" placeholder="Rechercher un exercice">
+                        <input type="submit" class="buttonNav" value="Rechercher">
+                    </form>
+                <a href="page">Exercices aléatoires</a>
+            
+            </div>
+            
+            <?php foreach($pageFill['exercice'] as $exercice){?>   <!--On va parcourir la liste contenant les 3 exo affichés aléatoirement-->
+                <article class="exo">
+                    <h2><?=$exercice['name']?></h2> <!--On met en titre le nom de l'exercice correspondant-->
+                    <img href="<?=$exercice['picture']?>"/> <!--On affiche l'image de l'exercice correspondant-->
+                    <p>Calories consommées : <?=$exercice['calories']?> kcal pour 1h</p> <!--On affiche le nombre de calories consommées pour l'exercice correspondant-->
+                    
+                    <form method="post" action="index.php?page=sport"> <!--Au clic sur le bouton de réalisation de l'exercice, la page va être actualisée-->
+                        <input type="text" name="ID_exo" value="<?=$exercice['id']?>" hidden/> <!--Permet de retrouver l'id de l'exercice correspondant (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
+                        <input type="submit" class="buttonNav" value="Je réalise cet exercice"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser l'exercice correspondant, sera notamment utile pour le module santé-->
+                    </form>
+                </article>
+            
+            <?php }?>
+            <a class="creation_exo" href="session.phtml">Créer ma séance d'entrainement</a> <!--Bouton qui redirige vers la page permettant de créer sa séance-->
+
         
-        <?php foreach($pagefill as $exercice){?>   <!--On va parcourir la liste contenant les 3 exo affichés aléatoirement-->
-            <article class="exo">
-                <h2><?=$exercice['name']?></h2> <!--On met en titre le nom de l'exercice correspondant-->
-                <img href="<?=$exercice['url']?>"/> <!--On affiche l'image de l'exercice correspondant-->
-                <p>Calories consommées :<?=$exercice['calories']?> kcal pour 1h</p>
-                
-                <form method="post" action="index.php?page=recherche">
-                    <input type="text" name="ID_exo" value="<?=$exercice['id']?>" hidden/>
-                    <input type="submit" class="buttonNav" value="Je réalise cet exercice">
-                </form>
-            </article>
-        
-        <?php}?>
-        
-        <a class="creation_exo" href="page">Créer ma séance d'entrainement</a>
-
-    </section>
-
-
-
-
-</body>
+<?php $sectionContent=ob_get_clean();
