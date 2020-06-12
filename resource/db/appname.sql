@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `appname`
+-- Base de données :  `tajjet`
 --
 
 -- --------------------------------------------------------
@@ -328,8 +328,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`ID_user`),
   KEY `FK_User_town_id_town` (`town_id_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `work`
