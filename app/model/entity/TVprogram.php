@@ -7,6 +7,8 @@ class News extends Entity {
     private $_synopsis;
     private $_begin;
     private $_end;
+    
+    private $_Genres; //array of Genre instances
 
 
     //methods
@@ -39,6 +41,10 @@ class News extends Entity {
     public function getEnd() {
         return this->_end;
     }
+    
+    public function getGenres() {
+        return this->_Genres;
+    }
 
 
     //setters
@@ -56,5 +62,13 @@ class News extends Entity {
     
     public function setEnd($end) {
         if ($end instanceof DateTime) this->_end = $end;
+    }
+
+    public function setGenres($genres) {
+        foreach ($genres as $genre) addGenre($genre);
+    }
+
+    public function addGenre($genre) {
+        if ($genre instanceof Genre) this->_Genres[] = $genre;
     }
 }

@@ -31,12 +31,7 @@ class News extends Entity {
     public function getTheme() {
         return this->_Theme;
     }
-/*
-    public function getArticles() {
-        return this->_Articles;
-    }
-    */
-
+    
 
     //setters
     public function setSummary($summary) {
@@ -46,14 +41,4 @@ class News extends Entity {
     public function setTheme($theme) {
         if ($theme instanceof Theme) this->_Theme = $theme;
     }
-
-    /*
-    public function setArticles($articles) {
-        foreach ($articles as $article) addArticle($article);
-    }
-
-    public function addArticle($article) {
-        if ($article instanceof Article) this->_Articles[] = $article;
-    }
-    */
 }
