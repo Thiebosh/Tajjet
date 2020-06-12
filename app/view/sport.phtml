@@ -2,7 +2,7 @@
 <?php ob_start();?>
         
             <div>
-                <a href="page">Liste d'exercices</a> <!--Bouton qui redirige vers la page contenant tous les exercices-->
+                <a href="index.php?page=exercices">Liste d'exercices</a> <!--Bouton qui redirige vers la page contenant tous les exercices-->
                     <form method="post" action="index.php?page=recherche"><!--Au clic sur le bouton de recherche, l'utilisateur va être redirigé vers la page dédiée-->
                         <input type="text" name="search" placeholder="Rechercher un exercice">
                         <input type="submit" class="buttonNav" value="Rechercher">
@@ -24,7 +24,7 @@
                 </article>
             
             <?php }?>
-            <a class="creation_exo" href="session.phtml">Créer ma séance d'entrainement</a> <!--Bouton qui redirige vers la page permettant de créer sa séance-->
+            <a class="creation_exo" href="index.php?page=session">Créer ma séance d'entrainement</a> <!--Bouton qui redirige vers la page permettant de créer sa séance-->
 
         
 <?php $sectionContent=ob_get_clean();
