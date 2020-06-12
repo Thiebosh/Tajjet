@@ -1,0 +1,14 @@
+
+<?php ob_start();?>
+    <div>
+        <input type="text" name="username" placeholder="Nom d'utilisateur">
+        <input type="text" name="password" placeholder="Mot de passe">
+        <a href="page">Connexion</a>
+    </div>
+
+    <div>
+        <p>Pas encore inscrit ?</p>
+        <a href="registration.phtml">S'inscrire</a>
+    </div>
+    
+<?php $sectionContent=ob_get_clean();

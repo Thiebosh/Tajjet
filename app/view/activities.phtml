@@ -1,0 +1,41 @@
+<?php ob_start();?>
+
+    <article class="interieur">
+        <h1>Intérieur</h1>
+        
+        <h2>Programme télé : </h2>
+        <h3><?php echo(date("l d M Y"))?></h3>
+        <ul>
+            <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
+                                                                    On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->
+                <?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
+                    <li> <strong><?=$programme['channel']?></strong> 
+                        <?=$programme['program'][$i]['title']?>
+                        <?=$programme['program'][$i]['begin']?>
+                        <?=$programme['program'][$i]['end']?>
+                        <em>Synopsis : <?=$programme['program'][$i]['synopsis']?> </em>
+                    </li>
+                <?php } ?>
+            <?php } ?>
+        </ul>
+        
+    
+    </article>
+
+    <article class="exterieur">
+        <h1>Extérieur</h1>
+
+        <ul>
+            <?php foreach($pageFill['outdoor'] as $exterieur) {?>   <!--On parcourt la liste des activités extérieures et on les affiche avec la distance qui 
+                                                                    les sépare du centre de la ville de l'utilisateur-->
+                    <div>
+                        <h1><?=$exterieur['category']?>
+                        <h2><?=$exterieur['label']?></h2>
+                        Distance : <?=$exterieur['distance']?> km
+                    </div>
+            <?php } ?>
+    
+    </article>
+
+
+<?php $sectionContent=ob_get_clean();

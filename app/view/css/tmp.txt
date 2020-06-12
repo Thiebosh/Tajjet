@@ -1,0 +1,1 @@
+add stylesheet with page concerned name here

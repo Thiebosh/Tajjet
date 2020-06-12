@@ -1,0 +1,51 @@
+<?php ob_start(); ?>
+
+    <div> 
+        <h1>Analyse et résumé de votre état de santé</h1>
+        <p>Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> : <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+            <?php if($pageFill['records'][0]['imc'] < 18.5) {   
+                echo("Attention ! Vous êtes en insuffisance pondérale (maigreur), il vous faut gagner du poids !");
+                } 
+
+              elseif($pageFill['records'][0]['imc'] >= 18.5 && $pageFill['records'][0]['imc'] <= 25) {   
+                echo("Très bien ! Vous entrez dans la catégorie Corpulence Normale, votre poids correspond à votre taille !");
+                } 
+
+             elseif($pageFill['records'][0]['imc'] > 25 && $pageFill['records'][0]['imc'] <=30) { 
+                echo("Attention ! Vous êtes en surpoids, il vous faut perdre du poids !");
+                } 
+
+             elseif($pageFill['records'][0]['imc'] > 30 && $pageFill['records'][0]['imc'] <= 35) { 
+                echo("Attention ! Vous êtes obèse, prenez soin de votre corps et éliminez le surplus !");
+                } 
+            
+             elseif($pageFill['records'][0]['imc'] >35 && $pageFill['records'][0]['imc'] <= 40) { 
+                echo("Attention ! Vous avez atteint une obésité sévère, il devient urgent de faire quelque chose ! Consultez un médecin.");
+                } 
+            
+             else { 
+                echo("Vous avez atteint une obésité morbide. Si ce n'est pas déjà le cas, il faut vous soigner : votre vie est en danger. ");
+                } 
+            
+            ?>
+            </br>
+            Pour votre taille, le poids idéal est de : <strong><?=$pageFill['user']['lorentz']['idealWeigth']?> kg.</strong>
+        </p>
+    
+    
+    </div>
+
+    <article>
+        <div>Image de courbe de sommeil
+            <p>Commentaire par rapport au sommeil</p>
+        </div>
+        <div>
+            <p>Commentaire par rapport à l'exercice physique, alimentation et calories dépensées récemment</p>
+        </div>
+
+
+
+
+    </article>
+    
+<?php $sectionContent = ob_get_clean();

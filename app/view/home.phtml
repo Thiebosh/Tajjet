@@ -1,0 +1,13 @@
+<?php ob_start(); ?>
+    <?= htmlspecialchars("page d'accueil") ?>
+    <br><hr><br>
+    <a href="index.php?page=sport">module sport</a>
+    <br>
+    <a href="index.php?page=health">module santé</a>
+    <br>
+    <a href="index.php?page=news">module news</a>
+    <br>
+    <a href="index.php?page=weather">module météo</a>
+    <br>
+    <a href="index.php?page=activities">module activités</a>
+<?php $sectionContent = ob_get_clean();
