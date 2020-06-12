@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/../abstract/Entity.php");
 
-class News extends Entity {
+class Sky extends Entity {
     //attributes
     private $_label;
 

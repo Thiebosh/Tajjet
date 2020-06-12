@@ -20,7 +20,7 @@ class Genre extends Entity {
 
     //getters
     public function getLabel() {
-        return this->_URL;
+        return this->_label;
     }
 
 
