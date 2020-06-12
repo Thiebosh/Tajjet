@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 12 juin 2020 à 15:16
+-- Généré le :  ven. 12 juin 2020 à 15:23
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `muscle` (
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `ID_news` int(11) NOT NULL AUTO_INCREMENT,
-  `Summary` text COLLATE latin1_general_ci,
+  `Summary` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `ID_theme` int(11) NOT NULL,
   PRIMARY KEY (`ID_news`),
   KEY `FK_News_ID_theme` (`ID_theme`)
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `PreparationTime` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `CookingTime` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Steps` text COLLATE latin1_general_ci,
+  `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
   PRIMARY KEY (`ID_recipe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -301,7 +301,7 @@ DROP TABLE IF EXISTS `tvprogram`;
 CREATE TABLE IF NOT EXISTS `tvprogram` (
   `ID_TVprogram` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Synopsis` text COLLATE latin1_general_ci,
+  `Synopsis` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Begin` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `End` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Genre` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ID_user` int(11) NOT NULL AUTO_INCREMENT,
   `Login` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Avatar` varchar(255) DEFAULT NULL,
+  `Avatar` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
   `town_id_town` int(11) DEFAULT NULL,
