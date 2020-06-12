@@ -1,8 +1,38 @@
-import requests
+import feedparser
+from datetime import date
 
-#response = requests.get('https://webnext.fr/templates/webnext_exclusive/views/includes/epg_cache/programme-tv-rss_07-06-2020.xml')
-#print(response.content)
+today = date.today()
 
-print("success")
+if today.day < 10:
+    day = "0" + str(today.day)
+else:
+    day = today.day
 
-#put here switch or something who call module(s) depending of arguments or json (modules names)
+if today.month < 10:
+    month = "0" + str(today.month)
+else:
+    month = today.month
+
+
+tv_feed = feedparser.parse('https://webnext.fr/templates/webnext_exclusive/views/includes/epg_cache/programme-tv-rss_{}-{}-2020.xml'.format(day, month))
+
+for item in tv_feed.entries:
+    new_title = item.title.replace("Ç", "C")
+    new_title = new_title.replace("À", "A")
+    new_title = new_title.replace('Ô', 'O')
+    new_title = new_title.replace('É', 'E')
+    title_split = new_title.encode('utf-8').decode('latin1').split("|")
+
+    new_sumamry = item.summary.replace("Ç", "C")
+    new_sumamry = new_sumamry.replace("À", "A")
+    new_sumamry = new_sumamry.replace('Ô', 'O')
+    new_sumamry = new_sumamry.replace('É', 'E')
+
+    print("{} :: {} :: {} :: {} :: {}".format(
+        title_split[0],
+        title_split[1],
+        title_split[2],
+        item.tags[0].term.encode('utf-8').decode('latin1'),
+        new_sumamry.encode('utf-8').decode('latin1')
+        )
+    )
