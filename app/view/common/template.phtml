@@ -8,16 +8,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     <link rel="stylesheet" href="css/template.css"/><!-- style de la partie template + declaration variables -->
-    <link rel="stylesheet" href="../css/<?= $pageFill['pageName'] ?>.css"/><!-- style de la partie section -->
-
-    <title>AppName - <?= htmlspecialchars(ucfirst($pageFill['pageName'])) ?></title>
+    <?php if (file_exists("../css/<?= $pageName ?>.css")) { ?>
+        <link rel="stylesheet" href="../css/<?= $pageName ?>.css"/><!-- style de la partie section -->
+    <?php } ?>
+    <title>AppName - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 </head>
 
 <body>
+    <header>
+            <a href="index.php?page=home">Accueil</a>
+            <?= $userGateContent ?>
+    </header>
+
     <section>
-        <?= $pageFill['sectionContent'] ?>
+        <?= $sectionContent ?>
     </section>
 </body>
+</html>
 
 <!-- load js bootstrap framework script after html for performance issues -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

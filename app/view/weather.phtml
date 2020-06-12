@@ -1,0 +1,30 @@
+<?php ob_start();?>
+
+    <article>
+
+        <h1>Météo de Ville</h1>   <!--Variable à modifier, elle va correspondre au champ ville des infos de l'utilisateur-->
+
+        <div>
+            
+            <div class="jour">  <!--Ici on va faire une boucle for pour afficher la météo des 7 prochains jours à compter de la date d'aujourd'hui-->
+                <?php for($i=0;$i<7;++$i) { ?>
+                    <?php $jour=$aujourdhui+$i?> <!--On veut afficher les 7 prochains jours à compter de la date du jour, la variable $jour contient cette date par défaut,
+                                                     on lui ajoute $i pour avoir le total des 7 prochains jours et on attribue le résultat à une nouvelle variable qui va parcourir les 7 jours-->
+
+                    <h1><?php echo("$jour $mois $annee")?></h1> <!--On affiche les dates des 7 prochains jours sous le format jours/mois/année-->
+                    <h2>Temps : <?=$pageFill['sky']?></h2>
+                    <p>Température min : <?=$pageFill['minTemp']?> °C </br>
+                    Température max : <?=$pageFill['maxTemp']?> °C </br>
+                    Température ressentie : <?=$pageFill['feltTemp']?> °C </br>
+                    Humidité : <?=$pageFill['humidity']?> % </br>
+                    Pression : <?=$pageFill['pressure']?> hPa </br>
+                    </p>
+                <?php } ?>        
+            </div>
+
+  
+        </div>
+
+    </article>
+    
+<?php $sectionContent=ob_get_clean();

@@ -10,7 +10,3 @@
 
 //3. transforme donnees (post traitement)
 //tranformations goes here
-
-
-//4. appelle vue
-require(__DIR__."/../view/$pageName.phtml");
