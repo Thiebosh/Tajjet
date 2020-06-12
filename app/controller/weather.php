@@ -14,6 +14,9 @@ $pageFill['feltTemp'] = 12;
 $pageFill['humidity'] = 40;
 $pageFill['pressure'] = 12;
 $pageFill['sky'] = "pluvieux";
+$aujourdhui=date("d");
+$mois=date("M");
+$annee=date("Y");
 
 
 //3. transforme donnees (post traitement)
