@@ -6,7 +6,8 @@
 //2. appels bdd
 //load bdd functions : require("../model/manager/*needed*.php");
 //call managers functions (load data here)
-$pageFill['recipe'] = array(array("titre" => "préparation de cookies",
+$pageFill['recipe'] = array(array("id"=>1,
+                                    "titre" => "préparation de cookies",
                                     "picture" => "url ou path",
                                     "prepTime" => 120,
                                     "cookTime" => 30,

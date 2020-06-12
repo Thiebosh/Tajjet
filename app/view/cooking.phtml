@@ -1,0 +1,59 @@
+<?php ob_start();?>
+
+    <div>
+        <form method="post" action="index.php?page=recherche">
+            <input type="text" name="search" placeholder="Rechercher des recettes">
+            <input type="submit" class="buttonNav" value="Rechercher">
+            <a href="page">Aléatoire</a>
+        </form>
+    </div>
+    <article class="desc">
+        <h1><?=$pageFill['recipe'][0]['titre']?></h1>
+        <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
+        
+        <div>
+            <?=$pageFill['recipe'][0]["globalTime"]?> min
+            <?=$pageFill['recipe'][0]['prepTime']?> min
+            <?=$pageFill['recipe'][0]['cookTime']?> min
+        </div>
+        <p><?=$pageFill['recipe'][0]['steps']?></p>
+        <div>
+            <form method="post" action="index.php?page=cooking"> <!--Au clic sur le bouton de réalisation de la recette, la page va être actualisée-->
+                <input type="text" name="ID_recette" value="<?=$pageFill['recipe'][0]['id']?>" hidden/> <!--Permet de retrouver l'id de la recette correspondante (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
+                <input type="submit" class="buttonNav" value="Réaliser la recette"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser la recette correspondante, sera notamment utile pour le module santé-->
+                <div>
+                    <p class="nombre">Nombre</p>
+                    nombre de personnes
+                    <input type="submit" class="buttonNav" value="+">
+                    <input type="submit" class="buttonNav" value="-">
+                </div>
+            </form>
+            <p>Calories absorbées : <?=$pageFill['recipe'][0]['calories']?> kcal pour 100 g</p>
+        </div>
+    </article>
+    <article class="liste">
+        <div class="liste_possession">
+            <h1>Liste possession</h1>
+            <ul>
+                <?php foreach($pageFill['userItems'] as $possession) { ?>
+                    <li><?=$possession?></li>
+                <?php } ?>
+            <ul>
+            <form method="post" action="index.php?page=cooking">
+                <input type="text" name="add" placeholder="Ajoutez ce dont vous disposez déjà">
+                <input type="submit" class="buttonNav" value="Ajouter">
+            </form>
+        </div>
+        
+        <div class="liste_courses">
+            <ul>
+                <?php foreach($pageFill['userItems'] as $possession) { ?>   <!--Ici on parcourt la liste de ce que l'utilisateur possède déjà, si il ne possède pas l'un des ingrédients, 
+                                                                            celui-ci est ajouté à la lite de courses-->
+                    <?php if($possession != $pageFill['recipe'][0]['items']['name']) { ?>
+                        <li><?=$pageFill['recipe'][0]['items']['name']?></li>
+                    <?php } ?>
+                <?php } ?>
+            </ul>  
+        </div>
+    </article>
+<?php $sectionContent=ob_get_clean();
