@@ -1,7 +1,6 @@
 <?php
 //routeur de l'app : selon l'url, redirige vers le bon controleur
-
-//couche utilisateur (connecté ou non) ?
+require_once('model/Manager/UserManager.php');//importe le reste
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
@@ -45,6 +44,29 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
     $pageName = 'home';//page d'accueil, sait qu'elle existe
 }
+else if (isset($_SESSION["userId"])) {
+    switch (filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING)) {
+        case 'login':
+            echo("todo - wip<br><br>");
+            $pageName = 'login';
+        break;
+
+        case 'profile':
+            echo("todo - wip<br><br>");
+            $pageName = 'profile';
+        break;
+
+        case 'logout':
+            echo("todo - wip<br><br>");
+            $pageName = 'logout';
+        break;
+
+        case 'register':
+            echo("todo - wip<br><br>");
+            $pageName = 'register';
+        break;
+    }
+}
 else {//forcement a la fin, sinon existence de action pas verifiee
     $pageName = (!empty($_GET['page'])) ? filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) : 'home';
 
@@ -63,6 +85,9 @@ try {
 
     //3.3. vide variables inutiles car deja integrees (ne reste que $pageFill et $_SESSION)
     unset($path, $scriptName, $errMsg, $_GET, $_POST);
+
+    //3.4. appelle en-tete utilisateur
+    require(__DIR__."/../view/common/logged".(isset($_SESSION["userId"]) ? "In" : "Out" ).".phtml");
 
     //3.4. appelle template
     require(__DIR__."/../view/common/template.phtml");
