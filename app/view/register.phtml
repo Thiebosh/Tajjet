@@ -1,0 +1,7 @@
+<?php ob_start();?>
+    <input type="text" name="username" placeholder="Nom d'utilisateur">
+    <input type="text" name="password" placeholder="Mot de passe">
+    <input type="text" name="password_conf" placeholder="Confirmer le mot de passe">
+    <input type="text" name="e-mail" placeholder="Adresse mail">
+    <a href="homePage.phtml">S'inscrire</a>
+<?php $sectionContent=ob_get_clean();
