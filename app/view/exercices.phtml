@@ -1,4 +1,19 @@
 
 <?php ob_start();?>
-    <?=htmlspecialchars("Liste exercices")?>
+    <div class="recherche">
+        <form method="post" action="index.php?page=exercices">
+            <input type="text" placeholder="Rechercher exercice">
+            <input type="submit" class="buttonNav" value="Rechercher">
+        </form>
+    </div>
+    
+    <ul>
+        <?php foreach() { ?>
+            <li>
+                <article>
+
+                </article>
+            </li>
+        <?php } ?>
+    </ul>
 <?php $sectionContent=ob_get_clean();
