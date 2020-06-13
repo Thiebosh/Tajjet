@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Article.php");
+require_once(__DIR__."/../entity/User.php");
 
-class ArticleManager extends Manager {
+class UserManager extends Manager {
     //constructor & destructor
     public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -12,10 +12,12 @@ class ArticleManager extends Manager {
         parent::__destruct();
     }
 
-
-    //requetes sql    
-    public function getByArticle($idArticle) {
+    
+    public function getUserById($id) {
 
     }
     
+    public function getUserByLogin($login) {
+        
+    }
 }

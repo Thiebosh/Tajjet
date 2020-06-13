@@ -60,13 +60,16 @@ class News extends Entity {
     
     public function setBegin($begin) {
         if ($begin instanceof DateTime) this->_begin = $begin;
+        else if (isDateTimeConvertible($begin)) this->_begin = new DateTime($begin);
     }
     
     public function setEnd($end) {
         if ($end instanceof DateTime) this->_end = $end;
+        else if (isDateTimeConvertible($end)) this->_end = new DateTime($end);
     }
 
     public function setGenres($genres) {
+        unset(this->_Genres);
         foreach ($genres as $genre) addGenre($genre);
     }
 

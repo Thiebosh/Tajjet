@@ -4,7 +4,7 @@
 
 
 //2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
+require_once('model/Manager/HealthManager.php');//importe le reste
 //call managers functions (load data here)
 $pageFill['records'] = array(
                             array("recordDate" => 14-12-20,

@@ -36,4 +36,20 @@ abstract class Entity {
     final function isID($value) {
         return is_int($value) && $value > 0;
     }
+
+    final function isDateTimeConvertible($value) {
+        return is_string($preparationTime) && strtotime($preparationTime);
+    }
+
+    static function printDate($date) {
+        return $date instanceof DateTime ? $date->format('d-m-Y') : NULL ;
+    }
+
+    static function printTime($time) {
+        return $time instanceof DateTime ? $time->format('H:i') : NULL ;
+    }
+
+    static function printDateTime($datetime) {
+        return printTime($datetime)+' '+printDate($datetime);
+    }
 }

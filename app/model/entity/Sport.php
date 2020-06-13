@@ -56,6 +56,7 @@ class Sport extends Entity {
     }
 
     public function setMuscles($muscles) {
+        unset(this->_Muscles);
         foreach ($muscles as $muscle) addMuscle($muscle);
     }
 

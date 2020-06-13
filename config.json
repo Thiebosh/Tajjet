@@ -1,6 +1,6 @@
 {
     "Python" : {
-        "executable" : "C:/Users/Thibaut Juzeau/AppData/Local/Programs/Python/Python36/python"
+        "executable" : "C:/Users/yourname/AppData/Local/Programs/Python/Python36/python"
     },
 
     "DB" : {
@@ -10,7 +10,7 @@
         },
 
         "setup" : {            
-            "DBname": "appname",
+            "DBname": "Your_Everyday_Sunshine",
             "characterSet" : "latin1",
             "classification" : "latin1_general_ci"
         }

@@ -32,10 +32,11 @@ class Frequency extends Entity {
 
     //setters
     public function setNumberOfDays($numberOfDays) {
-        if (is_float($numberOfDays)) this->_numberOfDays = $numberOfDays;
+        if (is_float($numberOfDays) && $numberOfDays > 0) this->_numberOfDays = $numberOfDays;
     }
 
     public function setNextDate($nextDate) {
         if ($nextDate instanceof DateTime) this->_nextDate = $nextDate;
+        else if (isDateTimeConvertible($nextDate)) this->_nextDate = new DateTime($nextDate);
     }
 }

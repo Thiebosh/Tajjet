@@ -42,6 +42,7 @@ class Article extends Entity {
 
     public function setReadingTime($readingTime) {
         if ($readingTime instanceof DateTime) this->_readingTime = $readingTime;
+        else if (isDateTimeConvertible($readingTime)) this->_readingTime = new DateTime($readingTime);
     }
 
     public function setIdNews($idNews) {
