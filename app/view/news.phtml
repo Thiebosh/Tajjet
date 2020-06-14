@@ -1,7 +1,18 @@
 <?php ob_start();?>
     <?php?>
         <article class="theme">
-        <h1><a href="page"><?=$pageFill['theme']?></a></h1>
+        <div>
+            <h1><a href="page"><?=$pageFill['theme'][0]?></a></h1>  <!--On affiche le nom du thème-->
+            <div>
+                <ul>
+                    <?php foreach($pageFill['theme'] as $theme) { ?> <!--On liste les onglets-->
+                        <form>
+                            <input type="submit" class="buttonNav" value="<?=$theme?>">
+                        </form>
+                    <?php } ?>
+                <ul>
+            </div>
+        </div>
         <div>
             <p><?=$pageFill['summary']?></p>
             <p>Sources et temps de lecture estimé :
