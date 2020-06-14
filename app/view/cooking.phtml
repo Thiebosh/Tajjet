@@ -1,10 +1,13 @@
 <?php ob_start();?>
-
     <div>
         <form method="post" action="index.php?page=recherche">
+            <select name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+                <?php foreach($pageFill['type'] as $type) { ?>
+                    <option><?=$type?>
+                <?php } ?>
+            </select>
             <input type="text" name="search" placeholder="Rechercher des recettes">
             <input type="submit" class="buttonNav" value="Rechercher">
-            <a href="page">Aléatoire</a>
         </form>
     </div>
     <article class="desc">
@@ -22,38 +25,35 @@
                 <input type="text" name="ID_recette" value="<?=$pageFill['recipe'][0]['id']?>" hidden/> <!--Permet de retrouver l'id de la recette correspondante (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
                 <input type="submit" class="buttonNav" value="Réaliser la recette"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser la recette correspondante, sera notamment utile pour le module santé-->
                 <div>
-                    <p class="nombre">Nombre</p>
-                    nombre de personnes
-                    <input type="submit" class="buttonNav" value="+">
-                    <input type="submit" class="buttonNav" value="-">
+                    <p class="nombre">Nombre de personnes :</p>
+                    <p class="note">Note :</p>
+                    <p class="difficulte">Difficulté :</p>
+                    <p class="budget">Budget :</p>
+                    
                 </div>
             </form>
-            <p>Calories absorbées : <?=$pageFill['recipe'][0]['calories']?> kcal pour 100 g</p>
         </div>
     </article>
-    <article class="liste">
-        <div class="liste_possession">
-            <h1>Liste possession</h1>
+    <article class="liste_courses">
+            <h1>Liste de courses</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
             <ul>
-                <?php foreach($pageFill['userItems'] as $possession) { ?>
-                    <li><?=$possession?></li>
-                <?php } ?>
-            <ul>
-            <form method="post" action="index.php?page=cooking">
-                <input type="text" name="add" placeholder="Ajoutez ce dont vous disposez déjà">
-                <input type="submit" class="buttonNav" value="Ajouter">
-            </form>
-        </div>
-        
-        <div class="liste_courses">
-            <ul>
-                <?php foreach($pageFill['userItems'] as $possession) { ?>   <!--Ici on parcourt la liste de ce que l'utilisateur possède déjà, si il ne possède pas l'un des ingrédients, 
-                                                                            celui-ci est ajouté à la lite de courses-->
-                    <?php if($possession != $pageFill['recipe'][0]['items']['name']) { ?>
-                        <li><?=$pageFill['recipe'][0]['items']['name']?></li>
+                <?php for($i=0; $i<sizeof($pageFill['recipe']);++$i) { ?>   <!--On parcourt la liste des recettes sélectionnées par l'utilisateur-->
+                    <?php for($j=0;$j<sizeof($pageFill['recipe'][$i]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de chaque recette sélectionnée par l'utilisateur-->
+                        <li><?=$pageFill['recipe'][$i]['items'][$j]['quantity']?> <?=$pageFill['recipe'][$i]['items'][$j]['name']?>
+                            <form>
+                                <?php if( ( is_int($pageFill['recipe'][$i]['items'][$j]['quantity']) ) == true) { ?> <!--Si l'ingrédient est quantifiable en terme de produits, on ne met qu'un bouton "-"-->
+                                    <input type="submit" class="buttonNav" value="-">
+                                <?php } ?>
+                                <?php if( (is_string($pageFill['recipe'][$i]['items'][$j]['quantity']) ) ==true) { ?> <!--Si l'ingrédient est quantifiable de par une masse (exemple 500 g de farine), on met un bouton - mais aussi un champ de saisie pour que l'utilisateur saisisse la quantité qu'il possède-->
+                                    <input type="text" placeholder="Quantité">
+                                    <input type="submit" class="buttonNav" value="-">
+                                <?php } ?>
+                                
+                            </form>
+                        
+                        </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
                     <?php } ?>
                 <?php } ?>
-            </ul>  
-        </div>
+            </ul> 
     </article>
 <?php $sectionContent=ob_get_clean();
