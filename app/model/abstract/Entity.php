@@ -16,12 +16,12 @@ abstract class Entity {
     
     //getters
     public function getId() {
-        return this->_id;
+        return $this->_id;
     }
 
     //setters
     public function setId($id) {
-        if (isID($id)) this->_id = $id;
+        if (isID($id)) $this->_id = $id;
     }
 
     //methods

@@ -23,29 +23,29 @@ class Article extends Entity {
 
     //getters
     public function getURL() {
-        return this->_URL;
+        return $this->_URL;
     }
 
     public function getReadingTime() {
-        return this->_readingTime;
+        return $this->_readingTime;
     }
 
     public function getIdNews() {
-        return this->_idNews;
+        return $this->_idNews;
     }
 
 
     //setters
     public function setURL($url) {
-        if (is_string($url)) this->_URL = $url;
+        if (is_string($url)) $this->_URL = $url;
     }
 
     public function setReadingTime($readingTime) {
-        if ($readingTime instanceof DateTime) this->_readingTime = $readingTime;
-        else if (isDateTimeConvertible($readingTime)) this->_readingTime = new DateTime($readingTime);
+        if ($readingTime instanceof DateTime) $this->_readingTime = $readingTime;
+        else if (isDateTimeConvertible($readingTime)) $this->_readingTime = new DateTime($readingTime);
     }
 
     public function setIdNews($idNews) {
-        if (isID($idNews)) this->_idNews = $idNews;
+        if (isID($idNews)) $this->_idNews = $idNews;
     }
 }

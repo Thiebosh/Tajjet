@@ -22,21 +22,21 @@ class Frequency extends Entity {
 
     //getters
     public function getNumberOfDays() {
-        return this->_numberOfDays;
+        return $this->_numberOfDays;
     }
 
     public function etNextDate() {
-        return this->_nextDate;
+        return $this->_nextDate;
     }
 
 
     //setters
     public function setNumberOfDays($numberOfDays) {
-        if (is_float($numberOfDays) && $numberOfDays > 0) this->_numberOfDays = $numberOfDays;
+        if (is_float($numberOfDays) && $numberOfDays > 0) $this->_numberOfDays = $numberOfDays;
     }
 
     public function setNextDate($nextDate) {
-        if ($nextDate instanceof DateTime) this->_nextDate = $nextDate;
-        else if (isDateTimeConvertible($nextDate)) this->_nextDate = new DateTime($nextDate);
+        if ($nextDate instanceof DateTime) $this->_nextDate = $nextDate;
+        else if (isDateTimeConvertible($nextDate)) $this->_nextDate = new DateTime($nextDate);
     }
 }
