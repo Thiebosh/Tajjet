@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Item.php");
+require_once(__DIR__."/../entity/Theme.php");
 
-class ItemManager extends Manager {
+class ThemeManager extends Manager {
     //constructor & destructor
     public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -12,9 +12,9 @@ class ItemManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idItem){
-
-        return array( new Item() );
+    public function getAllById($idTheme){
+        
+        return array( new Theme() );
     }
-
+    
 }

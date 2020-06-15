@@ -14,8 +14,9 @@ class ArticleManager extends Manager {
 
 
     //requetes sql    
-    public function getByArticle($idArticle) {
-
+    public function getAllByIdNews($idNews) {
+        
+        return array( new Article() );   
     }
     
 }

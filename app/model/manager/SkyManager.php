@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Item.php");
+require_once(__DIR__."/../entity/Sky.php");
 
-class ItemManager extends Manager {
+class SkyManager extends Manager {
     //constructor & destructor
     public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -12,9 +12,9 @@ class ItemManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idItem){
+    public function getAllById($idSky){
 
-        return array( new Item() );
+        return array( new Sky() );
     }
-
+    
 }

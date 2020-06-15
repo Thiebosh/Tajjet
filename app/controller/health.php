@@ -4,10 +4,10 @@
 
 
 //2. appels bdd
-require_once('app/model/manager/HealthManager.php');//importe le reste
+//require_once('app/model/manager/HealthManager.php');//importe le reste
 //call managers functions (load data here)
 
-$test=getLast7Days(1);
+
 $pageFill['records'] = array(
                             array("recordDate" => 14-12-20,
                                     "weight" => 56,

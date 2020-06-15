@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Item.php");
+require_once(__DIR__."/../entity/Muscle.php");
 
-class ItemManager extends Manager {
+class MuscleManager extends Manager {
     //constructor & destructor
     public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -12,9 +12,13 @@ class ItemManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idItem){
-
-        return array( new Item() );
+    public function getAllById($idMuscle){
+        
+        return array( new Muscle() );
     }
-
+    public function getAllMuscles(){
+        
+        return array( new Muscle() );
+    }
+    
 }
