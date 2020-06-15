@@ -13,7 +13,8 @@
                 <ul>
             </div>
         </div>
-        <div>
+                            
+        <div> <!--Onglet News-->
             <p><?=$pageFill['summary']?></p>
             <p>Sources et temps de lecture estimé :
                 <ul>
@@ -27,7 +28,31 @@
             </p>
         </div>
         </article>
-        <div>
+        <div><!--------------------->
+
+        <div> <!--Onglet Résultats sportifs-->
+            <h1>Les résultats et matches à venir de <?=$pageFill['team']?></h1>
+            <div> <!--Les résultats récents-->
+                <h1>Résultats récents de <?=$pageFill['team']?></h1>
+                <ul>
+                    <?php foreach($pageFill['results'] as $results) { ?>
+                        <li> <strong><?=$results['date']?></strong> </br>
+                            <em><?=$pageFill['team']?></em> <?=$results['score']?> <?=$results['opponent']?>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <div>
+                <h1>Matches à venir de <?=$pageFill['team']?></h1>
+                <ul>
+                    <?php foreach($pageFill['matches'] as $matches) { ?>
+                        <li> <strong><?=$matches['date']?></strong> </br>
+                            <?=$pageFill['team']?> - <?=$matches['opponent']?> <?=$matches['hours']?>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div><!-------------------->
             <p>Intéressé par un autre thème ?</p>
             <div>
                 <form>  <!--On crée une liste déroulante répertoriant les différents thèmes que l'utilisateur peut choisir-->
