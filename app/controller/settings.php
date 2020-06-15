@@ -11,7 +11,7 @@ $pageFill['account'] = array("username"=>"Dark Vador",
                                 "avatar"=>"url/path"
                             );
 
-$pageFill['personal'] = array("age"=>20,
+$pageFill['personal'] = array("birthdate"=>11-04-87,
                             "town"=>"Lille",
                             "height"=>1.80,
                             "weight"=>75,
