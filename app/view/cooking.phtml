@@ -21,39 +21,42 @@
         </div>
         <p><?=$pageFill['recipe'][0]['steps']?></p>
         <div>
-            <form method="post" action="index.php?page=cooking"> <!--Au clic sur le bouton de réalisation de la recette, la page va être actualisée-->
-                <input type="text" name="ID_recette" value="<?=$pageFill['recipe'][0]['id']?>" hidden/> <!--Permet de retrouver l'id de la recette correspondante (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
-                <input type="submit" class="buttonNav" value="Réaliser la recette"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser la recette correspondante, sera notamment utile pour le module santé-->
-                <div>
-                    <p class="nombre">Nombre de personnes :</p>
-                    <p class="note">Note :</p>
-                    <p class="difficulte">Difficulté :</p>
-                    <p class="budget">Budget :</p>
+            <p class="note">Note :</p>
+            <p class="difficulte">Difficulté :</p>
+            <p class="budget">Budget :</p>
                     
-                </div>
-            </form>
         </div>
     </article>
-    <article class="liste_courses">
-            <h1>Liste de courses</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
+    <article class="ingredients_necessaires">
+            <h1>Liste des ingrédients nécessaires pour la recette</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
+            <p>Nombre de personnes : </p>
+            <form method="post" action="index.php?page=cooking">
+                <input type="text" name="eaternumber" placeholder="">
+            </form>
+            <div>
+                <p>J'ai besoin de : </p>
+                <p>J'achète : </p>
+            </div>
             <ul>
                 <?php for($i=0; $i<sizeof($pageFill['recipe']);++$i) { ?>   <!--On parcourt la liste des recettes sélectionnées par l'utilisateur-->
                     <?php for($j=0;$j<sizeof($pageFill['recipe'][$i]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de chaque recette sélectionnée par l'utilisateur-->
-                        <li><?=$pageFill['recipe'][$i]['items'][$j]['quantity']?> <?=$pageFill['recipe'][$i]['items'][$j]['name']?>
-                            <form>
-                                <?php if( ( is_int($pageFill['recipe'][$i]['items'][$j]['quantity']) ) == true) { ?> <!--Si l'ingrédient est quantifiable en terme de produits, on ne met qu'un bouton "-"-->
-                                    <input type="submit" class="buttonNav" value="-">
-                                <?php } ?>
-                                <?php if( (is_string($pageFill['recipe'][$i]['items'][$j]['quantity']) ) ==true) { ?> <!--Si l'ingrédient est quantifiable de par une masse (exemple 500 g de farine), on met un bouton - mais aussi un champ de saisie pour que l'utilisateur saisisse la quantité qu'il possède-->
-                                    <input type="text" placeholder="Quantité">
-                                    <input type="submit" class="buttonNav" value="-">
-                                <?php } ?>
-                                
+                        <li><?=$pageFill['recipe'][$i]['items'][$j]['quantity']?> <?=$pageFill['recipe'][$i]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
+                        
+                            <form method="post" action="index.php?page=cooking">
+                                <input type="text" name="itemnumber" placeholder="">    
                             </form>
                         
                         </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
                     <?php } ?>
                 <?php } ?>
             </ul> 
+    </article>
+    <article class="liste_possession">
+        <h1>Liste possession</h1>
+        <ul>
+            <!--<?php foreach($pageFill['have'] as $have) { ?>
+                <li><?=$have['quantity']?><?=$have['items']?> (<?=$nombre?> restant(s) après la recette)</li>
+            <?php } ?>-->
+        </ul>
     </article>
 <?php $sectionContent=ob_get_clean();
