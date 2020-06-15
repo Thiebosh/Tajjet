@@ -45,26 +45,26 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
     $pageName = 'home';//page d'accueil, sait qu'elle existe
 }
-else if (isset($_SESSION["userId"])) {
+else if (!empty($_GET['user'])) {//(isset($_SESSION["userId"])) {
     switch (filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING)) {
         case 'login':
-            echo("todo - wip<br><br>");
             $pageName = 'login';
         break;
 
         case 'profile':
-            echo("todo - wip<br><br>");
             $pageName = 'profile';
         break;
 
         case 'logout':
-            echo("todo - wip<br><br>");
             $pageName = 'logout';
         break;
 
         case 'register':
-            echo("todo - wip<br><br>");
             $pageName = 'register';
+        break;
+
+        default:
+            display_error($path, $errMsg['router']['URL']['unknow']);
         break;
     }
 }
