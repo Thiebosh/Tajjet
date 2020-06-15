@@ -12,10 +12,11 @@ class MuscleManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idMuscle){
+    public function getById($idMuscle){
         
-        return array( new Muscle() );
+        return new Muscle();
     }
+
     public function getAllMuscles(){
         
         return array( new Muscle() );

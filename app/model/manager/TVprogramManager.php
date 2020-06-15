@@ -12,11 +12,7 @@ class TVprogramManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAll(){
-        
-        return array( new TVprogram() );
-    }
-    public function getAllByTime($time){
+    public function getAllAfterTime($time){
         
         return array( new TVprogam() );
     }

@@ -12,9 +12,9 @@ class SkyManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idSky){
+    public function getById($idSky){
 
-        return array( new Sky() );
+        return new Sky();
     }
     
 }

@@ -11,7 +11,7 @@ else if (isset($_POST["form"])) {
         else {
             require("../model/manager/UserManager.php");
             
-            if ((new UserManager)->isUsedLogin($trustedPost['name'])) {
+            if ((new UserManager)->isUsedName($trustedPost['name'])) {
                 $trustedPost['errMsgs'][] = $errMsg['controller']['register']['login'];
             }
             else {

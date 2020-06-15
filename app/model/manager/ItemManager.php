@@ -12,7 +12,7 @@ class ItemManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idItem){
+    public function getAllByRecipie($idRecipie){
 
         return array( new Item() );
     }

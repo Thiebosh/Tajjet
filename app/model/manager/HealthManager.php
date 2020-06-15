@@ -17,9 +17,12 @@ class HealthManager extends Manager {
         return array( new Health() );
     }
 
-    public function addToday($idUser){
+    public function addToday($healthRecord){
         
+        return new Health();//gagne un id
     }
 
-    
+    public function updateToday($healthRecord){
+        
+    }
 }   

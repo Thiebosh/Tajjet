@@ -12,9 +12,9 @@ class ThemeManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idTheme){
+    public function getById($idTheme){
         
-        return array( new Theme() );
+        return new Theme();
     }
     
 }

@@ -7,7 +7,7 @@ else if (isset($_POST["form"])) {
     if (!isset($trustedPost['errMsgs'])) {
         require("../model/manager/UserManager.php");
 
-        $user = (new UserManager)->getUserByLogin($trustedPost['name']);
+        $user = (new UserManager)->getUserByName($trustedPost['name']);
         
         if ($user->getPassword() != sha1($trustedPost['password'])) {
             $trustedPost['errMsgs'][] = $errMsg['controller']['login']['password'];

@@ -12,9 +12,9 @@ class RecipeManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllByLabel($label){
+    public function getByLabel($label){
         
-        return array( new Recipe() );
+        return new Recipe();
     }
     
 }

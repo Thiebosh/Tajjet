@@ -7,7 +7,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['password_conf'])) {//c
     
 
     if (isset($_POST['avatar'], $_POST['birthDate'], $_POST['height'], $_POST['town'])) {//champs non required
-        //$trustedPost['avatar'] =  filter_input(INPUT_POST, 'avatar',  FILTER_SANITIZE_STRING); regarder comment faire
+        $trustedPost['avatar'] =  $_POST['avatar'];//filter_input(INPUT_POST, 'avatar',  FILTER_SANITIZE_STRING); regarder comment faire
         $trustedPost['birthDate'] = filter_input(INPUT_POST, 'birth',   FILTER_SANITIZE_STRING);//https://github.com/Thiebosh/Eveneo/blob/master/project/globalFunctions.php recuperer verifDateTime?
         $trustedPost['height'] =    filter_input(INPUT_POST, 'height',  FILTER_VALIDATE_FLOAT);
         $trustedPost['town'] =      filter_input(INPUT_POST, 'town',    FILTER_SANITIZE_STRING);
