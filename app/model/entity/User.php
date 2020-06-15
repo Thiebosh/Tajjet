@@ -6,8 +6,8 @@ require_once("Item.php");
 
 class Genre extends Entity {
     //attributes
-    private $_login;
-    private $_pasword;
+    private $_name;
+    private $_password;
     private $_avatar;
     private $_birthDate;
     private $_height;
@@ -30,12 +30,12 @@ class Genre extends Entity {
 
 
     //getters
-    public function getLogin() {
-        return $this->_login;
+    public function getName() {
+        return $this->_name;
     }
 
-    public function getPasword() {
-        return $this->_pasword;
+    public function getPassword() {
+        return $this->_password;
     }
 
     public function getAvatar() {
@@ -64,12 +64,12 @@ class Genre extends Entity {
 
 
     //setters
-    public function setLogin($login) {
-        if (is_string($login)) $this->_login = $login;
+    public function setName($name) {
+        if (is_string($name)) $this->_name = $name;
     }
 
-    public function setPasword($pasword) {
-        if (is_string($pasword)) $this->_pasword = $pasword;
+    public function setPassword($password) {
+        if (is_string($password)) $this->_password = $password;
     }
 
     public function setAvatar($avatar) {
