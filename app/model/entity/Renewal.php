@@ -21,20 +21,20 @@ class Renewal extends Entity {
 
     //getters
     public function getModuleName() {
-        return this->_moduleName;
+        return $this->_moduleName;
     }
 
     public function getIdFrequency() {
-        return this->_idFrequency;
+        return $this->_idFrequency;
     }
 
 
     //setters
     public function setModuleName($moduleName) {
-        if (is_string($moduleName)) this->_moduleName = $moduleName;
+        if (is_string($moduleName)) $this->_moduleName = $moduleName;
     }
 
     public function setIdFrequency($idFrequency) {
-        if (isID($idFrequency)) this->_idFrequency = $idFrequency;
+        if (isID($idFrequency)) $this->_idFrequency = $idFrequency;
     }
 }

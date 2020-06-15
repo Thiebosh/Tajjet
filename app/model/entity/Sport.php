@@ -26,41 +26,41 @@ class Sport extends Entity {
 
     //getters
     public function getLabel() {
-        return this->_label;
+        return $this->_label;
     }
     
     public function getPicture() {
-        return this->_picture;
+        return $this->_picture;
     }
     
     public function getCalories() {
-        return this->_calories;
+        return $this->_calories;
     }
     
     public function getMuscles() {
-        return this->_Muscles;
+        return $this->_Muscles;
     }
 
 
     //setters
     public function setLabel($label) {
-        if (is_string($label)) this->_label = $label;
+        if (is_string($label)) $this->_label = $label;
     }
     
     public function setPicture($picture) {
-        if (is_string($picture)) this->_picture = $picture;
+        if (is_string($picture)) $this->_picture = $picture;
     }
     
     public function setCalories($calories) {
-        if (is_float($calories)) this->_calories = $calories;
+        if (is_float($calories)) $this->_calories = $calories;
     }
 
     public function setMuscles($muscles) {
-        unset(this->_Muscles);
+        unset($this->_Muscles);
         foreach ($muscles as $muscle) addMuscle($muscle);
     }
 
     public function addMuscle($muscle) {
-        if ($muscle instanceof Muscle) this->_Muscles[] = $muscle;
+        if ($muscle instanceof Muscle) $this->_Muscles[] = $muscle;
     }
 }
