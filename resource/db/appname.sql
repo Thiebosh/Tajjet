@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 15 juin 2020 à 15:57
+-- Généré le :  lun. 15 juin 2020 à 16:05
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `muscle` (
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `ID_news` int(11) NOT NULL AUTO_INCREMENT,
-  `Summary` text COLLATE latin1_general_ci,
+  `Summary` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   PRIMARY KEY (`ID_news`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `Score_Recipe` float NOT NULL,
   `Price` float NOT NULL,
   `Difficulty` float NOT NULL,
-  `Steps` text COLLATE latin1_general_ci,
+  `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
   `ID_type` int(11) NOT NULL,
   PRIMARY KEY (`ID_recipe`),
@@ -294,7 +294,7 @@ DROP TABLE IF EXISTS `tvprogram`;
 CREATE TABLE IF NOT EXISTS `tvprogram` (
   `ID_TVprogram` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Synopsis` text COLLATE latin1_general_ci,
+  `Synopsis` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Begin` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `End` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Genre` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
