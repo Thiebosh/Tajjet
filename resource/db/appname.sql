@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Avatar` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
-  `town_id_town` int(11) DEFAULT NULL,
+  `ID_town` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
   KEY `FK_User_town_id_town` (`town_id_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -421,7 +421,7 @@ ALTER TABLE `tvprogram`
 -- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_User_town_id_town` FOREIGN KEY (`town_id_town`) REFERENCES `town` (`ID_town`);
+  ADD CONSTRAINT `FK_User_ID_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
 
 --
 -- Contraintes pour la table `work`

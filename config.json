@@ -1,0 +1,18 @@
+{
+    "Python" : {
+        "executable" : "C:/Users/yourname/AppData/Local/Programs/Python/Python36/python"
+    },
+
+    "DB" : {
+        "connexion" : {
+            "username" : "root",
+            "password" : ""
+        },
+
+        "setup" : {            
+            "DBname": "Your_Everyday_Sunshine",
+            "characterSet" : "latin1",
+            "classification" : "latin1_general_ci"
+        }
+    }
+}
