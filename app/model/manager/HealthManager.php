@@ -12,5 +12,17 @@ class HealthManager extends Manager {
         parent::__destruct();
     }
 
-    
-}
+    public function getAllLast7Days($idUser){
+        
+        return array( new Health() );
+    }
+
+    public function addToday($healthRecord){
+        
+        return new Health();//gagne un id
+    }
+
+    public function updateToday($healthRecord){
+        
+    }
+}   

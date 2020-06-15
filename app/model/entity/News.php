@@ -25,20 +25,20 @@ class News extends Entity {
 
     //getters
     public function getSummary() {
-        return this->_summary;
+        return $this->_summary;
     }
 
     public function getTheme() {
-        return this->_Theme;
+        return $this->_Theme;
     }
     
 
     //setters
     public function setSummary($summary) {
-        if (is_string($summary)) this->_summary = $summary;
+        if (is_string($summary)) $this->_summary = $summary;
     }
 
     public function setTheme($theme) {
-        if ($theme instanceof Theme) this->_Theme = $theme;
+        if ($theme instanceof Theme) $this->_Theme = $theme;
     }
 }

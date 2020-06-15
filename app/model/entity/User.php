@@ -6,8 +6,8 @@ require_once("Item.php");
 
 class Genre extends Entity {
     //attributes
-    private $_login;
-    private $_pasword;
+    private $_name;
+    private $_password;
     private $_avatar;
     private $_birthDate;
     private $_height;
@@ -30,80 +30,80 @@ class Genre extends Entity {
 
 
     //getters
-    public function getLogin() {
-        return this->_login;
+    public function getName() {
+        return $this->_name;
     }
 
-    public function getPasword() {
-        return this->_pasword;
+    public function getPassword() {
+        return $this->_password;
     }
 
     public function getAvatar() {
-        return this->_avatar;
+        return $this->_avatar;
     }
     
     public function getBirthDate() {
-        return this->_birthDate;
+        return $this->_birthDate;
     }
 
     public function getHeight() {
-        return this->_height;
+        return $this->_height;
     }
 
     public function getIdTown() {
-        return this->_idTown;
+        return $this->_idTown;
     }
 
     public function getSports() {
-        return this->_Sports;
+        return $this->_Sports;
     }
 
     public function getItems() {
-        return this->_Items;
+        return $this->_Items;
     }
 
 
     //setters
-    public function setLogin($login) {
-        if (is_string($login)) this->_login = $login;
+    public function setName($name) {
+        if (is_string($name)) $this->_name = $name;
     }
 
-    public function setPasword($pasword) {
-        if (is_string($pasword)) this->_pasword = $pasword;
+    public function setPassword($password) {
+        if (is_string($password)) $this->_password = $password;
     }
 
     public function setAvatar($avatar) {
-        if (is_string($avatar)) this->_avatar = $avatar;
+        if (is_string($avatar)) $this->_avatar = $avatar;
     }
     
     public function setBirthDate($birthDate) {
-        if ($birthDate instanceof DateTime) this->_birthDate = $birthDate;
-        else if (isDateTimeConvertible($birthDate)) this->_birthDate = new DateTime($birthDate);
+        if ($birthDate instanceof DateTime) $this->_birthDate = $birthDate;
+        else if (isDateTimeConvertible($birthDate)) $this->_birthDate = new DateTime($birthDate);
     }
 
     public function setHeight($height) {
-        if (is_float($height)) this->_height = $height;
+        if (is_float($height)) $this->_height = $height;
     }
 
     public function setIdTown($idTown) {
-        if (isID($idTown)) this->_idTown = $idTown;
+        if (isID($idTown)) $this->_idTown = $idTown;
     }
 
     public function setSports($sports) {
-        unset(this->_Sports);
+        unset($this->_Sports);
         foreach ($sports as $sport) addSport($sport);
     }
 
     public function addSport($sport) {
-        if ($sport instanceof Sport) this->_Sports[] = $sport;
+        if ($sport instanceof Sport) $this->_Sports[] = $sport;
     }
 
     public function setItems($items) {
-        unset(this->_Items);
+        unset($this->_Items);
         foreach ($items as $item) addSport($item);
     }
 
     public function addItem($item) {
-        if ($item instanceof Item) this->_Items[] = $item;
+        if ($item instanceof Item) $this->_Items[] = $item;
     }
 }

@@ -1,14 +1,21 @@
 
 <?php ob_start();?>
-    <div>
-        <input type="text" name="username" placeholder="Nom d'utilisateur">
-        <input type="text" name="password" placeholder="Mot de passe">
-        <a href="page">Connexion</a>
-    </div>
+    <form method="post" action="index.php?user=login">
+        <p> 
+            <label for="username">Nom d'utilisateur</label><br>
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <br><br>
+            <label for="password">Mot de passe</label><br>
+            <input type="text" name="password" placeholder="Mot de passe" required>
+        </p>
+        <br><br>
+        <input type="submit" value="Connexion"/>
+        <input type="hidden" name="form" value="1">
+    </form>
 
     <div>
         <p>Pas encore inscrit ?</p>
-        <a href="registration.phtml">S'inscrire</a>
+        <a href="index.php?user=register">S'inscrire</a>
     </div>
     
 <?php $sectionContent=ob_get_clean();
