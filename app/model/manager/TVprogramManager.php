@@ -14,11 +14,11 @@ class TVprogramManager extends Manager {
 
     public function getAll(){
         
-        return array( new News() );
+        return array( new TVprogram() );
     }
     public function getAllByTime($time){
         
-        return array( new News() );
+        return array( new TVprogam() );
     }
     
 }

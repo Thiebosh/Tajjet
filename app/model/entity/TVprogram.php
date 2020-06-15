@@ -3,7 +3,7 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 require_once("Genre.php");
 
-class News extends Entity {
+class TVprogram extends Entity {
     //attributes
     private $_title;
     private $_synopsis;
