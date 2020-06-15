@@ -5,6 +5,14 @@
         
         <h2>Programme télé : </h2>
         <h3><?php echo(date("l d M Y"))?></h3>
+        <div>
+            <form method="post" action="index.php?page=activities"> <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
+                Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé : </br>
+                <input type="text" name="heure">:
+                <input type="text" name="minutes">
+                <input type="submit" class="buttonNav" value="Filtrer">
+            </form>
+        </div>
         <ul>
             <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
                                                                     On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->

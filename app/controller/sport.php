@@ -22,6 +22,31 @@ $pageFill['exercice'] = array(
                                 )
                             );
 
+$pageFill['seance']=array(
+                        array("id"=>1,
+                            "exercices"=>array(
+                                                array("id"=>1,
+                                                    "name"=>"Développé couché",
+                                                    "image"=>"Image développé couché"),
+                                                array("id"=>2,
+                                                    "name"=>"Tractions",
+                                                    "image"=>"Image tractions")
+                            
+                                            )
+
+                            ),
+
+                        array("id"=>2,
+                            "exercices"=>array(
+                                                array("id"=>3,
+                                                    "name"=>"Développé incliné",
+                                                    "image"=>"Image développé incliné")
+                            
+                                            )
+
+                            )
+
+                        );
 
 //3. transforme donnees (post traitement)
 //tranformations goes here

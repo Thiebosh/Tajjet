@@ -21,20 +21,20 @@ class Item extends Entity {
 
     //getters
     public function getLabel() {
-        return this->_label;
+        return $this->_label;
     }
 
     public function getConsumable() {
-        return this->_consumable;
+        return $this->_consumable;
     }
 
 
     //setters
     public function setLabel($label) {
-        if (is_string($label)) this->_label = $label;
+        if (is_string($label)) $this->_label = $label;
     }
 
     public function setConsumable($consumable) {
-        if (is_bool($consumable)) this->_consumable = $consumable;
+        if (is_bool($consumable)) $this->_consumable = $consumable;
     }
 }

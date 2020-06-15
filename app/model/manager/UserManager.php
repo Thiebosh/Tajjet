@@ -17,7 +17,18 @@ class UserManager extends Manager {
 
     }
     
-    public function getUserByLogin($login) {
+    public function getUserByName($name) {
         
+        return new User();
+    }
+
+    public function isUsedName($name) {
+
+        return false;
+    }
+
+    public function addUser($userInstance) {
+
+        return $userInstance;
     }
 }
