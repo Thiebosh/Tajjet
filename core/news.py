@@ -1,28 +1,40 @@
+# -*- coding: utf-8 -*-
 # module news
 # ReadingTime ; URL
 # pip install newsapi-python
-# -*- coding: latin1 -*-
+
 
 import requests
 import sys
 from pprint import pprint
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="your_everyday_sunshine"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO news (Summary) VALUES (%s)"
 
 
-import requests
-from pprint import pprint
 
-country = sys.argv[3]
+country = sys.argv[1]
 api_adress = 'http://newsapi.org/v2/top-headlines?country={}&apiKey=611b5266a5ee4d539ace29be666449ad'.format(country) 
-res = requests.get(api_adress)
-data = res.json() 
 
-pprint(data)
-url = data['articles'][0]['url']
+r = requests.get(api_adress)
+data = r.json() 
+#pprint(data)
+url = data['articles']
 
-#print(url)
+for article in url:
+    print(article['title'])
 
-# MinTemp = data['list'][0]['main']['temp_min']
-# MaxTemp = data['list'][0]['main']['temp_max']
-# FeltTemp = data['list'][0]['main']['feels_like']
-# Humidity = data['list'][0]['main']['humidity']
-# Pressure = data['list'][0]['main']['pressure']
+stringVal = data['articles'][12]['title']
+val = (stringVal)
+mycursor.execute(sql, (val,))
+
+mydb.commit()
