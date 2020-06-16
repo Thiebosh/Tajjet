@@ -11,8 +11,8 @@
 
         "setup" : {            
             "DBname": "everydaySunshine",
-            "characterSet" : "latin1",
-            "classification" : "latin1_general_ci"
+            "characterSet" : "utf8",
+            "classification" : "utf8_general_ci"
         }
     }
 }

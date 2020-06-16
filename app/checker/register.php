@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['username'], $_POST['password'], $_POST['password_conf'])) {//champs required
+if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//champs required
     $trustedPost['name'] =      filter_input(INPUT_POST, 'username',    FILTER_SANITIZE_STRING);//false si incorrect
     $trustedPost['password'] =      filter_input(INPUT_POST, 'password',    FILTER_SANITIZE_STRING);
     $trustedPost['passwordConf'] =  filter_input(INPUT_POST, 'passwordConf',FILTER_SANITIZE_STRING);

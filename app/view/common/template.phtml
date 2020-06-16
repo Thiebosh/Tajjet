@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="css/normalize.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
+    <link rel="stylesheet" href="app/view/common/css/normalize.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
     <!-- framework bootstrap : soit en local dans common/css, soit directement en ligne comme ici -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="css/template.css"/><!-- style de la partie template + declaration variables -->
-    <?php 
-    
-    if (file_exists(__DIR__."/../css/$pageName.css")) { ?>
-        
-        <link rel="stylesheet" href="app/view/css/<?=$pageName?>.css"/><!-- style de la partie section -->
+    <link rel="stylesheet" href="app/view/common/css/template.css"/><!-- style de la partie template + declaration variables -->
+    <?php if (file_exists(__DIR__."/../css/$pageName.css")) { ?>
+        <link rel="stylesheet" href="app/view/css/<?= $pageName ?>.css"/><!-- style de la partie section -->
     <?php } ?>
     <title>AppName - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 </head>
