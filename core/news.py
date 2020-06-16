@@ -11,18 +11,16 @@ from pprint import pprint
 import requests
 from pprint import pprint
 
-country = sys.argv[3]
+country = sys.argv[1]
 api_adress = 'http://newsapi.org/v2/top-headlines?country={}&apiKey=611b5266a5ee4d539ace29be666449ad'.format(country) 
 res = requests.get(api_adress)
-data = res.json() 
+data = res.json()
 
-pprint(data)
-url = data['articles'][0]['url']
 
-#print(url)
+for i in range(10):
+    description = data['articles'][i]['description'] + "<br>\n"
+    link = data['articles'][i]['url'] + "<br>\n"
+    print(description, link,)
 
-# MinTemp = data['list'][0]['main']['temp_min']
-# MaxTemp = data['list'][0]['main']['temp_max']
-# FeltTemp = data['list'][0]['main']['feels_like']
-# Humidity = data['list'][0]['main']['humidity']
-# Pressure = data['list'][0]['main']['pressure']
+#pprint(data)
+

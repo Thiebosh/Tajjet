@@ -31,5 +31,5 @@ $errMsg['checker']['form']['filter'] = 'Valeurs incorrectes.';
 
 $errMsg['controller']['login']['password'] = 'Nom d\'utilisateur ou mot de passe incorrect.';
 
-$errMsg['controller']['register']['password']   = 'Mots de passes différents.'
+$errMsg['controller']['register']['password']   = 'Mots de passes différents.';
 $errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà réservé';

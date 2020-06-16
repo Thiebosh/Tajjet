@@ -1,6 +1,5 @@
 #module recettes
 
-# -*- coding: latin1 -*-
 
 from bs4 import BeautifulSoup
 
@@ -79,7 +78,7 @@ class Marmiton(object):
         
         #print(html_content)
 
-        soup = BeautifulSoup(html_content.decode('latin1', 'ignore'), 'html.parser')
+        soup = BeautifulSoup(html_content, 'html.parser')
 
         main_data = soup.find("div", {"class": "m_content_recette_main"})
         try:
@@ -143,7 +142,7 @@ class Marmiton(object):
 # Search :
 
 print(sys.argv)
-wished_recipe = sys.argv[2]
+wished_recipe = sys.argv[1]
 
 query_options = {
   "aqt": "{}".format(wished_recipe),      # Query keywords - separated by a white space
@@ -158,16 +157,22 @@ query_result = Marmiton.search(query_options)
 recipe = query_result[0]
 main_recipe_url = recipe['url']
 detailed_recipe = Marmiton.get(main_recipe_url)  # Get the details of the first returned recipe (most relevant in our case)
+name = detailed_recipe['name']
 picture = detailed_recipe['image']
 PreparationTime = detailed_recipe['prep_time']
 CookingTime = detailed_recipe['cook_time']
+TotalTime = detailed_recipe['total_time']
+Difficulty = detailed_recipe['difficulty']
+
+ingredients = ""
+for ingredient in detailed_recipe['ingredients']:  # List of ingredients
+    ingredients += ingredient + "<br>"
+    
 
 steps = ""
-
 for step in detailed_recipe['steps']:  # List of cooking steps
     steps += step + "<br>"
  
-steps = steps.replace("’", "'")
+#steps = steps.replace("’", "'")
 
-print(picture, PreparationTime, CookingTime, steps)
-
+print(name, "\n", picture,"\n", PreparationTime,"\n", CookingTime,"\n", TotalTime, "\n", Difficulty,"\n", ingredients ,"\n", steps)
