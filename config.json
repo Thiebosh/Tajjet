@@ -6,11 +6,11 @@
     "DB" : {
         "connexion" : {
             "username" : "root",
-            "password" : ""
+            "password" : "1a9z9e8r"
         },
 
         "setup" : {            
-            "DBname": "Your_Everyday_Sunshine",
+            "DBname": "everydaySunshine",
             "characterSet" : "latin1",
             "classification" : "latin1_general_ci"
         }

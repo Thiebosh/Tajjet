@@ -6,6 +6,14 @@
 //2. appels bdd
 //load bdd functions : require("../model/manager/*needed*.php");
 //call managers functions (load data here)
+
+require(__DIR__."/../model/manager/RecipeManager.php");
+
+
+$retour = (new RecipeManager())->getByLabel("test");
+
+var_dump($retour);
+
 $pageFill['recipe'] = array(array("id"=>1,
                                     "titre" => "préparation de cookies",
                                     "picture" => "url ou path",

@@ -3,7 +3,7 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 require_once("Item.php");
 
-class Item extends Entity {
+class Recipe extends Entity {
     //attributes
     private $_label;
     private $_picture;

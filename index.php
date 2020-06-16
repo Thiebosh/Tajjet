@@ -26,8 +26,13 @@ else {//ok
 }
 
 
-//3. monitoring de la bdd : mise a jour des donnees obsoletes
-require_once($path['app'].'core/dbMonitoring.php');
+//3. monitoring de la bdd : connexion et mise a jour des donnees obsoletes
+require("app/model/abstract/Manager.php");
+
+Manager::dbConnect($config['DB']['setup']['DBname'],
+                    $config['DB']['connexion']['username'],
+                    $config['DB']['connexion']['password'],
+                    $config['DB']['setup']['characterSet']);
 
 
 //4. appelle le routeur et met fin au script
