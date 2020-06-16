@@ -88,7 +88,7 @@ try {
     unset($path, $scriptName, $errMsg, $_GET, $_POST);
 
     //3.4. appelle en-tete utilisateur
-    require(__DIR__."/../view/common/logged".(isset($_SESSION["userId"]) ? "In" : "Out" ).".phtml");
+    require(__DIR__."/../view/common/logged".(isset($_SESSION["user"]) ? "In" : "Out" ).".phtml");
 
     //3.4. appelle template
     require(__DIR__."/../view/common/template.phtml");

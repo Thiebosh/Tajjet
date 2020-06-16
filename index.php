@@ -29,7 +29,7 @@ else {//ok
 //3. monitoring de la bdd : connexion et mise a jour des donnees obsoletes
 require("app/model/abstract/Manager.php");
 
-Manager::dbConnect($config['DB']['setup']['DBname'],
+Manager::setDBData($config['DB']['setup']['DBname'],
                     $config['DB']['connexion']['username'],
                     $config['DB']['connexion']['password'],
                     $config['DB']['setup']['characterSet']);

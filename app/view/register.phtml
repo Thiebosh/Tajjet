@@ -1,4 +1,10 @@
-<?php ob_start();?>
+<?php ob_start();
+    if (isset($trustedPost['errMsgs'])) { ?>
+        <div>
+            <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
+        </div> 
+    <?php } ?>
+
     <form method="post" action="index.php?user=register">
         <p>
             <label for="username">Nom d'utilisateur</label><br>

@@ -5,11 +5,7 @@
 
 //2. appels bdd
 //load bdd functions : 
-require(__DIR__."/../model/manager/RecipeManager.php");
-//call managers functions (load data here)
-
-require(__DIR__."/../model/manager/RecipeManager.php");
-
+require_once(__DIR__."/../model/manager/RecipeManager.php");
 
 $retour = (new RecipeManager())->getByLabel("test");
 
