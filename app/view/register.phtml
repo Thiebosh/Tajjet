@@ -5,7 +5,7 @@
         </div> 
     <?php } ?>
 
-    <form method="post" action="index.php?user=register">
+    <form class="container-fluid" method="post" action="index.php?user=register">
         <p>
             <label for="username">Nom d'utilisateur</label><br>
             <input type="text" name="username" placeholder="Nom d'utilisateur" required>
@@ -26,7 +26,7 @@
             <input type="text" name="email" placeholder="Adresse mail">
         </p>
         <br><br>
-        <input type="submit" value="Inscription"/>
+        <input class="btn btn-outline-success" type="submit" value="Inscription"/>
         <input type="hidden" name="form" value="1">
     </form>
 <?php $sectionContent=ob_get_clean();

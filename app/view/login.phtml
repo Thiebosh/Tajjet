@@ -14,13 +14,13 @@
             <input type="text" name="password" placeholder="Mot de passe" required>
         </p>
         <br><br>
-        <input type="submit" value="Connexion"/>
+        <input class="btn btn-outline-success" type="submit" value="Connexion"/>
         <input type="hidden" name="form" value="1">
     </form>
 
     <div>
         <p>Pas encore inscrit ?</p>
-        <a href="index.php?user=register">S'inscrire</a>
+        <a class="btn btn-primary" href="index.php?user=register" role="button">S'inscrire</a>
     </div>
     
 <?php $sectionContent=ob_get_clean();
