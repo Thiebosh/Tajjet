@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 15 juin 2020 à 16:05
+-- Généré le :  mar. 16 juin 2020 à 08:28
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `appname`
+-- Base de données :  `everydaysunshine`
 --
 
 -- --------------------------------------------------------
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `ID_activity` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Distance` float NOT NULL,
-  `ID_town` int(11) NOT NULL,
+  `ID_weather` int(11) NOT NULL,
   `ID_category` int(11) NOT NULL,
   PRIMARY KEY (`ID_activity`),
-  KEY `FK_Activity_ID_town` (`ID_town`),
+  KEY `FK_Activity_ID_weather` (`ID_weather`),
   KEY `FK_Activity_ID_category` (`ID_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -206,14 +206,14 @@ CREATE TABLE IF NOT EXISTS `program` (
 DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
-  `Name_Recipe` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `PreparationTime` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `CookingTime` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `TotalTime` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Score_Recipe` float NOT NULL,
-  `Price` float NOT NULL,
-  `Difficulty` float NOT NULL,
+  `Score` float DEFAULT NULL,
+  `Price` float DEFAULT NULL,
+  `Difficulty` float DEFAULT NULL,
   `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
   `ID_type` int(11) NOT NULL,
@@ -274,14 +274,7 @@ DROP TABLE IF EXISTS `town`;
 CREATE TABLE IF NOT EXISTS `town` (
   `ID_town` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `MinTemp` float NOT NULL,
-  `MaxTemp` float NOT NULL,
-  `FeltTemp` float NOT NULL,
-  `Humidity` float NOT NULL,
-  `Pressure` float NOT NULL,
-  `ID_sky` int(11) NOT NULL,
-  PRIMARY KEY (`ID_town`),
-  KEY `FK_Town_ID_sky` (`ID_sky`)
+  PRIMARY KEY (`ID_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -327,12 +320,34 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ID_user` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Avatar` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `Avatar` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
   `ID_town` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
-  KEY `FK_User_town_id_town` (`town_id_town`)
+  KEY `FK_User_town_id_town` (`ID_town`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `weather`
+--
+
+DROP TABLE IF EXISTS `weather`;
+CREATE TABLE IF NOT EXISTS `weather` (
+  `ID_weather` int(11) NOT NULL AUTO_INCREMENT,
+  `Forecast` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `MinTemp` float NOT NULL,
+  `MaxTemp` float NOT NULL,
+  `FeltTemp` float NOT NULL,
+  `Humidity` float NOT NULL,
+  `Pressure` float NOT NULL,
+  `ID_sky` int(11) NOT NULL,
+  `ID_town` int(11) NOT NULL,
+  PRIMARY KEY (`ID_weather`),
+  KEY `FK_Weather_ID_sky` (`ID_sky`),
+  KEY `FK_Weather_ID_town` (`ID_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -358,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `work` (
 --
 ALTER TABLE `activity`
   ADD CONSTRAINT `FK_Activity_ID_category` FOREIGN KEY (`ID_category`) REFERENCES `category` (`ID_category`),
-  ADD CONSTRAINT `FK_Activity_ID_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
+  ADD CONSTRAINT `FK_Activity_ID_weather` FOREIGN KEY (`ID_weather`) REFERENCES `weather` (`ID_weather`);
 
 --
 -- Contraintes pour la table `article`
@@ -406,12 +421,6 @@ ALTER TABLE `renewal`
   ADD CONSTRAINT `FK_Renewal_ID_frequency` FOREIGN KEY (`ID_frequency`) REFERENCES `frequency` (`ID_frequency`);
 
 --
--- Contraintes pour la table `town`
---
-ALTER TABLE `town`
-  ADD CONSTRAINT `FK_Town_ID_sky` FOREIGN KEY (`ID_sky`) REFERENCES `sky` (`ID_sky`);
-
---
 -- Contraintes pour la table `tvprogram`
 --
 ALTER TABLE `tvprogram`
@@ -421,7 +430,14 @@ ALTER TABLE `tvprogram`
 -- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_User_ID_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
+  ADD CONSTRAINT `FK_User_town_id_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
+
+--
+-- Contraintes pour la table `weather`
+--
+ALTER TABLE `weather`
+  ADD CONSTRAINT `FK_Weather_ID_sky` FOREIGN KEY (`ID_sky`) REFERENCES `sky` (`ID_sky`),
+  ADD CONSTRAINT `FK_Weather_ID_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
 
 --
 -- Contraintes pour la table `work`
