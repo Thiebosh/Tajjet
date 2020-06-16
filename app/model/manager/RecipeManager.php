@@ -18,7 +18,6 @@ class RecipeManager extends Manager {
     }
 
     public function getByLabel($label){ //Pour tout récupérer selon la recherche utilisateur
-        echo("'$label'<br>");
 
         return new Recipe(array());
     }

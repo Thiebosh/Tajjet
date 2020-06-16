@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/../abstract/Entity.php");
 
-class Include extends Entity {
+class Includ extends Entity {
     //attributes
     private $_quantity;
     private $_Recipe;//objet recipe
@@ -44,5 +44,4 @@ class Include extends Entity {
     public function setItem($item) {
         if ($item instanceof Item) $this->_Item = $item;
     }
-}
 }

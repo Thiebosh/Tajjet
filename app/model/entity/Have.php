@@ -49,4 +49,3 @@ class Have extends Entity {
 
     
 }
-}

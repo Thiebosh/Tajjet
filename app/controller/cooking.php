@@ -5,15 +5,20 @@
 
 //2. appels bdd
 //load bdd functions : 
-require(__DIR__."/../model/manager/RecipeManager.php");
+require_once(__DIR__."/../model/manager/RecipeManager.php");
+require_once(__DIR__."/../model/manager/TypeManager.php");
+require_once(__DIR__."/../model/manager/IncludeManager.php");
+require_once(__DIR__."/../model/manager/ItemManager.php");
+require_once(__DIR__."/../model/manager/HaveManager.php");
+require_once(__DIR__."/../model/manager/UserManager.php");
 //call managers functions (load data here)
 
-require(__DIR__."/../model/manager/RecipeManager.php");
 
 
-$retour = (new RecipeManager())->getByLabel("test");
+/*$retour = (new RecipeManager())->getByLabel("test"); //On récupère toutes les infos de la recette en fonction du nom de celle-ci
+$type= (new TypeManager())->getAll(); //On récupère tous les types de plats pour la liste déroulante
 
-var_dump($retour);
+$quantity= (new IncludManager())->getQuantityByIdItemAndRecipe(1,2);*/ //On récupère la quantité des ingrédients nécessaires à la recette
 
 $pageFill['recipe'] = array(array("id"=>1,
                                     "titre" => "préparation de cookies",
