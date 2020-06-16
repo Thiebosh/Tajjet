@@ -4,7 +4,8 @@
 
 
 //2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
+//load bdd functions : 
+require(__DIR__."/../model/manager/RecipeManager.php");
 //call managers functions (load data here)
 
 require(__DIR__."/../model/manager/RecipeManager.php");

@@ -12,7 +12,7 @@ class NewsManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAll(){
+    public function getAllByIdNews($idNews){ //Pour tout récupérer selon si l'utilisateur a choisi "actu" ou "résultats sportifs", donc à partir de l'id News
        
         return array( new News() );
     }

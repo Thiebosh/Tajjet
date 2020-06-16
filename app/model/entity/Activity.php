@@ -5,7 +5,7 @@ class Activity extends Entity {
     //attributes
     private $_label;
     private $_distance;
-    private $_idTown;
+    private $_idWeather;
     private $_idCategory;
 
 
@@ -30,8 +30,8 @@ class Activity extends Entity {
         return $this->_distance;
     }
 
-    public function getIdTown() {
-        return $this->_idTown;
+    public function getIdWeather() {
+        return $this->_idWeather;
     }
 
     public function getIdCategory() {
@@ -48,8 +48,8 @@ class Activity extends Entity {
         if (is_float($distance)) $this->_distance = $distance;
     }
 
-    public function setIdTown($id) {
-        if (isID($id)) $this->_idTown = $id;
+    public function setIdWeather($id) {
+        if (isID($id)) $this->_idWeather = $id;
     }
 
     public function setIdCategory$id) {

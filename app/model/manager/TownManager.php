@@ -12,7 +12,7 @@ class TownManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllTownLabel(){
+    public function getAllByTownLabel($labelTown){
         
         return array( new Town() );
     }

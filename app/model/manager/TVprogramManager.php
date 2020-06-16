@@ -12,9 +12,15 @@ class TVprogramManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllAfterTime($time){
+    public function getAllAfterTime($time){ //Pour afficher le programme selon l'heure saisie par l'utilisateur
+        
+        return array( new TVprogam() );
+    }
+
+    public function getAllForDay($date){ //Pour afficher le programme de la journée par défaut
         
         return array( new TVprogam() );
     }
     
+
 }

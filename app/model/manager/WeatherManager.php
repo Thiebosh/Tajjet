@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Theme.php");
+require_once(__DIR__."/../entity/Weather.php");
 
-class ThemeManager extends Manager {
+class WeatherManager extends Manager {
     //constructor & destructor
     public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -12,9 +12,10 @@ class ThemeManager extends Manager {
         parent::__destruct();
     }
 
-    public function getById($idTheme){
+    public function getAllByIdTown($idTown){
         
-        return new Theme();
+        return array( new Weather() );
     }
+
     
 }

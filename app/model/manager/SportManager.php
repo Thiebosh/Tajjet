@@ -11,6 +11,11 @@ class SportManager extends Manager {
     public function __destruct() {
         parent::__destruct();
     }
+    
+    public function getAll(){ //Pour afficher la liste de tous les exercices si clic sur "liste d'exercices"
+    
+        return array( new Sport() );
+    }
 
     public function getAllByIdMuscle($idMuscle){
         
@@ -18,4 +23,15 @@ class SportManager extends Manager {
         return array( new Sport() );
     }
     
+    public function getAllByLabelSport($labelSport){ //Pour la recherche par nom d'exercice
+        
+
+        return array( new Sport() );
+    }
+
+    public function getAllByIdUser($idUser){ //Pour pouvoir afficher la séance de l'utilisateur à sa prochaine connexion
+        
+
+        return array( new Sport() );
+    }
 }
