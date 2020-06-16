@@ -8,7 +8,7 @@ $path = array(  'app' => 'app/',
                 'vendor' => 'vendor/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
-                    'sql' => 'resource/db/appname.sql',
+                    'sql' => 'resource/db/everydaySunshine.sql',
                     'python' => 'core/main_function.py');
 
 
