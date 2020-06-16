@@ -1,5 +1,6 @@
 #module recettes
 
+# pip install beautifulsoup4
 
 from bs4 import BeautifulSoup
 
@@ -140,16 +141,12 @@ class Marmiton(object):
 
 
 # Search :
-
 print(sys.argv)
 wished_recipe = sys.argv[1]
 
 query_options = {
   "aqt": "{}".format(wished_recipe),      # Query keywords - separated by a white space
   "dt": "platprincipal",      # Plate type : "entree", "platprincipal", "accompagnement", "amusegueule", "sauce" (optional)
-  #"exp": 2,                   # Plate price : 1 -> Cheap, 2 -> Medium, 3 -> Kind of expensive (optional)
-  #"dif": 2,                   # Recipe difficulty : 1 -> Very easy, 2 -> Easy, 3 -> Medium, 4 -> Advanced (optional)
-  #"veg": 0,                   # Vegetarien only : 0 -> False, 1 -> True (optional)
 }
 query_result = Marmiton.search(query_options)
 
@@ -172,7 +169,5 @@ for ingredient in detailed_recipe['ingredients']:  # List of ingredients
 steps = ""
 for step in detailed_recipe['steps']:  # List of cooking steps
     steps += step + "<br>"
- 
-#steps = steps.replace("’", "'")
 
 print(name, "\n", picture,"\n", PreparationTime,"\n", CookingTime,"\n", TotalTime, "\n", Difficulty,"\n", ingredients ,"\n", steps)

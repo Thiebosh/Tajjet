@@ -9,7 +9,7 @@ $path = array(  'app' => 'app/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/appname.sql',
-                    'python' => 'core/recipe.py');
+                    'python' => 'core/sport.py');
 
 
 //1. charge en memoire les messages d'erreurs
