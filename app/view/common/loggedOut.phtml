@@ -1,7 +1,9 @@
 <?php ob_start();?>
-
-    <a href="index.php?user=login">Connexion</a>
-    <br>
-    <a href="index.php?user=register">Inscription</a>
+<li class="nav-item active">
+    <a class="nav-link" href="index.php?user=login">Connexion<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="index.php?user=register">Inscription<span class="sr-only">(current)</span></a>
+</li>
 
 <?php $userGateContent=ob_get_clean();
