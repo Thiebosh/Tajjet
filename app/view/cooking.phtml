@@ -1,15 +1,16 @@
 <?php ob_start();?>
-    <div>
-        <form method="post" action="index.php?page=recherche">
-            <select name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+    <div class="row">
+        <form class="col-md-9" method="post" action="index.php?page=recherche">
+            <select class="custom-select col-md-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($pageFill['type'] as $type) { ?>
                     <option><?=$type?>
                 <?php } ?>
             </select>
-            <input type="text" name="search" placeholder="Rechercher des recettes">
-            <input type="submit" class="buttonNav" value="Rechercher">
+            <input class="col-md-3" type="text" name="search" placeholder="Rechercher des recettes">
+            <input class="col-md-3" type="submit" class="buttonNav" value="Rechercher">
         </form>
     </div>
+    
     <article class="desc">
         <h1><?=$pageFill['recipe'][0]['titre']?></h1>
         <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
