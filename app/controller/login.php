@@ -7,7 +7,7 @@ else if (isset($_POST["form"])) {
     if (!isset($trustedPost['errMsgs'])) {
         require_once(__DIR__."/../model/manager/UserManager.php");
 
-        $user = (new UserManager)->getUserByName($trustedPost['name']);
+        $user = (new UserManager)->readByName($trustedPost['name']);
         
         if ($user === false) {
             $trustedPost['errMsgs'][] = $errMsg['controller']['login']['unknown'];

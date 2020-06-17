@@ -1,21 +1,16 @@
-<?php ob_start();
-    if (isset($trustedPost['errMsgs'])) { ?>
-        <div>
-            <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
-        </div> 
-    <?php } ?>
+<?php ob_start(); ?>
     <div class="d-flex justify-content-center">
         <div class="mt-4 col-lg-3">
             <form method="post" action="index.php?user=login">
                 <p> 
-                    <label for="username">Nom d'utilisateur</label><br>
-                    <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                    <label for="username" class="ml-1">Nom d'utilisateur</label><br>
+                    <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
-                    <label for="password">Mot de passe</label><br>
-                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                    <label for="password" class="ml-1">Mot de passe</label><br>
+                    <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                 </p>
                 <p class="d-flex justify-content-center">
-                    <input class="btn btn-success" type="submit" value="Connexion"/>
+                    <input type="submit" class="btn btn-success" value="Connexion"/>
                     <input type="hidden" name="form" value="1">
                 </p>
             </form>
@@ -28,6 +23,4 @@
             </div>
         </div>
     </div>
-    
-    
 <?php $sectionContent=ob_get_clean();
