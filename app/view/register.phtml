@@ -1,36 +1,46 @@
 <?php ob_start(); ?>
-    <form class="col-md-6 " method="post" action="index.php?user=register">
-        <p>
-            <label for="username">Nom d'utilisateur</label><br>
-            <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
-            <br><br>
-            <label for="password">Mot de passe</label><br>
-            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
-            <br><br>
-            <label for="passwordConf">Confirmer le mot de passe</label><br>
-            <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" required>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <form method="post" action="index.php?user=register">
+                <p>
+                    <label for="username">Nom d'utilisateur</label><br>
+                    <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
+                    <br>
+                    <label for="password">Mot de passe</label><br>
+                    <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
+                    <br>
+                    <label for="passwordConf">Confirmer le mot de passe</label><br>
+                    <input required type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
+                    <br>
+                    <div>
+                        <label for="avatar">Avatar</label>
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="avatar">Importer image</label>
+                            <input type="file" class="custom-file-input" name="avatar" accept=".png" value="<?= isset($trustedPost['avatar']) ? htmlspecialchars($trustedPost['avatar']) : '' ?>">
+                        </div>
+                    </div>
+                    <br>
+                    <label for="birth">Date de naissance</label><br>
+                    <input type="date" class="form-control" name="birth" placeholder="AAAA-MM-JJ" value="<?= isset($trustedPost['birthDate']) ? htmlspecialchars($trustedPost['birthDate']) : '' ?>">
+                    <br>
+                    <label for="height">Taille</label><br>
+                    <input type="text" class="form-control" name="height" placeholder="Exemple pour 1m80 : 1.80" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
+                    <br>
+                    <label for="town">Ville</label><br>
+                    <input type="text" class="form-control" name="town" placeholder="Ville" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
+                </p>
+                <p class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-success" value="Inscription"/>
+                    <input type="hidden" name="form" value="1">
+                </p>
+            </form>
             <br>
-            <div>
-                <label for="avatar">Avatar</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="avatar" accept=".png">
-                    <label class="custom-file-label" for="avatar">Importer image</label>
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <p>Déjà inscrit ?</p>
+                    <a class="btn btn-primary" href="index.php?user=login" role="button">Se connecter</a>
                 </div>
             </div>
-            <br><br>
-                <label for="birthdate">Date de naissance</label><br>
-                <input type="text" class="form-control" name="birthdate" placeholder="AAAA-MM-JJ">
-            <br><br>
-            <label for="height">Taille</label><br>
-            <input type="text" class="form-control" name="height" placeholder="Exemple pour 1m80 : 1.80">
-            <br><br>
-            <label for="weight">Ville</label><br>
-            <input type="text" class="form-control" name="weight" placeholder="Ville">
-            <br><br>
-            
-        </p>
-        <br><br>
-            <input class="col-md-6 btn btn-info" type="submit" value="Inscription"/>
-            <input type="hidden" name="form" value="1">
-    </form>
+        </div>
+    </div>
 <?php $sectionContent=ob_get_clean();

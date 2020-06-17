@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['username'])) {
     $trustedPost['name'] = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);//false si incorrect
 }
@@ -36,8 +35,6 @@ if (isset($_POST['town'])) {
 }
 
 
-
-if (in_array(false, $trustedPost, true)) {//si un "false" existe dans le tableau, avec comparaison des types
-    $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];
-}
+//si un "false" existe dans le tableau, avec comparaison des types
+if (in_array(false, $trustedPost, true)) $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];
 //garde les false pour afficher class erreur

@@ -6,7 +6,6 @@
     <title>EverydaySunshine - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 
     <link rel="stylesheet" href="app/view/common/css/normalize.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
-    <!-- framework bootstrap : soit en local dans common/css, soit directement en ligne comme ici -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     <link rel="stylesheet" href="app/view/common/css/template.css"/><!-- style de la partie template + declaration variables -->
@@ -45,10 +44,19 @@
     <section class="container-fluid">
         <?= $sectionContent ?>
     </section>
+
+    <footer class="d-flex justify-content-center">
+        <div>
+            <br><hr class="mt-8 col-lg-8">
+            <span>© 2020 —  My Everyday Sunshine  —  Crédits</span><br>
+            <span>Contact : <em><a href="mailto:contact@everydaySunshine.fr">contact@everydaySunshine.fr</a></em></span><br>
+            &nbsp;
+        </div>
+    </footer>
 </body>
 </html>
 
+<!-- load js scripts after html display for performance issues -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<!-- load js bootstrap framework script after html for performance issues -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

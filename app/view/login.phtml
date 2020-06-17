@@ -4,13 +4,13 @@
             <form method="post" action="index.php?user=login">
                 <p> 
                     <label for="username">Nom d'utilisateur</label><br>
-                    <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                    <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
                     <label for="password">Mot de passe</label><br>
-                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                    <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                 </p>
                 <p class="d-flex justify-content-center">
-                    <input class="btn btn-success" type="submit" value="Connexion"/>
+                    <input type="submit" class="btn btn-success" value="Connexion"/>
                     <input type="hidden" name="form" value="1">
                 </p>
             </form>
@@ -23,6 +23,4 @@
             </div>
         </div>
     </div>
-    
-    
 <?php $sectionContent=ob_get_clean();
