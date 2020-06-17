@@ -9,9 +9,9 @@
     
     <link rel="stylesheet" href="app/view/common/css/template.css"/><!-- style de la partie template + declaration variables -->
     <?php if (file_exists(__DIR__."/../css/$pageName.css")) { ?>
-        <link rel="stylesheet" href="app/view/css/<?= $pageName ?>.css"/><!-- style de la partie section -->
+        <link rel="stylesheet" href="app/view/css/<?= htmlspecialchars($pageName) ?>.css"/><!-- style de la partie section -->
     <?php } ?>
-    <title>AppName - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
+    <title>EverydaySunshine - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 </head>
 
 <body>
