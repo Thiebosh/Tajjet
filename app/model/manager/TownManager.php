@@ -7,7 +7,7 @@ class TownManager extends Manager {
         $query = 'SELECT * FROM town ORDER BY ID_town';
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Town($line);
@@ -22,7 +22,7 @@ class TownManager extends Manager {
 
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result1[] = new NewlabelTown($line);
@@ -36,7 +36,7 @@ class TownManager extends Manager {
     $query = 'SELECT * FROM town WHERE ID_town=?';
 
     $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute(array($townLabel))) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute(array($townLabel))) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result2[] = new IdTown($line);

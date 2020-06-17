@@ -8,7 +8,7 @@ class ItemManager extends Manager {
 
         $query = "SELECT * FROM recipe ORDER BY ID_recipe";
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($idRecipe)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute($idRecipe)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
            $result[] = new Item($line);
@@ -16,4 +16,5 @@ class ItemManager extends Manager {
         return $result;
     }
 
+}
 }

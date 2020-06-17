@@ -8,10 +8,10 @@ class IncludeManager extends Manager {//pas sur que existe
     public function getQuantityByIdItemAndRecipe($idItem,$idRecipe){
        $query = "SELECT * FROM include";
        $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
-           $result[] = new Include($line);
+           $result[] = new Includ($line);
        }
         return $result;
     }

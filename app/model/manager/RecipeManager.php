@@ -9,7 +9,7 @@ class RecipeManager extends Manager {
         $query = 'SELECT * FROM recipe ORDER BY ID_recipe';
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute(array($idRecipe))) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute(array($idRecipe))) throw new Exception("Base De Donnéez : Echec d'exécution");
         
         foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
             $result[] = new Recipe($line);
