@@ -4,15 +4,17 @@ require_once(__DIR__."/../entity/Sky.php");
 
 class SkyManager extends Manager {
     public function getById($idSky){
-        $query = "SELECT * FROM Sky WHERE ID_sky =?"
+        $query = "SELECT * FROM sky WHERE ID_sky =?";
 
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute(array($idsky))) throw new Exception("Base De Donnéez : Echec d'exécution");
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN)
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+            $result = new Sky($line);
+        }
         }
 
-        return new Sky();
+        return $return;
     }
     
 }

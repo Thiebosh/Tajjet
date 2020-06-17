@@ -5,9 +5,9 @@ require_once(__DIR__."/../entity/TVprogram.php");
 class TVprogramManager extends Manager {
 
     public function getAllAfterTime($time){
-        $query = "SELECT * FROM TVprogam ORDER BY ID_TVprogam";
+        $query = "SELECT * FROM tVprogam ORDER BY ID_TVprogam";
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute(array($townLabel))) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!request->execute(array($time))) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new TVprogram($line);

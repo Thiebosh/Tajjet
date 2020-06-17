@@ -5,7 +5,7 @@ require_once(__DIR__."/../entity/Article.php");
 class ArticleManager extends Manager {
     //requetes sql    
     public function getAllByIdNews($idNews) {
-        $query ="SELECT * FROM Article ORDER by ID_news ";
+        $query ="SELECT * FROM article ORDER by ID_news ";
         
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute($idNews)) throw new Exception("Base De Donnéez : Echec d'exécution");

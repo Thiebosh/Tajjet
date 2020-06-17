@@ -5,7 +5,7 @@ require_once(__DIR__."/../entity/Theme.php");
 class ThemeManager extends Manager {
     
     public function getAllByIDtheme($idtheme){ //Pour tout récupérer selon si l'utilisateur a choisi "actu" ou "résultats sportifs", donc à partir de l'id News
-        $query = 'SELECT * FROM Theme ORDER BY ID_theme';
+        $query = 'SELECT * FROM theme ORDER BY ID_theme';
 
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");

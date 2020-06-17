@@ -5,7 +5,7 @@ require_once(__DIR__."/../entity/Category.php");
 class CategoryManager extends Manager {
 
     public function getAllById($idCategory){
-        $query ="SELECT * FROM Category ORDER by ID_category ";
+        $query ="SELECT * FROM category ORDER by ID_category ";
         
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute($idCategory)) throw new Exception("Base De Donnéez : Echec d'exécution");
@@ -14,6 +14,6 @@ class CategoryManager extends Manager {
            $result[] = new Category($line);
         }
 
-        return array( new Category() );
+        return $result;
     }
 }

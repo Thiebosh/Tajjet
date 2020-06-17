@@ -4,12 +4,12 @@ require_once(__DIR__."/../entity/Sport.php");
 
 class SportManager extends Manager {
     
-    public function getAllByIdMuscle($idMuscle){
+    public function getAllByIdSport($idSport){
 
-        $query = 'SELECT * FROM Town ORDER BY ID_muscle';
+        $query = 'SELECT * FROM sport ORDER BY ID_sport';
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute(array($idMuscle))) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!request->execute(array($idSport))) throw new Exception("Base De Donnéez : Echec d'exécution");
         
         foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
             $result[] = new Sport($line);

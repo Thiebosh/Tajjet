@@ -4,7 +4,7 @@ require_once(__DIR__."/../entity/Town.php");
 
 class TownManager extends Manager {
     public function getAllTownLabel(){
-        $query = 'SELECT * FROM Town ORDER BY ID_town';
+        $query = 'SELECT * FROM town ORDER BY ID_town';
 
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
@@ -18,7 +18,7 @@ class TownManager extends Manager {
     }
 
     public function addTown($labelTown){
-        $query = 'INSERT INTO Town Values (:Label)'
+        $query = 'INSERT INTO town Values (:Label)';
 
 
         $request = parent::getDBConnect()->prepare($query);
@@ -33,7 +33,7 @@ class TownManager extends Manager {
     
     public function getIdTown($townLabel) {
 
-    $query = 'SELECT * FROM Town WHERE ID_town=?';
+    $query = 'SELECT * FROM town WHERE ID_town=?';
 
     $request = parent::getDBConnect()->prepare($query);
         if (!request->execute(array($townLabel))) throw new Exception("Base De Donnéez : Echec d'exécution");

@@ -6,14 +6,14 @@ class ItemManager extends Manager {
 	
     public function getAllByRecipe($idRecipe){
 
-        $query = "SELECT * FROM Recipe ORDER BY ID_Recipe"
+        $query = "SELECT * FROM recipe ORDER BY ID_recipe";
         $request = parent::getDBConnect()->prepare($query);
         if (!request->execute($idRecipe)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
            $result[] = new Item($line);
 
-        return array( new Item() );
+        return $result;
     }
 
 }
