@@ -92,6 +92,7 @@ class User extends Entity {
     }
 
     public function setHeight($height) {
+        $height = Entity::stringToFloat($height);
         if (is_float($height)) $this->_height = $height;
     }
 

@@ -42,6 +42,11 @@ abstract class Entity {
         return is_string($value) && strtotime($value);
     }
 
+    public static function stringToFloat($number) {
+        $number = str_replace(',','.',$number);
+        return (is_numeric($number)) ? floatval($number) : null;
+    }
+
     public static function printDate($date) {
         return $date instanceof DateTime ? $date->format('d-m-Y') : NULL ;
     }

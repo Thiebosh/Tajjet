@@ -14,6 +14,11 @@ if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//ch
     }
     if (isset($_POST['height'])) {
         $trustedPost['height'] = filter_input(INPUT_POST, 'height', FILTER_VALIDATE_FLOAT);
+
+        if (!$trustedPost['height']) {
+            $tmp = Entity::stringToFloat($_POST['height']);
+            if (is_numeric(Entity::stringToFloat($tmp))) $trustedPost['height'] = $tmp;
+        }
     }
     if (isset($_POST['town'])) {
         $trustedPost['town'] = filter_input(INPUT_POST, 'town', FILTER_SANITIZE_STRING);
