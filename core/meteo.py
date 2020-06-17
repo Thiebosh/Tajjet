@@ -20,16 +20,32 @@ data = res.json()
 # weather = data['list'][0]['main']
 # print(weather)
 
-label = data['list'][0]['weather'][0]['main']
+Forecast = data['list'][0]['weather'][0]['main']
 MinTemp = data['list'][0]['main']['temp_min']
 MaxTemp = data['list'][0]['main']['temp_max']
 FeltTemp = data['list'][0]['main']['feels_like']
 Humidity = data['list'][0]['main']['humidity']
 Pressure = data['list'][0]['main']['pressure']
 
-print(label, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure)
+print(Forecast, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+# Import vers BDD
+import mysql.connector
+ 
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="everydaySunshine"
+)
+ 
+mycursor = mydb.cursor()
+ 
+sql = "INSERT INTO weather (Forecast, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure) VALUES (%s, %s, %s, %s, %s, %s)"
+val = (Forecast, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure)
+mycursor.execute(sql, val)
+ 
+mydb.commit()
 
 

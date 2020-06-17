@@ -9,7 +9,7 @@ $path = array(  'app' => 'app/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'core/module_tv.py');
+                    'python' => 'core/meteo.py');
 
 
 //1. charge en memoire les messages d'erreurs
