@@ -3,3 +3,15 @@
 {
     font-size: 2em;
 }
+
+form{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+
+li{
+    list-style-type: none;
+}

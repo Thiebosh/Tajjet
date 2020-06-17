@@ -6,47 +6,61 @@
                     <option><?=$type?>
                 <?php } ?>
             </select>
-            <input class="col-md-3" type="text" name="search" placeholder="Rechercher des recettes">
-            <input class="col-md-3" type="submit" class="buttonNav" value="Rechercher">
+            <input class="col-md-3 form-control" type="text" name="search" placeholder="Rechercher des recettes">
+            <input class="col-md-3 btn btn-primary" type="submit" class="buttonNav" value="Rechercher">
         </form>
     </div>
     
-    <article class="row">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 ><?=$pageFill['recipe'][0]['titre']?></h1>
-            </div>
-            <div class="col-md-6">
-                <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
-            </div>
-        </div>
-        <div class="row">
-            <div class="row">
-                <?=$pageFill['recipe'][0]["globalTime"]?> min
-            </div>
+    <article class="row" id="recipe">
+        <div classe="col-md-12">
             <div class="row">
                 <div class="col-md-6">
-                    <?=$pageFill['recipe'][0]['prepTime']?> min
+                    <h1 ><?=$pageFill['recipe'][0]['titre']?></h1>
                 </div>
                 <div class="col-md-6">
-                    <?=$pageFill['recipe'][0]['cookTime']?> min
+                    <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <p><?=$pageFill['recipe'][0]['steps']?></p>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <p class="note">Note :</p>
-            </div>
-            <div class="col-md-4">
-                <p class="difficulty">Difficulté :</p>
-            </div>
-            <div class="col-md-4">
-                <p class="price">Budget :</p>
-            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?=$pageFill['recipe'][0]["globalTime"]?> min
+                        </div>
+                    </div>
                     
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?=$pageFill['recipe'][0]['prepTime']?> min
+                        </div>
+                        <div class="col-md-6">
+                            <?=$pageFill['recipe'][0]['cookTime']?> min
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                
+            <div class="row">
+                <div class="col-md-12">
+                    <p><?=$pageFill['recipe'][0]['steps']?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="note">Note :</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="difficulty">Difficulté :</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="price">Budget :</p>
+                </div>
+            </div>
+              
+                        
+                
+            
         </div>
     </article>
     <article class="row">
@@ -56,23 +70,41 @@
             <form method="post" action="index.php?page=cooking">
                 <input type="text" name="eaternumber" placeholder="">
             </form>
-            <div>
-                <p>J'ai besoin de : </p>
-                <p>J'achète : </p>
+            <div class="row">
+                
+                    <div class="col-md-3">
+                        <p>J'ai besoin de : </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>J'achète : </p>
+                    </div>
             </div>
-            <ul>
-                <?php for($i=0; $i<sizeof($pageFill['recipe']);++$i) { ?>   <!--On parcourt la liste des recettes sélectionnées par l'utilisateur-->
-                    <?php for($j=0;$j<sizeof($pageFill['recipe'][$i]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de chaque recette sélectionnée par l'utilisateur-->
-                        <li><?=$pageFill['recipe'][$i]['items'][$j]['quantity']?> <?=$pageFill['recipe'][$i]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
-                        
-                            <form method="post" action="index.php?page=cooking">
-                                <input type="text" name="itemnumber" placeholder="">    
-                            </form>
-                        
-                        </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
-                    <?php } ?>
-                <?php } ?>
-            </ul> 
+            <div class="row">
+                    <ul>
+                        <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
+                                <li>
+                                    <?=$pageFill['recipe'][0]['items'][$j]['quantity']?> <?=$pageFill['recipe'][0]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
+                                </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
+                        <?php } ?>
+
+                    </ul>
+                    
+                        <ul>
+                            <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
+                                <li>
+                                    <form method="post" action="index.php?page=cooking">
+                                            <input type="text" name="itemnumber" placeholder="">    
+                                    </form>
+                                    </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
+                                <?php } ?>
+
+                        </ul>
+                    <br>
+                    
+                    
+                
+            </div>
+            
         </div>
     
         <div class="col-md-6" id="possession">
