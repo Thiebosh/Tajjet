@@ -1,15 +1,26 @@
 <?php ob_start(); ?>
-    <?= htmlspecialchars("page d'accueil") ?>
-    <br><hr><br>
-    <a href="index.php?page=sport">module sport</a>
-    <br>
-    <a href="index.php?page=health">module santé</a>
-    <br>
-    <a href="index.php?page=news">module news</a>
-    <br>
-    <a href="index.php?page=weather">module météo</a>
-    <br>
-    <a href="index.php?page=activities">module activités</a>
-    <br>
-    <a href="index.php?page=cooking">module recettes</a>
+    <h1 class="col-lg mt-4 mb-4">Page d'Accueil</h1>
+    <hr>
+    <div class="row mt-4">
+        <div class="col-lg mt-2">
+            <a href="index.php?page=sport"><button class="col-lg-12 btn btn-primary">Sport</button></a>
+        </div>
+        <div class="col-lg mt-2">
+            <a href="index.php?page=health"><button class="col-lg-12 btn btn-primary">Santé</button></a>
+        </div>
+        <div class="col-lg mt-2">
+            <a href="index.php?page=news"><button class="col-lg-12 btn btn-primary">News</button></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg mt-2">
+            <a href="index.php?page=weather"><button class="col-lg-12 btn btn-primary">Météo</button></a>
+        </div>
+        <div class="col-lg mt-2">
+            <a href="index.php?page=activities"><button class="col-lg-12 btn btn-primary">Activités</button></a>
+        </div>
+        <div class="col-lg mt-2">
+            <a href="index.php?page=cooking"><button class="col-lg-12 btn btn-primary">Recettes</button></a>
+        </div>
+    </div>
 <?php $sectionContent = ob_get_clean();

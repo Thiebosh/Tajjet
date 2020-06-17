@@ -4,23 +4,30 @@
             <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
         </div> 
     <?php } ?>
-    
-    <form method="post" action="index.php?user=login">
-        <p> 
-            <label for="username">Nom d'utilisateur</label><br>
-            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-            <br><br>
-            <label for="password">Mot de passe</label><br>
-            <input type="text" name="password" placeholder="Mot de passe" required>
-        </p>
-        <br><br>
-        <input class="btn btn-outline-success" type="submit" value="Connexion"/>
-        <input type="hidden" name="form" value="1">
-    </form>
-
-    <div>
-        <p>Pas encore inscrit ?</p>
-        <a class="btn btn-primary" href="index.php?user=register" role="button">S'inscrire</a>
+    <div class="d-flex justify-content-center">
+        <div class="mt-4 col-lg-3">
+            <form method="post" action="index.php?user=login">
+                <p> 
+                    <label for="username">Nom d'utilisateur</label><br>
+                    <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                    <br>
+                    <label for="password">Mot de passe</label><br>
+                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                </p>
+                <p class="d-flex justify-content-center">
+                    <input class="btn btn-success" type="submit" value="Connexion"/>
+                    <input type="hidden" name="form" value="1">
+                </p>
+            </form>
+            <br>
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <p>Pas encore inscrit ?</p>
+                    <a class="btn btn-primary" href="index.php?user=register" role="button">S'inscrire</a>
+                </div>
+            </div>
+        </div>
     </div>
+    
     
 <?php $sectionContent=ob_get_clean();
