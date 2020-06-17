@@ -1,34 +1,49 @@
 <?php
-//description logique générale de cette page
-/*
-if (!isset($_SESSION["userId"])) echo("rediriger vers page connexion");//ou ne pas afficher l'option
-else {
-    if (!isset($_POST["form"])) echo("afficher page sans reflechir");
-    else {
-        echo("tentative de modification : traiter le formulaire");
-        if (isGood($_POST["form"])) echo("afficher page avec modifs");
-        else echo("afficher page avec erreurs");
+if (!isset($_SESSION["user"])) header('Location: index.php');
+
+else if (isset($_POST["form"])) {
+    require(__DIR__."/../checker/$pageName.php");
+
+    require_once(__DIR__."/../model/manager/UserManager.php");
+
+    {
+        if (isset($trustedPost['name']) && $trustedPost['name'] !== false) {
+            echo("here");
+            if ((new UserManager)->isUsedName($trustedPost['name'])) {
+                $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['login'];
+            }
+            else $_SESSION['user']->setName($trustedPost['name']);
+        }
+        
+        if (isset($trustedPost['avatar']) && $trustedPost['avatar'] !== false) {
+            //opérations
+            $_SESSION['user']->setAvatar($trustedPost['avatar']);
+        }
+        
+        if (isset($trustedPost['password'], $trustedPost['passwordConf']) && 
+            $trustedPost['password'] !== false && $trustedPost['passwordConf'] !== false) {
+            if ($trustedPost['password'] != $trustedPost['passwordConf']) {
+                $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['password'];
+            }
+            else $_SESSION['user']->setPassword(sha1($trustedPost['password']));
+        }
+        
+        if (isset($trustedPost['birthDate']) && $trustedPost['birthDate'] !== false) {
+            $_SESSION['user']->setBirthDate($trustedPost['birthDate']);
+        }
+        
+        if (isset($trustedPost['height']) && $trustedPost['height'] !== false) {
+            $_SESSION['user']->setHeight($trustedPost['height']);
+        }
+        
+        if (isset($trustedPost['town']) && $trustedPost['town'] !== false) {
+            require_once(__DIR__."/../model/manager/TownManager.php");
+
+            $_SESSION['user']->setTown((new TownManager)->readByName($trustedPost['town']));//cree ligne si town existe pas?
+        }
+    }
+
+    if (!in_array(false, $trustedPost, true) && (new UserManager)->update($_SESSION['user'])) {//si pas de pb, lance update ; si update error, lance message
+        $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['db'];
     }
 }
-*/
-
-
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
-
-
-//2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
-//call managers functions (load data here)
-$pageFill['account'] = array("username"=>"Dark Vador",
-                                "e-mail"=>"darkvad@gmail.com",
-                                "avatar"=>"url/path"
-                            );
-
-$pageFill['personal'] = array("age"=>20,
-                            "town"=>"Lille",
-                            "height"=>1.80,
-                            "weight"=>75,
-                            "favourite_team"=>"LOSC"
-                        );
-

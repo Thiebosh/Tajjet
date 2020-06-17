@@ -1,11 +1,4 @@
-<?php ob_start();
-    if (isset($trustedPost['errMsgs'])) { ?>
-        <div>
-            <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
-        </div> 
-    <?php } ?>
-
-    <div>
+<?php ob_start(); ?>
     <form class="col-md-6 " method="post" action="index.php?user=register">
         <p>
             <label for="username">Nom d'utilisateur</label><br>
@@ -14,7 +7,7 @@
             <label for="password">Mot de passe</label><br>
             <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
             <br><br>
-            <label for="password_conf">Confirmer le mot de passe</label><br>
+            <label for="passwordConf">Confirmer le mot de passe</label><br>
             <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" required>
             <br>
             <div>
@@ -40,5 +33,4 @@
             <input class="col-md-6 btn btn-info" type="submit" value="Inscription"/>
             <input type="hidden" name="form" value="1">
     </form>
-    <div>
 <?php $sectionContent=ob_get_clean();

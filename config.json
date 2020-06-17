@@ -1,18 +1,18 @@
 {
     "Python" : {
-        "executable" : "C:/Users/tristan/AppData/Local/Programs/Python/Python36/python"
+        "executable" : "C:/Users/Thibaut Juzeau/AppData/Local/Programs/Python/Python36/python"
     },
 
     "DB" : {
         "connexion" : {
             "username" : "root",
-            "password" : ""
+            "password" : "1a9z9e8r"
         },
 
         "setup" : {            
             "DBname": "everydaySunshine",
-            "characterSet" : "utf8",
-            "classification" : "utf8_general_ci"
+            "characterSet" : "latin1",
+            "classification" : "latin1_general_ci"
         }
     }
 }

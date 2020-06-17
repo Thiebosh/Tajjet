@@ -1,23 +1,50 @@
-<?php ob_start();?>
-    <div class="infos_compte">
-        <h1>Informations de compte</h1>
-        <ul>
-            <li><strong>Nom d'utilisateur</strong> : <?=$pageFill['account']['username']?></li>
-            <li><strong>Adresse mail</strong> : <?=$pageFill['account']['e-mail']?></li>
-            <li><strong>Avatar</strong> : <?=$pageFill['account']['avatar']?></li>
-        </ul>
-    </div>
+<?php ob_start(); ?>
+    <form method="post" action="index.php?user=profile">
+        <div class="infos_compte">
+            <h1>Informations de compte</h1>
+            <div>
+                <div>
+                    <label for="username">Nom d'utilisateur</label><br>
+                    <input type="text" name="username" placeholder="Nouveau nom" value="<?= htmlspecialchars($_SESSION['user']->getName()) ?>">
+                </div>
+                <!--
+                <div>
+                    <label for="avatar">Avatar</label><br>
+                    <input type="text" name="avatar" placeholder="Nouveau nom" value="< ?= $_SESSION['user']->getName() ?>" required>
+                </div>
+                -->
+                <div>
+                    <label for="password">Mot de passe</label><br>
+                    <input type="text" name="password" placeholder="Nouveau mot de passe">
+                </div>
+                <div>
+                    <label for="passwordConf">Confirmer le mot de passe</label><br>
+                    <input type="text" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
+                </div>
+            </div>
+        </div>
 
-    <div class="infos_perso">
-        <h1>Informations personnelles</h1>
-        <ul>
-            <li><strong>Age</strong> : <?=$pageFill['personal']['age']?></li>
-            <li><strong>Ville</strong> : <?=$pageFill['personal']['town']?></li>
-            <li><strong>Taille</strong> : <?=$pageFill['personal']['height']?> m</li>
-            <li><strong>Poids</strong> : <?=$pageFill['personal']['weight']?> kg</li>
-            <li><strong>Equipe favorite</strong> : <?=$pageFill['personal']['favourite_team']?></li>
-        </ul>
+        <div class="infos_perso">
+            <h1>Informations personnelles</h1>
+            <div>
+                <div>
+                    <label for="birthDate">Votre date de naissance</label><br>
+                    <input type="date" name="birthDate" placeholder="Nouveau nom" value="<?= htmlspecialchars(Entity::printDate($_SESSION['user']->getBirthDate())) ?>">
+                </div>
+                <div>
+                    <label for="height">Votre taille</label><br>
+                    <input type="text" name="height" placeholder="Taille en mètre" value="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>">
+                </div>
+                <div>
+                    <label for="town">Votre ville</label><br>
+                    <input type="text" name="town" placeholder="Nouvelle ville" value="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>">
+                </div>
+            </div>
+        </div>
 
-    </div>
-
+        <input class="btn btn-outline-success" type="submit" value="Modifier mes informations"/>
+        <input type="hidden" name="form" value="1">
+    </form>
 <?php $sectionContent=ob_get_clean();
+
+//ajouter script js pour afficher formulaire (ou champs et bouton de validation) avec un clic bouton "modifier mes données" ?
