@@ -3,20 +3,17 @@ require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Category.php");
 
 class CategoryManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
-
-    public function __destruct() {
-        parent::__destruct();
-    }
 
     public function getAllById($idCategory){
+        $query ="SELECT * FROM Category ORDER by ID_category ";
         
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($idCategory)) throw new Exception("Base De Donnéez : Echec d'exécution");
+
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+           $result[] = new Category($line);
+        }
+
         return array( new Category() );
     }
-    
 }

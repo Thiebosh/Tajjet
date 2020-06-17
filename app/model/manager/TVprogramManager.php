@@ -3,26 +3,19 @@ require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/TVprogram.php");
 
 class TVprogramManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
 
-    public function __destruct() {
-        parent::__destruct();
-    }
+    public function getAllAfterTime($time){
+        $query = "SELECT * FROM TVprogam ORDER BY ID_TVprogam";
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute(array($townLabel))) throw new Exception("Base De Donnéez : Echec d'exécution");
 
-    public function getAllAfterTime($time){ //Pour afficher le programme selon l'heure saisie par l'utilisateur
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+            $result[] = new TVprogram($line);
+        }
+
+        return $result;
+    }
         
-        return array( new TVprogam() );
-    }
-
-    public function getAllForDay($date){ //Pour afficher le programme de la journée par défaut
-        
-        return array( new TVprogam() );
-    }
     
-
+    
 }
