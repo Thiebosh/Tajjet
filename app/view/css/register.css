@@ -1,0 +1,33 @@
+
+form,#inscr
+{
+    
+    border:2px solid black;
+    margin:10px auto 10px auto;
+    padding:5px;
+    background-color:#F0A33E;    
+}
+
+div{
+    margin:auto;
+    text-align:center;
+}
+label,#inscr p
+{
+    font-weight:bold;
+}
+
+.form-control,.custom-file-label
+{
+    border:2px solid black;
+    box-shadow: 2px 2px black;
+    text-align:left;
+}
+
+.btn-info
+{
+    
+    background-color: #0A6DA3;
+    border-color:#0A6DA3;;
+}
+
