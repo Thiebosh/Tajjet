@@ -29,7 +29,10 @@ $errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
 $errMsg['checker']['form']['filter'] = 'Valeurs incorrectes.';
 
 
-$errMsg['controller']['login']['password'] = 'Nom d\'utilisateur ou mot de passe incorrect.';
+$errMsg['controller']['login']['unknown'] = 'Nom d\'utilisateur ou mot de passe incorrect.';//ne peut pas preciser, sinon fait fuiter info
+$errMsg['controller']['login']['password'] = 'Nom d\'utilisateur ou mot de passe incorrect.';//ne peut pas preciser, sinon fait fuiter info
+
 
 $errMsg['controller']['register']['password']   = 'Mots de passes différents.';
-$errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà réservé';
+$errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà utilisé';
+$errMsg['controller']['register']['db']         = 'Problème d\'enregistrement, veuillez réessayer';

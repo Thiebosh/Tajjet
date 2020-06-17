@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/../abstract/Entity.php");
 
-require_once("Genre.php");
+require_once("Channel.php");
 
 class TVprogram extends Entity {
     //attributes
@@ -9,8 +9,9 @@ class TVprogram extends Entity {
     private $_synopsis;
     private $_begin;
     private $_end;
-    
-    private $_Genres; //array of Genre instances
+    private $_genre; 
+
+    private $_Channel;//objet Channel
 
 
     //methods
@@ -44,10 +45,13 @@ class TVprogram extends Entity {
         return $this->_end;
     }
     
-    public function getGenres() {
-        return $this->_Genres;
+    public function getGenre() {
+        return $this->_genre;
     }
 
+    public function getChannel() {
+        return $this->_Channel  ;
+    }
 
     //setters
     public function setTitle($title) {
@@ -68,12 +72,11 @@ class TVprogram extends Entity {
         else if (isDateTimeConvertible($end)) $this->_end = new DateTime($end);
     }
 
-    public function setGenres($genres) {
-        unset($this->_Genres);
-        foreach ($genres as $genre) addGenre($genre);
+    public function setGenre($Genre) {
+        if (is_string($genre)) $this->_genre = $genre;
     }
 
-    public function addGenre($genre) {
-        if ($genre instanceof Genre) $this->_Genres[] = $genre;
+    public function setChannel($channel) {
+        if ($channel instanceof Channel) $this->_Channe = $channel;
     }
 }
