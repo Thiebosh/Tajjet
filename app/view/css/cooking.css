@@ -40,7 +40,7 @@ li{
 
 #nom_recette
 {
-    font-family:"Segoe Script";
+    font-family: 'Balsamiq Sans', sans-serif;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -51,7 +51,19 @@ li{
 .recette
 {
     border:2px solid black;
-    box-shadow:3px 3px black;
     background-color:#ffb677;
 }
 
+.list_ingredient {
+    height: 38px;
+    padding: 7px;
+}
+
+.input_number_ingredient {
+    width: 50px;
+    height: 38px;
+}
+
+#number_person {
+    width: 50px;
+}

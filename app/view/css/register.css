@@ -1,9 +1,5 @@
-
-
-
 div{
     margin:auto;
-    text-align:center;
 }
 label,#inscr p
 {
@@ -12,8 +8,6 @@ label,#inscr p
 
 .form-control,.custom-file-label
 {
-    border:2px solid black;
-    box-shadow: 2px 2px black;
     text-align:left;
 }
 
