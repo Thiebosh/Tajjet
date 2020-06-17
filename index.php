@@ -7,7 +7,7 @@ $path = array(  'app' => 'app/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'core/meteo.py');
+                    'python' => 'core/module_meteo.py');
 
 
 //1. charge en memoire les messages d'erreurs et class user (mise en session safe) puis donnees de session
