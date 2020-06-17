@@ -1,0 +1,39 @@
+
+
+/*div
+{
+    border:1px solid black;
+}*/
+
+li
+{
+    list-style-type: none;
+}
+.recherche
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.btn-info
+{
+    background-color:#5f6caf;
+    border-color: #5f6caf;
+}
+
+.nom_image
+{
+    justify-content: center;
+}
+
+.nom_image h1{
+    font-size: 2em;
+}
+
+.btn-warning
+{
+    background-color:#ffb677;
+    border-color:#ffb677;
+}
