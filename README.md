@@ -20,7 +20,7 @@
 
 ### Setup du fichier config.json
 
-La configuration du projet s'effectue dans le fichier setup/config.json. Avant lancement du programme, il est nécessaire de vérifier les informations contenues dans ce fichier.
+La configuration du projet s'effectue dans le fichier config.json. Avant lancement du programme, il est nécessaire de dupliquer config_example.json, de le renommer en config.json et d'appliquer ses propres informations dans ce fichier.
 
 * Python
   * executable : chemin d'accès absolu à votre exécutable python 3.6
