@@ -3,14 +3,9 @@
 
 # pip install newsapi-python
 
-
-# -*- coding: latin1 -*-
-
-
 import requests
 import sys
 from pprint import pprint
-import mysql.connector
 
 #On récupère les articles par code pays
 country = sys.argv[1] #il faut mettre l'argument dans router.php ligne 28
