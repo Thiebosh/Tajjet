@@ -24,6 +24,18 @@ res = requests.get(api_adress)
 data = res.json()         
 
 #pprint(data) #affichage de toutes les données sur chaque cycle
+mycursor = mydb.cursor()
+if (mycursor.rowcount >= 30):
+    sql = "DELETE FROM weather WHERE id_town = %s"
+    adr = (city, )
+    mycursor.execute(sql, adr)
+    
+
+
+
+print(mycursor.rowcount, "record(s) deleted")
+
+
 
 for j in range(0, len(data['list'])): 
     Forecast = data['list'][j]['dt_txt']

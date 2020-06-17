@@ -8,7 +8,7 @@ import urllib.parse
 import urllib.request
 import sys
 import re
-
+import random
 
 class Marmiton(object):
 
@@ -160,6 +160,9 @@ PreparationTime = detailed_recipe['prep_time']
 CookingTime = detailed_recipe['cook_time']
 TotalTime = detailed_recipe['total_time']
 Difficulty = detailed_recipe['difficulty']
+Score = detailed_recipe['rate']
+Price = detailed_recipe['budget']
+
 
 ingredients = ""
 for ingredient in detailed_recipe['ingredients']:  # List of ingredients
@@ -170,4 +173,44 @@ steps = ""
 for step in detailed_recipe['steps']:  # List of cooking steps
     steps += step + "<br>"
 
-print(name, "\n", picture,"\n", PreparationTime,"\n", CookingTime,"\n", TotalTime, "\n", Difficulty,"\n", ingredients ,"\n", steps)
+
+calories = random.randint(0,800)
+print(detailed_recipe['rate'])
+print(name, picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, steps, calories)
+
+import mysql.connector
+ 
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="everydaySunshine"
+)
+mycursor = mydb.cursor(buffered=True)
+
+sql = "SELECT id_type FROM type WHERE label=%s"
+adr = ("dt", )
+mycursor.execute(sql, adr)
+
+
+if(mycursor.rowcount == 0):
+    sql = "INSERT INTO type (label) VALUES (%s)"
+    adr = ("dt", )
+    mycursor.execute(sql, adr)
+    mydb.commit()
+
+    sql = "SELECT id_type FROM type WHERE label=%s"
+    adr = ("dt", )
+    mycursor.execute(sql, adr)
+
+myresult = mycursor.fetchall()
+id_type = myresult[0][0]
+
+
+mycursor = mydb.cursor(buffered=True)
+
+sql = "INSERT INTO recipe (name, picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, steps, calories, id_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+val = (name, picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, steps, calories, id_type)
+mycursor.execute(sql, val)
+
+mydb.commit()
