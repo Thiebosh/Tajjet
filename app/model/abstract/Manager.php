@@ -1,18 +1,24 @@
 <?php
 
 abstract class Manager {
-    protected $_dataBase;
+    private static $dbName;
+    private static $dbUser;
+    private static $dbPass;
+    private static $charset;
 
-    protected function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        //Connexion à la base de données
-        $errMsg = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-        $this->_dataBase = new PDO("mysql:host=localhost;dbname=$dbName;charset=$charset", $dbUser, $dbPass, $errMsg);
-        
-        //En cas d'échec de connexion
-        if (!$this->_dataBase) throw new Exception("Base De Données : Echec de connexion");
+    public static function setDBData($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
+        self::$dbName = $dbName;
+        self::$dbUser = $dbUser;
+        self::$dbPass = $dbPass;
+        self::$charset = $charset;
     }
-    
-    protected function __destruct() {
-        $this->_dataBase = null;
+
+    protected function getDBConnect() {
+        $errMsg = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+        $db = new PDO('mysql:host=localhost;dbname='.self::$dbName.';charset='.self::$charset, self::$dbUser, self::$dbPass, $errMsg);
+        
+        if (!$db) throw new Exception("Base De Données : Echec de connexion");
+
+        return $db;
     }
 }

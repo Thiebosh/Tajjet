@@ -38,7 +38,7 @@ abstract class Entity {
     }
 
     final function isDateTimeConvertible($value) {
-        return is_string($preparationTime) && strtotime($preparationTime);
+        return is_string($value) && strtotime($value);
     }
 
     static function printDate($date) {

@@ -4,14 +4,14 @@ require_once(__DIR__."/../abstract/Entity.php");
 require_once("Sport.php");
 require_once("Item.php");
 
-class Genre extends Entity {
+class User extends Entity {
     //attributes
     private $_name;
     private $_password;
-    private $_avatar;
-    private $_birthDate;
-    private $_height;
-    private $_idTown;
+    private $_avatar = null;
+    private $_birthDate = null;
+    private $_height = null;
+    private $_idTown = null;
 
     private $_Sports;//liste d'instances de Sport (programme)
     private $_Items;//liste d'instances de Item (courses)
@@ -50,7 +50,7 @@ class Genre extends Entity {
         return $this->_height;
     }
 
-    public function getIdTown() {
+    public function getID_Town() {
         return $this->_idTown;
     }
 
@@ -78,15 +78,15 @@ class Genre extends Entity {
     
     public function setBirthDate($birthDate) {
         if ($birthDate instanceof DateTime) $this->_birthDate = $birthDate;
-        else if (isDateTimeConvertible($birthDate)) $this->_birthDate = new DateTime($birthDate);
+        else if ($this->isDateTimeConvertible($birthDate)) $this->_birthDate = new DateTime($birthDate);
     }
 
     public function setHeight($height) {
         if (is_float($height)) $this->_height = $height;
     }
 
-    public function setIdTown($idTown) {
-        if (isID($idTown)) $this->_idTown = $idTown;
+    public function setID_Town($idTown) {
+        if ($this->isID($idTown)) $this->_idTown = $idTown;
     }
 
     public function setSports($sports) {
