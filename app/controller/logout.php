@@ -1,4 +1,4 @@
 <?php
-unset($_SESSION["user"]);//qu'il existe ou non
+session_destroy();//plus fort qu'un simple unset($_SESSION["user"]);
 
-$pageName = 'home';
+header('Location: index.php');

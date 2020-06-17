@@ -3,6 +3,7 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 require_once("Sport.php");
 require_once("Item.php");
+require_once("Town.php");
 
 class User extends Entity {
     //attributes
@@ -13,6 +14,7 @@ class User extends Entity {
     private $_height = null;
     private $_idTown = null;
 
+    private $_Town;//instance de Town
     private $_Sports;//liste d'instances de Sport (programme)
     private $_Items;//liste d'instances de Item (courses)
 
@@ -54,6 +56,10 @@ class User extends Entity {
         return $this->_idTown;
     }
 
+    public function getTown() {
+        return ($this->_Town != null) ? $this->_Town : new Town(array());
+    }
+
     public function getSports() {
         return $this->_Sports;
     }
@@ -64,6 +70,10 @@ class User extends Entity {
 
 
     //setters
+    public function setID_user($id) {
+        $this->setId($id);
+    }
+
     public function setName($name) {
         if (is_string($name)) $this->_name = $name;
     }
@@ -87,6 +97,13 @@ class User extends Entity {
 
     public function setID_Town($idTown) {
         if ($this->isID($idTown)) $this->_idTown = $idTown;
+    }
+
+    public function setTown($town) {
+        if ($town instanceof Town) {
+            $this->_Town = $town;
+            $this->_idTown = $this->_Town->getId();
+        }
     }
 
     public function setSports($sports) {

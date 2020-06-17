@@ -1,0 +1,17 @@
+
+#ingredients_recette h1,#possession h1
+{
+    font-size: 2em;
+}
+
+form{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+
+li{
+    list-style-type: none;
+}
