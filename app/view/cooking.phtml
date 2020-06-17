@@ -1,6 +1,6 @@
 <?php ob_start();?>
     <div class="row">
-        <form class="col-md-9" method="post" action="index.php?page=recherche">
+        <form class="col-md-12" method="post" action="index.php?page=recherche">
             <select class="custom-select col-md-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($pageFill['type'] as $type) { ?>
                     <option><?=$type?>
@@ -11,24 +11,46 @@
         </form>
     </div>
     
-    <article class="desc">
-        <h1><?=$pageFill['recipe'][0]['titre']?></h1>
-        <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
-        
-        <div>
-            <?=$pageFill['recipe'][0]["globalTime"]?> min
-            <?=$pageFill['recipe'][0]['prepTime']?> min
-            <?=$pageFill['recipe'][0]['cookTime']?> min
+    <article class="row">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 ><?=$pageFill['recipe'][0]['titre']?></h1>
+            </div>
+            <div class="col-md-6">
+                <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
+            </div>
         </div>
-        <p><?=$pageFill['recipe'][0]['steps']?></p>
-        <div>
-            <p class="note">Note :</p>
-            <p class="difficulte">Difficulté :</p>
-            <p class="budget">Budget :</p>
+        <div class="row">
+            <div class="row">
+                <?=$pageFill['recipe'][0]["globalTime"]?> min
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <?=$pageFill['recipe'][0]['prepTime']?> min
+                </div>
+                <div class="col-md-6">
+                    <?=$pageFill['recipe'][0]['cookTime']?> min
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p><?=$pageFill['recipe'][0]['steps']?></p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="note">Note :</p>
+            </div>
+            <div class="col-md-4">
+                <p class="difficulty">Difficulté :</p>
+            </div>
+            <div class="col-md-4">
+                <p class="price">Budget :</p>
+            </div>
                     
         </div>
     </article>
-    <article class="ingredients_necessaires">
+    <article class="row">
+        <div class="col-md-6" id="ingredients_recette">
             <h1>Liste des ingrédients nécessaires pour la recette</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
             <p>Nombre de personnes : </p>
             <form method="post" action="index.php?page=cooking">
@@ -51,18 +73,22 @@
                     <?php } ?>
                 <?php } ?>
             </ul> 
+        </div>
+    
+        <div class="col-md-6" id="possession">
+            <div class="row">
+            <h1>Liste possession</h1>
+            <ul>
+                <!--<?php foreach($pageFill['have'] as $have) { ?>
+                    <li><?=$have['quantity']?><?=$have['items']?> (<?=$nombre?> restant(s) après la recette)</li>
+                <?php } ?>-->
+            </ul>
+            </div>
+            <div class="row">
+                <form method="post" action="index.php?page=cooking">
+                    <input class="btn btn-success" type="submit" value="Je prépare">
+                </form>
+            </div>
+        </div>
     </article>
-    <article class="liste_possession">
-        <h1>Liste possession</h1>
-        <ul>
-            <!--<?php foreach($pageFill['have'] as $have) { ?>
-                <li><?=$have['quantity']?><?=$have['items']?> (<?=$nombre?> restant(s) après la recette)</li>
-            <?php } ?>-->
-        </ul>
-    </article>
-    <div>
-        <form method="post" action="index.php?page=cooking">
-            <input type="submit" name="buttonNav" value="Je prépare">
-        </form>
-    </div>
 <?php $sectionContent=ob_get_clean();
