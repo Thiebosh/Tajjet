@@ -1,7 +1,9 @@
 <?php ob_start();?>
-
-    <a href="index.php?user=profile">Mon profil</a>
-    <br>
-    <a href="index.php?user=logout">Déconnexion</a>
+<li class="nav-item">
+    <a class="nav-link" href="index.php?user=profile">Mon profil</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="index.php?user=logout">Déconnexion</a>
+</li>
 
 <?php $userGateContent=ob_get_clean();

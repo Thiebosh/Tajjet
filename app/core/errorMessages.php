@@ -26,13 +26,19 @@ $errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';
 $errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
 
 
-$errMsg['checker']['form']['filter'] = 'Valeurs incorrectes.';
+$errMsg['checker']['form']['filter']            = 'Valeurs incorrectes.';
+$errMsg['checker']['form']['notBothPassword']   = 'Mot de passe ou confirmation manquant.';
 
 
-$errMsg['controller']['login']['unknown'] = 'Nom d\'utilisateur ou mot de passe incorrect.';//ne peut pas preciser, sinon fait fuiter info
-$errMsg['controller']['login']['password'] = 'Nom d\'utilisateur ou mot de passe incorrect.';//ne peut pas preciser, sinon fait fuiter info
+$errMsg['controller']['login']['unknown']   = 'Nom d\'utilisateur ou mot de passe incorrect.';//ne peut pas preciser, sinon fait fuiter info
+$errMsg['controller']['login']['password']  = $errMsg['controller']['login']['unknown'];
 
 
 $errMsg['controller']['register']['password']   = 'Mots de passes différents.';
-$errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà utilisé';
-$errMsg['controller']['register']['db']         = 'Problème d\'enregistrement, veuillez réessayer';
+$errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà utilisé.';
+$errMsg['controller']['register']['db']         = 'Problème d\'enregistrement, veuillez réessayer.';
+
+
+$errMsg['controller']['profil']['password'] = $errMsg['controller']['register']['password'];
+$errMsg['controller']['profil']['login']    = $errMsg['controller']['register']['login'];
+$errMsg['controller']['profil']['db']       = $errMsg['controller']['register']['db'];

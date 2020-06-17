@@ -2,18 +2,7 @@
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Town.php");
 
-class TownManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
-
-    public function __destruct() {
-        parent::__destruct();
-    }
-
+class TownManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
     public function getAllByTownLabel($labelTown){
         
         return array( new Town() );
@@ -23,7 +12,12 @@ class TownManager extends Manager {
         
     }
     
-    public function getIdTown($townLabel) {
+    public function readById($townLabel) {
+
+        return 2;
+    }
+    
+    public function readByName($townLabel) {
 
         return 2;
     }

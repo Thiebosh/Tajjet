@@ -21,11 +21,12 @@ abstract class Entity {
 
     //setters
     public function setId($id) {
-        if (isID($id)) $this->_id = $id;
+        $id = intval($id);
+        if ($this->isID($id)) $this->_id = $id;
     }
 
     //methods
-    final protected function hydrate(array $data) {
+    protected final function hydrate(array $data) {
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
 
@@ -33,23 +34,23 @@ abstract class Entity {
         }
     }
 
-    final function isID($value) {
+    protected final function isID($value) {
         return is_int($value) && $value > 0;
     }
 
-    final function isDateTimeConvertible($value) {
+    protected final function isDateTimeConvertible($value) {
         return is_string($value) && strtotime($value);
     }
 
-    static function printDate($date) {
+    public static function printDate($date) {
         return $date instanceof DateTime ? $date->format('d-m-Y') : NULL ;
     }
 
-    static function printTime($time) {
+    public static function printTime($time) {
         return $time instanceof DateTime ? $time->format('H:i') : NULL ;
     }
 
-    static function printDateTime($datetime) {
+    public static function printDateTime($datetime) {
         return printTime($datetime)+' '+printDate($datetime);
     }
 }
