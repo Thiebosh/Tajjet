@@ -25,8 +25,8 @@ if (isset($_POST['height'])) {
     $trustedPost['height'] = filter_input(INPUT_POST, 'height', FILTER_VALIDATE_FLOAT);
 
     if (!$trustedPost['height']) {
-        $tmp = str_replace(',','.',filter_input(INPUT_POST, 'height', FILTER_SANITIZE_STRING));
-        if (is_numeric($tmp)) $trustedPost['height'] = floatval($tmp);
+        $tmp = Entity::stringToFloat($_POST['height']);
+        if (is_numeric(Entity::stringToFloat($tmp))) $trustedPost['height'] = $tmp;
     }
 }
 
