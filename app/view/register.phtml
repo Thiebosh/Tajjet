@@ -5,28 +5,38 @@
         </div> 
     <?php } ?>
 
-    <form class="container-fluid" method="post" action="index.php?user=register">
+    <form class="col-md-6 " method="post" action="index.php?user=register">
         <p>
             <label for="username">Nom d'utilisateur</label><br>
-            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
             <br><br>
             <label for="password">Mot de passe</label><br>
-            <input type="text" name="password" placeholder="Mot de passe" required>
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
             <br><br>
             <label for="password_conf">Confirmer le mot de passe</label><br>
-            <input type="text" name="passwordConf" placeholder="Confirmer le mot de passe" required>
+            <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" required>
+            <br>
+            <div>
+                <label for="avatar">Avatar</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="avatar" accept=".png">
+                    <label class="custom-file-label" for="avatar">Importer image</label>
+                </div>
+            </div>
             <br><br>
-            <!-- pas d'adresse email dans la table. Par contre, 
-                -> avatar (image upload) facultatif
-                -> date de naissance (input date) facultatif
-                -> taille facultative
-                -> ville facultative
-            -->
-            <label for="email">Adresse mail</label><br>
-            <input type="text" name="email" placeholder="Adresse mail">
+            <label for="birthdate">Date de naissance</label><br>
+            <input type="text" class="form-control" name="birthdate" placeholder="AAAA-MM-JJ">
+            <br><br>
+            <label for="height">Taille</label><br>
+            <input type="text" class="form-control" name="height" placeholder="Exemple pour 1m80 : 1.80">
+            <br><br>
+            <label for="weight">Ville</label><br>
+            <input type="text" class="form-control" name="weight" placeholder="Ville">
+            <br><br>
+            
         </p>
         <br><br>
-        <input class="btn btn-outline-success" type="submit" value="Inscription"/>
+        <input class="col-md-6 btn btn-info" type="submit" value="Inscription"/>
         <input type="hidden" name="form" value="1">
     </form>
 <?php $sectionContent=ob_get_clean();

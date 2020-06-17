@@ -1,15 +1,20 @@
 <?php ob_start(); ?>
-    <?= htmlspecialchars("page d'accueil") ?>
+    <h1 class="col-lg-12">Page d'Accueil</h1>
     <br><hr><br>
-    <a href="index.php?page=sport">module sport</a>
+    <div class="row">
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=sport">Sport</a>
     <br>
-    <a href="index.php?page=health">module santé</a>
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=health">Santé</a>
     <br>
-    <a href="index.php?page=news">module news</a>
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=news">News</a>
     <br>
-    <a href="index.php?page=weather">module météo</a>
+    </div>
     <br>
-    <a href="index.php?page=activities">module activités</a>
+    <div class="row">
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=weather">Météo</a>
     <br>
-    <a href="index.php?page=cooking">module recettes</a>
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=activities">Activités</a>
+    <br>
+    <a class="col-lg-3 btn btn-primary" href="index.php?page=cooking">Recettes</a>
+    </div>
 <?php $sectionContent = ob_get_clean();
