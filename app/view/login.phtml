@@ -3,10 +3,10 @@
         <div class="mt-4 col-lg-3">
             <form method="post" action="index.php?user=login">
                 <p> 
-                    <label for="username">Nom d'utilisateur</label><br>
+                    <label for="username" class="ml-1">Nom d'utilisateur</label><br>
                     <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
-                    <label for="password">Mot de passe</label><br>
+                    <label for="password" class="ml-1">Mot de passe</label><br>
                     <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                 </p>
                 <p class="d-flex justify-content-center">
