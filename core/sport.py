@@ -1,16 +1,19 @@
 #module sport
-#label, picture, calories
+#pip install pandas
 
+
+import pandas as pd
 import csv, sys
-adressname = 'C:\wamp64\www\Tajjet\Data-recovery\sport.csv'
+adressname = 'core\sport.csv'
+
+import pandas as pd
+df = pd.read_csv(adressname)
+df = df.head(87)
+df = df.drop(["Equipment","Exercise Type","Notes", "Modifications"], axis=1)
 
 
-with open(adressname) as f:
-    
-    reader = csv.reader(f)
-
-    try:
-        for row in reader:
-            print(row)
-    except csv.Error as e:
-        sys.exit('file {}, line {}: {}'.format(adressname, reader.line_num, e))
+exercices = df.Exercise.tolist()
+MajorMuscle = df["Major Muscle"].unique().tolist()
+MinorMuscle = df["Minor Muscle"].unique().tolist()
+gif = df.Example.tolist()
+print(exercices,"\n",MajorMuscle, "\n", MinorMuscle,"\n",gif,"\n")

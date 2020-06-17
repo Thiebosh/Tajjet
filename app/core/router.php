@@ -4,7 +4,7 @@ require_once($path['vendor'].'php/Encoding.php');
 use \ForceUTF8\Encoding;
 
 //routeur de l'app : selon l'url, redirige vers le bon controleur
-require_once(__DIR__.'/../model/Manager/UserManager.php');//importe le reste
+//require_once('model/Manager/UserManager.php');//importe le reste
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
