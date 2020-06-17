@@ -1,10 +1,4 @@
-<?php ob_start();
-    if (isset($trustedPost['errMsgs'])) { ?>
-        <div>
-            <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
-        </div> 
-    <?php } ?>
-
+<?php ob_start(); ?>
     <form method="post" action="index.php?user=profile">
         <div class="infos_compte">
             <h1>Informations de compte</h1>

@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    
+    <title>EverydaySunshine - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 
     <link rel="stylesheet" href="app/view/common/css/normalize.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
     <!-- framework bootstrap : soit en local dans common/css, soit directement en ligne comme ici -->
@@ -11,9 +13,9 @@
     <?php if (file_exists(__DIR__."/../css/$pageName.css")) { ?>
         <link rel="stylesheet" href="app/view/css/<?= htmlspecialchars($pageName) ?>.css"/><!-- style de la partie section -->
     <?php } ?>
+
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>EverydaySunshine - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
 </head>
 
 <body>
@@ -31,6 +33,14 @@
         </nav>
             
     </header>
+
+    <aside>
+        <?php if (isset($trustedPost['errMsgs'])) { ?>
+            <div>
+                <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
+            </div> 
+        <?php } ?>
+    </aside>
 
     <section class="container-fluid">
         <?= $sectionContent ?>

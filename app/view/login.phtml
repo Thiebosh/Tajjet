@@ -1,9 +1,4 @@
-<?php ob_start();
-    if (isset($trustedPost['errMsgs'])) { ?>
-        <div>
-            <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
-        </div> 
-    <?php } ?>
+<?php ob_start(); ?>
     <div class="d-flex justify-content-center">
         <div class="mt-4 col-lg-3">
             <form method="post" action="index.php?user=login">
