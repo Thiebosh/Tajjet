@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 sql = "INSERT INTO tvprogram (Title, Synopsis, Begin, End) VALUES (%s, %s, %s, %s)"
-val = ("John", "Highway 21", "21h", "22h")
+val = ("Titre du programme tv", "Synopsis du programme tv", "Heure début", "Heure fin")
 mycursor.execute(sql, val)
 
 mydb.commit()

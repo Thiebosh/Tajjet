@@ -1,24 +1,17 @@
 body
 {
-    background-color:#B0B0B0;
+    background-color:#DEDEDE;
+    font-family: 'Roboto', sans-serif;
 }
 
 
 a
 {
     margin:auto;
-}
-
-.btn-primary
-{
-    background-color:#D95E2E;
-    border-color:#D95E2E;
+    color: white;
 }
 
 h1{
-    text-align:center;
-    font-family:"bembo",serif;
-    margin:20px 0px 0px 0px;
-    text-shadow: 3px 2px 0px #B0B0B0, 8px 7px 0px rgba(0,0,0,0.15);
-    
+    text-align: center;
+    font-family: 'Balsamiq Sans', sans-serif;
 }
