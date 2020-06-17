@@ -18,23 +18,19 @@ else:
 
 tv_feed = feedparser.parse('https://webnext.fr/templates/webnext_exclusive/views/includes/epg_cache/programme-tv-rss_{}-{}-2020.xml'.format(day, month))
 
-for item in tv_feed.entries:
-    new_title = item.title.replace("Ç", "C")
-    new_title = new_title.replace("À", "A")
-    new_title = new_title.replace('Ô', 'O')
-    new_title = new_title.replace('É', 'E')
-    title_split = new_title.encode('utf-8').decode('latin1').split("|")
+if (len(tv_feed.entries) == 0) :
+    print(1)
+else :
+    print(0)
 
-    new_sumamry = item.summary.replace("Ç", "C")
-    new_sumamry = new_sumamry.replace("À", "A")
-    new_sumamry = new_sumamry.replace('Ô', 'O')
-    new_sumamry = new_sumamry.replace('É', 'E')
+for item in tv_feed.entries:
+    title_split = item.title.split("|")
 
     print("{} :: {} :: {} :: {} :: {}".format(
         title_split[0],
         title_split[1],
         title_split[2],
-        item.tags[0].term.encode('utf-8').decode('latin1'),
-        new_sumamry.encode('utf-8').decode('latin1')
+        item.tags[0].term,
+        item.summary
         )
     )   

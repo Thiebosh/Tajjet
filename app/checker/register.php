@@ -23,3 +23,4 @@ if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//ch
     //si un "false" existe dans le tableau, avec comparaison des types
     if (in_array(false, $trustedPost, true)) $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];
 }
+

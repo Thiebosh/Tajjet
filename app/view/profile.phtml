@@ -6,7 +6,7 @@
                     <h1>Informations de compte</h1>
                     <p>
                         <label for="username">Nom d'utilisateur</label><br>
-                        <input type="text" class="form-control" name="username" placeholder="Nouveau nom" value="<?= htmlspecialchars($_SESSION['user']->getName()) ?>">
+                        <input type="text" class="form-control" name="username" placeholder="<?= htmlspecialchars($_SESSION['user']->getName()) ?>" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                         <br>
                         <div>
                             afficher l'image, positionner bouton "changer d'avatar"
@@ -29,13 +29,13 @@
                     <h1>Informations personnelles</h1>
                     <p>
                         <label for="birthDate">Votre date de naissance</label><br>
-                        <input type="date" class="form-control" name="birthDate" placeholder="Nouveau nom" value="<?= htmlspecialchars(Entity::printDate($_SESSION['user']->getBirthDate())) ?>">
+                        <input type="date" class="form-control" name="birthDate" placeholder="<?= htmlspecialchars(Entity::printDate($_SESSION['user']->getBirthDate())) ?>" value="<?= isset($trustedPost['birthDate']) ? htmlspecialchars($trustedPost['birthDate']) : '' ?>">
                         <br>
                         <label for="height">Votre taille</label><br>
-                        <input type="text" class="form-control" name="height" placeholder="Taille en mètre" value="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>">
+                        <input type="text" class="form-control" name="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
                         <br>
                         <label for="town">Votre ville</label><br>
-                        <input type="text" class="form-control" name="town" placeholder="Nouvelle ville" value="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>">
+                        <input type="text" class="form-control" name="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
                     </p>
                 </div>
 
