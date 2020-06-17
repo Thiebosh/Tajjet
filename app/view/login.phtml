@@ -5,22 +5,27 @@
         </div> 
     <?php } ?>
     
-    <form method="post" action="index.php?user=login">
-        <p> 
-            <label for="username">Nom d'utilisateur</label><br>
-            <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
-            <br><br>
-            <label for="password">Mot de passe</label><br>
-            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
-        </p>
-        <br><br>
-        <input class="btn btn-outline-success" type="submit" value="Connexion"/>
-        <input type="hidden" name="form" value="1">
-    </form>
-
     <div>
-        <p>Pas encore inscrit ?</p>
-        <a class="btn btn-primary" href="index.php?user=register" role="button">S'inscrire</a>
+        <form class="col-md-6" method="post" action="index.php?user=login">
+            <p> 
+                <label for="username">Nom d'utilisateur</label><br>
+                <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                <br><br>
+                <label for="password">Mot de passe</label><br>
+                <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+            </p>
+            <br><br>
+            <input class="col-md-6 btn btn-info" type="submit" value="Connexion"/>
+            <input type="hidden" name="form" value="1">
+        </form>
+    </div>
+
+    <div class="col-md-6" id="inscr">
+        <div class="col-md-6">
+            <p>Pas encore inscrit ?</p>
+        </div>
+        <a class="col-md-6 btn btn-info" href="index.php?user=register" role="button">S'inscrire</a>
+        
     </div>
     
 <?php $sectionContent=ob_get_clean();

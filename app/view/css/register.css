@@ -12,6 +12,9 @@ form
     background-color:#F0A33E;    
 }
 
+div{
+    text-align:center;
+}
 
 label
 {
@@ -22,6 +25,7 @@ label
 {
     border:2px solid black;
     box-shadow: 2px 2px black;
+    text-align:left;
 }
 
 .btn-info

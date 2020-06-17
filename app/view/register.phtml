@@ -5,6 +5,7 @@
         </div> 
     <?php } ?>
 
+    <div>
     <form class="col-md-6 " method="post" action="index.php?user=register">
         <p>
             <label for="username">Nom d'utilisateur</label><br>
@@ -24,8 +25,8 @@
                 </div>
             </div>
             <br><br>
-            <label for="birthdate">Date de naissance</label><br>
-            <input type="text" class="form-control" name="birthdate" placeholder="AAAA-MM-JJ">
+                <label for="birthdate">Date de naissance</label><br>
+                <input type="text" class="form-control" name="birthdate" placeholder="AAAA-MM-JJ">
             <br><br>
             <label for="height">Taille</label><br>
             <input type="text" class="form-control" name="height" placeholder="Exemple pour 1m80 : 1.80">
@@ -36,7 +37,8 @@
             
         </p>
         <br><br>
-        <input class="col-md-6 btn btn-info" type="submit" value="Inscription"/>
-        <input type="hidden" name="form" value="1">
+            <input class="col-md-6 btn btn-info" type="submit" value="Inscription"/>
+            <input type="hidden" name="form" value="1">
     </form>
+    <div>
 <?php $sectionContent=ob_get_clean();
