@@ -1,6 +1,6 @@
 <?php
 //routeur de l'app : selon l'url, redirige vers le bon controleur
-require_once(__DIR__.'/../model/Manager/UserManager.php');//importe le reste
+//require_once('model/Manager/UserManager.php');//importe le reste
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
@@ -25,7 +25,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         case 'fill_db':
             if (!file_exists($scriptName['python'])) display_error($path, $errMsg['index']['pythonFile']['notSet']);
             else {
-                exec('"'.$config['Python']['executable'].'" "'.$scriptName['python'].'" 2>&1 Lille', $output, $return);
+                exec('"'.$config['Python']['executable'].'" "'.$scriptName['python'].'" 2>&1 fr ', $output, $return);
                 
                 echo("<br>valeur de retour : $return<br>");
                 var_dump($output);

@@ -8,8 +8,8 @@ $path = array(  'app' => 'app/',
                 'vendor' => 'vendor/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
-                    'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'core/main_function.py');
+                    'sql' => 'resource/db/appname.sql',
+                    'python' => 'core/sport.py');
 
 
 //1. charge en memoire les messages d'erreurs
