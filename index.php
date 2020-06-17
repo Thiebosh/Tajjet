@@ -9,7 +9,7 @@ $path = array(  'app' => 'app/',
                 'resource' => 'resource/');
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'core/main_function.py');
+                    'python' => 'core/news.py');
 
 
 //1. charge en memoire les messages d'erreurs
@@ -26,8 +26,13 @@ else {//ok
 }
 
 
-//3. monitoring de la bdd : mise a jour des donnees obsoletes
-require_once($path['app'].'core/dbMonitoring.php');
+//3. monitoring de la bdd : connexion et mise a jour des donnees obsoletes
+require("app/model/abstract/Manager.php");
+
+Manager::setDBData($config['DB']['setup']['DBname'],
+                    $config['DB']['connexion']['username'],
+                    $config['DB']['connexion']['password'],
+                    $config['DB']['setup']['characterSet']);
 
 
 //4. appelle le routeur et met fin au script

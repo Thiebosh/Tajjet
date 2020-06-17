@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
-require_once(__DIR__."/../entity/Sky.php");
+require_once(__DIR__."/../entity/Weather.php");
 
-class SkyManager extends Manager {
+class WeatherManager extends Manager {
     //constructor & destructor
     /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
         parent::__construct($dbName, $dbUser, $dbPass, $charset);
@@ -14,9 +14,10 @@ class SkyManager extends Manager {
         parent::__destruct();
     }
 
-    public function getAllById($idSky){
-
-        return array( new Sky() );
+    public function getAllByIdTown($idTown){
+        
+        return array( new Weather() );
     }
+
     
 }

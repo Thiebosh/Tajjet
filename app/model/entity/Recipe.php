@@ -3,12 +3,16 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 require_once("Item.php");
 
-class Item extends Entity {
+class Recipe extends Entity {
     //attributes
-    private $_label;
+    private $_name;
     private $_picture;
     private $_preparationTime;
     private $_cookingTime;
+    private $_totalTime;
+    private $_score;
+    private $_price;
+    private $_difficulty;
     private $_steps;
     private $_calories;
 
@@ -29,8 +33,8 @@ class Item extends Entity {
 
 
     //getters
-    public function getLabel() {
-        return $this->_label;
+    public function getName() {
+        return $this->_name;
     }
     
     public function getPicture() {
@@ -43,6 +47,18 @@ class Item extends Entity {
     
     public function getCookingTime() {
         return $this->_cookingTime;
+    }
+    public function getTotalTime() {
+        return $this->_totalTime;
+    }
+    public function getScore() {
+        return $this->_score;
+    }
+    public function getPrice() {
+        return $this->_price;
+    }
+    public function getDifficulty() {
+        return $this->_difficulty;
     }
     
     public function getSteps() {
@@ -59,8 +75,8 @@ class Item extends Entity {
 
 
     //setters
-    public function setLabel($label) {
-        if (is_string($label)) $this->_label = $label;
+    public function setName($name) {
+        if (is_string($name)) $this->_name = $name;
     }
 
     public function setPicture($picture) {
@@ -76,7 +92,20 @@ class Item extends Entity {
         if ($cookingTime instanceof DateTime) $this->_cookingTime = $cookingTime;
         else if (isDateTimeConvertible($cookingTime)) $this->_cookingTime = new DateTime($cookingTime);
     }
+    public function setTotalTime($totalTime) {
+        if ($totalTime instanceof DateTime) $this->_totalTime = $totalTime;
+        else if (isDateTimeConvertible($totalTime)) $this->_totalTime = new DateTime($totalTime);
+    }
     
+    public function setScore($score) {
+        if (is_float($score)) $this->_score = $score;
+    }
+    public function setPrice($price) {
+        if (is_float($price)) $this->_price = $price;
+    }
+    public function setDifficulty($difficulty) {
+        if (is_float($difficulty)) $this->difficulty = $difficulty;
+    }
     public function setSteps($steps) {
         if (is_string($steps)) $this->_steps = $steps;
     }

@@ -1,6 +1,10 @@
 <?php
+
+require_once($path['vendor'].'php/Encoding.php');
+use \ForceUTF8\Encoding;
+
 //routeur de l'app : selon l'url, redirige vers le bon controleur
-require_once(__DIR__.'/../model/Manager/UserManager.php');//importe le reste
+//require_once('model/Manager/UserManager.php');//importe le reste
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
@@ -25,11 +29,17 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         case 'fill_db':
             if (!file_exists($scriptName['python'])) display_error($path, $errMsg['index']['pythonFile']['notSet']);
             else {
-                exec('"'.$config['Python']['executable'].'" "'.$scriptName['python'].'" 2>&1 Lille', $output, $return);
+                exec('"'.$config['Python']['executable'].'" "'.$scriptName['python'].'" 2>&1 fr', $output, $return);
                 
                 echo("<br>valeur de retour : $return<br>");
                 var_dump($output);
-                foreach ($output as $line) echo(htmlspecialchars($line).'<br>');//recuperation du flux ligne par ligne
+                foreach ($output as $line) {
+                    echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
+                    // iconv(mb_detect_encoding($line, mb_detect_order(), true), "UTF-8", $line);
+                    // echo($line . "<br>");
+                    //$test = Encoding::toUTF8($line);
+                    //echo($test);
+                }
                 echo('<br>');
             }
         break;
@@ -88,7 +98,7 @@ try {
     unset($path, $scriptName, $errMsg, $_GET, $_POST);
 
     //3.4. appelle en-tete utilisateur
-    require(__DIR__."/../view/common/logged".(isset($_SESSION["userId"]) ? "In" : "Out" ).".phtml");
+    require(__DIR__."/../view/common/logged".(isset($_SESSION["user"]) ? "In" : "Out" ).".phtml");
 
     //3.4. appelle template
     require(__DIR__."/../view/common/template.phtml");

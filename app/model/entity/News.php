@@ -7,7 +7,7 @@ require_once("Theme.php");
 class News extends Entity {
     //attributes
     private $_summary;
-    private $_Theme;//instance de Theme
+    
     //private $_Articles;//tableau d'instances d'Articles
 
 
@@ -28,9 +28,6 @@ class News extends Entity {
         return $this->_summary;
     }
 
-    public function getTheme() {
-        return $this->_Theme;
-    }
     
 
     //setters
@@ -38,7 +35,4 @@ class News extends Entity {
         if (is_string($summary)) $this->_summary = $summary;
     }
 
-    public function setTheme($theme) {
-        if ($theme instanceof Theme) $this->_Theme = $theme;
-    }
 }
