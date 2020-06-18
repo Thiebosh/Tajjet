@@ -5,7 +5,7 @@ class Article extends Entity {
     //attributes
     private $_URL;
     private $_readingTime;
-    private $_idNews;
+    private $_summary;
 
 
     //methods
@@ -30,8 +30,8 @@ class Article extends Entity {
         return $this->_readingTime;
     }
 
-    public function getIdNews() {
-        return $this->_idNews;
+    public function getSummary() {
+        return $this->_summary;
     }
 
 
@@ -45,7 +45,7 @@ class Article extends Entity {
         else if (isDateTimeConvertible($readingTime)) $this->_readingTime = new DateTime($readingTime);
     }
 
-    public function setIdNews($idNews) {
-        if (isID($idNews)) $this->_idNews = $idNews;
+    public function setSummary($summary) {
+        if (is_string($summary)) $this->_summary = $summary;
     }
 }

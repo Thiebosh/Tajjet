@@ -49,7 +49,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
     }
     
 
-    public function update($user) {//a tester
+    public function update($user) {
         $query = 'UPDATE User
                     SET Name = :name, 
                         Password = :password, 
