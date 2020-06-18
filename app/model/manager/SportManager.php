@@ -10,7 +10,7 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         $table = array('label' => $name);
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
         
         foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
             $result[] = new Sport($line);
@@ -27,7 +27,7 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         $table = array('id' => $id);
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
         
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         

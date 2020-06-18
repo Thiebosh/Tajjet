@@ -34,7 +34,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
                     WHERE RecordDate = NOW()";
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute() throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute() throw new Exception("Base De Donnéez : Echec d'exécution");
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
 
@@ -50,7 +50,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         $table = array('id' => $idUser);
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute($table) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Health($line);
