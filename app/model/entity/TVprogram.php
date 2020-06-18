@@ -8,7 +8,6 @@ class TVprogram extends Entity {
     private $_title;
     private $_synopsis;
     private $_begin;
-    private $_end;
     private $_genre; 
 
     private $_Channel;//objet Channel
@@ -39,10 +38,6 @@ class TVprogram extends Entity {
         return $this->_begin;
     }
     
-    public function getEnd() {
-        return $this->_end;
-    }
-    
     public function getGenre() {
         return $this->_genre;
     }
@@ -62,10 +57,6 @@ class TVprogram extends Entity {
     
     public function setBegin($begin) {
         if (is_string($begin)) $this->_begin = $begin;
-    }
-    
-    public function setEnd($end) {
-        if (is_string($end)) $this->_end = $end;
     }
 
     public function setGenre($Genre) {

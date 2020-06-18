@@ -85,11 +85,11 @@ try {
     //3.1. declare variables pour la vue
     require(__DIR__."/../controller/$pageName.php");//sait qu'il existe
 
-    //3.2. integre variables a la vue
-    require(__DIR__."/../view/$pageName.phtml");//cense exister
+    //3.2. vide variables inutiles car deja utilisees (ne reste que $pageFill et $_SESSION)
+    unset($scriptName, $errMsg, $_GET, $_POST);
 
-    //3.3. vide variables inutiles car deja integrees (ne reste que $pageFill et $_SESSION)
-    unset($path, $scriptName, $errMsg, $_GET, $_POST);
+    //3.3. integre variables a la vue
+    require(__DIR__."/../view/$pageName.phtml");//cense exister
 
     //3.4. appelle en-tete utilisateur
     require(__DIR__."/../view/common/logged".(isset($_SESSION["user"]) ? "In" : "Out" ).".phtml");

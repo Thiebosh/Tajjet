@@ -49,20 +49,15 @@ CREATE TABLE TVprogram (ID_TVprogram BIGINT AUTO_INCREMENT NOT NULL,
 Title VARCHAR,
 Synopsis TEXT,
 Begin TIME,
-End TIME,
 Genre VARCHAR,
 ID_channel **NOT FOUND**,
 PRIMARY KEY (ID_TVprogram)) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS Ingredient ;
-CREATE TABLE Ingredient (ID_ingredient BIGINT AUTO_INCREMENT NOT NULL,
-Label VARCHAR,
-PRIMARY KEY (ID_ingredient)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Recipe ;
 CREATE TABLE Recipe (ID_recipe BIGINT AUTO_INCREMENT NOT NULL,
 Name VARCHAR,
 Picture VARCHAR,
+NbPerson INT,
 PreparationTime TIME,
 CookingTime TIME,
 TotalTime TIME,
@@ -70,6 +65,7 @@ Score FLOAT,
 Price FLOAT,
 Difficulty FLOAT,
 Steps TEXT,
+Ingredients TEXT,
 Calories FLOAT,
 ID_type **NOT FOUND**,
 PRIMARY KEY (ID_recipe)) ENGINE=InnoDB;
@@ -110,20 +106,6 @@ CREATE TABLE Town (ID_town BIGINT AUTO_INCREMENT NOT NULL,
 Label VARCHAR,
 PRIMARY KEY (ID_town)) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS Need ;
-CREATE TABLE Need (ID_recipe **NOT FOUND** AUTO_INCREMENT NOT NULL,
-ID_ingredient **NOT FOUND** NOT NULL,
-Quantity FLOAT,
-PRIMARY KEY (ID_recipe,
- ID_ingredient)) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS Have ;
-CREATE TABLE Have (ID_ingredient **NOT FOUND** AUTO_INCREMENT NOT NULL,
-ID_user **NOT FOUND** NOT NULL,
-Quantity FLOAT,
-PRIMARY KEY (ID_ingredient,
- ID_user)) ENGINE=InnoDB;
-
 DROP TABLE IF EXISTS Work ;
 CREATE TABLE Work (ID_muscle **NOT FOUND** AUTO_INCREMENT NOT NULL,
 ID_sport **NOT FOUND** NOT NULL,
@@ -144,10 +126,6 @@ ALTER TABLE Renewal ADD CONSTRAINT FK_Renewal_ID_frequency FOREIGN KEY (ID_frequ
 ALTER TABLE TVprogram ADD CONSTRAINT FK_TVprogram_ID_channel FOREIGN KEY (ID_channel) REFERENCES Channel (ID_channel);
 ALTER TABLE Recipe ADD CONSTRAINT FK_Recipe_ID_type FOREIGN KEY (ID_type) REFERENCES Type (ID_type);
 ALTER TABLE Health ADD CONSTRAINT FK_Health_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
-ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_recipe FOREIGN KEY (ID_recipe) REFERENCES Recipe (ID_recipe);
-ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
-ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
-ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_muscle FOREIGN KEY (ID_muscle) REFERENCES Muscle (ID_muscle);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_sport FOREIGN KEY (ID_sport) REFERENCES Sport (ID_sport);
 ALTER TABLE Program ADD CONSTRAINT FK_Program_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);

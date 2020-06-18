@@ -9,8 +9,7 @@ class IngredientManager extends Manager {//pattern CRUD : create, read, update, 
                     WHERE ID_ingredient = :id";
         $table = array('id' => $id);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
