@@ -22,7 +22,7 @@ abstract class Manager {
         return $db;
     }
 
-    protected function prepareAndExecute($query, $table = "") {
+    protected function prepareAndExecute($query, $table = array()) {
         $request = $this->getDBConnect()->prepare($query);
         if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
         return $request;
