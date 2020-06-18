@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 18 juin 2020 à 10:09
+-- Généré le :  jeu. 18 juin 2020 à 16:11
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -64,20 +64,13 @@ CREATE TABLE IF NOT EXISTS `frequency` (
   PRIMARY KEY (`ID_frequency`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `have`
+-- Déchargement des données de la table `frequency`
 --
 
-DROP TABLE IF EXISTS `have`;
-CREATE TABLE IF NOT EXISTS `have` (
-  `ID_ingredient` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_user` int(11) NOT NULL,
-  `Quantity` float NOT NULL,
-  PRIMARY KEY (`ID_ingredient`,`ID_user`),
-  KEY `FK_Have_ID_user` (`ID_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
+(1, 1, '2020-06-19 00:00:00'),
+(2, 0.12, '2020-06-19 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -100,19 +93,6 @@ CREATE TABLE IF NOT EXISTS `health` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ingredient`
---
-
-DROP TABLE IF EXISTS `ingredient`;
-CREATE TABLE IF NOT EXISTS `ingredient` (
-  `ID_ingredient` int(11) NOT NULL AUTO_INCREMENT,
-  `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  PRIMARY KEY (`ID_ingredient`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `muscle`
 --
 
@@ -121,21 +101,6 @@ CREATE TABLE IF NOT EXISTS `muscle` (
   `ID_muscle` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_muscle`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `need`
---
-
-DROP TABLE IF EXISTS `need`;
-CREATE TABLE IF NOT EXISTS `need` (
-  `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_ingredient` int(11) NOT NULL,
-  `Quantity` float NOT NULL,
-  PRIMARY KEY (`ID_recipe`,`ID_ingredient`),
-  KEY `FK_Need_ID_ingredient` (`ID_ingredient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -163,13 +128,15 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `NbPerson` int(11) NOT NULL,
   `PreparationTime` time NOT NULL,
   `CookingTime` time NOT NULL,
   `TotalTime` time NOT NULL,
-  `Score` float DEFAULT NULL,
-  `Price` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
-  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `Score` float NOT NULL,
+  `Price` float NOT NULL,
+  `Difficulty` float NOT NULL,
   `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `Ingredients` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
   `ID_type` int(11) NOT NULL,
   PRIMARY KEY (`ID_recipe`),
@@ -190,6 +157,15 @@ CREATE TABLE IF NOT EXISTS `renewal` (
   PRIMARY KEY (`ID_renewal`),
   KEY `FK_Renewal_ID_frequency` (`ID_frequency`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Déchargement des données de la table `renewal`
+--
+
+INSERT INTO `renewal` (`ID_renewal`, `ModuleName`, `ID_frequency`) VALUES
+(1, 'meteo', 1),
+(2, 'TVprogram', 1),
+(3, 'news', 2);
 
 -- --------------------------------------------------------
 
@@ -279,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Height` float DEFAULT NULL,
   `ID_town` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
-  KEY `FK_User_town_id_town` (`ID_town`)
+  KEY `FK_User_ID_town` (`ID_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -323,24 +299,10 @@ CREATE TABLE IF NOT EXISTS `work` (
 --
 
 --
--- Contraintes pour la table `have`
---
-ALTER TABLE `have`
-  ADD CONSTRAINT `FK_Have_ID_ingredient` FOREIGN KEY (`ID_ingredient`) REFERENCES `ingredient` (`ID_ingredient`),
-  ADD CONSTRAINT `FK_Have_ID_user` FOREIGN KEY (`ID_user`) REFERENCES `user` (`ID_user`);
-
---
 -- Contraintes pour la table `health`
 --
 ALTER TABLE `health`
   ADD CONSTRAINT `FK_Health_ID_user` FOREIGN KEY (`ID_user`) REFERENCES `user` (`ID_user`);
-
---
--- Contraintes pour la table `need`
---
-ALTER TABLE `need`
-  ADD CONSTRAINT `FK_Need_ID_ingredient` FOREIGN KEY (`ID_ingredient`) REFERENCES `ingredient` (`ID_ingredient`),
-  ADD CONSTRAINT `FK_Need_ID_recipe` FOREIGN KEY (`ID_recipe`) REFERENCES `recipe` (`ID_recipe`);
 
 --
 -- Contraintes pour la table `program`
@@ -371,7 +333,7 @@ ALTER TABLE `tvprogram`
 -- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_User_town_id_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
+  ADD CONSTRAINT `FK_User_ID_town` FOREIGN KEY (`ID_town`) REFERENCES `town` (`ID_town`);
 
 --
 -- Contraintes pour la table `weather`
