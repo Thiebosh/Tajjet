@@ -49,7 +49,6 @@ CREATE TABLE TVprogram (ID_TVprogram INT AUTO_INCREMENT NOT NULL,
 Title VARCHAR(255),
 Synopsis TEXT,
 Begin TIME,
-End TIME,
 Genre VARCHAR(255),
 ID_channel INT,
 PRIMARY KEY (ID_TVprogram)) ENGINE=InnoDB;

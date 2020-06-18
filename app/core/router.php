@@ -24,9 +24,9 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         case 'fill_db':
             $moduleScript = "meteo";
             $moduleArgs = "";
-            if (!file_exists($moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
+            if (!file_exists("core/module_$moduleScript.py")) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
-                exec("'".$config['Python']['executable']."' core/$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                exec("'".$config['Python']['executable']."' core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                 
                 echo("<br><hr>valeur de retour : $return<br>");
                 var_dump($output);
