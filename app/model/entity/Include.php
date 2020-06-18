@@ -33,7 +33,8 @@ class Includ extends Entity {
     }
 
     //setters
-    public function setLabel($quantity) {
+    public function setQuantity($quantity) {
+        $quantity = Entity::stringToFloat($quantity);
         if (is_float($quantity)) $this->_quantity = $quantity;
     }
 

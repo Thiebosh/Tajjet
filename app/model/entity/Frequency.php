@@ -32,6 +32,7 @@ class Frequency extends Entity {
 
     //setters
     public function setNumberOfDays($numberOfDays) {
+        $numberOfDays = Entity::stringToFloat($numberOfDays);
         if (is_float($numberOfDays) && $numberOfDays > 0) $this->_numberOfDays = $numberOfDays;
     }
 

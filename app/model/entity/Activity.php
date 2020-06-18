@@ -45,6 +45,7 @@ class Activity extends Entity {
     }
 
     public function setDistance($distance) {
+        $distance = Entity::stringToFloat($distance);
         if (is_float($distance)) $this->_distance = $distance;
     }
 
