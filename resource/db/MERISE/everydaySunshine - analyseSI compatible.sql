@@ -5,7 +5,7 @@ PRIMARY KEY (ID_sky)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Weather ;
 CREATE TABLE Weather (ID_weather INT AUTO_INCREMENT NOT NULL,
-Forecast VARCHAR(255),
+Forecast DATETIME,
 MinTemp FLOAT,
 MaxTemp FLOAT,
 FeltTemp FLOAT,
@@ -22,7 +22,7 @@ Password VARCHAR(255),
 Avatar VARCHAR(255),
 BirthDate DATE,
 Height FLOAT,
-town_id_town INT,
+ID_town INT,
 PRIMARY KEY (ID_user)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Renewal ;
@@ -37,53 +37,35 @@ NumberOfDays FLOAT,
 NextDate DATETIME,
 PRIMARY KEY (ID_frequency)) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS News ;
-CREATE TABLE News (ID_news INT AUTO_INCREMENT NOT NULL,
-Summary TEXT,
-PRIMARY KEY (ID_news)) ENGINE=InnoDB;
-
 DROP TABLE IF EXISTS Article ;
 CREATE TABLE Article (ID_article INT AUTO_INCREMENT NOT NULL,
+Summary TEXT,
 URL VARCHAR(255),
-ReadingTime VARCHAR(255),
-ID_news INT,
+ReadingTime TIME,
 PRIMARY KEY (ID_article)) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS Category ;
-CREATE TABLE Category (ID_category INT AUTO_INCREMENT NOT NULL,
-Label VARCHAR(255),
-PRIMARY KEY (ID_category)) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS Activity ;
-CREATE TABLE Activity (ID_activity INT AUTO_INCREMENT NOT NULL,
-Label VARCHAR(255),
-Distance FLOAT,
-ID_weather INT,
-ID_category INT,
-PRIMARY KEY (ID_activity)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS TVprogram ;
 CREATE TABLE TVprogram (ID_TVprogram INT AUTO_INCREMENT NOT NULL,
 Title VARCHAR(255),
 Synopsis TEXT,
-Begin VARCHAR(255),
-End VARCHAR(255),
+Begin TIME,
+End TIME,
 Genre VARCHAR(255),
 ID_channel INT,
 PRIMARY KEY (ID_TVprogram)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Ingredient ;
-CREATE TABLE Ingredient (ID_item INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE Ingredient (ID_ingredient INT AUTO_INCREMENT NOT NULL,
 Label VARCHAR(255),
-PRIMARY KEY (ID_item)) ENGINE=InnoDB;
+PRIMARY KEY (ID_ingredient)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Recipe ;
 CREATE TABLE Recipe (ID_recipe INT AUTO_INCREMENT NOT NULL,
 Name VARCHAR(255),
 Picture VARCHAR(255),
-PreparationTime VARCHAR(255),
-CookingTime VARCHAR(255),
-TotalTime VARCHAR(255),
+PreparationTime TIME,
+CookingTime TIME,
+TotalTime TIME,
 Score FLOAT,
 Price FLOAT,
 Difficulty FLOAT,
@@ -128,18 +110,18 @@ CREATE TABLE Town (ID_town INT AUTO_INCREMENT NOT NULL,
 Label VARCHAR(255),
 PRIMARY KEY (ID_town)) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS Include ;
-CREATE TABLE Include (ID_recipe INT AUTO_INCREMENT NOT NULL,
-ID_item INT NOT NULL,
+DROP TABLE IF EXISTS Need ;
+CREATE TABLE Need (ID_recipe INT AUTO_INCREMENT NOT NULL,
+ID_ingredient INT NOT NULL,
 Quantity FLOAT,
 PRIMARY KEY (ID_recipe,
- ID_item)) ENGINE=InnoDB;
+ ID_ingredient)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Have ;
-CREATE TABLE Have (ID_item INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE Have (ID_ingredient INT AUTO_INCREMENT NOT NULL,
 ID_user INT NOT NULL,
 Quantity FLOAT,
-PRIMARY KEY (ID_item,
+PRIMARY KEY (ID_ingredient,
  ID_user)) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Work ;
@@ -157,17 +139,14 @@ PRIMARY KEY (ID_user,
 ALTER TABLE Weather ADD CONSTRAINT FK_Weather_ID_sky FOREIGN KEY (ID_sky) REFERENCES Sky (ID_sky);
 
 ALTER TABLE Weather ADD CONSTRAINT FK_Weather_ID_town FOREIGN KEY (ID_town) REFERENCES Town (ID_town);
-ALTER TABLE User ADD CONSTRAINT FK_User_town_id_town FOREIGN KEY (town_id_town) REFERENCES Town (ID_town);
+ALTER TABLE User ADD CONSTRAINT FK_User_town_id_town FOREIGN KEY (ID_town) REFERENCES Town (ID_town);
 ALTER TABLE Renewal ADD CONSTRAINT FK_Renewal_ID_frequency FOREIGN KEY (ID_frequency) REFERENCES Frequency (ID_frequency);
-ALTER TABLE Article ADD CONSTRAINT FK_Article_ID_news FOREIGN KEY (ID_news) REFERENCES News (ID_news);
-ALTER TABLE Activity ADD CONSTRAINT FK_Activity_ID_weather FOREIGN KEY (ID_weather) REFERENCES Weather (ID_weather);
-ALTER TABLE Activity ADD CONSTRAINT FK_Activity_ID_category FOREIGN KEY (ID_category) REFERENCES Category (ID_category);
 ALTER TABLE TVprogram ADD CONSTRAINT FK_TVprogram_ID_channel FOREIGN KEY (ID_channel) REFERENCES Channel (ID_channel);
 ALTER TABLE Recipe ADD CONSTRAINT FK_Recipe_ID_type FOREIGN KEY (ID_type) REFERENCES Type (ID_type);
 ALTER TABLE Health ADD CONSTRAINT FK_Health_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
-ALTER TABLE Include ADD CONSTRAINT FK_Include_ID_recipe FOREIGN KEY (ID_recipe) REFERENCES Recipe (ID_recipe);
-ALTER TABLE Include ADD CONSTRAINT FK_Include_ID_item FOREIGN KEY (ID_item) REFERENCES Ingredient (ID_item);
-ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_item FOREIGN KEY (ID_item) REFERENCES Ingredient (ID_item);
+ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_recipe FOREIGN KEY (ID_recipe) REFERENCES Recipe (ID_recipe);
+ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
+ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
 ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_muscle FOREIGN KEY (ID_muscle) REFERENCES Muscle (ID_muscle);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_sport FOREIGN KEY (ID_sport) REFERENCES Sport (ID_sport);
