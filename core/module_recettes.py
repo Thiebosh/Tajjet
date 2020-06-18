@@ -1,13 +1,24 @@
 # -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
-
 import urllib.parse
 import urllib.request
 import sys
-import re
+import mysql.connector
+import json
+import random
 
+with open('config.json') as json_file:
+    data = json.load(json_file)
+  
+mydb = mysql.connector.connect(
+  host="localhost",
+  user=data['DB']['connexion']['username'],
+  password=data['DB']['connexion']['password'],
+  database=data['DB']['setup']['DBname']
+)
 
+"""Basé sur ce travail : https://github.com/remaudcorentin-dev/python-marmiton """
 class Marmiton(object):
 
     @staticmethod
@@ -70,12 +81,9 @@ class Marmiton(object):
 
         base_url = "https://www.marmiton.org"
         url = base_url + uri
-        print(url)
         html_content = urllib.request.urlopen(url).read()
         #r = requests.get(url)
         #html_content = r.text
-        
-        print(html_content)
 
         soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -94,7 +102,7 @@ class Marmiton(object):
 
         recipe_elements = [
             {"name": "author", "query": soup.find('span', {"class": "recipe-author__name"}) },
-            {"name": "rate", "query": soup.find("span", {"class": "recipe-reviews-list__review__head__infos__rating__value"}) },
+            {"name": "rate", "query": soup.find("span", {"class": "recipe-infos-users__rating"}) },
             {"name": "difficulty", "query": soup.find("div", {"class": "recipe-infos__level"}) },
             {"name": "budget", "query": soup.find("div", {"class": "recipe-infos__budget"}) },
             {"name": "prep_time", "query": soup.find("span", {"class": "recipe-infos__timmings__value"}) },
@@ -138,13 +146,16 @@ class Marmiton(object):
         return data
 
 
-print(sys.argv)
-city = sys.argv[1]
+aqt = ""
+for i in range(1, len(sys.argv) - 1):
+    aqt += sys.argv[i] + " "
+
+dt = sys.argv[len(sys.argv) - 1]
 
 # Search :
 query_options = {
-  "aqt": "boeuf bourguignon",      # Query keywords - separated by a white space
-  "dt": "platprincipal",      # Plate type : "entree", "platprincipal", "accompagnement", "amusegueule", "sauce" (optional)
+  "aqt": aqt,      # Query keywords - separated by a white space
+  "dt": dt,      # Plate type : "entree", "platprincipal", "accompagnement", "amusegueule", "sauce" (optional)
   #"exp": 2,                   # Plate price : 1 -> Cheap, 2 -> Medium, 3 -> Kind of expensive (optional)
   #"dif": 2,                   # Recipe difficulty : 1 -> Very easy, 2 -> Easy, 3 -> Medium, 4 -> Advanced (optional)
   #"veg": 0,                   # Vegetarien only : 0 -> False, 1 -> True (optional)
@@ -154,27 +165,61 @@ query_result = Marmiton.search(query_options)
 # Get :
 recipe = query_result[0]
 main_recipe_url = recipe['url']
-detailed_recipe = Marmiton.get(main_recipe_url)  # Get the details of the first returned recipe (most relevant in our case)
+try:
+    detailed_recipe = Marmiton.get(main_recipe_url)  # Get the details of the first returned recipe (most relevant in our case)
+except:
+    try:
+        recipe = query_result[1]
+        main_recipe_url = recipe['url']
+        detailed_recipe = Marmiton.get(main_recipe_url)
+    except:
+        error = True
+        print("1")
 
-# Display result :
-print("## %s\n" % detailed_recipe['name'])  # Name of the recipe
-print("Recette par '%s'" % (detailed_recipe['author']))
-print("Noté %s/5 par %s personnes." % (detailed_recipe['rate'], detailed_recipe['nb_comments']))
-print("Temps de cuisson : %s / Temps de préparation : %s / Temps total : %s." % (detailed_recipe['cook_time'] if detailed_recipe['cook_time'] else 'N/A',detailed_recipe['prep_time'], detailed_recipe['total_time']))
-print("Tags : %s" % (", ".join(detailed_recipe['tags'])))
-print("Difficulté : '%s'" % detailed_recipe['difficulty'])
-print("Budget : '%s'" % detailed_recipe['budget'])
-print("image : '%s'" % detailed_recipe['image'])
 
-print("\nRecette pour %s personne(s) :\n" % detailed_recipe['people_quantity'])
-for ingredient in detailed_recipe['ingredients']:  # List of ingredients
-    print("- %s" % ingredient)
+if(error != True):
+    mycursor = mydb.cursor(buffered=True)
+    sql = "SELECT name FROM recipe WHERE name=%s"
+    adr = (detailed_recipe['name'], )
+    mycursor.execute(sql, adr)
 
-print("")
-steps = ""
-for step in detailed_recipe['steps']:  # List of cooking steps
-    steps += step
+    if mycursor.rowcount == 0:        
+        sql = "SELECT id_type FROM type WHERE label=%s"
+        adr = (dt, )
+        mycursor.execute(sql, adr)
 
-print(steps)
-if detailed_recipe['author_tip']:
-    print("\nNote de l'auteur :\n%s" % detailed_recipe['author_tip'])
+        if(mycursor.rowcount == 0):
+            sql = "INSERT INTO type (label) VALUES (%s)"
+            adr = (dt, )
+            mycursor.execute(sql, adr)
+            mydb.commit()
+
+            sql = "SELECT id_type FROM type WHERE label=%s"
+            adr = (dt, )
+            mycursor.execute(sql, adr)
+
+        myresult = mycursor.fetchall()
+        id_type = myresult[0][0]
+        
+        steps = ""
+        for step in detailed_recipe['steps']:  # List of cooking steps
+            steps += step + "<br>"
+
+        ingredients = ""
+        for ingredient in detailed_recipe['ingredients']:  # List of ingredients
+            ingredients += ingredient + "<br>"
+        
+        calories = random.randrange(500, 900, 1)
+
+        sql = "INSERT INTO recipe (Name, Picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, Steps, Ingredients, Calories, ID_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (detailed_recipe['name'], detailed_recipe['image'], detailed_recipe['prep_time'], detailed_recipe['cook_time'] if detailed_recipe['cook_time'] else 'N/A', detailed_recipe['total_time'], detailed_recipe['rate'], detailed_recipe['budget'], detailed_recipe['difficulty'], steps, ingredients, calories, id_type)
+        mycursor.execute(sql, val)
+
+        mydb.commit()
+        print(detailed_recipe['name'])
+    else :
+        myresult = mycursor.fetchall()
+        name_recipe = myresult[0][0]
+        print(name_recipe)
+
+
