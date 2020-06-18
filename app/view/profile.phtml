@@ -1,16 +1,18 @@
 <?php ob_start(); ?>
-    <div class="d-flex justify-content-center">
-        <div class="col-md-6">
+    <div class="infos d-flex justify-content-center">
+        <div class="col-md-6 infos_compte">
             <form method="post" action="index.php?user=profile">
-                <div class="infos_compte">
+                <div>
                     <h1>Informations de compte</h1>
+                    <hr>
                     <p>
                         <label for="username">Nom d'utilisateur</label><br>
                         <input type="text" class="form-control" name="username" placeholder="<?= htmlspecialchars($_SESSION['user']->getName()) ?>" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                         <br>
                         <div>
-                            afficher l'image, positionner bouton "changer d'avatar"
+                            afficher l'image
                             <label for="avatar">Avatar</label>
+                            <input type="submit" class="btn btn-outline-primary" value="Changer d'avatar"/>
                             <div class="custom-file">
                                 <label class="custom-file-label" for="avatar">Importer image</label>
                                 <input type="file" class="custom-file-input" name="avatar" accept=".png" value="<?= isset($trustedPost['avatar']) ? htmlspecialchars($trustedPost['avatar']) : '' ?>">
@@ -24,26 +26,32 @@
                         <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
                     </p>
                 </div>
-
-                <div class="infos_perso">
-                    <h1>Informations personnelles</h1>
-                    <p>
-                        <label for="birthDate">Votre date de naissance</label><br>
-                        <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
-                        <br>
-                        <label for="height">Votre taille</label><br>
-                        <input type="text" class="form-control" name="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
-                        <br>
-                        <label for="town">Votre ville</label><br>
-                        <input type="text" class="form-control" name="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
-                    </p>
-                </div>
-
-                <p class="d-flex justify-content-center">
-                    <input type="submit" class="btn btn-outline-success" value="Modifier mes informations"/>
-                    <input type="hidden" name="form" value="1">
+            </form>
+        </div>
+        
+        <div class="col-md-6 infos_perso">
+            
+            <h1>Informations personnelles</h1>
+            <hr>
+            <form method="post" action="index.php?user=profile">
+                <p>
+                    <label for="birthDate">Votre date de naissance</label><br>
+                    <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
+                    <br>
+                    <label for="height">Votre taille</label><br>
+                    <input type="text" class="form-control" name="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
+                    <br>
+                    <label for="town">Votre ville</label><br>
+                    <input type="text" class="form-control" name="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
                 </p>
             </form>
+        </div>
+
+        <p class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-outline-success" value="Modifier mes informations"/>
+            <input type="hidden" name="form" value="1">
+        </p>
+            
 <?php $sectionContent=ob_get_clean();
 
 //ajouter script js pour afficher formulaire (ou champs et bouton de validation) avec un clic bouton "modifier mes données" ?

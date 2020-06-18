@@ -1,16 +1,22 @@
 
-form,#inscr
+.infos_perso,.infos_compte
 {
     
-    border:2px solid black;
+    
     margin:10px auto 10px auto;
     padding:5px;
-    background-color:#F0A33E;    
+      
+}
+
+.btn-outline-primary
+{
+    margin:0px 1px 5px 0px;
 }
 
 div{
     margin:auto;
     text-align:center;
+    
 }
 label,#inscr p
 {
@@ -19,8 +25,7 @@ label,#inscr p
 
 .form-control,.custom-file-label
 {
-    border:2px solid black;
-    box-shadow: 2px 2px black;
+    
     text-align:left;
 }
 
@@ -31,3 +36,14 @@ label,#inscr p
     border-color:#0A6DA3;;
 }
 
+.infos
+{
+    display:flex;
+    flex-direction: column;
+}
+
+form
+{
+    margin:10px auto 10px auto;
+    padding:5px;
+}

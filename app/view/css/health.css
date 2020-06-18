@@ -9,7 +9,7 @@ border:1px solid black;
     font-family: 'Balsamiq Sans', sans-serif;;
 }
 
-.sommeil,.phys
+.graphes,.saisie
 {
     border:1px solid black;
     text-align: center;
@@ -23,8 +23,13 @@ article
     justify-content: space-between;
 }
 
-form
+.saisie h1
 {
-    display: flex;
+    font-size:1.7em;
+    font-weight: bold;
+}
+
+.tab
+{
     justify-content: center;
 }
