@@ -10,7 +10,7 @@ class SkyManager extends Manager {//pattern CRUD : create, read, update, delete 
         $table = array('id' => $idSky);
 
         $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         

@@ -14,8 +14,6 @@ class Health extends Entity {
 
     //constructor & destructor
     public function __construct(array $data) {
-        //conversion de recordDate en objet DateTime si nécessaire?
-        //conversion de sleep en objet DateTime si nécessaire?
         parent::__construct($data);
     }
 
@@ -52,8 +50,7 @@ class Health extends Entity {
     }
 
     public function setRecordDate($recordDate) {
-        if ($recordDate instanceof DateTime) $this->_recordDate = $recordDate;
-        else if (isDateTimeConvertible($recordDate)) $this->_recordDate = new DateTime($recordDate);
+        if (is_string($recordDate)) $this->_recordDate = $recordDate;
     }
     
     public function setWeight($weight) {
@@ -67,8 +64,7 @@ class Health extends Entity {
     }
     
     public function setSleep($sleepTime) {
-        if ($sleepTime instanceof DateTime) $this->_sleep = $sleepTime;
-        else if (isDateTimeConvertible($sleepTime)) $this->_sleep = new DateTime($sleepTime);
+        if (is_string($sleepTime)) $this->_sleep = $sleepTime;
     }
     
     public function setIdUser($idUser) {

@@ -87,8 +87,7 @@ class User extends Entity {
     }
     
     public function setBirthDate($birthDate) {
-        if ($birthDate instanceof DateTime) $this->_birthDate = $birthDate;
-        else if ($this->isDateTimeConvertible($birthDate)) $this->_birthDate = new DateTime($birthDate);
+        if (is_string($birthDate)) $this->_birthDate = $birthDate;
     }
 
     public function setHeight($height) {

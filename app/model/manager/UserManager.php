@@ -10,9 +10,9 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
                     VALUES(:name, :password, :avatar, :birthDate, :height'.($user->getID_Town() != null ? ', :town' : '').')';
         $table = array('name'       => $user->getName(),
                         'password'  => $user->getPassword(),
-                        'avatar'    => ($user->getAvatar()      != null) ? $user->getAvatar()                       : PDO::PARAM_NULL,
-                        'birthDate' => ($user->getBirthDate()   != null) ? Entity::printDate($user->getBirthDate()) : PDO::PARAM_NULL,
-                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()                       : PDO::PARAM_NULL);
+                        'avatar'    => ($user->getAvatar()      != null) ? $user->getAvatar()       : PDO::PARAM_NULL,
+                        'birthDate' => ($user->getBirthDate()   != null) ? $user->getBirthDate()    : PDO::PARAM_NULL,
+                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL);
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
         $request = parent::getDBConnect()->prepare($query);
@@ -27,7 +27,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
 
         if ($result !== false) {
             $result = new User($result);
-            $result->setTown((new TownManager)->readById($result->getID_Town()));
+            if ($result->getID_Town != 0) $result->setTown((new TownManager)->readById($result->getID_Town()));
         }
 
         return $result;
@@ -61,9 +61,9 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
         $table = array('idUser'     => $user->getId(),
                         'name'      => $user->getName(),
                         'password'  => $user->getPassword(),
-                        'avatar'    => ($user->getAvatar()      != null) ? $user->getAvatar()                       : PDO::PARAM_NULL,
-                        'birthDate' => ($user->getBirthDate()   != null) ? Entity::printDate($user->getBirthDate()) : PDO::PARAM_NULL,
-                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()                       : PDO::PARAM_NULL);
+                        'avatar'    => ($user->getAvatar()      != null) ? $user->getAvatar()       : PDO::PARAM_NULL,
+                        'birthDate' => ($user->getBirthDate()   != null) ? $user->getBirthDate()    : PDO::PARAM_NULL,
+                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL);
 
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
