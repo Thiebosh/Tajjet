@@ -9,8 +9,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
                     WHERE ID_recipe = :id';
         $table = array('id' => $id);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
         
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
@@ -24,8 +23,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
                     WHERE Name = :name';
         $table = array('name' => $name);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
         
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
@@ -40,8 +38,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
                     ORDER BY Name';
         $table = array('search' => $name);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
         
         foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
             $result[] = new Recipe($line);

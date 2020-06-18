@@ -9,8 +9,7 @@ class WeatherManager extends Manager {
                     WHERE ID_town = :id';
         $table = array('id' => $idTown);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
         
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Weather($line);

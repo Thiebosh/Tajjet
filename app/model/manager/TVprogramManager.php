@@ -9,8 +9,7 @@ class TVprogramManager extends Manager {//pattern CRUD : create, read, update, d
                     WHERE End > Convert(time, :time)";
         $table = array('time' => $time);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new TVprogram($line);
