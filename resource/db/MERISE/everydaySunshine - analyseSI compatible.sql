@@ -53,15 +53,11 @@ Genre VARCHAR(255),
 ID_channel INT,
 PRIMARY KEY (ID_TVprogram)) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS Ingredient ;
-CREATE TABLE Ingredient (ID_ingredient INT AUTO_INCREMENT NOT NULL,
-Label VARCHAR(255),
-PRIMARY KEY (ID_ingredient)) ENGINE=InnoDB;
-
 DROP TABLE IF EXISTS Recipe ;
 CREATE TABLE Recipe (ID_recipe INT AUTO_INCREMENT NOT NULL,
 Name VARCHAR(255),
 Picture VARCHAR(255),
+NbPerson INT,
 PreparationTime TIME,
 CookingTime TIME,
 TotalTime TIME,
@@ -69,6 +65,7 @@ Score FLOAT,
 Price FLOAT,
 Difficulty FLOAT,
 Steps TEXT,
+Ingredients TEXT,
 Calories FLOAT,
 ID_type INT,
 PRIMARY KEY (ID_recipe)) ENGINE=InnoDB;
@@ -109,20 +106,6 @@ CREATE TABLE Town (ID_town INT AUTO_INCREMENT NOT NULL,
 Label VARCHAR(255),
 PRIMARY KEY (ID_town)) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS Need ;
-CREATE TABLE Need (ID_recipe INT AUTO_INCREMENT NOT NULL,
-ID_ingredient INT NOT NULL,
-Quantity FLOAT,
-PRIMARY KEY (ID_recipe,
- ID_ingredient)) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS Have ;
-CREATE TABLE Have (ID_ingredient INT AUTO_INCREMENT NOT NULL,
-ID_user INT NOT NULL,
-Quantity FLOAT,
-PRIMARY KEY (ID_ingredient,
- ID_user)) ENGINE=InnoDB;
-
 DROP TABLE IF EXISTS Work ;
 CREATE TABLE Work (ID_muscle INT AUTO_INCREMENT NOT NULL,
 ID_sport INT NOT NULL,
@@ -138,15 +121,11 @@ PRIMARY KEY (ID_user,
 ALTER TABLE Weather ADD CONSTRAINT FK_Weather_ID_sky FOREIGN KEY (ID_sky) REFERENCES Sky (ID_sky);
 
 ALTER TABLE Weather ADD CONSTRAINT FK_Weather_ID_town FOREIGN KEY (ID_town) REFERENCES Town (ID_town);
-ALTER TABLE User ADD CONSTRAINT FK_User_town_id_town FOREIGN KEY (ID_town) REFERENCES Town (ID_town);
+ALTER TABLE User ADD CONSTRAINT FK_User_ID_town FOREIGN KEY (ID_town) REFERENCES Town (ID_town);
 ALTER TABLE Renewal ADD CONSTRAINT FK_Renewal_ID_frequency FOREIGN KEY (ID_frequency) REFERENCES Frequency (ID_frequency);
 ALTER TABLE TVprogram ADD CONSTRAINT FK_TVprogram_ID_channel FOREIGN KEY (ID_channel) REFERENCES Channel (ID_channel);
 ALTER TABLE Recipe ADD CONSTRAINT FK_Recipe_ID_type FOREIGN KEY (ID_type) REFERENCES Type (ID_type);
 ALTER TABLE Health ADD CONSTRAINT FK_Health_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
-ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_recipe FOREIGN KEY (ID_recipe) REFERENCES Recipe (ID_recipe);
-ALTER TABLE Need ADD CONSTRAINT FK_Need_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
-ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_ingredient FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID_ingredient);
-ALTER TABLE Have ADD CONSTRAINT FK_Have_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_muscle FOREIGN KEY (ID_muscle) REFERENCES Muscle (ID_muscle);
 ALTER TABLE Work ADD CONSTRAINT FK_Work_ID_sport FOREIGN KEY (ID_sport) REFERENCES Sport (ID_sport);
 ALTER TABLE Program ADD CONSTRAINT FK_Program_ID_user FOREIGN KEY (ID_user) REFERENCES User (ID_user);
