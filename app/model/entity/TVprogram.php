@@ -18,8 +18,6 @@ class TVprogram extends Entity {
 
     //constructor & destructor
     public function __construct(array $data) {
-        //conversion de begin en objet DateTime si nécessaire?
-        //conversion de end en objet DateTime si nécessaire?
         parent::__construct($data);
     }
 
@@ -63,13 +61,11 @@ class TVprogram extends Entity {
     }
     
     public function setBegin($begin) {
-        if ($begin instanceof DateTime) $this->_begin = $begin;
-        else if (isDateTimeConvertible($begin)) $this->_begin = new DateTime($begin);
+        if (is_string($begin)) $this->_begin = $begin;
     }
     
     public function setEnd($end) {
-        if ($end instanceof DateTime) $this->_end = $end;
-        else if (isDateTimeConvertible($end)) $this->_end = new DateTime($end);
+        if (is_string($end)) $this->_end = $end;
     }
 
     public function setGenre($Genre) {
