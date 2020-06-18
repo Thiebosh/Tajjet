@@ -2,22 +2,34 @@
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Type.php");
 
-class TypeManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
+class TypeManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
+    public function readById($id) {
+        $query = "SELECT * 
+                    FROM Type 
+                    WHERE ID_type = :id";
+        $table = array('id' => $id);
 
-    public function __destruct() {
-        parent::__destruct();
-    }
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
-    public function getAll(){ //Pour récupérer tous les types de plats pour la liste déroulante
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
-        return array(new Type() );
+        return new Type($result[0]);
     }
 
-    
+
+    public function readAll() {
+        $query = "SELECT * 
+                    FROM Type 
+                    ORDER BY Label";
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+            $result[] = new Type($line);
+        }
+        
+        return $result;
+    }
 }

@@ -1,52 +1,41 @@
 <?php ob_start();?>
     <div class="row">
-        <form class="col-md-12" method="post" action="index.php?page=recherche">
-            <select class="custom-select col-md-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+        <form class="col-md-12" method="post" action="index.php?page=recherche" id="plats">
+            <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($pageFill['type'] as $type) { ?>
                     <option><?=$type?>
                 <?php } ?>
             </select>
-            <input class="col-md-3 form-control" type="text" name="search" placeholder="Rechercher des recettes">
-            <input class="col-md-3 btn btn-primary" type="submit" class="buttonNav" value="Rechercher">
+            <input class="col-lg form-control  m-3" type="text" name="search" placeholder="Rechercher des recettes">
+            <input class="col-lg btn btn-primary  m-3" type="submit" class="buttonNav" value="Rechercher">
         </form>
     </div>
     
-    <article class="row" id="recipe">
-        <div classe="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1 ><?=$pageFill['recipe'][0]['titre']?></h1>
-                </div>
-                <div class="col-md-6">
-                    <img src="<?=$pageFill['recipe'][0]['picture']?>" alt="Image recette">
-                </div>
-            </div>
-            <div class="row">
+    <article class="recette">
+        <div classe="col-md-12 text-center">
+            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?=$pageFill['recipe'][0]['titre']?></h1></div>
+            <div class="d-flex justify-content-center"><img class="col-lg-3" src="https://assets.afcdn.com/recipe/20190212/87658_w600cxt0cyt0cxb6236cyb4154.jpg" alt="Image recette"></div>
+            
+            <div class="row my-4" id="times">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-12">
-                            <?=$pageFill['recipe'][0]["globalTime"]?> min
+                        <div class="col-md-12" id="timeGlobal">
+                            Temps total : <?=$pageFill['recipe'][0]["globalTime"]?> min
                         </div>
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6">
-                            <?=$pageFill['recipe'][0]['prepTime']?> min
+                        <div class="col-md-6" id="timePrep">
+                            Temps de préparation : <?=$pageFill['recipe'][0]['prepTime']?> min
                         </div>
-                        <div class="col-md-6">
-                            <?=$pageFill['recipe'][0]['cookTime']?> min
+                        <div class="col-md-6" id="timeCook">
+                            Temps de cuisson : <?=$pageFill['recipe'][0]['cookTime']?> min
                         </div>
                     </div>
                 </div>
             </div>
-                
-                
-            <div class="row">
-                <div class="col-md-12">
-                    <p><?=$pageFill['recipe'][0]['steps']?></p>
-                </div>
-            </div>
-            <div class="row">
+            <hr>    
+            <div class="row text-center">
                 <div class="col-md-4">
                     <p class="note">Note :</p>
                 </div>
@@ -57,69 +46,63 @@
                     <p class="price">Budget :</p>
                 </div>
             </div>
-              
-                        
-                
-            
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p><?=$pageFill['recipe'][0]['steps']?></p>
+                </div>
+            </div>
         </div>
     </article>
-    <article class="row">
-        <div class="col-md-6" id="ingredients_recette">
-            <h1>Liste des ingrédients nécessaires pour la recette</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
-            <p>Nombre de personnes : </p>
-            <form method="post" action="index.php?page=cooking">
-                <input type="text" name="eaternumber" placeholder="">
-            </form>
-            <div class="row">
-                
-                    <div class="col-md-3">
-                        <p>J'ai besoin de : </p>
-                    </div>
-                    <div class="col-md-3">
-                        <p>J'achète : </p>
-                    </div>
+    
+    <article class="row mt-4">
+        <div class="col-lg-6" id="ingredients_recette">
+            <h1>Liste des ingrédients nécessaires pour la recette :</h1> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
+            <div class="row d-flex justify-content-center">
+                <p>Nombre de personnes : </p>
+                <form class="ml-4" method="post" action="index.php?page=cooking">
+                    <input type="number" name="eaternumber" placeholder="" id="number_person">
+                    <input type="submit" name="submiteaternumber" class="btn-primary">
+                </form>
             </div>
             <div class="row">
-                    <ul>
+                    <ul class="col-lg-6 text-right">
                         <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
-                                <li>
-                                    <?=$pageFill['recipe'][0]['items'][$j]['quantity']?> <?=$pageFill['recipe'][0]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
-                                </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
+                        <li class="my-1 align-middle list_ingredient">
+                            <?=$pageFill['recipe'][0]['items'][$j]['quantity']?> <?=$pageFill['recipe'][0]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
+                        </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
                         <?php } ?>
 
                     </ul>
-                    
-                        <ul>
-                            <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
-                                <li>
-                                    <form method="post" action="index.php?page=cooking">
-                                            <input type="text" name="itemnumber" placeholder="">    
-                                    </form>
-                                    </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
-                                <?php } ?>
-
-                        </ul>
-                    <br>
-                    
-                    
-                
+                    <ul class="col-lg-6 text-left max">
+                        <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
+                        <li class="my-1">
+                            <form method="post" action="index.php?page=cooking">
+                                <input type="number" class="input_number_ingredient">
+                                <button class="btn btn-primary">+</button>
+                                <button class="btn btn-primary">-</button>
+                            </form>
+                        </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
+                        <?php } ?>
+                    </ul>
             </div>
             
         </div>
     
-        <div class="col-md-6" id="possession">
+        <div class="col-lg-6" id="possession">
+            <h1>Liste des ingrédients possédés :</h1>    
             <div class="row">
-            <h1>Liste possession</h1>
-            <ul>
-                <!--<?php foreach($pageFill['have'] as $have) { ?>
-                    <li><?=$have['quantity']?><?=$have['items']?> (<?=$nombre?> restant(s) après la recette)</li>
-                <?php } ?>-->
-            </ul>
+                <ul>
+                    <!--<?php foreach($pageFill['have'] as $have) { ?>
+                        <li><?=$have['quantity']?><?=$have['items']?> (<?=$nombre?> restant(s) après la recette)</li>
+                    <?php } ?>-->
+                </ul>
             </div>
             <div class="row">
-                <form method="post" action="index.php?page=cooking">
-                    <input class="btn btn-success" type="submit" value="Je prépare">
-                </form>
+                <div class="col-md-12" id="prepBouton">
+                    <form method="post" action="index.php?page=cooking">
+                        <input class="btn btn-success" type="submit" value="Je prépare la recette">
+                    </form>
+                </div>
             </div>
         </div>
     </article>

@@ -57,10 +57,12 @@ class Health extends Entity {
     }
     
     public function setWeight($weight) {
+        $weight = Entity::stringToFloat($weight);
         if (is_float($weight)) $this->_weight = $weight;
     }
     
     public function setCalories($calories) {
+        $calories = Entity::stringToFloat($calories);
         if (is_float($calories)) $this->_calories = $calories;
     }
     

@@ -2,39 +2,36 @@
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Sport.php");
 
-class SportManager extends Manager {
-    //constructor & destructor
-    
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
+class SportManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
+    public function readByName($name) {
+        $query = 'SELECT * 
+                    FROM Sport 
+                    WHERE Label = :label';
+        $table = array('label' => $name);
 
-    public function __destruct() {
-        parent::__destruct();
-    }
-    
-    public function getAll(){ //Pour afficher la liste de tous les exercices si clic sur "liste d'exercices"
-    
-        return array( new Sport() );
-    }
-
-    public function getAllByIdMuscle($idMuscle){
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
         
+        foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
+            $result[] = new Sport($line);
+        }
 
-        return array( new Sport() );
-    }
-    
-    public function getAllByLabelSport($labelSport){ //Pour la recherche par nom d'exercice
-        
-
-        return array( new Sport() );
+        return $result;
     }
 
-    public function getAllByIdUser($idUser){ //Pour pouvoir afficher la séance de l'utilisateur à sa prochaine connexion
-        
 
-        return array( new Sport() );
+    public function readById($id) {
+        $query = 'SELECT * 
+                    FROM Sport 
+                    WHERE ID_sport = :id';
+        $table = array('id' => $id);
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return new Sport($result[0]);
     }
 }
+

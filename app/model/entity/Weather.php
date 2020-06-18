@@ -69,22 +69,27 @@ class Weather extends Entity {
     }
 
     public function setMinTemp($temp) {
+        $temp = Entity::stringToFloat($temp);
         if (is_float($temp)) $this->_minTemp = $temp;
     }
 
     public function setMaxTemp($temp) {
+        $temp = Entity::stringToFloat($temp);
         if (is_float($temp)) $this->_maxTemp = $temp;
     }
 
     public function setFeltTemp($temp) {
+        $temp = Entity::stringToFloat($temp);
         if (is_float($temp)) $this->_feltTemp = $temp;
     }
 
     public function setHumidity($humidity) {
+        $humidity = Entity::stringToFloat($humidity);
         if (is_float($humidity) && $humidity >= 0 && $humidity <= 100) $this->_humidity = $humidity;
     }
 
     public function setPressure($pressure) {
+        $pressure = Entity::stringToFloat($pressure);
         if (is_float($pressure) && $pressure >= 0) $this->_pressure = $pressure;
     }
 
