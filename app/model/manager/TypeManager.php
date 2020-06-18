@@ -9,8 +9,7 @@ class TypeManager extends Manager {//pattern CRUD : create, read, update, delete
                     WHERE ID_type = :id";
         $table = array('id' => $id);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
@@ -22,9 +21,8 @@ class TypeManager extends Manager {//pattern CRUD : create, read, update, delete
         $query = "SELECT * 
                     FROM Type 
                     ORDER BY Label";
-
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+                    
+        $request = parent::prepareAndExecute($query);
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Type($line);
