@@ -15,8 +15,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
                         'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL);
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         return $this->readByName($user->getName());//ajoute id
     }
@@ -40,8 +39,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
                     WHERE Name = :name';
         $table = array('name' => $name);
         
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
 
@@ -67,7 +65,6 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
 
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
     }
 }
