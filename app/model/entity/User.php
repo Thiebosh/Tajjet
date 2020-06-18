@@ -2,7 +2,7 @@
 require_once(__DIR__."/../abstract/Entity.php");
 
 require_once("Sport.php");
-require_once("Item.php");
+require_once("Ingredient.php");
 require_once("Town.php");
 
 class User extends Entity {
