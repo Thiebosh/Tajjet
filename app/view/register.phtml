@@ -1,34 +1,34 @@
 <?php ob_start(); ?>
     <div class="d-flex justify-content-center">
-        <div class="col-md-6">
+        <div class="mt-4 col-md-3">
             <form method="post" action="index.php?user=register">
                 <p>
-                    <label for="username">Nom d'utilisateur</label><br>
+                    <label for="username" class="ml-1">Nom d'utilisateur</label><br>
                     <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
-                    <label for="password">Mot de passe</label><br>
+                    <label for="password" class="ml-1">Mot de passe</label><br>
                     <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                     <br>
-                    <label for="passwordConf">Confirmer le mot de passe</label><br>
+                    <label for="passwordConf" class="ml-1">Confirmer le mot de passe</label><br>
                     <input required type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
-                    <br>
                     <div>
-                        <label for="avatar">Avatar</label>
+                        <label for="avatar" class="ml-1">Avatar</label>
                         <div class="custom-file">
                             <label class="custom-file-label" for="avatar">Importer image</label>
                             <input type="file" class="custom-file-input" name="avatar" accept=".png" value="<?= isset($trustedPost['avatar']) ? htmlspecialchars($trustedPost['avatar']) : '' ?>">
                         </div>
                     </div>
                     <br>
-                    <label for="birth">Date de naissance</label><br>
+                    <label for="birth" class="ml-1">Date de naissance</label><br>
                     <input type="date" class="form-control" name="birth" placeholder="AAAA-MM-JJ" value="<?= isset($trustedPost['birthDate']) ? htmlspecialchars($trustedPost['birthDate']) : '' ?>">
                     <br>
-                    <label for="height">Taille</label><br>
+                    <label for="height" class="ml-1">Taille</label><br>
                     <input type="text" class="form-control" name="height" placeholder="Exemple pour 1m80 : 1.80" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
                     <br>
-                    <label for="town">Ville</label><br>
+                    <label for="town" class="ml-1">Ville</label><br>
                     <input type="text" class="form-control" name="town" placeholder="Ville" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
                 </p>
+                <br>
                 <p class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Inscription"/>
                     <input type="hidden" name="form" value="1">

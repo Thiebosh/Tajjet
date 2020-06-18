@@ -1,14 +1,14 @@
 <?php
 
 //affichage des messages d'erreur
-function display_error($path, $errMsg) {
+function display_error($errMsg) {
     $pageName = 'error';
     
     //1. construit vue
     require(__DIR__."/../view/error.phtml");//appelle vue de l'erreur
 
     //2. vide variables inutiles car utilisees (ne reste que $pageFill et $_SESSION)
-    unset($path, $scriptName, $errMsg, $_GET, $_POST);
+    unset($scriptName, $errMsg, $_GET, $_POST);
 
     //3. appelle template
     require(__DIR__."/../view/common/template.phtml");

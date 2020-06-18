@@ -1,19 +1,14 @@
 <?php
-
-require_once($path['vendor'].'php/Encoding.php');
-use \ForceUTF8\Encoding;
-
 //routeur de l'app : selon l'url, redirige vers le bon controleur
-//require_once('model/Manager/UserManager.php');//importe le reste
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
     switch (filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING)) {
         case 'upload_db':
-            if (!is_readable($scriptName['sql'])) display_error($path, $errMsg['index']['sqlFile']['notSet']);
+            if (!is_readable($scriptName['sql'])) display_error($errMsg['index']['sqlFile']['notSet']);
             else {
-                require_once($path['vendor'].'SqlImport/Import.php');
+                require_once('vendor/SqlImport/Import.php');
 
                 new vendor\SqlImport\Import($scriptName['sql'], 
                                             $config['DB']['connexion']['username'], 
@@ -27,20 +22,16 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         case 'fill_db':
-            if (!file_exists($scriptName['python'])) display_error($path, $errMsg['index']['pythonFile']['notSet']);
+            $moduleScript = "meteo";
+            $moduleArgs = "";
+            if (!file_exists($moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
-                exec('"'.$config['Python']['executable'].'" "'.$scriptName['python'].'" 2>&1 Lille', $output, $return);
+                exec("'".$config['Python']['executable']."' core/$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                 
-                echo("<br>valeur de retour : $return<br>");
+                echo("<br><hr>valeur de retour : $return<br>");
                 var_dump($output);
-                foreach ($output as $line) {
-                    echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
-                    // iconv(mb_detect_encoding($line, mb_detect_order(), true), "UTF-8", $line);
-                    // echo($line . "<br>");
-                    //$test = Encoding::toUTF8($line);
-                    //echo($test);
-                }
-                echo('<br>');
+                foreach ($output as $line) echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
+                echo('<hr><br>');
             }
         break;
 
@@ -49,7 +40,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         default:
-            display_error($path, $errMsg['router']['URL']['unknow']);
+            display_error($errMsg['router']['URL']['unknow']);
         break;
     }
 
@@ -74,7 +65,7 @@ else if (!empty($_GET['user'])) {//(isset($_SESSION["userId"])) {
         break;
 
         default:
-            display_error($path, $errMsg['router']['URL']['unknow']);
+            display_error($errMsg['router']['URL']['unknow']);
         break;
     }
 }
@@ -82,11 +73,13 @@ else {//forcement a la fin, sinon existence de action pas verifiee
     $pageName = (!empty($_GET['page'])) ? filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) : 'home';
 
     //teste existence de page
-    if (!file_exists(__DIR__."/../controller/$pageName.php")) display_error($path, $errMsg['router']['URL']['unknow']);
+    if (!file_exists(__DIR__."/../controller/$pageName.php")) display_error($errMsg['router']['URL']['unknow']);
 }
 
 
-//3. appelle le controller, qui genere les variables pour la vue, et la vue
+//3. nettoie les post vides et appelle le controller, qui genere les variables pour la vue, et la vue
+foreach ($_POST as $key => $value) if ($value == "") unset($_POST[$key]);
+
 try { 
     //3.1. declare variables pour la vue
     require(__DIR__."/../controller/$pageName.php");//sait qu'il existe

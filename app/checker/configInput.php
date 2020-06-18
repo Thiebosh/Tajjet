@@ -11,4 +11,5 @@ if (json_last_error() != JSON_ERROR_NONE //il y a une erreur
     || !(isset($config['DB']['setup']['classification']) && is_string($config['DB']['setup']['classification']))
     ) {
     display_error($path, $errMsg['index']['configFile']['notFull']);
+    exit();//necessaire d'etre complet et bien rempli
 }

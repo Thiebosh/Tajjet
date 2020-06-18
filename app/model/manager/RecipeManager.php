@@ -2,24 +2,51 @@
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Recipe.php");
 
-class RecipeManager extends Manager {
-    //constructor & destructor
-    /*
-    public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    
-    public function __construct() {
+class RecipeManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
+    public function readByID($id) {
+        $query = 'SELECT * 
+                    FROM Recipe 
+                    WHERE ID_recipe = :id';
+        $table = array('id' => $id);
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return new Recipe($result[0]);
     }
 
 
-    public function __destruct() {
-        parent::__destruct();
+    public function readByName($name) {//full name
+        $query = 'SELECT * 
+                    FROM Recipe 
+                    WHERE Name = :name';
+        $table = array('name' => $name);
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return (count($result) != 0) ? new Recipe($result[0]) : false;
     }
 
-    public function getByLabel($label){ //Pour tout récupérer selon la recherche utilisateur
 
-        return new Recipe(array());
+    public function searchByName($name) {//approx name
+        $query = 'SELECT * 
+                    FROM Recipe 
+                    WHERE LOWER(Name) LIKE LOWER(:search)
+                    ORDER BY Name';
+        $table = array('search' => $name);
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!$request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        
+        foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
+            $result[] = new Recipe($line);
+        }
+
+        return $result;
     }
-    
 }

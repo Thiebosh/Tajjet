@@ -3,20 +3,18 @@ require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Channel.php");
 
 class ChannelManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
+    public function readById($idChannel) {
+        $query = "SELECT * 
+                    FROM Channel 
+                    WHERE ID_channel = :id";
+        $table = array('id' => $idChannel);
 
-    public function __destruct() {
-        parent::__destruct();
-    }
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
-    public function getAllById($idChannel){
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
-        return array( new Channel() );
+        return new Channel($result[0]);
     }
-    
 }
+
