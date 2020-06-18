@@ -1,66 +1,87 @@
 <?php ob_start(); ?>
-
-    <div class="row imc"> 
+ 
         <div class="col-lg-12 titre">
-            <h1>Analyse et résumé de votre état de santé</h1>
+            <h1>Votre état de santé</h1>
             <hr>
         </div>
         
-        <div class="col-lg-8">
-            <p>Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> : <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
-                <?php if($pageFill['records'][0]['imc'] < 18.5) {   
-                    echo("Attention ! Vous êtes en insuffisance pondérale (maigreur), il vous faut gagner du poids !");
-                    } 
-
-                elseif($pageFill['records'][0]['imc'] >= 18.5 && $pageFill['records'][0]['imc'] <= 25) {   
-                    echo("Très bien ! Vous entrez dans la catégorie Corpulence Normale, votre poids correspond à votre taille !");
-                    } 
-
-                elseif($pageFill['records'][0]['imc'] > 25 && $pageFill['records'][0]['imc'] <=30) { 
-                    echo("Attention ! Vous êtes en surpoids, il vous faut perdre du poids !");
-                    } 
-
-                elseif($pageFill['records'][0]['imc'] > 30 && $pageFill['records'][0]['imc'] <= 35) { 
-                    echo("Attention ! Vous êtes obèse, prenez soin de votre corps et éliminez le surplus !");
-                    } 
-                
-                elseif($pageFill['records'][0]['imc'] >35 && $pageFill['records'][0]['imc'] <= 40) { 
-                    echo("Attention ! Vous avez atteint une obésité sévère, il devient urgent de faire quelque chose ! Consultez un médecin.");
-                    } 
-                
-                else { 
-                    echo("Vous avez atteint une obésité morbide. Si ce n'est pas déjà le cas, il faut vous soigner : votre vie est en danger. ");
-                    } 
-                
-                ?>
-                </br>
-                Pour votre taille, le poids idéal est de : <strong><?=$pageFill['user']['lorentz']['idealWeigth']?> kg.</strong>
-            </p>
-        </div>
     
-    
-    </div>
 
     <article class="row">
-        <div class="col-lg-6 sommeil">
-            Image de courbe de sommeil
-            <p>Commentaire par rapport au sommeil</p>
+        <div class="col-lg-6 ml-1 graphes">
+            Graphe de sommeil + poids
+
+        </div>
+        <div class="col-lg-2 mr-1 saisie">
+            <h1>Aujourd'hui</h1>
+            <br>
             <form method="post" action="index.php?page=health">
-                <input class="col-lg-4 form-control " type="text" name="calories" placeholder="Saisir le temps de sommeil">
-                <input class="btn btn-success" type="submit">
+                <label for="sleepTime">Heures de sommeil</label>
+                <input required type="time" class="form-control" name="sleepTime">
+                <br>
+                <label for="calories">Calories</label>
+                <input required type="number" class="form-control" name="calories">
+                <br>
+                <div>
+                    <input class="btn btn-success" type="submit" value="Enregistrer">
+                </div>
+                <br>
             </form>
         </div>
-        <div class="col-lg-5 phys">
-            <p>Commentaire par rapport à l'exercice physique, alimentation et calories dépensées récemment</p>
-            <form method="post" action="index.php?page=health">
-                <input class="col-lg-4 form-control" type="text" name="calories" placeholder="Saisir les calories absorbées">
-                <input class="btn btn-success" type="submit">
-            </form>
-        </div>
-
-
-
 
     </article>
+    
+    <br>
+    
+    <div class="row tab">
+        <div class="col-lg-8 ">
+            <table class="table table-dark table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Informations</th>
+                        <th scope="col">Commentaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                        </td>
+                        <td>
+                            <?=$commIMC?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Pour votre taille, le poids idéal est de : <strong><?=$pageFill['user']['lorentz']['idealWeigth']?> kg.</strong>
+                        </td>
+                        <td>
+                            <?=$commDiff?>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vous avez dormi ... heures cette nuit
+                        </td>
+                        <td>
+                            <?=$commSleepTod?>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                           
+                        </td>
+                        <td>
+                            
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
     
 <?php $sectionContent = ob_get_clean();
