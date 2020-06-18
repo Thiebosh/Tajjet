@@ -5,6 +5,7 @@
 
 //2. appels bdd
 //require_once('app/model/manager/HealthManager.php');//importe le reste
+require_once('app/core/utils.php');
 //call managers functions (load data here)
 
 
@@ -29,7 +30,8 @@ $pageFill['user'] = array(
 
 
 $sleepTime=7;
-$age=17;
+$age=Age("1980-06-10");
+
 //3. transforme donnees (post traitement)
 //tranformations goes here
 for ($i = 0; $i < sizeof($pageFill['records']); ++$i) { 
@@ -132,3 +134,23 @@ elseif($age>=65) {
     }
 
 }
+
+//Temps moyen de sommeil sur la dernière semaine + commentaire rythme
+
+
+$last7daysSleepTime= array("7:30","8:00","5:00","5:00","5:00","5:00","5:00");
+
+
+$tab_somm=somm($last7daysSleepTime);
+
+$temps_moyen=$tab_somm[0];
+$rythme=$tab_somm[1];
+$compteur=$tab_somm[2];
+
+if($rythme==false || ($rythme==true && (3<=$compteur))){
+    $commRythme="Votre rythme de sommeil est irrégulier, essayez de maintenir des heures de couché et de levée constantes.";
+}
+else{
+    $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez pour rester en forme.";
+}
+
