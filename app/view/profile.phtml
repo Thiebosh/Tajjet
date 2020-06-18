@@ -1,6 +1,4 @@
-<?php 
-var_dump($_SESSION['user']);
-ob_start(); ?>
+<?php ob_start(); ?>
     <div class="d-flex justify-content-center">
         <div class="col-md-6">
             <form method="post" action="index.php?user=profile">
@@ -31,7 +29,7 @@ ob_start(); ?>
                     <h1>Informations personnelles</h1>
                     <p>
                         <label for="birthDate">Votre date de naissance</label><br>
-                        <input type="date" class="form-control" name="birthDate" placeholder="<?= htmlspecialchars(Entity::printDate($_SESSION['user']->getBirthDate())) ?>" value="<?= isset($trustedPost['birthDate']) ? htmlspecialchars($trustedPost['birthDate']) : '' ?>">
+                        <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
                         <br>
                         <label for="height">Votre taille</label><br>
                         <input type="text" class="form-control" name="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">

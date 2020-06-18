@@ -9,8 +9,7 @@ class MuscleManager extends Manager {//pattern CRUD : create, read, update, dele
                     WHERE ID_muscle = :id";
         $table = array('id' => $idMuscle);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
@@ -23,8 +22,7 @@ class MuscleManager extends Manager {//pattern CRUD : create, read, update, dele
                     FROM Muscle 
                     ORDER BY Label";
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query);
 
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Muscle($line);

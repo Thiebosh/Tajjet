@@ -9,8 +9,7 @@ class ChannelManager extends Manager {
                     WHERE ID_channel = :id";
         $table = array('id' => $idChannel);
 
-        $request = parent::getDBConnect()->prepare($query);
-        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
