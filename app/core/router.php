@@ -23,7 +23,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
         case 'fill_db':
             $moduleScript = "module_recettes.py";
-            $moduleArgs = "J'ai un problème platprincipal";
+            $moduleArgs = "Burger entree";
             if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
                 exec("".$config['Python']['executable']." core/$moduleScript 2>&1 $moduleArgs", $output, $return);

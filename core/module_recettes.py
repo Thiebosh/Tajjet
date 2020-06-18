@@ -39,7 +39,6 @@ class Marmiton(object):
         query_url = urllib.parse.urlencode(query_dict)
 
         url = base_url + query_url
-
         html_content = urllib.request.urlopen(url).read()
         soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -163,6 +162,7 @@ query_options = {
 query_result = Marmiton.search(query_options)
 
 # Get :
+error = False
 recipe = query_result[0]
 main_recipe_url = recipe['url']
 try:
@@ -176,6 +176,28 @@ except:
         error = True
         print("1")
 
+
+def setupTime(timeType):
+    hour = ""
+    minute = ""
+    if detailed_recipe[timeType][len(detailed_recipe[timeType]) - 1] == "n":
+        for i in range(len(detailed_recipe[timeType]) - 3):
+            minute += detailed_recipe[timeType][i]
+    elif detailed_recipe[timeType][len(detailed_recipe[timeType]) - 1] == "h":
+        for i in range(len(detailed_recipe[timeType]) - 1):
+            hour += detailed_recipe[timeType][i]
+    else :
+        splitprepTime = detailed_recipe[timeType].split("h")
+        hour = splitprepTime[0]
+        minute = splitprepTime[1]
+
+    while len(hour.strip()) != 2:
+        hour = "0" + hour
+    while len(minute.strip()) != 2:
+        minute = "0" + minute
+
+    timeType = hour.strip() + ":" + minute.strip() + ":00"
+    return timeType
 
 if(error != True):
     mycursor = mydb.cursor(buffered=True)
@@ -211,8 +233,23 @@ if(error != True):
         
         calories = random.randrange(500, 900, 1)
 
+        if len(detailed_recipe['cook_time']) > 1:
+            cookTime = setupTime('cook_time') 
+        else: 
+            cookTime = '00:00:00'
+
+        if len(detailed_recipe['prep_time']) > 1:
+            prepTime = setupTime('prep_time') 
+        else: 
+            prepTime = '00:00:00'
+
+        if len(detailed_recipe['total_time']) > 1:
+            totalTime = setupTime('total_time') 
+        else: 
+            totalTime = '00:00:00'
+
         sql = "INSERT INTO recipe (Name, Picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, Steps, Ingredients, Calories, ID_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (detailed_recipe['name'], detailed_recipe['image'], detailed_recipe['prep_time'], detailed_recipe['cook_time'] if detailed_recipe['cook_time'] else 'N/A', detailed_recipe['total_time'], detailed_recipe['rate'], detailed_recipe['budget'], detailed_recipe['difficulty'], steps, ingredients, calories, id_type)
+        val = (detailed_recipe['name'], detailed_recipe['image'], prepTime, cookTime, totalTime, detailed_recipe['rate'], detailed_recipe['budget'], detailed_recipe['difficulty'], steps, ingredients, calories, id_type)
         mycursor.execute(sql, val)
 
         mydb.commit()
