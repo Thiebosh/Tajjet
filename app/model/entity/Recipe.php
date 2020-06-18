@@ -23,7 +23,6 @@ class Recipe extends Entity {
 
     //constructor & destructor
     public function __construct(array $data) {
-        //verif preptime et cooktime bien datetime?
         parent::__construct($data);
     }
 
@@ -84,17 +83,14 @@ class Recipe extends Entity {
     }
     
     public function setPreparationTime($preparationTime) {
-        if ($preparationTime instanceof DateTime) $this->_preparationTime = $preparationTime;
-        else if (isDateTimeConvertible($preparationTime)) $this->_preparationTime = new DateTime($preparationTime);
+        if (is_string($preparationTime)) $this->_preparationTime = $preparationTime;
     }
     
     public function setCookingTime($cookingTime) {
-        if ($cookingTime instanceof DateTime) $this->_cookingTime = $cookingTime;
-        else if (isDateTimeConvertible($cookingTime)) $this->_cookingTime = new DateTime($cookingTime);
+        if (is_string($cookingTime)) $this->_cookingTime = $cookingTime;
     }
     public function setTotalTime($totalTime) {
-        if ($totalTime instanceof DateTime) $this->_totalTime = $totalTime;
-        else if (isDateTimeConvertible($totalTime)) $this->_totalTime = new DateTime($totalTime);
+        if (is_string($totalTime)) $this->_totalTime = $totalTime;
     }
     
     public function setScore($score) {

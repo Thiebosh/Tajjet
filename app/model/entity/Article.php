@@ -12,7 +12,6 @@ class Article extends Entity {
 
     //constructor & destructor
     public function __construct(array $data) {
-        //conversion de readingTime en objet DateTime si nécessaire?
         parent::__construct($data);
     }
 
@@ -41,8 +40,7 @@ class Article extends Entity {
     }
 
     public function setReadingTime($readingTime) {
-        if ($readingTime instanceof DateTime) $this->_readingTime = $readingTime;
-        else if (isDateTimeConvertible($readingTime)) $this->_readingTime = new DateTime($readingTime);
+        if (is_string($readingTime)) $this->_readingTime = $readingTime;
     }
 
     public function setSummary($summary) {

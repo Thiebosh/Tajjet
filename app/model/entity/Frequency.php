@@ -11,7 +11,6 @@ class Frequency extends Entity {
 
     //constructor & destructor
     public function __construct(array $data) {
-        //conversion de nextDate en objet DateTime si nécessaire?
         parent::__construct($data);
     }
 
@@ -25,7 +24,7 @@ class Frequency extends Entity {
         return $this->_numberOfDays;
     }
 
-    public function etNextDate() {
+    public function getNextDate() {
         return $this->_nextDate;
     }
 
@@ -37,7 +36,6 @@ class Frequency extends Entity {
     }
 
     public function setNextDate($nextDate) {
-        if ($nextDate instanceof DateTime) $this->_nextDate = $nextDate;
-        else if (isDateTimeConvertible($nextDate)) $this->_nextDate = new DateTime($nextDate);
+        if (is_string($nextDate)) $this->_nextDate = $nextDate;
     }
 }

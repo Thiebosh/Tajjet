@@ -7,9 +7,9 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         $query = 'INSERT INTO Health(RecordDate, Weight, Calories, Sleep, ID_user)
                     VALUES(NOW(), :weight, :calories, :sleep, :id)';
         $table = array('id'         => $health->getIdUser(),
-                        'calories'  => ($health->getCalories()  != null) ? $health->getCalories()                   : PDO::PARAM_NULL,
-                        'sleep'     => ($health->getSleep()     != null) ? Entity::printDate($health->getSleep())   : PDO::PARAM_NULL,
-                        'weight'    => ($health->getWeight()    != null) ? $health->getWeight()                     : PDO::PARAM_NULL);
+                        'calories'  => ($health->getCalories()  != null) ? $health->getCalories()   : PDO::PARAM_NULL,
+                        'sleep'     => ($health->getSleep()     != null) ? $health->getSleep()      : PDO::PARAM_NULL,
+                        'weight'    => ($health->getWeight()    != null) ? $health->getWeight()     : PDO::PARAM_NULL);
 
         $request = parent::getDBConnect()->prepare($query);
         if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
@@ -70,9 +70,9 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
                     WHERE ID_user = :id
                     AND RecordDate = NOW()';
         $table = array('id'         => $health->getIdUser(),
-                        'calories'  => ($health->getCalories()  != null) ? $health->getCalories()                   : PDO::PARAM_NULL,
-                        'sleep'     => ($health->getSleep()     != null) ? Entity::printDate($health->getSleep())   : PDO::PARAM_NULL,
-                        'weight'    => ($health->getWeight()    != null) ? $health->getWeight()                     : PDO::PARAM_NULL);
+                        'calories'  => ($health->getCalories()  != null) ? $health->getCalories()   : PDO::PARAM_NULL,
+                        'sleep'     => ($health->getSleep()     != null) ? $health->getSleep()      : PDO::PARAM_NULL,
+                        'weight'    => ($health->getWeight()    != null) ? $health->getWeight()     : PDO::PARAM_NULL);
 
         $request = parent::getDBConnect()->prepare($query);
         if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
