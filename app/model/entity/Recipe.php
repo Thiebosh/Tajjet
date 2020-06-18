@@ -111,6 +111,7 @@ class Recipe extends Entity {
     }
     
     public function setCalories($calories) {
+        $calories = Entity::stringToFloat($calories);
         if (is_float($calories)) $this->_calories = $calories;
     }
 

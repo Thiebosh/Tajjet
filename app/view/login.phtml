@@ -9,6 +9,7 @@
                     <label for="password" class="ml-1">Mot de passe</label><br>
                     <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                 </p>
+                <br>
                 <p class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Connexion"/>
                     <input type="hidden" name="form" value="1">

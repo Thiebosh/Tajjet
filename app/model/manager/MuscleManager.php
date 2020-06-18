@@ -2,26 +2,34 @@
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Muscle.php");
 
-class MuscleManager extends Manager {
-    //constructor & destructor
-    /*public function __construct($dbName, $dbUser = 'root', $dbPass = '', $charset = 'utf8') {
-        parent::__construct($dbName, $dbUser, $dbPass, $charset);
-    }*/
-    public function __construct() {
-    }
+class MuscleManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
+    public function readById($idMuscle) {
+        $query = "SELECT * 
+                    FROM Muscle 
+                    WHERE ID_muscle = :id";
+        $table = array('id' => $idMuscle);
 
-    public function __destruct() {
-        parent::__destruct();
-    }
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute($table)) throw new Exception("Base De Donnéez : Echec d'exécution");
 
-    public function getById($idMuscle){
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
-        return new Muscle();
+        return new Muscle($result[0]);
     }
 
-    public function getAllMuscles(){
+
+    public function readAll() {
+        $query = "SELECT * 
+                    FROM Muscle 
+                    ORDER BY Label";
+
+        $request = parent::getDBConnect()->prepare($query);
+        if (!request->execute()) throw new Exception("Base De Donnéez : Echec d'exécution");
+
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+            $result[] = new Muscle($line);
+        }
         
-        return array( new Muscle() );
+        return $result;
     }
-    
 }

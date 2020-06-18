@@ -49,7 +49,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
     }
     
 
-    public function update($user) {//a tester
+    public function update($user) {
         $query = 'UPDATE User
                     SET Name = :name, 
                         Password = :password, 
@@ -65,7 +65,6 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
                         'birthDate' => ($user->getBirthDate()   != null) ? Entity::printDate($user->getBirthDate()) : PDO::PARAM_NULL,
                         'height'    => ($user->getHeight()      != null) ? $user->getHeight()                       : PDO::PARAM_NULL);
 
-        var_dump($table);
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
         $request = parent::getDBConnect()->prepare($query);

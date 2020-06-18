@@ -36,15 +36,6 @@ $pageFill['seance']=array(
 
                             ),
 
-                        array("id"=>2,
-                            "exercices"=>array(
-                                                array("id"=>3,
-                                                    "name"=>"Développé incliné",
-                                                    "image"=>"Image développé incliné")
-                            
-                                            )
-
-                            )
 
                         );
 

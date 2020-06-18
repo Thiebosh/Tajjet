@@ -8,7 +8,6 @@ else if (isset($_POST["form"])) {
 
     {
         if (isset($trustedPost['name']) && $trustedPost['name'] !== false) {
-            echo("here");
             if ((new UserManager)->isUsedName($trustedPost['name'])) {
                 $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['login'];
             }
