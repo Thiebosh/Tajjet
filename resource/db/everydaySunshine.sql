@@ -244,7 +244,6 @@ CREATE TABLE IF NOT EXISTS `tvprogram` (
   `Title` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Synopsis` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Begin` time NOT NULL,
-  `End` time NOT NULL,
   `Genre` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `ID_channel` int(11) NOT NULL,
   PRIMARY KEY (`ID_TVprogram`),
