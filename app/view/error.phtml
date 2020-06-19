@@ -1,3 +1,5 @@
 <?php ob_start(); ?>
-    <?= htmlspecialchars($errMsg) ?>
+    <div class="test">
+        <?= htmlspecialchars($errMsg) ?>
+    </div>
 <?php $sectionContent = ob_get_clean(); ?>
