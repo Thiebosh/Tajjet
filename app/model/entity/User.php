@@ -8,7 +8,6 @@ class User extends Entity {
     //attributes
     private $_name;
     private $_password;
-    private $_avatar = null;
     private $_birthDate = null;
     private $_height = null;
     private $_idTown = null;
@@ -37,10 +36,6 @@ class User extends Entity {
 
     public function getPassword() {
         return $this->_password;
-    }
-
-    public function getAvatar() {
-        return $this->_avatar;
     }
     
     public function getBirthDate() {
@@ -79,10 +74,6 @@ class User extends Entity {
 
     public function setPassword($password) {
         if (is_string($password)) $this->_password = $password;
-    }
-
-    public function setAvatar($avatar) {
-        if (is_string($avatar)) $this->_avatar = $avatar;
     }
     
     public function setBirthDate($birthDate) {

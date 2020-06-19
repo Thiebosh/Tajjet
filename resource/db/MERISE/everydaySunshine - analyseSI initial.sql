@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS User ;
 CREATE TABLE User (ID_user BIGINT AUTO_INCREMENT NOT NULL,
 Name VARCHAR,
 Password VARCHAR,
-Avatar VARCHAR,
 BirthDate DATE,
 Height FLOAT,
 town_id_town **NOT FOUND**,
