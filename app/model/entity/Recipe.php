@@ -1,8 +1,6 @@
 <?php
 require_once(__DIR__."/../abstract/Entity.php");
 
-require_once("Ingredient.php");
-
 class Recipe extends Entity {
     //attributes
     private $_name;

@@ -39,7 +39,7 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
     }
 
 
-    public function readAll(){
+    public function readAll() {
         $query = 'SELECT * 
                     FROM Town 
                     ORDER BY Label';
