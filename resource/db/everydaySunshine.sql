@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `ID_article` int(11) NOT NULL AUTO_INCREMENT,
   `Summary` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `Pays` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `URL` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `ReadingTime` time NOT NULL,
   PRIMARY KEY (`ID_article`)
