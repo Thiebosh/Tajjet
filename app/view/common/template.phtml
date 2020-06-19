@@ -30,26 +30,26 @@
                 </ul>
             </div>
         </nav>
-            
     </header>
 
     
-        <?php if (isset($trustedPost['errMsgs'])) { ?>
-            <aside>
-                <ul>
-                    <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
-                        <li class="liste_erreurs">
-                            <?php echo($errMsg);?>
-                        </li>
-                    <?php } ?>
-                </ul> 
-            </aside>
-        <?php } ?>
+    <?php if (isset($trustedPost['errMsgs'])) { ?>
+        <aside>
+            <ul>
+                <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
+                    <li class="liste_erreurs">
+                        <?php echo($errMsg);?>
+                    </li>
+                <?php } ?>
+            </ul> 
+        </aside>
+    <?php } ?>
     
 
     <section class="container-fluid">
         <?= $sectionContent ?>
     </section>
+
 
     <footer class="d-flex justify-content-center">
         <div>

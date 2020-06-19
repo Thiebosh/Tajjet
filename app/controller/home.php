@@ -1,12 +1,8 @@
 <?php
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
 
-
-//2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
-//call managers functions (load data here)
-
-
-//3. transforme donnees (post traitement)
-//tranformations goes here
+$grid = array(  array(  array("link" => "sport",        "display" => "Sport"),
+                        array("link" => "health",       "display" => "Santé"),
+                        array("link" => "news",         "display" => "News")),
+                array(  array("link" => "weather",      "display" => "Météo"),
+                        array("link" => "activities",   "display" => "Activités"),
+                        array("link" => "cooking",      "display" => "Recettes")));
