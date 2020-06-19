@@ -50,6 +50,6 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
             $result[] = new Town($line);
         }
         
-        return $result;
+        return isset($result) ? $result : false;
     }
 }

@@ -4,7 +4,7 @@
 //1. centralise noms de fichiers
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'requirements.txt');
+                    'python' => 'core/init.py');
 
 
 //2. charge en memoire les messages d'erreurs et class user (mise en session safe) puis donnees de session
@@ -28,13 +28,8 @@ else {
 //4. dependances python : installation des librairies necessaires
 if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
 else {
-    exec("'".$config['Python']['executable']."' pip install -r ".$scriptName['python'], $output, $return);//tester fonctionnement
-    /*
-    echo("<br><hr>valeur de retour : $return<br>");
-    var_dump($output);
-    foreach ($output as $line) echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
-    echo('<hr><br>');
-    */
+    exec('"'.$config['Python']['executable'].'" '.__DIR__.'/'.$scriptName['python'], $output, $return);
+    if ($return) display_error($errMsg['index']['setup']['fail']);
 }
 
 
@@ -46,7 +41,7 @@ Manager::setDBData($config['DB']['setup']['DBname'],
                     $config['DB']['connexion']['password'],
                     $config['DB']['setup']['characterSet']);
 
-//require_once('app/core/monitor.php');
+require_once('app/core/monitor.php');
 
 
 //6. appelle le routeur et met fin au script

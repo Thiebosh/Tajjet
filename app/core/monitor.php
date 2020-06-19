@@ -6,6 +6,7 @@ require(__DIR__."/../model/monitor/DBMonitor.php");
 //2. controle tables avec dates d'expiration
 $tables = (new DBMonitor)->readOutdatedModulesNames();
 
+var_dump($tables);
 
 //3. met a jour lignes obsoletes des tables
 $executable = $config['Python']['executable'];
@@ -26,13 +27,15 @@ foreach ($tables as $ligne) {
                 exec("'$executable' core/module_$moduleScript.py $moduleArgs");
                 break;
 
-            case "meteo"
+            case "meteo" :
                 require(__DIR__."/../model/manager/TownManager.php");
                 $towns = (new TownManager)->readAll();
 
-                foreach ($towns as $town) {
-                    $moduleArgs = $town->getLabel();
-                    exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                if ($towns != false) {
+                    foreach ($towns as $town) {
+                        $moduleArgs = $town->getLabel();
+                        exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                    }
                 }
                 break;
         }
