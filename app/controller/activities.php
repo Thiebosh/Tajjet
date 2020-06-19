@@ -7,6 +7,11 @@
 //load bdd functions : require("../model/manager/*needed*.php");
 //call managers functions (load data here)
 //if (weather->isgood()) {
+require_once(__DIR__."/../model/Manager/ChannelManager.php");
+require_once(__DIR__."/../model/Manager/TVprogramManager.php");
+require_once(__DIR__."/../model/Manager/WeatherManager.php");
+require_once(__DIR__."/../model/Manager/TownManager.php");
+require_once(__DIR__."/../model/Manager/SkyManager.php");
 $pageFill['indoor'] = array(
                             array(
                                 "channel" => 1,
@@ -69,6 +74,10 @@ $pageFill['outdoor'] = array(
                                 "category" => "cat2",
                             )
                         );
+//$time = "02:23";
+//$test[] = (new TVprogramManager)->readAllAfterTime($time);
+
+//var_dump($test);
 //}
 
 

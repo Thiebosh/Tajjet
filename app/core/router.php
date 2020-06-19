@@ -23,17 +23,16 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
         case 'fill_db':
             //premier voire unique remplissage : appelle tous les scripts un a un
-            $scripts = array(
+            /*$scripts = array(
                             array('name' => '', 'parametre' => '')
                         );
 
-
-            $moduleScript = "module_news.py";
+*/
+            $moduleScript = "module_sport.py";
             $moduleArgs = "fr";
             if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
-                var_dump('test');
-                exec("".$config['Python']['executable']." core/$moduleScript 2>&1 $moduleArgs", $output, $return);
+                exec('"'.$config['Python']['executable'].'" core/'.$moduleScript.' '.$moduleArgs, $output, $return);
                 
                 echo("<br><hr>valeur de retour : $return<br>");
                 var_dump($output);

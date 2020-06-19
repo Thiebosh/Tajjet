@@ -22,9 +22,13 @@ function display_error($errMsg) {
 $errMsg['index']['configFile']['notSet']    = 'Fichier de configuration introuvable.';
 $errMsg['index']['configFile']['notFull']   = 'Fichier de configuration incomplet ou incorrect.';
 
+$errMsg['index']['setup']['fail']   = 'Echec d\'installation des libairies python.';
+
 $errMsg['index']['sqlFile']['notSet']   = 'Script sql introuvable.';
 
 $errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';
+
+$errMsg['monitor']['refresh']['fail'] = 'Echec de renouvellement des données.';
 
 $errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
 

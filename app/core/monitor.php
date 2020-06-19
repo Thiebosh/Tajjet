@@ -16,29 +16,45 @@ foreach ($tables as $ligne) {
     if (!file_exists("core/module_$moduleScript.py")) display_error($errMsg['index']['pythonFile']['notSet']);
     else {
         switch($moduleScript) {
-            case "news":
-                $moduleArgs = "";
-                exec("'$executable' core/module_$moduleScript.py $moduleArgs");
-                break;
-
             case "tv":
-                $moduleArgs = "";
-                exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                exec("\"$executable\" core/module_$moduleScript.py 2>&1", $output, $return);
+                if ($return) display_error($errMsg['monitor']['refresh']['fail']);
+                var_dump($output);
+                unset($output);
                 break;
 
-            case "meteo"
+            case "news":
+                $pays = array("fr");
+                foreach ($pays as $moduleArgs) {
+                    exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                    if ($return) display_error($errMsg['monitor']['refresh']['fail']);
+                    var_dump($output);
+                    unset($output);
+                }
+                break;
+
+            case "meteo" :
                 require(__DIR__."/../model/manager/TownManager.php");
                 $towns = (new TownManager)->readAll();
 
-                foreach ($towns as $town) {
-                    $moduleArgs = $town->getLabel();
-                    exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                $towns = array('Versailles', 'Lille');
+                if ($towns != false) {
+                    foreach ($towns as $moduleArgs) {
+                        //$moduleArgs = $town->getLabel();
+                        exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                        if ($return) display_error($errMsg['monitor']['refresh']['fail']);
+                        var_dump($output);
+                        unset($output);
+                    }
                 }
                 break;
         }
     }
 }
 
+var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <-");
+/*
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
 }
+*/
