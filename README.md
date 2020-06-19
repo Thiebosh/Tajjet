@@ -11,6 +11,12 @@
     
     - PHP version 7.3
 
+2. Utiliser par défaut MySQL : 
+  * lancer wamp
+  * clic gauche sur l'icone de wamp apparue dans la barre des tâches (côté droit)
+  * vérifier qu'il y ait bien MySQL
+  * S'il n'a pas la marque de validation, clic gauche sur l'icone wamp -> outils -> inverser SGBD par défaut
+
 2. Placer le projet dans le dossier www de Wamp (chemin absolu : '\*yourDisc\*:/wamp64/www')
 
 2. Télécharger et installer [Python 3.6](www.python.org/downloads/release/python-368/)
@@ -31,7 +37,7 @@ La configuration du projet s'effectue dans le fichier config.json. Avant lanceme
     * password : mot de passe associé à l'utilisateur (vide par défaut)
 
   * setup
-    * DBname : nom à donner à la base de données de la webApp (everydaySunshine par défaut)
+    * DBname : nom de la base de données de la webApp sur phpMyAdmin (everydaySunshine par défaut)
     * characterSet : encodage par défaut des caractères pour la base de données (latin1 par défaut)
     * classification : mode de comparaison des données de la base de données (latin1_general_ci par défaut)
 

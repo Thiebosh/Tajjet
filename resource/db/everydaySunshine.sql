@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `renewal` (
 
 INSERT INTO `renewal` (`ID_renewal`, `ModuleName`, `ID_frequency`) VALUES
 (1, 'meteo', 1),
-(2, 'TVprogram', 1),
+(2, 'tv', 1),
 (3, 'news', 2);
 
 -- --------------------------------------------------------

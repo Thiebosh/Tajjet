@@ -7,9 +7,6 @@
 //load bdd functions : 
 require_once(__DIR__."/../model/manager/RecipeManager.php");
 require_once(__DIR__."/../model/manager/TypeManager.php");
-require_once(__DIR__."/../model/manager/NeedManager.php");
-require_once(__DIR__."/../model/manager/IngredientManager.php");
-require_once(__DIR__."/../model/manager/HaveManager.php");
 require_once(__DIR__."/../model/manager/UserManager.php");
 //call managers functions (load data here)
 
