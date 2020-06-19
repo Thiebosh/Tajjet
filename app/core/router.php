@@ -32,7 +32,6 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             $moduleArgs = "fr";
             if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
-                var_dump('test');
                 exec("".$config['Python']['executable']." core/$moduleScript 2>&1 $moduleArgs", $output, $return);
                 
                 echo("<br><hr>valeur de retour : $return<br>");
