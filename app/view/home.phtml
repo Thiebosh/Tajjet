@@ -1,55 +1,70 @@
 <?php ob_start(); ?>
     <h1 class="col-lg mt-4 mb-4">Page d'Accueil</h1>
     <hr>
-    <div class="row mt-4">
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=sport"><button class="col-lg-12 btn btn-primary">Sport</button></a>
-            </div>
-                <?=$pageFill['exercice'][0]['name']?>
-                <br>
-                <br>
-                <?=$pageFill['exercice'][0]['picture']?>
+    <?php 
+        $first = true;
+        foreach($grid as $line) { ?>
+        <div class="row <?= $first? 'mt-4' : '' ?>">
+            <?php foreach($line as $card) { ?>
+                <div class="col-lg mt-2 card <?= !$card["active"] ? 'inactive' : '' ?>">
+                    <div class="<?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
+                        <a class="col-lg mt-2" href="<?= $card["active"] ? 'index.php?page='.$card["link"] : 'index.php?page=profile#'.($card["link"]=="health"? 'height':'town') ?>">
+                            <button class="col-lg-12 btn btn-primary <?= !$card["active"] ? 'inactive in-btn' : '' ?>">
+                                <?= $card["display"] ?><br>
+                                </button>
+                        </a>
+                    </div>
+                    <?php if(!$card["active"]){ ?>
+                            <p class="inval">Veuillez renseigner votre <?=$card["missing"]?> dans votre profil</p>
+                        <?php } 
+                        
+                        else { ?>
+                            <?='&nbsp;'?>
+                            <?php switch ($card["link"]) {
+                                case "sport":?>
+                                    <?=$pageFill['exercice'][0]['name']?>
+                                    <br>    
+                                    <br>
+                                    <?=$pageFill['exercice'][0]['picture']?>
+                                <?php break; 
+    
+                                case "health":?>
+                                    Le poids idéal pour votre taille est de : <?=$pageFill['user']['lorentz']['idealWeigth']?> kg
+                                    <br>
+                                    <br>
+                                    Découvrez votre IMC, votre tendance de sommeil et votre sommeil moyen sur la semaine
+                                <?php break;
+    
+                                case "news":?>
+                                    Découvrez l'actualité en résumé et retrouvez les liens pour plus d'informations
+                                    <br>
+                                    <br>
+                                <?php break;
+    
+                                case "weather": ?>
+                                    Il fait actuellement <?=$pageFill['feltTemp']?>°C à <?=$pageFill['townName']?>
+                                    <br>
+                                    <br>
+                                    Retrouvez plus en détails la météo de la semaine
+                                <?php break;
+    
+                                case "activities": ?>
+                                    Aujourd'hui sur <?=$pageFill['indoor'][0]['channel']?> à <?=$pageFill['indoor'][0]['program'][0]['begin']?>, regardez <?=$pageFill['indoor'][0]['program'][0]['title']?>
+                                <br>
+                                <br>
+                                <?php break;
+    
+                                case "cooking": ?>
+                                    Vous ne savez pas quoi cuisiner pour ce soir ? Consulter notre recette de "nom_recette" et déguster un bon plat
+                                <br>
+                                <?php break;
+                                
+                            } ?>
+                        <?php } ?>   
+                </div>
+            <?php } ?>
         </div>
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=health"><button class="col-lg-12 btn btn-primary">Santé</button></a>
-            </div>
-            Le poids idéal pour votre taille est de : <?=$pageFill['user']['lorentz']['idealWeigth']?> kg
-            <br>
-            <br>
-            Découvrez votre IMC, votre tendance de sommeil et votre sommeil moyen sur la semaine
-        </div>
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=news"><button class="col-lg-12 btn btn-primary">News</button></a>
-            </div>
-            <br>
-            Découvrez l'actualité en résumé et retrouvez les liens pour plus d'informations
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=weather"><button class="col-lg-12 btn btn-primary">Météo</button></a>
-            </div>
-            Il fait actuellement <?=$pageFill['feltTemp']?>°C à <?=$pageFill['townName']?>
-            <br>
-            <br>
-            Retrouvez plus en détails la météo de la semaine
-        </div>
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=activities"><button class="col-lg-12 btn btn-primary">Activités</button></a>
-            </div>
-            <br>
-            Aujourd'hui sur <?=$pageFill['indoor'][0]['channel']?> à <?=$pageFill['indoor'][0]['program'][0]['begin']?>, regardez <?=$pageFill['indoor'][0]['program'][0]['title']?>
-        </div>
-        <div class="col-lg mt-2 card">
-            <div class="card-header">
-                <a href="index.php?page=cooking"><button class="col-lg-12 btn btn-primary">Recettes</button></a>
-            </div>
-            Vous ne savez pas quoi cuisiner pour ce soir ? Consulter notre recette de "nom_recette" et déguster un bon plat
-        </div>
-    </div>
+    <?php 
+        $first = false;
+        } ?>
 <?php $sectionContent = ob_get_clean();

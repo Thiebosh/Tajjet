@@ -16,4 +16,23 @@ h1{
     text-align: center;
 }
 
+.inactive 
+{
+    background-color: lightslategrey;
+    
+}
 
+.inval
+{
+    color:white;
+}
+
+.nonehr
+{
+    border:none;
+}
+
+.in-btn
+{
+    border-color: black;
+}
