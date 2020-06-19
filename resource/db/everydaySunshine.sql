@@ -251,7 +251,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ID_user` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Avatar` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
   `ID_town` int(11) DEFAULT NULL,
