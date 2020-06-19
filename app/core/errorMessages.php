@@ -28,6 +28,8 @@ $errMsg['index']['sqlFile']['notSet']   = 'Script sql introuvable.';
 
 $errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';
 
+$errMsg['monitor']['refresh']['fail'] = 'Echec de renouvellement des données.';
+
 $errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
 
 

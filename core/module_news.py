@@ -34,43 +34,44 @@ mydb.commit()
 
 #boucle permettant d'afficher les descriptions et liens des 10 premiers articles donnés via l'API
 for i in range(20):
-    if(len(data['articles'][i]['description']) > 0) :
-        summary = data['articles'][i]['description'] + "<br>\n"
-        url = data['articles'][i]['url'] + "<br>\n"
-        content = data['articles'][i]['content']
-        totalChars = ""
+    if (data['articles'][i]['description'] is not None) :
+        if(len(data['articles'][i]['description']) > 0) :
+            summary = data['articles'][i]['description'] + "<br>\n"
+            url = data['articles'][i]['url'] + "<br>\n"
+            content = data['articles'][i]['content']
+            totalChars = ""
 
-        for j in range(data['articles'][i]['content'].find("[+") + 2, data['articles'][i]['content'].find(' chars]')):
-            totalChars += data['articles'][i]['content'][j]
+            for j in range(data['articles'][i]['content'].find("[+") + 2, data['articles'][i]['content'].find(' chars]')):
+                totalChars += data['articles'][i]['content'][j]
+            
+            readingTime = int(totalChars)/1750
+
+            splitReadingTime = str(readingTime).split('.')
+            minute = splitReadingTime[0]
+
+            if(splitReadingTime[1][0] != "0"):
+                seconde = 60/(10/int(splitReadingTime[1][0]))
+            else:
+                seconde = "00"
+            
+            minute = int(minute)
+            seconde = int(seconde)
+
+            if(len(str(math.floor(int(minute)))) < 2):
+                minute = "0" + str(minute)
+            
+            if(len(str(math.floor(int(seconde)))) < 2):
+                seconde = "0" + str(seconde)
+
+
+            readingTime = "00:" + str(minute) + ":" + str(seconde)
         
-        readingTime = int(totalChars)/1750
+            sql = "INSERT INTO article (Summary, url, Pays, readingTime) VALUES (%s, %s, %s, %s)"
+            val = (summary, url, country, readingTime)
+            mycursor.execute(sql, val)
 
-        splitReadingTime = str(readingTime).split('.')
-        minute = splitReadingTime[0]
-
-        if(splitReadingTime[1][0] != "0"):
-          seconde = 60/(10/int(splitReadingTime[1][0]))
-        else:
-          seconde = "00"
-        
-        minute = int(minute)
-        seconde = int(seconde)
-
-        if(len(str(math.floor(int(minute)))) < 2):
-            minute = "0" + str(minute)
-        
-        if(len(str(math.floor(int(seconde)))) < 2):
-            seconde = "0" + str(seconde)
-
-
-        readingTime = "00:" + str(minute) + ":" + str(seconde)
-      
-        sql = "INSERT INTO article (Summary, url, Pays, readingTime) VALUES (%s, %s, %s, %s)"
-        val = (summary, url, country, readingTime)
-        mycursor.execute(sql, val)
-
-        mydb.commit()
-print('0')
+            mydb.commit()
+print('news done')
 
 #pprint(data) # affiche toutes les news
 

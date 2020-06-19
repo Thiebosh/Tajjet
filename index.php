@@ -28,8 +28,12 @@ else {
 //4. dependances python : installation des librairies necessaires
 if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
 else {
-    exec('"'.$config['Python']['executable'].'" '.__DIR__.'/'.$scriptName['python'], $output, $return);
-    if ($return) display_error($errMsg['index']['setup']['fail']);
+    if (!isset($_SESSION['depVerif'])) {
+        exec('"'.$config['Python']['executable'].'" '.$scriptName['python'], $output, $return);
+        if ($return) display_error($errMsg['index']['setup']['fail']);
+        unset($output);
+        $_SESSION['depVerif'] = true;//eviter verif a chaque appel (lourd)
+    }
 }
 
 
