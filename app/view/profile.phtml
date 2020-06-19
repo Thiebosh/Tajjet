@@ -39,10 +39,10 @@
                     <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
                     <br>
                     <label for="height">Votre taille</label><br>
-                    <input type="text" class="form-control" name="height" id="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight()) ?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : 'Exemple pour 1m80 : 1.80' ?>">
+                    <input type="text" class="form-control" name="height" id="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight())?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
                     <br>
                     <label for="town">Votre ville</label><br>
-                    <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : 'Ville' ?>">
+                    <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
                 </p>
             </form>
         </div>
