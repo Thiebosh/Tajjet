@@ -26,9 +26,9 @@ else {
 
 
 //4. dependances python : installation des librairies necessaires
-if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
-else {
-    if (!isset($_SESSION['depVerif'])) {
+if (!isset($_SESSION['depVerif'])) {
+    if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
+    else {    
         exec('"'.$config['Python']['executable'].'" '.$scriptName['python'], $output, $return);
         if ($return) display_error($errMsg['index']['setup']['fail']);
         unset($output);
@@ -45,7 +45,7 @@ Manager::setDBData($config['DB']['setup']['DBname'],
                     $config['DB']['connexion']['password'],
                     $config['DB']['setup']['characterSet']);
 
-require_once('app/core/monitor.php');
+//require_once('app/core/monitor.php');
 
 
 //6. appelle le routeur et met fin au script
