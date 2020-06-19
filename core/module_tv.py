@@ -59,11 +59,11 @@ else :
         myresult = mycursor.fetchall()
         id_channel = myresult[0][0]
         
-        
-        sql = "INSERT INTO tvprogram (Title, Synopsis, Begin, End, Genre, id_channel) VALUES (%s, %s, %s, %s, %s, %s)"
-        val = (title_split[2], item.summary, title_split[1], title_split[1], item.tags[0].term, id_channel)
+
+        sql = "INSERT INTO tvprogram (Title, Synopsis, Begin, Genre, id_channel) VALUES (%s, %s, %s, %s, %s)"
+        val = (title_split[2], item.summary, title_split[1], item.tags[0].term, id_channel)
         mycursor.execute(sql, val)
 
         mydb.commit()
 
-    print(0)
+print('tv done')

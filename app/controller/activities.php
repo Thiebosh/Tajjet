@@ -74,10 +74,10 @@ $pageFill['outdoor'] = array(
                                 "category" => "cat2",
                             )
                         );
-$time = "02:23";
-$test[] = (new TVprogramManager)->readAllAfterTime($time);
+//$time = "02:23";
+//$test[] = (new TVprogramManager)->readAllAfterTime($time);
 
-var_dump($test);
+//var_dump($test);
 //}
 
 
