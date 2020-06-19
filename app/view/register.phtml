@@ -11,13 +11,10 @@
                     <br>
                     <label for="passwordConf" class="ml-1">Confirmer le mot de passe</label><br>
                     <input required type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
-                    <div>
-                        <label for="avatar" class="ml-1">Avatar</label>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="avatar">Importer image</label>
-                            <input type="file" class="custom-file-input" name="avatar" accept=".png" value="<?= isset($trustedPost['avatar']) ? htmlspecialchars($trustedPost['avatar']) : '' ?>">
-                        </div>
-                    </div>
+                    <br>
+                    <label for="avatar" class="ml-1">Avatar</label>
+                    <input type="file" name="avatar" accept=".png">
+                    <br>
                     <br>
                     <label for="birth" class="ml-1">Date de naissance</label><br>
                     <input type="date" class="form-control" name="birth" placeholder="AAAA-MM-JJ" value="<?= isset($trustedPost['birthDate']) ? htmlspecialchars($trustedPost['birthDate']) : '' ?>">
@@ -31,7 +28,6 @@
                 <br>
                 <p class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Inscription"/>
-                    <input type="hidden" name="form" value="1">
                 </p>
             </form>
             <br>

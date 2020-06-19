@@ -1,7 +1,7 @@
 <?php
 if (!isset($_SESSION["user"])) header('Location: index.php');
 
-else if (isset($_POST["form"])) {
+else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__."/../checker/$pageName.php");
 
     require_once(__DIR__."/../model/manager/UserManager.php");
