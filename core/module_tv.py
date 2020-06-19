@@ -9,10 +9,10 @@ with open('config.json') as json_file:
     data = json.load(json_file)
   
 mydb = mysql.connector.connect(
-  host="localhost",
-  user=data['DB']['connexion']['username'],
-  password=data['DB']['connexion']['password'],
-  database=data['DB']['setup']['DBname']
+    host="localhost",
+    user=data['DB']['connexion']['username'],
+    password=data['DB']['connexion']['password'],
+    database=data['DB']['setup']['DBname']
 )
 
 today = date.today()

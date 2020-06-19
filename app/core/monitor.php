@@ -18,22 +18,27 @@ foreach ($tables as $ligne) {
         switch($moduleScript) {
             case "news":
                 $moduleArgs = "";
-                break;
-
-            case "meteo"
-                //1 appel par ville
+                exec("'$executable' core/module_$moduleScript.py $moduleArgs");
                 break;
 
             case "tv":
-                //
+                $moduleArgs = "";
+                exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                break;
+
+            case "meteo"
+                require(__DIR__."/../model/manager/TownManager.php");
+                $towns = (new TownManager)->readAll();
+
+                foreach ($towns as $town) {
+                    $moduleArgs = $town->getLabel();
+                    exec("'$executable' core/module_$moduleScript.py $moduleArgs");
+                }
                 break;
         }
-        exec("'$executable' core/module_$moduleScript.py $moduleArgs", $output, $return);
     }
 }
 
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
 }
-
-//exit();

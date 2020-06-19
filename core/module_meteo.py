@@ -5,7 +5,6 @@
 
 import requests
 import sys
-from pprint import pprint
 
 import mysql.connector
 import json
