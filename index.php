@@ -9,6 +9,7 @@ $scriptName = array('config' => 'config.json',
 
 //2. charge en memoire les messages d'erreurs et class user (mise en session safe) puis donnees de session
 require_once('app/core/errorMessages.php');
+require_once('app/core/utils.php');
 require_once('app/model/entity/User.php');
 
 session_start();//initie ou recupere $_SUPERVARIABLES
