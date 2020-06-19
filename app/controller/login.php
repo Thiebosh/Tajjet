@@ -1,7 +1,7 @@
 <?php
 if (isset($_SESSION["user"])) header('Location: index.php');//changer nom de page suffirait?
 
-else if (isset($_POST["form"])) {
+else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__."/../checker/$pageName.php");
 
     if (!isset($trustedPost['errMsgs'])) {
