@@ -42,7 +42,7 @@
             <ul>
                 <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
                     <li class="liste_erreurs">
-                        <?php echo($errMsg);?>
+                        <?= htmlspecialchars($errMsg) ?>
                     </li>
                 <?php } ?>
             </ul> 
