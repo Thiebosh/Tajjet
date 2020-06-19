@@ -22,6 +22,12 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         case 'fill_db':
+            //premier voire unique remplissage : appelle tous les scripts un a un
+            $scripts = array(
+                            array('name' => '', 'parametre' => '')
+                        );
+
+
             $moduleScript = "module_news.py";
             $moduleArgs = "fr";
             if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
@@ -47,7 +53,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
     $pageName = 'home';//page d'accueil, sait qu'elle existe
 }
-else if (!empty($_GET['user'])) {//(isset($_SESSION["userId"])) {
+else if (!empty($_GET['user'])) {
     switch (filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING)) {
         case 'login':
             $pageName = 'login';
@@ -76,6 +82,8 @@ else {//forcement a la fin, sinon existence de action pas verifiee
     //teste existence de page
     if (!file_exists(__DIR__."/../controller/$pageName.php")) display_error($errMsg['router']['URL']['unknow']);
 }
+
+if (!isset($_SESSION['user']) && !($pageName == 'login' || $pageName == 'register')) $pageName = 'login';//connexion obligatoire
 
 
 //3. nettoie les post vides et appelle le controller, qui genere les variables pour la vue, et la vue

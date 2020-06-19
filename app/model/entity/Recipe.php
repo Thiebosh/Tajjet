@@ -1,8 +1,6 @@
 <?php
 require_once(__DIR__."/../abstract/Entity.php");
 
-require_once("Ingredient.php");
-
 class Recipe extends Entity {
     //attributes
     private $_name;
@@ -94,12 +92,15 @@ class Recipe extends Entity {
     }
     
     public function setScore($score) {
+        $score = Entity::stringToFloat($score);
         if (is_float($score)) $this->_score = $score;
     }
     public function setPrice($price) {
+        $price = Entity::stringToFloat($price);
         if (is_float($price)) $this->_price = $price;
     }
     public function setDifficulty($difficulty) {
+        $difficulty = Entity::stringToFloat($difficulty);
         if (is_float($difficulty)) $this->difficulty = $difficulty;
     }
     public function setSteps($steps) {

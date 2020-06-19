@@ -13,6 +13,10 @@
         <link rel="stylesheet" href="app/view/css/<?= htmlspecialchars($pageName) ?>.css"/><!-- style de la partie section -->
     <?php } ?>
 
+    <?php if (file_exists(__DIR__."/../js/$pageName.js")) { ?>
+        <link rel="stylesheet" href="app/view/js/<?= htmlspecialchars($pageName) ?>.js"/><!-- fichier js -->
+    <?php } ?>
+
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
@@ -30,26 +34,26 @@
                 </ul>
             </div>
         </nav>
-            
     </header>
 
     
-        <?php if (isset($trustedPost['errMsgs'])) { ?>
-            <aside>
-                <ul>
-                    <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
-                        <li>
-                            <?php echo($errMsg);?>
-                        </li>
-                    <?php } ?>
-                </ul> 
-            </aside>
-        <?php } ?>
+    <?php if (isset($trustedPost['errMsgs'])) { ?>
+        <aside>
+            <ul>
+                <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
+                    <li class="liste_erreurs">
+                        <?= htmlspecialchars($errMsg) ?>
+                    </li>
+                <?php } ?>
+            </ul> 
+        </aside>
+    <?php } ?>
     
 
     <section class="container-fluid">
         <?= $sectionContent ?>
     </section>
+
 
     <footer class="d-flex justify-content-center">
         <div>
