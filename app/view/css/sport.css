@@ -38,13 +38,14 @@ aside h1
 {
     border:1px solid black;
     background-color:#e1f4f3;
+    margin:0px 5px 0px 1px;
 
 }
 
 .liste_exercices,.aleatoire
 {
-    
     border:1px solid black;
     background-color:#e1f4f3;
+    margin:0px 5px 0px 1px;
 
 }
