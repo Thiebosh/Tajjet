@@ -4,7 +4,7 @@
 //1. centralise noms de fichiers
 $scriptName = array('config' => 'config.json',
                     'sql' => 'resource/db/everydaySunshine.sql',
-                    'python' => 'requirements.txt');
+                    'python' => 'core/init.py');
 
 
 //2. charge en memoire les messages d'erreurs et class user (mise en session safe) puis donnees de session
@@ -26,15 +26,14 @@ else {
 
 
 //4. dependances python : installation des librairies necessaires
-if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
-else {
-    exec("'".$config['Python']['executable']."' pip install -r ".$scriptName['python'], $output, $return);//tester fonctionnement
-    /*
-    echo("<br><hr>valeur de retour : $return<br>");
-    var_dump($output);
-    foreach ($output as $line) echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
-    echo('<hr><br>');
-    */
+if (!isset($_SESSION['depVerif'])) {
+    if (!file_exists($scriptName['python'])) display_error($errMsg['index']['pythonFile']['notSet']);
+    else {    
+        exec('"'.$config['Python']['executable'].'" '.$scriptName['python'], $output, $return);
+        if ($return) display_error($errMsg['index']['setup']['fail']);
+        unset($output);
+        $_SESSION['depVerif'] = true;//eviter verif a chaque appel (lourd)
+    }
 }
 
 
