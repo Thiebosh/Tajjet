@@ -33,13 +33,19 @@
             
     </header>
 
-    <aside>
+    
         <?php if (isset($trustedPost['errMsgs'])) { ?>
-            <div>
-                <?php foreach($trustedPost['errMsgs'] as $errMsg) echo $errMsg; ?> <br>
-            </div> 
+            <aside>
+                <ul>
+                    <?php foreach($trustedPost['errMsgs'] as $errMsg) { ?>
+                        <li>
+                            <?php echo($errMsg);?>
+                        </li>
+                    <?php } ?>
+                </ul> 
+            </aside>
         <?php } ?>
-    </aside>
+    
 
     <section class="container-fluid">
         <?= $sectionContent ?>
