@@ -22,8 +22,8 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         case 'fill_db':
-            $moduleScript = "module_news.py";
-            $moduleArgs = "fr";
+            $moduleScript = "module_sport.py";
+            $moduleArgs = "";
             if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
                 var_dump('test');
