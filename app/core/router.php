@@ -22,11 +22,12 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         case 'fill_db':
-            $moduleScript = "meteo";
-            $moduleArgs = "";
-            if (!file_exists("core/module_$moduleScript.py")) display_error($errMsg['index']['pythonFile']['notSet']);
+            $moduleScript = "module_news.py";
+            $moduleArgs = "fr";
+            if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
             else {
-                exec("'".$config['Python']['executable']."' core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                var_dump('test');
+                exec("".$config['Python']['executable']." core/$moduleScript 2>&1 $moduleArgs", $output, $return);
                 
                 echo("<br><hr>valeur de retour : $return<br>");
                 var_dump($output);

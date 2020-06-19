@@ -10,7 +10,10 @@ function display_error($errMsg) {
     //2. vide variables inutiles car utilisees (ne reste que $pageFill et $_SESSION)
     unset($scriptName, $errMsg, $_GET, $_POST);
 
-    //3. appelle template
+    //3. appelle en-tete utilisateur
+    require(__DIR__."/../view/common/logged".(isset($_SESSION["user"]) ? "In" : "Out" ).".phtml");
+
+    //4. appelle template
     require(__DIR__."/../view/common/template.phtml");
     exit();//mets fin au script
 }
