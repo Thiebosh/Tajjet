@@ -1,5 +1,4 @@
-a
-{
+a {
     margin:auto;
     color: white;
 }
@@ -7,4 +6,8 @@ a
 h1{
     text-align: center;
     font-family: 'Balsamiq Sans', sans-serif;
+}
+
+.inactive {
+    background-color: lightslategrey;
 }

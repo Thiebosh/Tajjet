@@ -6,8 +6,24 @@
         foreach($grid as $line) { ?>
         <div class="row <?= $first? 'mt-4' : '' ?>">
             <?php foreach($line as $card) { ?>
-                <a class="col-lg mt-2" href="index.php?page=<?= $card["link"] ?>">
-                    <button class="col-lg-12 btn btn-primary"><?= $card["display"] ?></button>
+                <a class="col-lg mt-2" href="<?= $card["active"] ? 'index.php?page='.$card["link"] : '' ?>">
+                    <button class="col-lg-12 btn btn-primary <?= !$card["active"] ? 'inactive' : '' ?>">
+                        <?= $card["display"] ?><br>
+                        <?= !$card["active"] ? "Veuillez renseigner votre ".$card["missing"]." dans votre profil" : '&nbsp;' ?>
+                        <!-- si pas truc générique (style image), utiliser switch
+                        < ?php switch ($card["link"]) {
+                            case "sport": ?>
+                                html
+                            < ?php break;
+
+                            case "health": ?>
+                                html
+                            < ?php break;
+
+                            ...
+                        } ?>
+                        -->
+                    </button>
                 </a>
             <?php } ?>
         </div>
