@@ -12,24 +12,26 @@
             <button class="btn btn-primary">Filtrer</button>
         </div>
         <hr>
-        <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
+        < ?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
                                                                 On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->
             <ul>
-                <?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
+                < ?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
                     <li> 
-                        <strong><?=$programme['channel']?></strong> 
-                        <?=$programme['program'][$i]['title']?>
-                        <?=$programme['program'][$i]['begin']?>
-                        <?=$programme['program'][$i]['end']?>
+                        <strong>< ?=$programme['channel']?></strong> 
+                        < ?=$programme['program'][$i]['title']?>
+                        < ?=$programme['program'][$i]['begin']?>
+                        < ?=$programme['program'][$i]['end']?>
                         <br>
-                        <em>Synopsis : <?=$programme['program'][$i]['synopsis']?> </em>
+                        <em>Synopsis : < ?=$programme['program'][$i]['synopsis']?> </em>
                     </li>
-                <?php } ?>
+                < ?php } ?>
             </ul>
             <br>
-        <?php } ?>
+        < ?php } ?>
     </div>
     <script>
+        var variableRecuperee = <?= $data ?>;
+
         (function($){
             $("button").click(function(){
                 heureFiltre = $(this).siblings('#heure')[0].value

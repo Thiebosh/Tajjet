@@ -113,9 +113,7 @@ if ($listHealth !== false) {
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
 else $json = "{}";
 
-?>
 
- <?php
 /*
 //fait en js : nécessite sexe (bouton radio)
 

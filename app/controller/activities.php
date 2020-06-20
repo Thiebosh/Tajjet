@@ -5,5 +5,3 @@ foreach ((new TVprogramManager)->readAll(false) as $line) $activitiesListNotStar
 foreach ((new TVprogramManager)->readAll(true) as $line) $activitiesListStarted[] = $line->objectToJson();
 
 $data = json_encode(array("notStarted" => $activitiesListNotStarted, "started" => $activitiesListStarted));
-
-exit();
