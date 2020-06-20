@@ -1,9 +1,11 @@
 <?php ob_start();?>
-<li class="nav-item">
-    <a class="nav-link" href="index.php?user=login">Connexion</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="index.php?user=register">Inscription</a>
-</li>
 
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?user=login">Connexion</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?user=register">Inscription</a>
+    </li>
+</ul>
 <?php $userGateContent=ob_get_clean();

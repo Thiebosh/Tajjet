@@ -37,4 +37,30 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
+    
+    if($import && !$stop) { //Si l'utilisateur a importé un fichier
+        $dir="resource/image/avatars";
+        if(!$ex){
+            $creation=mkdir($dir,0777,true);
+            if($creation){
+                $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                if($retour) {
+                    $avatar=$dir.'/' . $trustedPost['avatar'];
+                } 
+            }
+        }
+        else{
+            if(!file_exists($dir.$trustedPost['avatar'])){ //Si l'avatar n'a pas déjà été importé, alors on l'importe
+                if(sizeof(scandir($dir))>2){ //Il y a déjà un fichier dans le dossier : on le supprime
+                    $name=scandir($dir)[2];
+                    unlink($dir.'/'.$name);
+                }
+                $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                if($retour) {
+                $avatar=$dir.'/' . $trustedPost['avatar'];
+                } 
+            }
+        }
+        
+    }
 }

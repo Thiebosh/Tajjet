@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['sleepTime'])) {
+if (isset($_POST[''])) {
     $trustedPost['sleepTime'] = filter_input(INPUT_POST, 'sleepTime', FILTER_VALIDATE_INT);
 }
 

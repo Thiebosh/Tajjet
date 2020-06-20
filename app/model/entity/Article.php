@@ -21,6 +21,10 @@ class Article extends Entity {
 
 
     //getters
+    public function setID_article($id) {
+        $this->setId($id);
+    }
+
     public function getURL() {
         return $this->_URL;
     }
