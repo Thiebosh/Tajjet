@@ -26,12 +26,14 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
     }
 
 
-    public function readTodayRecord() {
+    public function readTodayRecord($userId) {
         $query = "SELECT * 
                     FROM Health 
-                    WHERE RecordDate = NOW()";
+                    WHERE RecordDate = NOW()
+                    AND ID_user = :id";
+        $table = array('id' => $idUser);
 
-        $request = parent::prepareAndExecute($query);
+        $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
 
@@ -43,7 +45,8 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         $query = "SELECT * 
                     FROM Health 
                     WHERE ID_user = :id
-                    AND RecordDate > DATE_SUB(NOW(), INTERVAL 7 DAY)";
+                    AND RecordDate > DATE_SUB(NOW(), INTERVAL 7 DAY)
+                    ORDER BY RecordDate";
         $table = array('id' => $idUser);
 
         $request = parent::prepareAndExecute($query, $table);

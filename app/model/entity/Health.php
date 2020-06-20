@@ -45,10 +45,6 @@ class Health extends Entity {
 
 
     //setters
-    public function setLabel($label) {
-        if (is_string($label)) $this->_label = $label;
-    }
-
     public function setRecordDate($recordDate) {
         if (is_string($recordDate)) $this->_recordDate = $recordDate;
     }
