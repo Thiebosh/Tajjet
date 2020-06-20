@@ -33,26 +33,26 @@ foreach ($tables as $ligne) {
                 }
                 break;
 
-            case "meteo" :
-                require(__DIR__."/../model/manager/TownManager.php");
-                $towns = (new TownManager)->readAll();
+            // case "meteo" :
+            //     require(__DIR__."/../model/manager/TownManager.php");
+            //     $towns = (new TownManager)->readAll();
 
-                $towns = array('Versailles', 'Lille');
-                if ($towns != false) {
-                    foreach ($towns as $moduleArgs) {
-                        //$moduleArgs = $town->getLabel();
-                        exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
-                        if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                        var_dump($output);
-                        unset($output);
-                    }
-                }
-                break;
+            //     $towns = array('Versailles', 'Lille');
+            //     if ($towns != false) {
+            //         foreach ($towns as $moduleArgs) {
+            //             $moduleArgs = $town->getLabel();
+            //             exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+            //             if ($return) display_error($errMsg['monitor']['refresh']['fail']);
+            //             var_dump($output);
+            //             unset($output);
+            //         }
+            //     }
+            //     break;
         }
     }
 }
 
-var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <-");
+var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <- (ligne 57 monitor)");
 /*
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
