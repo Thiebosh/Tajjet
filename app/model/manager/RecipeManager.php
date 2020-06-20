@@ -35,7 +35,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
         $query = 'SELECT * 
                     FROM Recipe 
                     WHERE LOWER(Name) LIKE LOWER(:search)';
-        $table = array('search' => $name);
+        $table = array('search' => '%'.$name.'%');
 
         $request = parent::prepareAndExecute($query, $table);
         

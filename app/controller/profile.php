@@ -108,5 +108,3 @@ else { //Si l'utilisateur a importé un fichier
         }
     }
 }
-                    
-                   

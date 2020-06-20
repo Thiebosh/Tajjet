@@ -27,6 +27,9 @@ class User extends Entity {
         parent::__destruct();
     }
 
+    public function objectToJson() {
+        return json_encode(get_object_vars($this));
+    }
 
     //getters
     public function getName() {
