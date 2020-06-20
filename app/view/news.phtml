@@ -8,7 +8,7 @@
                     <li class="my-3">
                         <div class="card col-lg-12">
                             <div class="card-header">
-                                <a href="<?= $article->getURL() ?>">Article Title /!\ NEED /!\ </a>
+                                <a href="<?= $article->getURL() ?>"><?= $article->getTitre() ?></a>
                                 <p class="mb-0">Temps aproximatif de l'article : <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec</p>
                             </div>
                             <br>
