@@ -19,7 +19,6 @@ foreach ($tables as $ligne) {
             case "tv":
                 exec("\"$executable\" core/module_$moduleScript.py 2>&1", $output, $return);
                 if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                var_dump($output);
                 unset($output);
                 break;
 
@@ -28,33 +27,28 @@ foreach ($tables as $ligne) {
                 foreach ($pays as $moduleArgs) {
                     exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                     if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                    var_dump($output);
                     unset($output);
                 }
                 break;
 
-            // case "meteo" :
-            //     require(__DIR__."/../model/manager/TownManager.php");
-            //     $towns = (new TownManager)->readAll();
+            case "meteo" :
+                require(__DIR__."/../model/manager/TownManager.php");
+                $towns = (new TownManager)->readAll();
 
-            //     $towns = array('Versailles', 'Lille');
-            //     if ($towns != false) {
-            //         foreach ($towns as $moduleArgs) {
-            //             $moduleArgs = $town->getLabel();
-            //             exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
-            //             if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-            //             var_dump($output);
-            //             unset($output);
-            //         }
-            //     }
-            //     break;
+                if ($towns != false) {
+                    foreach ($towns as $town) {
+                        $moduleArgs = $town->getLabel();
+                        exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                        if ($return) display_error($errMsg['monitor']['refresh']['fail']);
+                        unset($output);
+                    }
+                }
+                break;
         }
     }
 }
 
-var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <- (ligne 57 monitor)");
-/*
+
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
 }
-*/

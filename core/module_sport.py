@@ -18,6 +18,19 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor(buffered=True)
 
+
+sql = "DELETE FROM work"
+mycursor.execute(sql)
+mydb.commit()
+
+sql = "DELETE FROM sport"
+mycursor.execute(sql)
+mydb.commit()
+
+sql = "DELETE FROM muscle"
+mycursor.execute(sql)
+mydb.commit()
+    
 adressname = 'core\sport.csv'
 df = pd.read_csv(adressname)
 df = df.drop(["Equipment","Exercise Type","Notes", "Modifications"], axis=1)

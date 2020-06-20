@@ -39,7 +39,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
+        foreach($request->fetchALL(PDO::FETCH_ASSOC) as $line){
             $result[] = new Recipe($line);
         }
 

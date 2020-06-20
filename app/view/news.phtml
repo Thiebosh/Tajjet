@@ -1,26 +1,24 @@
 <?php ob_start();?>
-    <?php?>
-        <article class="theme">
-            <h1>Actualité</h1> 
-            <hr>           
-            <div class="row article"> 
-                <ul>
-                    <?php for($i=1; $i<sizeof($pageFill['source'])+1;++$i) { ?>  <!--On va ici afficher chaque temps de lecture de l'article associé avec la source accessible en cliquant sur "Article"-->
-                        <li>
-                            <div class="card col-lg-12">
-                                <div class="card-header mb-2">
-                                    <p><a href="<?=$pageFill['source'][$i-1]['URL']?>">Article <?=$i?></a></p> <!--Ici, on va chercher dans un premier temps l'URL correspondant à l'article associé, et ce grâce à l'indice de l'itération-->
-                                    <p class="m-0"><?=$pageFill['source'][$i-1]['readingTime']?> min</p> <!-- Dans un second temps, on va chercher le temps de lecture estimé qui est un autre sous-champ de notre variable-->                                    
-                                </div>
-                                <p>
-                                    <?=$pageFill['summary']?>
-                                </p>
+    <article class="theme">
+        <h1>Actualité</h1> 
+        <hr>
+        <div class="row article"> 
+            <ul>
+                <?php foreach ($articleList as $article) { ?>
+                    <li>
+                        <div class="card col-lg-12">
+                            <div class="card-header">
+                                <a href="<?= $article->getURL() ?>">Article</a>
+                                <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec
                             </div>
-                        </li>
-                    <?php } ?>
-                </ul>   
-            </div>
-        </article>
-
-        
+                            <br>
+                            <p>
+                                <?= \ForceUTF8\Encoding::toUTF8($article->getSummary()) ?>
+                            </p>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>   
+        </div>
+    </article>
 <?php $sectionContent=ob_get_clean();
