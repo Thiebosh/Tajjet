@@ -25,20 +25,15 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             $modules = array(
                             array('name' => 'tv'),
                             array('name' => 'sport'),
-                            array('name' => 'news', 'param' => 'fr')
+                            array('name' => 'news', 'param' => 'fr'),
+                            array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
                         );
 
             foreach ($modules as $module) {
                 if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
                 else {
-                    echo('core/module_'.$module['name'].'.py');
-                    var_dump('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''));
-                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);
-                    
-                    echo("<br><hr>valeur de retour : $return<br>");
-                    var_dump($output);
+                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);                    
                     unset($output);
-                    echo('<hr><br>');
                 }
             }
         break;

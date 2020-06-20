@@ -57,7 +57,7 @@
                             Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
                         </td>
                         <td>
-                            <?=$commIMC?>
+                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
                         </td>
                     </tr>
                     <tr>
