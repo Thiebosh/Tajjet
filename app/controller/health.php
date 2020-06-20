@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $health->setWeight($trustedPost['weight']);
                 (new HealthManager)->updateTodayRecord($health);
             }
-            
         }
     }
 }
@@ -41,32 +40,34 @@ $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
 if ($listHealth !== false) {
     //imc
-    $imc = $listHealth[0]->getWeight() / pow($_SESSION['user']->getHeight(), 2);
+    if ($_SESSION['user']->getHeight() != null && $listHealth[0]->getWeight() != null) {
+        $imc = $listHealth[0]->getWeight() / pow($_SESSION['user']->getHeight(), 2);
 
-    if ($imc !== false) {
-        if ($imc < 18.5) {   
-            $commIMC="Attention ! Vous êtes en insuffisance pondérale (maigreur), il vous faut gagner du poids !";
-        } 
-        else if ($imc <= 25) {   
-            $commIMC="Très bien ! Vous entrez dans la catégorie Corpulence Normale, votre poids correspond à votre taille !";
-        } 
-        else if ($imc <= 30) { 
-            $commIMC="Attention ! Vous êtes en surpoids, il vous faut perdre du poids !";
-        } 
-        else if ($imc <= 35) { 
-            $commIMC="Attention ! Vous êtes obèse, prenez soin de votre corps et éliminez le surplus !";
-        } 
-        else if ($imc <= 40) { 
-            $commIMC="Attention ! Vous avez atteint une obésité sévère, il devient urgent de faire quelque chose ! Consultez un médecin.";
-        } 
-        else {
-            $commIMC="Vous avez atteint une obésité morbide. Si ce n'est pas déjà le cas, il faut vous soigner : votre vie est en danger. ";
-        } 
+        if ($imc !== false) {
+            if ($imc < 18.5) {   
+                $commIMC="Attention ! Vous êtes en insuffisance pondérale (maigreur), il vous faut gagner du poids !";
+            } 
+            else if ($imc <= 25) {   
+                $commIMC="Très bien ! Vous entrez dans la catégorie Corpulence Normale, votre poids correspond à votre taille !";
+            } 
+            else if ($imc <= 30) { 
+                $commIMC="Attention ! Vous êtes en surpoids, il vous faut perdre du poids !";
+            } 
+            else if ($imc <= 35) { 
+                $commIMC="Attention ! Vous êtes obèse, prenez soin de votre corps et éliminez le surplus !";
+            } 
+            else if ($imc <= 40) { 
+                $commIMC="Attention ! Vous avez atteint une obésité sévère, il devient urgent de faire quelque chose ! Consultez un médecin.";
+            } 
+            else {
+                $commIMC="Vous avez atteint une obésité morbide. Si ce n'est pas déjà le cas, il faut vous soigner : votre vie est en danger. ";
+            } 
+        }
+        //garde imc pour l'afficher
     }
-    //garde imc pour l'afficher
 
 
-    //Commentaire selon temps de sommeil enregistré et âge
+    //Commentaire selon temps de sommeil enregistré et age
     if ($_SESSION['user']->getBirthDate() !== null) {
         $age = Age($_SESSION['user']->getBirthDate());
         $sleepTime = $listHealth[0]->getSleep();//verif 0 == plus recent
@@ -90,7 +91,7 @@ if ($listHealth !== false) {
 
 
     //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) $lastSleepTime[] = $health->getSleep();
+    foreach ($listHealth as $health) if ($health->getSleep() != null) $lastSleepTime[] = $health->getSleep();
 
     $tab_somm=somm($lastSleepTime);
 
@@ -107,6 +108,8 @@ if ($listHealth !== false) {
 
     unset($tab_somm, $temps_moyen, $rythme, $compteur);
 }
+
+var_dump($listHealth);
 
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
 else $health = "{}";

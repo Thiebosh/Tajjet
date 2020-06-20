@@ -48,6 +48,10 @@ class Health extends Entity {
 
 
     //setters
+    public function setId_health($id) {
+        $this->setId($id);
+    }
+
     public function setRecordDate($recordDate) {
         if (is_string($recordDate)) $this->_recordDate = $recordDate;
     }
@@ -66,7 +70,8 @@ class Health extends Entity {
         if (is_string($sleepTime)) $this->_sleep = $sleepTime;
     }
     
-    public function setIdUser($idUser) {
-        if (isID($idUser)) $this->_idUser = $idUser;
+    public function setId_user($idUser) {
+        $idUser = intval(Entity::stringToFloat($idUser));
+        if (is_int($idUser) && $idUser > 0) $this->_idUser = $idUser;
     }
 }
