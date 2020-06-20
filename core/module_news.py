@@ -70,8 +70,8 @@ for i in range(20):
             val = (summary, url, country, readingTime)
             mycursor.execute(sql, val)
 
-            mydb.commit()
-print('news done')
+        mydb.commit()
+print('0')
 
 #pprint(data) # affiche toutes les news
 
