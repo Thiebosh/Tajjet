@@ -8,12 +8,12 @@
                     <li>
                         <div class="card col-lg-12">
                             <div class="card-header">
-                                <a href="<?= $article->getURL() ?>">Article</a>
-                                <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec
+                                <a href="<?= htmlspecialchars($article->getURL()) ?>">Article</a>
+                                <?= htmlspecialchars(explode(':',$article->getReadingTime())[1]) ?> min <?= htmlspecialchars(explode(':',$article->getReadingTime())[2]) ?> sec
                             </div>
                             <br>
                             <p>
-                                <?= \ForceUTF8\Encoding::toUTF8($article->getSummary()) ?>
+                                <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getSummary())) ?>
                             </p>
                         </div>
                     </li>
