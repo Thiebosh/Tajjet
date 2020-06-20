@@ -5,6 +5,7 @@ class Recipe extends Entity {
     //attributes
     private $_name;
     private $_picture;
+    private $_nbPerson;
     private $_preparationTime;
     private $_cookingTime;
     private $_totalTime;
@@ -37,6 +38,10 @@ class Recipe extends Entity {
         return $this->_picture;
     }
     
+    public function getNbPerson() {
+        return $this->_nbPerson;
+    }
+
     public function getPreparationTime() {
         return $this->_preparationTime;
     }
@@ -81,6 +86,10 @@ class Recipe extends Entity {
 
     public function setPicture($picture) {
         if (is_string($picture)) $this->_picture = $picture;
+    }
+
+    public function setNbPerson($nbPerson) {
+        if (is_string($nbPerson)) $this->_nbPerson   = $nbPerson;
     }
     
     public function setPreparationTime($preparationTime) {

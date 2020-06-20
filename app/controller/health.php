@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
+
 if ($listHealth !== false) {
     //imc
     if ($_SESSION['user']->getHeight() != null && $listHealth[0]->getWeight() != null) {
@@ -113,10 +114,6 @@ if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->o
 else $json = "{}";
 
 ?>
-
-<script>
-    var variableRecuperee = <?= json_encode($listHealth) ?>;
-</script>
 
  <?php
 /*

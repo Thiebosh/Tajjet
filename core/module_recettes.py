@@ -248,8 +248,8 @@ if(error != True):
         else: 
             totalTime = '00:00:00'
 
-        sql = "INSERT INTO recipe (Name, Picture, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, Steps, Ingredients, Calories, ID_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (detailed_recipe['name'], detailed_recipe['image'], prepTime, cookTime, totalTime, detailed_recipe['rate'], detailed_recipe['budget'], detailed_recipe['difficulty'], steps, ingredients, calories, id_type)
+        sql = "INSERT INTO recipe (Name, Picture, NbPerson, PreparationTime, CookingTime, TotalTime, Score, Price, Difficulty, Steps, Ingredients, Calories, ID_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (detailed_recipe['name'], detailed_recipe['image'], detailed_recipe['people_quantity'], prepTime, cookTime, totalTime, detailed_recipe['rate'], detailed_recipe['budget'], detailed_recipe['difficulty'], steps, ingredients, calories, id_type)
         mycursor.execute(sql, val)
 
         mydb.commit()

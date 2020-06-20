@@ -5,6 +5,7 @@ if (isset($_POST['username'])) {
 
 if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fichier
     $import=true;
+    $stop=false;
     $taille_maxi=600000;
     $extensions = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
     $taille = filesize($_FILES['avatar']['tmp_name']); //On récupère la taille et l'extension du fichier
@@ -16,6 +17,10 @@ if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fic
     elseif(file_exists($dir)){
         $ex=true;
     }
+    if($_FILES['avatar']['tmp_name']==''){ //Si modification des infos personnelles sans changement d'avatar
+        $stop=true;
+    }
+
     if($taille>$taille_maxi)
     {
         $erreur = 'Votre fichier dépasse la taille maximale';
@@ -24,7 +29,7 @@ if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fic
     {
         $erreur = 'Votre fichier doit être de type png, gif, jpg ou jpeg';
     }
-    if(!isset($erreur)){
+    if(!isset($erreur) && !$stop){
         $trustedPost['avatar']=$_FILES['avatar']['name'];
     }
     
