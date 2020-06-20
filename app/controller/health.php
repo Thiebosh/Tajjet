@@ -109,11 +109,8 @@ if ($listHealth !== false) {
     unset($tab_somm, $temps_moyen, $rythme, $compteur);
 }
 
-var_dump($listHealth);
-
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
-else $health = "{}";
-
+else $json = "{}";
 
 ?>
 
