@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
-    <h1 class="col-lg mt-4 mb-4">Page d'Accueil</h1>
-    <hr>
+    <div class="text-center">
+        <h1>Page d'Accueil</h1>
+        <hr>
+    </div>
     <?php 
         $first = true;
         foreach($grid as $line) { ?>
@@ -11,7 +13,7 @@
                         <a class="col-lg mt-2" href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
                             <button class="col-lg-12 btn btn-primary <?= !$card["active"] ? 'inactive in-btn' : '' ?>">
                                 <?= $card["display"] ?><br>
-                                </button>
+                            </button>
                         </a>
                     </div>
                     <?php if(!$card["active"]){ ?>

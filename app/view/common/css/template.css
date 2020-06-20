@@ -5,9 +5,13 @@ body
     
 }
 
+h1, h2, h3, h4, h5 {
+    font-family: 'Balsamiq Sans', sans-serif;
+}
+
 header{
     
-    margin-bottom:5px;
+    margin-bottom: 25px;
 }
 
 .liste_erreurs
