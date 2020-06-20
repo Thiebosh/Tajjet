@@ -51,10 +51,11 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md text-center">
                     <h2>Etapes de préparation :</h2>    
                     <p><?=$pageFill['recipe'][0]['steps']?></p>
+                    <button class="btn btn-success">Je prépare cette recette</button>
                 </div>
                 <div class="col-md text-center">
                     <h2>Liste des ingrédients :</h2> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
@@ -65,6 +66,7 @@
                         </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
                         <?php } ?>
                     </ul>
+                    <button class="btn btn-success">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>
