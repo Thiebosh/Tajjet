@@ -5,8 +5,6 @@ require_once(__DIR__."/../model/manager/RecipeManager.php");
 //array("Entrées","Plats","Dessert","Amuses bouches","Sauces","Accompagnements","Boissons");
 $typeList = (new TypeManager)->readAll();
 
-
-
 /*
 formulaire {
     checker
@@ -20,7 +18,7 @@ formulaire {
         }
 
 
-
+concaténer type (pas d'espace)
         
         $town = (new TownManager)->searchByName($trustedPost['town']);
         if ($town !== false) $_SESSION['user']->setTown($town);
@@ -34,7 +32,7 @@ formulaire {
     
 }
 */
-$recipe = (new RecipeManager)->readLast7Days($_SESSION['user']->getId());
+//$recipe = (new RecipeManager)->readLast7Days($_SESSION['user']->getId());
 
 
 

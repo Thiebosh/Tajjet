@@ -1,6 +1,12 @@
 <?php
 //1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
+require_once(__DIR__."/../model/manager/ArticleManager.php");
+
+$articleList = (new ArticleManager)->readAll();
+
+var_dump($articleList);
+
+exit();
 
 
 //2. appels bdd

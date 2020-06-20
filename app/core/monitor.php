@@ -37,10 +37,9 @@ foreach ($tables as $ligne) {
                 require(__DIR__."/../model/manager/TownManager.php");
                 $towns = (new TownManager)->readAll();
 
-                $towns = array('Versailles', 'Lille');
                 if ($towns != false) {
                     foreach ($towns as $moduleArgs) {
-                        //$moduleArgs = $town->getLabel();
+                        $moduleArgs = $town->getLabel();
                         exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                         if ($return) display_error($errMsg['monitor']['refresh']['fail']);
                         var_dump($output);

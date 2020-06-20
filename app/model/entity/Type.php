@@ -25,6 +25,10 @@ class Type extends Entity {
 
 
     //setters
+    public function setID_type($id) {
+        $this->setId($id);
+    }
+
     public function setLabel($label) {
         if (is_string($label)) $this->_label = $label;
     }
