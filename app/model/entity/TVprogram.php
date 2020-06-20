@@ -28,6 +28,8 @@ class TVprogram extends Entity {
         $tmp = $this;
         $tmp->_Channel = ($tmp->_Channel)->objectToJson();
         $tmp->_synopsis = \ForceUTF8\Encoding::toUTF8($tmp->_synopsis);
+        $tmp->_title = \ForceUTF8\Encoding::toUTF8($tmp->_title);
+        $tmp->_genre = \ForceUTF8\Encoding::toUTF8($tmp->_genre);
         return json_encode(get_object_vars($tmp));
     }
 
