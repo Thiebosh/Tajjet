@@ -28,7 +28,6 @@ class Weather extends Entity {
 
 
     //getters
-    
     public function getForecast() {
         return $this->_forecast;
     }
@@ -63,6 +62,9 @@ class Weather extends Entity {
 
 
     //setters
+    public function setID_weather($id) {
+        $this->setId($id);
+    }
     
     public function setForecast($forecast) {
         if (is_string($forecast)) $this->_forecast = $forecast;

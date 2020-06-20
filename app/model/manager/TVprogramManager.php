@@ -16,6 +16,6 @@ class TVprogramManager extends Manager {//pattern CRUD : create, read, update, d
             $result[] = new TVprogram($line);
         }
 
-        return $result;
+        return isset($result) ? $result : false;
     }
 }

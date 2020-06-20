@@ -24,7 +24,8 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
                     FROM Health 
                     WHERE RecordDate = NOW()
                     AND ID_user = :id";
-        $table = array('id' => $idUser);
+        $table = array('id' => $userId);
+
         $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
