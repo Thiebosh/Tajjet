@@ -75,4 +75,3 @@ if (!$import) { //Import d'avatar
         $avatar=$dir.'/' . $name;
     }
 }
-//Upload de l'avatar
