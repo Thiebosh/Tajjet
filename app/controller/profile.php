@@ -14,7 +14,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else $_SESSION['user']->setName($trustedPost['name']);
         }
         
-        if($import) { //Si l'utilisateur a importé un fichier
+        if($import && !$stop) { //Si l'utilisateur a importé un fichier
             $dir="resource/image/avatars";
             if(!$ex){
                 $creation=mkdir($dir,0777,true);
@@ -79,7 +79,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 require(__DIR__."/../checker/$pageName.php");
-if (!$import) { //Import d'avatar
+if (!$import || $_FILES['avatar']['tmp_name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
     $dir="resource/image/avatars";
     if($ex){ //Si le dossier avatars existe, on va chercher l'avatar déjà existant
         $name=scandir($dir)[2];
