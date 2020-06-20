@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `ID_article` int(11) NOT NULL AUTO_INCREMENT,
+  `Titre` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Summary` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Pays` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `URL` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
