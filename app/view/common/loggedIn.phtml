@@ -5,5 +5,19 @@
 <li class="nav-item">
     <a class="nav-link" href="index.php?user=logout">Déconnexion</a>
 </li>
+<li class="nav-item">
+    <?php 
+        $dir="resource/image/avatars";
+        if(!file_exists($dir)) { //On vérifie si le dossier avatars existe ?>
+            <img class="user_ava" src="resource/image/defaultavatar.jpg">
+    <?php }
+        else { 
+            $name=scandir($dir)[2];
+            if(file_exists($dir."/".$name)){ 
+                $avatar=$dir.'/' . $name;
+            }?>
+            <img class="user_ava" src="<?=htmlspecialchars($avatar)?>">
+    <?php } ?>
+</li>
 
 <?php $userGateContent=ob_get_clean();
