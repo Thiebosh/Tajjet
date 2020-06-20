@@ -8,14 +8,14 @@
 //call managers functions (load data here)
 $pageFill['exercice'] = array(
                             array("id" => 1,
-                                    "name" => "sport1",
+                                    "name" => "Développé couché",
                                     "picture" => "url ou path",
                                     "calories" => 234,
                                     "muscles" => array("muscle1", "muscle2", "muscle3")
                                 ),
 
                             array("id" => 2,
-                                    "name" => "sport2",
+                                    "name" => "Tractions",
                                     "picture" => "url ou path",
                                     "calories" => 864,
                                     "muscles" => array("muscle2", "muscle4")
@@ -27,10 +27,12 @@ $pageFill['seance']=array(
                             "exercices"=>array(
                                                 array("id"=>1,
                                                     "name"=>"Développé couché",
-                                                    "image"=>"Image développé couché"),
+                                                    "image"=>"Image développé couché",
+                                                    "calories" => 234),
                                                 array("id"=>2,
                                                     "name"=>"Tractions",
-                                                    "image"=>"Image tractions")
+                                                    "image"=>"Image tractions",
+                                                    "calories" => 86)
                             
                                             )
 

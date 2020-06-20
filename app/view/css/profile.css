@@ -47,3 +47,9 @@ form
     margin:10px auto 10px auto;
     padding:5px;
 }
+
+.user_avatar
+{
+    height:100px;
+    width:100px;
+}
