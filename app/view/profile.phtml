@@ -19,19 +19,33 @@
                     <p class="d-flex justify-content-center">
                         <input type="submit" class="btn btn-outline-success" value="Modifier mes identifiants"/>
                     </p>
-                <form>
+                </form>
             </div>
             
             <div class="col-md-6 infos_perso">
                 <h1>Informations personnelles</h1>
                 <hr>
+                
+                <div>
+                    <label for="avatar">Avatar</label>
+                    
+                    <form method="post" action="index.php?user=profile" enctype="multipart/form-data">
+                        <input type="file" name="avatar" accept=".png">
+                        <input type="submit" name="import">
+                    </form>
+                </div>
                 <form method="post" action="index.php?user=profile">
+                    <?php 
+                        if(isset($erreur)){
+                            echo($erreur);
+                        }
+
+                        if(isset($avatar))
+                        {
+                            echo($avatar);
+                        }
+                    ?>
                     <p>
-                        <div>
-                            <label for="avatar">Avatar</label>
-                            <br>todo : add image box here<br>
-                            <input type="file" name="avatar" accept=".png">
-                        </div>
                         <br>
                         <label for="birthDate">Votre date de naissance</label><br>
                         <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">

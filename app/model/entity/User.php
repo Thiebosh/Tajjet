@@ -14,7 +14,6 @@ class User extends Entity {
 
     private $_Town;//instance de Town
     private $_Sports;//liste d'instances de Sport (programme)
-    private $_Items;//liste d'instances de Item (courses)
 
 
     //methods
@@ -28,6 +27,9 @@ class User extends Entity {
         parent::__destruct();
     }
 
+    public function objectToJson() {
+        return json_encode(get_object_vars($this));
+    }
 
     //getters
     public function getName() {
@@ -58,10 +60,6 @@ class User extends Entity {
         return $this->_Sports;
     }
 
-    public function getItems() {
-        return $this->_Items;
-    }
-
 
     //setters
     public function setID_user($id) {
@@ -85,8 +83,8 @@ class User extends Entity {
         if (is_float($height)) $this->_height = $height;
     }
 
-    public function setID_Town($idTown) {
-        if ($this->isID($idTown)) $this->_idTown = $idTown;
+    public function setID_town($idTown) {
+        $this->_idTown = Entity::stringToFloat($idTown);
     }
 
     public function setTown($town) {
@@ -103,14 +101,5 @@ class User extends Entity {
 
     public function addSport($sport) {
         if ($sport instanceof Sport) $this->_Sports[] = $sport;
-    }
-
-    public function setItems($items) {
-        unset($this->_Items);
-        foreach ($items as $item) addSport($item);
-    }
-
-    public function addItem($item) {
-        if ($item instanceof Item) $this->_Items[] = $item;
     }
 }

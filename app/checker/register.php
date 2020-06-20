@@ -10,7 +10,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//ch
         $trustedPost['avatar'] = $_POST['avatar'];//filter_input(INPUT_POST, 'avatar',  FILTER_SANITIZE_STRING); regarder comment faire
     }
     if (isset($_POST['birth'])) {
-        $trustedPost['birthDate'] = filter_input(INPUT_POST, 'birth', FILTER_SANITIZE_STRING);//https://github.com/Thiebosh/Eveneo/blob/master/project/globalFunctions.php recuperer verifDateTime?
+        $trustedPost['birthDate'] = filter_input(INPUT_POST, 'birth', FILTER_SANITIZE_STRING);
     }
     if (isset($_POST['height'])) {
         $trustedPost['height'] = filter_input(INPUT_POST, 'height', FILTER_VALIDATE_FLOAT);

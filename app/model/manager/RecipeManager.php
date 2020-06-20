@@ -34,13 +34,12 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
     public function searchByName($name) {//approx name
         $query = 'SELECT * 
                     FROM Recipe 
-                    WHERE LOWER(Name) LIKE LOWER(:search)
-                    ORDER BY Name';
-        $table = array('search' => $name);
+                    WHERE LOWER(Name) LIKE LOWER(:search)';
+        $table = array('search' => '%'.$name.'%');
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
+        foreach($request->fetchALL(PDO::FETCH_ASSOC) as $line){
             $result[] = new Recipe($line);
         }
 

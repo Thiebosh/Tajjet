@@ -4,7 +4,6 @@ require_once(__DIR__."/../entity/Town.php");
 
 class TownManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
     public function create($label) {
-        //1. ajoute ligne
         $query = 'INSERT INTO Town(Label) 
                     VALUES(:label)';
         $table = array('label' => $label);
@@ -23,6 +22,20 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
         
         return new Town($result[0]);
     }
+
+
+    public function searchByName($name) {
+        $query = 'SELECT *
+                    FROM Town 
+                    WHERE LOWER(Label) LIKE LOWER(:label)';
+        $table = array('label' => '%'.$name.'%');
+
+        $request = parent::prepareAndExecute($query, $table);
+
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
+
+        return (count($result) != 0) ? new Town($result[0]) : false;//fetchAll => tableau => indice 0
+    }
     
 
     public function readById($id) {
@@ -39,6 +52,20 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
     }
 
 
+    public function readByName($name) {
+        $query = 'SELECT *
+                    FROM Town 
+                    WHERE LOWER(Label) = LOWER(:label)';
+        $table = array('label' => $name);
+
+        $request = parent::prepareAndExecute($query, $table);
+
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
+
+        return (count($result) != 0) ? new Town($result[0]) : false;//fetchAll => tableau => indice 0
+    }
+
+
     public function readAll() {
         $query = 'SELECT * 
                     FROM Town 
@@ -46,7 +73,7 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
 
         $request = parent::prepareAndExecute($query);
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new Town($line);
         }
         

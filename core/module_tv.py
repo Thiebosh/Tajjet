@@ -67,3 +67,5 @@ else :
         mydb.commit()
     
     print('0')
+
+print('0')

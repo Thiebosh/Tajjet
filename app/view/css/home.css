@@ -4,11 +4,6 @@ button
     color: white;
 }
 
-h1{
-    text-align: center;
-    font-family: 'Balsamiq Sans', sans-serif;
-}
-
 .card
 {
     background-color: #e1f4f3;
@@ -35,4 +30,8 @@ h1{
 .in-btn
 {
     border-color: black;
+}
+
+a.col-lg {
+    padding: 0;
 }

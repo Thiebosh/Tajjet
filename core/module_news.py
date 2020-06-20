@@ -50,6 +50,24 @@ if(len(data['articles']) >= 20):
                 
                 readingTime = int(totalChars)/1750
 
+            error = False
+            try:
+                print(data['articles'][i]['content'])
+            except UnicodeEncodeError:
+                error = True
+
+            if(not error):
+                if (data['articles'][i]['content'] is not None) :
+                    for j in range(data['articles'][i]['content'].find("[+") + 2, data['articles'][i]['content'].find(' chars]')):
+                        totalChars += data['articles'][i]['content'][j]
+                else:
+                    totalChars = 0
+
+                if(len(totalChars) == 0):
+                    readingTime = 0.0
+                else:
+                    readingTime = int(totalChars)/1750
+
                 splitReadingTime = str(readingTime).split('.')
                 minute = splitReadingTime[0]
 
@@ -75,8 +93,7 @@ if(len(data['articles']) >= 20):
                 mycursor.execute(sql, val)
 
                 mydb.commit()
-    print('0')
-else:
-    print('1')
+print('0')
+
 #pprint(data) # affiche toutes les news
 
