@@ -34,8 +34,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
     public function searchByName($name) {//approx name
         $query = 'SELECT * 
                     FROM Recipe 
-                    WHERE LOWER(Name) LIKE LOWER(:search)
-                    ORDER BY Name';
+                    WHERE LOWER(Name) LIKE LOWER(:search)';
         $table = array('search' => $name);
 
         $request = parent::prepareAndExecute($query, $table);
