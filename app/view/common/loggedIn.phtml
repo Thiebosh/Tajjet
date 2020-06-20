@@ -1,11 +1,13 @@
 <?php ob_start();?>
-<li class="nav-item">
-    <a class="nav-link" href="index.php?user=profile">Mon profil</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="index.php?user=logout">Déconnexion</a>
-</li>
-<li class="nav-item">
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?user=profile">Mon profil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?user=logout">Déconnexion</a>
+    </li>
+</ul>
+<span class="navbar-text p-0">
     <?php 
         $dir="resource/image/avatars";
         if(!file_exists($dir)) { //On vérifie si le dossier avatars existe ?>
@@ -18,6 +20,8 @@
             }?>
             <img class="user_ava" src="<?=htmlspecialchars($avatar)?>">
     <?php } ?>
-</li>
+</span>
 
 <?php $userGateContent=ob_get_clean();
+                    
+                  
