@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
     <div class="d-flex justify-content-center">
         <div class="mt-4 col-md-3">
-            <form method="post" action="index.php?user=register">
+            <form method="post" action="index.php?user=register" enctype="multipart/form-data">
                 <p>
                     <label for="username" class="ml-1">Nom d'utilisateur</label><br>
                     <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
@@ -13,7 +13,7 @@
                     <input required type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
                     <br>
                     <label for="avatar" class="ml-1">Avatar</label>
-                    <input type="file" name="avatar" accept=".png">
+                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
                     <br>
                     <br>
                     <label for="birth" class="ml-1">Date de naissance</label><br>
