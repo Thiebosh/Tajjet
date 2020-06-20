@@ -27,6 +27,10 @@ class Town extends Entity {
 
 
     //setters
+    public function setId_town($id) {
+        $this->setId($id);
+    }
+
     public function setLabel($label) {
         if (is_string($label)) $this->_label = $label;
     }

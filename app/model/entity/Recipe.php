@@ -13,8 +13,7 @@ class Recipe extends Entity {
     private $_difficulty;
     private $_steps;
     private $_calories;
-
-    private $_Items;//liste d'instances de Item (courses)
+    private $_Items;
 
 
     //methods

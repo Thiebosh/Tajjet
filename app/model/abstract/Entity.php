@@ -35,7 +35,7 @@ abstract class Entity {
     }
 
     protected final function isID($value) {
-        return is_int($value) && $value > 0;
+        return (is_int($value) && $value > 0) ? true : false;
     }
 
     public static function stringToFloat($number) {

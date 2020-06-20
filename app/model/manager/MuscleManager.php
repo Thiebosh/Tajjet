@@ -24,7 +24,7 @@ class MuscleManager extends Manager {//pattern CRUD : create, read, update, dele
 
         $request = parent::prepareAndExecute($query);
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new Muscle($line);
         }
         

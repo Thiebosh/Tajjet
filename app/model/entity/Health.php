@@ -20,7 +20,10 @@ class Health extends Entity {
     public function __destruct() {
         parent::__destruct();
     }
-
+    
+    public function objectToJson() {
+        return json_encode(get_object_vars($this));
+    }
 
     //getters
     public function getRecordDate() {
@@ -45,10 +48,6 @@ class Health extends Entity {
 
 
     //setters
-    public function setLabel($label) {
-        if (is_string($label)) $this->_label = $label;
-    }
-
     public function setRecordDate($recordDate) {
         if (is_string($recordDate)) $this->_recordDate = $recordDate;
     }

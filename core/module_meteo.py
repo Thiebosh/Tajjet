@@ -96,6 +96,6 @@ try:
         mycursor.execute(sql, val)
 
         mydb.commit()
-    print("meteo done")
+    print("0")
 except KeyError:
-    print("meteo echec")
+    print("1")
