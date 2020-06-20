@@ -31,3 +31,7 @@ button
 {
     border-color: black;
 }
+
+a.col-lg {
+    padding: 0;
+}
