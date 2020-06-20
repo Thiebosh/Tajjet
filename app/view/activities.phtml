@@ -7,11 +7,10 @@
     </div>
     <div class="container">
         <div class="heure_filtre text-center">
-            <form method="post" action="index.php?page=activities"> <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
-                <label for="heure">Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé :</label>    
-                <input  type="time" name="heure" id="heure">
-                <input type="submit" class="btn btn-primary" value="Filtrer">
-            </form>
+            <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
+            <span>Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé :</span>    
+            <input  type="time" name="heure" id="heure">
+            <button class="btn btn-primary">Filtrer</button>
         </div>
         <hr>
         <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
@@ -31,7 +30,14 @@
             <br>
         <?php } ?>
     </div>
+    <script>
+        (function($){
+            $("button").click(function(){
+                heureFiltre = $(this).siblings('#heure')[0].value
+            });
+        })(jQuery);
 
+    </script>
 
 
 <?php $sectionContent=ob_get_clean();
