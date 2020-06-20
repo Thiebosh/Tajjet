@@ -33,16 +33,18 @@
                         <input type="file" name="avatar" accept=".png">
                         <input type="submit" name="import">
                     </form>
-                    <?php
-                        if (isset($_FILES['avatar']['tmp_name'])) {
-                            $retour = copy($_FILES['avatar']['tmp_name'], "resource/image/avatars/".$_FILES['avatar']['name']);
-                            if($retour) {
-                                echo '<img src="resource/image/avatars/' . $_FILES['avatar']['name'] . '">';
-                            }
-                        }
-                    ?>
                 </div>
                 <form method="post" action="index.php?user=profile">
+                    <?php 
+                        if(isset($erreur)){
+                            echo($erreur);
+                        }
+
+                        if(isset($avatar))
+                        {
+                            echo($avatar);
+                        }
+                    ?>
                     <p>
                         <br>
                         <label for="birthDate">Votre date de naissance</label><br>
