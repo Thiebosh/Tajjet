@@ -16,15 +16,26 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if($import) { //Si l'utilisateur a importé un fichier
             $dir="resource/image/avatars";
-            if(!file_exists($dir.$trustedPost['avatar'])){ //Si l'avatar n'a pas déjà été importé, alors on l'importe et l'affiche
-                if(sizeof(scandir($dir))>2){ //Il y a déjà un fichier dans le dossier : on le supprime
-                    $name=scandir($dir)[2];
-                    unlink($dir.'/'.$name);
+            if(!$ex){
+                $creation=mkdir($dir,0777,true);
+                if($creation){
+                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                    if($retour) {
+                        $avatar=$dir.'/' . $trustedPost['avatar'];
+                    } 
                 }
-                $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
-                if($retour) {
-                $avatar=$dir.'/' . $trustedPost['avatar'];
-                } 
+            }
+            else{
+                if(!file_exists($dir.$trustedPost['avatar'])){ //Si l'avatar n'a pas déjà été importé, alors on l'importe
+                    if(sizeof(scandir($dir))>2){ //Il y a déjà un fichier dans le dossier : on le supprime
+                        $name=scandir($dir)[2];
+                        unlink($dir.'/'.$name);
+                    }
+                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                    if($retour) {
+                    $avatar=$dir.'/' . $trustedPost['avatar'];
+                    } 
+                }
             }
             
         }
@@ -70,8 +81,14 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 require(__DIR__."/../checker/$pageName.php");
 if (!$import) { //Import d'avatar
     $dir="resource/image/avatars";
-    $name=scandir($dir)[2];
-    if(file_exists($dir."/".$name)){ 
-        $avatar=$dir.'/' . $name;
+    if($ex){ //Si le dossier avatars existe, on va chercher l'avatar déjà existant
+        $name=scandir($dir)[2];
+        if(file_exists($dir."/".$name)){ 
+            $avatar=$dir.'/' . $name;
+        }
     }
+    else{ //Sinon, l'avatar correspond à l'avatar par défaut
+        $avatar="resource/image/defaultavatar.jpg";
+    }
+    
 }
