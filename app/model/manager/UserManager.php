@@ -25,7 +25,7 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
 
         if ($result !== false) {
             $result = new User($result);
-            if ($result->getID_Town != 0) $result->setTown((new TownManager)->readById($result->getID_Town()));
+            if ($result->getID_Town() != 0) $result->setTown((new TownManager)->readById($result->getID_Town()));
         }
 
         return $result;

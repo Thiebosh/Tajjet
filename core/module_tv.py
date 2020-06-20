@@ -66,4 +66,4 @@ else :
 
         mydb.commit()
 
-print('tv done')
+print('0')

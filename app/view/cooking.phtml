@@ -1,25 +1,24 @@
 <?php ob_start();?>
- 
     <div class="col-lg-12 text-center">
         <h1>Chercher une recette</h1>
         <hr>
     </div>
     <div class="d-flex justify-content-center">
-        <form class="w-100 row" method="post" action="index.php?page=recherche" id="plats">
+        <form class="w-100 row" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
-                <?php foreach($pageFill['type'] as $type) { ?>
-                    <option><?=$type?>
+                <?php foreach($typeList as $type) { ?>
+                    <option><?= $type->getLabel() ?>
                 <?php } ?>
             </select>
-            <input class="col-lg form-control  m-3" type="text" name="search" placeholder="Rechercher des recettes">
-            <input class="col-lg btn btn-primary  m-3" type="submit" class="buttonNav" value="Rechercher">
+            <input require class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
+            <input class="col-lg btn btn-primary m-3 buttonNav" type="submit" value="Rechercher">
         </form>
     </div>
     
     <article class="recette">
         <div classe="col-md-12 text-center">
             <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?=$pageFill['recipe'][0]['titre']?></h1></div>
-            <div class="d-flex justify-content-center"><img class="col-lg-3" src="https://assets.afcdn.com/recipe/20190212/87658_w600cxt0cyt0cxb6236cyb4154.jpg" alt="Image recette"></div>
+            <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?=$pageFill['recipe'][0]['url']?>" alt="Image recette"></div>
             
             <div class="row my-4" id="times">
                 <div class="col-md-12">
@@ -52,10 +51,11 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md text-center">
                     <h2>Etapes de préparation :</h2>    
                     <p><?=$pageFill['recipe'][0]['steps']?></p>
+                    <button class="btn btn-success">Je prépare cette recette</button>
                 </div>
                 <div class="col-md text-center">
                     <h2>Liste des ingrédients :</h2> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
@@ -66,6 +66,7 @@
                         </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
                         <?php } ?>
                     </ul>
+                    <button class="btn btn-success">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>

@@ -50,7 +50,14 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($trustedPost['town']) && $trustedPost['town'] !== false) {
             require_once(__DIR__."/../model/manager/TownManager.php");
 
-            $_SESSION['user']->setTown((new TownManager)->readByName($trustedPost['town']));//cree ligne si town existe pas?
+            $town = (new TownManager)->searchByName($trustedPost['town']);
+            if ($town !== false) $_SESSION['user']->setTown($town);
+            else {
+                exec('"'.$config['Python']['executable'].'" core/module_meteo.py '.$trustedPost['town'], $output, $return);
+                if (end($output) == '0') $_SESSION['user']->setTown((new TownManager)->readByName($trustedPost['town']));
+                else $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['town'];
+                unset($output);
+            }
         }
     }
 

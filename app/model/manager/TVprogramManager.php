@@ -11,7 +11,7 @@ class TVprogramManager extends Manager {//pattern CRUD : create, read, update, d
 
         $request = parent::prepareAndExecute($query, $table);
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new TVprogram($line);
         }
 

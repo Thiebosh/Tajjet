@@ -20,7 +20,10 @@ class Health extends Entity {
     public function __destruct() {
         parent::__destruct();
     }
-
+    
+    public function objectToJson() {
+        return json_encode(get_object_vars($this));
+    }
 
     //getters
     public function getRecordDate() {
