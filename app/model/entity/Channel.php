@@ -3,7 +3,7 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 class Channel extends Entity {
     //attributes
-    private $_label;
+    protected  $_label;
 
 
     //methods
@@ -17,6 +17,9 @@ class Channel extends Entity {
         parent::__destruct();
     }
 
+    public function objectToJson() {
+        return json_encode(get_object_vars($this));
+    }
 
     //getters
     public function getLabel() {
@@ -25,6 +28,10 @@ class Channel extends Entity {
 
 
     //setters
+    public function setID_Channel($id) {
+        $this->setId($id);
+    }
+
     public function setLabel($label) {
         if (is_string($label)) $this->_label = $label;
     }
