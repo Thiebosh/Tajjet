@@ -57,18 +57,18 @@
                 <tbody>
                     <tr>
                         <td>
-                            Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                            Votre IMC est de <strong><?= htmlspecialchars($pageFill['records'][0]['imc']) ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
                         </td>
                         <td>
-                            <?=$commIMC?>
+                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                        Pour votre taille, le poids idéal est de : <strong><?=$pageFill['user']['lorentz']['idealWeigth']?> kg.</strong>
+                        Pour votre taille, le poids idéal est de : <strong><?= htmlspecialchars($pageFill['user']['lorentz']['idealWeigth']) ?> kg.</strong>
                         </td>
                         <td>
-                            <?=$commDiff?>
+                            <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
 
                         </td>
                     </tr>
@@ -77,16 +77,16 @@
                             Vous avez dormi ... heures cette nuit
                         </td>
                         <td>
-                            <?=$commSleepTod?>
+                            <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
                         </td>
 
                     </tr>
                     <tr>
                         <td>
-                           Vous avez dormi en moyenne <?=$temps_moyen?> au cours des 7 dernier jours
+                           Vous avez dormi en moyenne <?= htmlspecialchars($temps_moyen) ?> au cours des 7 dernier jours
                         </td>
                         <td>
-                            <?=$commRythme?>
+                            <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
                         </td>
                     </tr>
 
