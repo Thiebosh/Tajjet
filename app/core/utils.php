@@ -44,8 +44,12 @@ function somm($last7daysSleepTime) {
     $temps_moyen=$heure_moyenne+($min_moyenne/60);
 
     $hmoy=explode('.',$heure_moyenne)[0];
-    $mmoy=round($min_moyenne+(60*explode('.',$heure_moyenne)[1]/100));
-
+    if(sizeof(explode('.',$heure_moyenne))==2 ){
+        $mmoy=round($min_moyenne+(60*explode('.',$heure_moyenne)[1]/100));
+    }
+    elseif(sizeof(explode('.',$heure_moyenne))==1 ){
+        $mmoy=round($min_moyenne+(60*explode('.',$heure_moyenne)[0]/100));
+    }
     $temps_moyen="$hmoy"."h"."$mmoy";
 
     $retour=array();
