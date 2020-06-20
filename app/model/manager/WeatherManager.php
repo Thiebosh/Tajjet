@@ -11,7 +11,7 @@ class WeatherManager extends Manager {
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new Weather($line);
         }
         

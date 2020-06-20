@@ -21,23 +21,20 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             }
         break;
 
-        case 'fill_db':
-            //premier voire unique remplissage : appelle tous les scripts un a un
-            /*$scripts = array(
-                            array('name' => '', 'parametre' => '')
+        case 'fill_db'://premier / unique remplissage : appelle les scripts un a un
+            $modules = array(
+                            array('name' => 'tv'),
+                            array('name' => 'sport'),
+                            array('name' => 'news', 'param' => 'fr'),
+                            array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
                         );
 
-*/
-            $moduleScript = "module_sport.py";
-            $moduleArgs = "fr";
-            if (!file_exists("core/".$moduleScript)) display_error($errMsg['index']['pythonFile']['notSet']);
-            else {
-                exec('"'.$config['Python']['executable'].'" core/'.$moduleScript.' '.$moduleArgs, $output, $return);
-                
-                echo("<br><hr>valeur de retour : $return<br>");
-                var_dump($output);
-                foreach ($output as $line) echo(htmlspecialchars(utf8_encode($line)).'<br>');//recuperation du flux ligne par ligne
-                echo('<hr><br>');
+            foreach ($modules as $module) {
+                if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
+                else {
+                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);                    
+                    unset($output);
+                }
             }
         break;
 

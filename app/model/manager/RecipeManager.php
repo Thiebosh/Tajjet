@@ -31,6 +31,20 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
     }
 
 
+    public function readAlea() {
+        $query = 'SELECT * 
+                    FROM Recipe 
+                    ORDER BY RAND()
+                    LIMIT 1';
+
+        $request = parent::prepareAndExecute($query);
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return new Recipe($result[0]);
+    }
+
+
     public function searchByName($name) {//approx name
         $query = 'SELECT * 
                     FROM Recipe 
@@ -39,7 +53,7 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach($request->fetchALL(PDO::FETCH_COLUMN) as $line){
+        foreach($request->fetchALL(PDO::FETCH_ASSOC) as $line){
             $result[] = new Recipe($line);
         }
 

@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `CookingTime` time NOT NULL,
   `TotalTime` time NOT NULL,
   `Score` float NOT NULL,
-  `Price` float NOT NULL,
-  `Difficulty` float NOT NULL,
+  `Price` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Ingredients` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
@@ -239,6 +239,17 @@ CREATE TABLE IF NOT EXISTS `type` (
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Déchargement des données de la table `type`
+--
+
+INSERT INTO `type` (`ID_type`, `Label`) VALUES
+(1, 'entree'),
+(2, 'plat principal'),
+(3, 'accompagnement'),
+(4, 'amuse gueule'),
+(5, 'sauce');
 
 -- --------------------------------------------------------
 

@@ -13,7 +13,7 @@ class Recipe extends Entity {
     private $_difficulty;
     private $_steps;
     private $_calories;
-    private $_Items;
+    private $_ingredients;
 
 
     //methods
@@ -65,12 +65,16 @@ class Recipe extends Entity {
         return $this->_calories;
     }
 
-    public function getItems() {
-        return $this->_Items;
+    public function getIngredients() {
+        return $this->_ingredients;
     }
 
 
     //setters
+    public function setID_recipe($id) {
+        $this->setId($id);
+    }
+
     public function setName($name) {
         if (is_string($name)) $this->_name = $name;
     }
@@ -95,12 +99,10 @@ class Recipe extends Entity {
         if (is_float($score)) $this->_score = $score;
     }
     public function setPrice($price) {
-        $price = Entity::stringToFloat($price);
-        if (is_float($price)) $this->_price = $price;
+        if (is_string($price)) $this->_price = $price;
     }
     public function setDifficulty($difficulty) {
-        $difficulty = Entity::stringToFloat($difficulty);
-        if (is_float($difficulty)) $this->difficulty = $difficulty;
+        if (is_string($difficulty)) $this->_difficulty = $difficulty;
     }
     public function setSteps($steps) {
         if (is_string($steps)) $this->_steps = $steps;
@@ -111,12 +113,7 @@ class Recipe extends Entity {
         if (is_float($calories)) $this->_calories = $calories;
     }
 
-    public function setItems($items) {
-        unset($this->_Items);
-        foreach ($items as $item) addSport($item);
-    }
-
-    public function addItem($item) {
-        if ($item instanceof Item) $this->_Items[] = $item;
+    public function setIngredients($items) {
+        if (is_string($items)) $this->_ingredients = $items;
     }
 }

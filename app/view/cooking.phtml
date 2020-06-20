@@ -17,54 +17,76 @@
     
     <article class="recette">
         <div classe="col-md-12 text-center">
-            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?=$pageFill['recipe'][0]['titre']?></h1></div>
-            <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?=$pageFill['recipe'][0]['url']?>" alt="Image recette"></div>
+            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= $recipe->getName() ?></h1></div>
+            <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= $recipe->getPicture() ?>" alt="Image recette"></div>
             
             <div class="row my-4" id="times">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12" id="timeGlobal">
-                            Temps total : <?=$pageFill['recipe'][0]["globalTime"]?> min
+                            Temps total : <?= intval(explode(':',$recipe->getTotalTime())[0]) ?> heure(s)
+                            et <?= intval(explode(':',$recipe->getTotalTime())[1]) ?> minute(s)
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6" id="timePrep">
-                            Temps de préparation : <?=$pageFill['recipe'][0]['prepTime']?> min
+                            Temps de préparation :
+                            <?= intval(explode(':',$recipe->getPreparationTime())[0]) ?> heure(s)
+                            et <?= intval(explode(':',$recipe->getPreparationTime())[1]) ?> minute(s)
                         </div>
                         <div class="col-md-6" id="timeCook">
-                            Temps de cuisson : <?=$pageFill['recipe'][0]['cookTime']?> min
+                            Temps de cuisson : 
+                            <?= intval(explode(':',$recipe->getCookingTime())[0]) ?> heure(s)
+                            et <?= intval(explode(':',$recipe->getCookingTime())[1]) ?> minute(s)
                         </div>
                     </div>
                 </div>
             </div>
-            <hr>    
+            <hr>
             <div class="row text-center">
                 <div class="col-md-4 mt-3">
-                    <p class="note">Note :</p>
+                    <p class="note">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
                 </div>
                 <div class="col-md-4 mt-3">
-                    <p class="difficulty">Difficulté :</p>
+                    <p class="difficulty">Difficulté : <?= \ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()) ?></p>
                 </div>
                 <div class="col-md-4 mt-3">
-                    <p class="price">Budget :</p>
+                    <p class="price">Budget : <?= \ForceUTF8\Encoding::toUTF8($recipe->getPrice()) ?></p>
                 </div>
             </div>
             <hr>
             <div class="row mb-3">
                 <div class="col-md text-center">
                     <h2>Etapes de préparation :</h2>    
-                    <p><?=$pageFill['recipe'][0]['steps']?></p>
-                    <button class="btn btn-success">Je prépare cette recette</button>
+                    <ul>
+                        <?php 
+                            $i = 0;
+                            $lines = explode('<br>',$recipe->getSteps());
+                            $limit = count($lines);
+                            foreach ($lines as $line) { 
+                                if (++$i < $limit) { ?>
+                                    <li><?= $i.'. '.\ForceUTF8\Encoding::toUTF8($line) ?></li>
+                                <?php }    
+                        } ?>
+                    </ul>
+                    <form method="post" action="index.php?page=home"><!--soit ça soit message de confirmation au rechargement-->
+                        <input type="hidden" name="calories" value="<?= $recipe->getCalories() ?>">
+                        <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
+                    </form>
                 </div>
                 <div class="col-md text-center">
-                    <h2>Liste des ingrédients :</h2> <!--A mettre à jour au clic sur le bouton "Je réalise cette recette"-->
+                    <h2>Liste des ingrédients :</h2> 
                     <ul>
-                        <?php for($j=0;$j<sizeof($pageFill['recipe'][0]['items']);++$j) { ?> <!--On parcourt la liste des ingrédients de la recette sélectionnée par l'utilisateur-->
-                        <li class="my-1 align-middle list_ingredient">
-                            <?=$pageFill['recipe'][0]['items'][$j]['quantity']?> <?=$pageFill['recipe'][0]['items'][$j]['name']?> <!--(<?=$nombre?> manquant(s))-->
-                        </li> <!--On affiche les ingrédients avec leur quantité correspondante-->
-                        <?php } ?>
+                        <?php 
+                            $i = 0;
+                            $lines = explode('<br>',$recipe->getIngredients());
+                            $limit = count($lines);
+                            foreach ($lines as $line) { 
+                                if (++$i < $limit) { ?>
+                                    <li><?= '* '.\ForceUTF8\Encoding::toUTF8($line) ?></li>
+                                <?php }    
+                        } ?>
                     </ul>
                     <button class="btn btn-success">Je télécharge la liste d'ingrédient</button>
                 </div>
