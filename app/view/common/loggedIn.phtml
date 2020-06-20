@@ -10,13 +10,21 @@
 <span class="navbar-text p-0">
     <?php 
         $dir="resource/image/avatars";
+        $nom_sans_ext=$_SESSION['user']->getName();
+        $trouve=false;
         if(!file_exists($dir)) { //On vérifie si le dossier avatars existe ?>
             <img class="user_ava" src="resource/image/defaultavatar.jpg">
     <?php }
         else { 
-            $name=scandir($dir)[2];
-            if(file_exists($dir."/".$name)){ 
-                $avatar=$dir.'/' . $name;
+            for($i=0;$i<sizeof(scandir($dir));++$i ){ //On parcourt le dossier avatars
+                if(explode('.',scandir($dir)[$i])[0]==$nom_sans_ext){
+                    $avatar=$dir.'/'.$nom_sans_ext.'.'.explode('.',scandir($dir)[$i])[1];
+                    $trouve=true;
+                    
+                }
+                if($trouve==false){ //Sinon, l'avatar correspond à l'avatar par défaut
+                    $avatar="resource/image/defaultavatar.jpg";
+                }
             }?>
             <img class="user_ava" src="<?=htmlspecialchars($avatar)?>">
     <?php } ?>
