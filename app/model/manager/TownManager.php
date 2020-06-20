@@ -78,7 +78,7 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
 
         $request = parent::prepareAndExecute($query);
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new Town($line);
         }
         

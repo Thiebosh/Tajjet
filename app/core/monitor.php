@@ -33,9 +33,9 @@ foreach ($tables as $ligne) {
                 }
                 break;
 
-            // case "meteo" :
-            //     require(__DIR__."/../model/manager/TownManager.php");
-            //     $towns = (new TownManager)->readAll();
+            case "meteo" :
+                require(__DIR__."/../model/manager/TownManager.php");
+                $towns = (new TownManager)->readAll();
 
                 if ($towns != false) {
                     foreach ($towns as $moduleArgs) {
