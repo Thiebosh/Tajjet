@@ -25,6 +25,10 @@ class Sky extends Entity {
 
 
     //setters
+    public function setID_Sky($id) {
+        $this->setId($id);
+    }
+
     public function setLabel($label) {
         if (is_string($label)) $this->_label = $label;
     }

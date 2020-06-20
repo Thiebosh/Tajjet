@@ -1,14 +1,13 @@
-<?php ob_start();?>
+<?php ob_start(); ?>
     <div class="text-center">
-        <h1>Météo de Ville</h1>   <!--Variable à modifier, elle va correspondre au champ ville des infos de l'utilisateur-->
-                                                                <!--Le "?" va indiquer au survol à l'utilisateur qu'il peut changer sa ville-->
+        <h1>Météo de <?= $weatherList != false ? $weatherList[0]->getTown()->getLabel() : '' ?></h1>
         <hr>
     </div>
     <article>
         <div class="d-flex justify-content-center">
             <div class="card carte_ville">
                 <div class="card-header">
-                    Envie de voir la météo d'ailleurs ?
+                    Envie de voir la météo d'une autre ville ?
                 </div>
                 <br>
                 <form class="d-flex justify-content-between" method="post" action="index.php?page=weather">
@@ -20,26 +19,31 @@
         </div>
         <br>
         <div class="row">
-            <!--Ici on va faire une boucle for pour afficher la météo des 5 prochains jours à compter de la date d'aujourd'hui-->
-            <?php for($i=0;$i<5;++$i) { ?>
-                <div class="col-lg m-3 jour card">
-                    <?php $jour=$aujourdhui+$i?> <!--On veut afficher les 5 prochains jours à compter de la date du jour, la variable $jour contient cette date par défaut,
-                                                    on lui ajoute $i pour avoir le total des 5 prochains jours et on attribue le résultat à une nouvelle variable qui va parcourir les 7 jours-->
-
-                    <div class="card-header">
-                        <h1><?php echo("$jour $mois $annee")?> 12:00</h1> <!--On affiche les dates des 5 prochains jours sous le format jours/mois/année-->
-                    </div>
-                    <br>
-                    <h2>Temps : <?=$pageFill['sky']?></h2>  <!--On affiche la météo de 12h pour chacun des jours disponibles-->
-                    <br>
-                    <p>Température <strong>min</strong> : <?=$pageFill['minTemp']?> °C </br>
-                    Température <strong>max</strong> : <?=$pageFill['maxTemp']?> °C </br>
-                    Température <strong>ressentie</strong> : <?=$pageFill['feltTemp']?> °C </br>
-                    Humidité : <?=$pageFill['humidity']?> % </br>
-                    Pression : <?=$pageFill['pressure']?> hPa </br>
-                    </p>
-                </div>
-            <?php } ?>                
+            <?php if ($weatherList != false) {
+                $i = 0;
+                foreach ($weatherList as $weather) { ?>
+                        <div class="col-lg m-3 jour card">
+                            <div class="card-header">
+                                <h2>
+                                    <?= explode(' ',$weather->getForecast())[0] ?>
+                                    <br>
+                                    <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
+                                </h2>
+                            </div>
+                            <br>
+                            <h2>Temps : <?= $weather->getSky()->getLabel() ?></h2>
+                            <br>
+                            <p>
+                                Température <strong>min</strong> : <?= $weather->getMinTemp() ?> °C </br>
+                                Température <strong>max</strong> : <?= $weather->getMaxTemp() ?> °C </br>
+                                Température <strong>ressentie</strong> : <?= $weather->getFeltTemp() ?> °C </br>
+                                Humidité : <?= $weather->getHumidity() ?> % </br>
+                                Pression : <?= $weather->getPressure() ?> hPa </br>
+                            </p>
+                        </div>
+                    <?php if (++$i == 5) break; ?>
+                <?php }
+            } ?>                
         </div>
     </article>
     

@@ -1,6 +1,9 @@
 <?php
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
+require_once(__DIR__."/../model/manager/WeatherManager.php");
+
+$weatherList = $_SESSION['user']->getID_Town() != null ? (new WeatherManager)->readByIdTown($_SESSION['user']->getID_Town()) : false;
+
+//var_dump($weatherList);
 
 
 //2. appels bdd
