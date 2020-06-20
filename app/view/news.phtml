@@ -4,17 +4,16 @@
         <hr>
         <div class="row article"> 
             <ul>
-                <?php foreach ($articleList as $article) { ?>  <!--On va ici afficher chaque temps de lecture de l'article associé avec la source accessible en cliquant sur "Article"-->
+                <?php foreach ($articleList as $article) { ?>
                     <li>
                         <div class="card col-lg-12">
                             <div class="card-header">
                                 <a href="<?= $article->getURL() ?>">Article</a>
                                 <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec
-                                                                                                                                                        Dans un second temps, on va chercher le temps de lecture estimé qui est un autre sous-champ de notre variable-->
                             </div>
                             <br>
                             <p>
-                                <?= utf8_decode($article->getSummary()) ?>
+                                <?= \ForceUTF8\Encoding::toUTF8($article->getSummary()) ?>
                             </p>
                         </div>
                     </li>
