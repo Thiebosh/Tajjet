@@ -91,9 +91,32 @@
                                 <?php }    
                         } ?>
                     </ul>
-                    <button class="btn btn-success">Je télécharge la liste d'ingrédient</button>
+                    <?php 
+                    $test = str_replace("'", "&#146", $recipe->getIngredients());
+                    ?>
+                    <button class="btn btn-success" onclick="downloadFile('<?= $test ?>')">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>
     </article>
+    <script>
+        function downloadFile(data, name = 'file', type = 'text/plain') {
+            const { createElement } = document
+            const { URL: { createObjectURL, revokeObjectURL }, setTimeout } = window
+            
+            while(data.search("<br>") != -1) {
+                data = data.replace("<br>", "\n")
+            }
+            
+            const blob = new Blob([data], { type })
+            const url = createObjectURL(blob)
+
+            const anchor = document.createElement("a")
+            anchor.setAttribute('href', url)
+            anchor.setAttribute('download', name)
+            anchor.click()
+            
+            setTimeout(() => { revokeObjectURL(url) }, 100)
+            }
+    </script>
 <?php $sectionContent=ob_get_clean();

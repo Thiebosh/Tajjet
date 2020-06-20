@@ -42,20 +42,22 @@ function somm($last7daysSleepTime) {
     $heure_moyenne=(round  ( (array_sum($heures))/(sizeof($heures)),2));
     $min_moyenne=(array_sum($minutes))/(sizeof($minutes));
     $temps_moyen=$heure_moyenne+($min_moyenne/60);
-
+    
     $hmoy=explode('.',$heure_moyenne)[0];
+    
     if(sizeof(explode('.',$heure_moyenne))==2 ){
-        $mmoy=round($min_moyenne+(60*explode('.',$heure_moyenne)[1]/100));
+        $mmoy=round(60*explode('.',$temps_moyen)[1]/100);
+        
     }
     elseif(sizeof(explode('.',$heure_moyenne))==1 ){
-        $mmoy=round($min_moyenne+(60*explode('.',$heure_moyenne)[0]/100));
+        $mmoy=round(60*explode('.',$temps_moyen)[0]/100);
     }
+   // echo(var_dump($mmoy));
     $temps_moyen="$hmoy"."h"."$mmoy";
 
     $retour=array();
     array_push($retour,$temps_moyen);
     array_push($retour,$rythme);
     array_push($retour,$compteur);
-
     return $retour;
 }

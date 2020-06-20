@@ -6,6 +6,7 @@ $typeList = (new TypeManager)->readAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $recipe = "result";
+    //calories a deduire de health
 }
 else {
     $recipe = (new RecipeManager)->readAlea();

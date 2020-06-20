@@ -2,14 +2,14 @@
     <article class="theme">
         <h1>Actualité</h1> 
         <hr>
-        <div class="row article"> 
+        <div class="container"> 
             <ul>
                 <?php foreach ($articleList as $article) { ?>
-                    <li>
+                    <li class="my-3">
                         <div class="card col-lg-12">
                             <div class="card-header">
-                                <a href="<?= htmlspecialchars($article->getURL()) ?>">Article</a>
-                                <?= htmlspecialchars(explode(':',$article->getReadingTime())[1]) ?> min <?= htmlspecialchars(explode(':',$article->getReadingTime())[2]) ?> sec
+                                <a href="<?= $article->getURL() ?>">Article Title /!\ NEED /!\ </a>
+                                <p class="mb-0">Temps aproximatif de l'article : <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec</p>
                             </div>
                             <br>
                             <p>

@@ -1,11 +1,8 @@
 <?php ob_start(); ?>
- 
     <div class="col-lg-12 text-center">
         <h1>Votre état de santé</h1>
         <hr>
     </div>
-        
-    
 
     <article class="container">
         <div class="row w-100 graph-container">
@@ -54,7 +51,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            Votre IMC est de <strong><?= htmlspecialchars($pageFill['records'][0]['imc']) ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                            Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? $imc : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
@@ -62,7 +59,7 @@
                     </tr>
                     <tr>
                         <td>
-                        Pour votre taille, le poids idéal est de : <strong><?= htmlspecialchars($pageFill['user']['lorentz']['idealWeigth']) ?> kg.</strong>
+                        Pour votre taille, le poids idéal est de : <strong> < calcul en js avec taille et sexe > kg.</strong>
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
@@ -71,7 +68,9 @@
                     </tr>
                     <tr>
                         <td>
-                            Vous avez dormi ... heures cette nuit
+                            Vous avez dormi 
+                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0]) : '') ?>
+                            heures cette nuit
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
