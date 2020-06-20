@@ -51,11 +51,12 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
 
         $request = parent::prepareAndExecute($query, $table);
 
+        $result = array();
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
             $result[] = new Health($line);
         }
 
-        return $result;
+        return (count($result) != 0) ? $result : false;
     }
 
 
