@@ -53,3 +53,6 @@ $errMsg['controller']['profil']['db']       = $errMsg['controller']['register'][
 $errMsg['controller']['profil']['town']     = $errMsg['controller']['register']['town'];
 
 $errMsg['controller']['cooking']['recipe']  = 'Aucune recette trouvée.';
+
+
+$errMsg['controller']['weather']['town'] = $errMsg['controller']['register']['town'];
