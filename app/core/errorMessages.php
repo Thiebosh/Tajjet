@@ -51,3 +51,5 @@ $errMsg['controller']['profil']['password'] = $errMsg['controller']['register'][
 $errMsg['controller']['profil']['login']    = $errMsg['controller']['register']['login'];
 $errMsg['controller']['profil']['db']       = $errMsg['controller']['register']['db'];
 $errMsg['controller']['profil']['town']     = $errMsg['controller']['register']['town'];
+
+$errMsg['controller']['cooking']['recipe']  = 'Aucune recette trouvée.';
