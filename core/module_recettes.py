@@ -150,7 +150,7 @@ for i in range(1, len(sys.argv) - 1):
     aqt += sys.argv[i] + " "
 
 dt = sys.argv[len(sys.argv) - 1]
-
+dt = dt.replace(' ', '')
 # Search :
 query_options = {
   "aqt": aqt,      # Query keywords - separated by a white space
