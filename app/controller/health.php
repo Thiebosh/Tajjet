@@ -107,7 +107,7 @@ if ($listHealth !== false) {
         $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez ainsi pour rester en forme.";
     }
 
-    unset($tab_somm, $temps_moyen, $rythme, $compteur);
+    unset($tab_somm, $rythme, $compteur);
 }
 
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
