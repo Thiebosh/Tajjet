@@ -31,7 +31,7 @@ else:
 tv_feed = feedparser.parse('https://webnext.fr/templates/webnext_exclusive/views/includes/epg_cache/programme-tv-rss_{}-{}-2020.xml'.format(day, month))
 
 if (len(tv_feed.entries) == 0) :
-    print(1)
+    print('1')
 else :
     mycursor = mydb.cursor(buffered=True)
 
@@ -68,4 +68,4 @@ else :
     
     print('0')
 
-print('0')
+    print('0')
