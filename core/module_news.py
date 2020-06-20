@@ -32,14 +32,23 @@ val = (country, )
 mycursor.execute(sql, val)
 mydb.commit()
 
-#boucle permettant d'afficher les descriptions et liens des 10 premiers articles donnés via l'API
-for i in range(20):
-    if (data['articles'][i]['description'] is not None) :
-        if(len(data['articles'][i]['description']) > 0) :
-            summary = data['articles'][i]['description'] + "<br>\n"
-            url = data['articles'][i]['url'] + "<br>\n"
-            content = data['articles'][i]['content']
-            totalChars = ""
+if(len(data['articles']) >= 20):
+    #boucle permettant d'afficher les descriptions et liens des 10 premiers articles donnés via l'API
+    for i in range(20):
+        if (data['articles'][i]['description'] is not None) :
+            if(len(data['articles'][i]['description']) > 0) :
+                summary = data['articles'][i]['description'] + "<br>\n"
+                url = data['articles'][i]['url'] + "<br>\n"
+                content = data['articles'][i]['content']
+                totalChars = ""
+                
+                if (data['articles'][i]['content'] is not None) :
+                    for j in range(data['articles'][i]['content'].find("[+") + 2, data['articles'][i]['content'].find(' chars]')):
+                        totalChars += data['articles'][i]['content'][j]
+                else:
+                    totalChars = 0
+                
+                readingTime = int(totalChars)/1750
 
             error = False
             try:

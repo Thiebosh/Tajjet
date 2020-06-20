@@ -19,7 +19,6 @@ foreach ($tables as $ligne) {
             case "tv":
                 exec("\"$executable\" core/module_$moduleScript.py 2>&1", $output, $return);
                 if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                var_dump($output);
                 unset($output);
                 break;
 
@@ -28,7 +27,6 @@ foreach ($tables as $ligne) {
                 foreach ($pays as $moduleArgs) {
                     exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                     if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                    var_dump($output);
                     unset($output);
                 }
                 break;
@@ -38,11 +36,10 @@ foreach ($tables as $ligne) {
                 $towns = (new TownManager)->readAll();
 
                 if ($towns != false) {
-                    foreach ($towns as $moduleArgs) {
+                    foreach ($towns as $town) {
                         $moduleArgs = $town->getLabel();
                         exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
                         if ($return) display_error($errMsg['monitor']['refresh']['fail']);
-                        var_dump($output);
                         unset($output);
                     }
                 }
@@ -51,9 +48,7 @@ foreach ($tables as $ligne) {
     }
 }
 
-var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <- (ligne 57 monitor)");
-/*
+
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
 }
-*/

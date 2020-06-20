@@ -65,5 +65,7 @@ else :
         mycursor.execute(sql, val)
 
         mydb.commit()
+    
+    print('0')
 
 print('0')
