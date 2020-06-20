@@ -1,80 +1,59 @@
 
 <?php ob_start();?>
+    <div class="text-center">
+        <h1>Votre séance de sport :</h1>
+        <hr>
+    </div>
+
     <div class="menu">
-        <div class="row d-flex justify-content-center">
-            <form method="post" action="index.php?page=exercices"> 
-                <input type="submit" class="btn btn-info" value="Liste d'exercices"> <!--Lors du clic sur l'un des boutons, l'apparence de celui-ci change pour montrer à l'utilisateur qu'il est dessus, et cela va changer le contenu de la page-->
-                <input type="submit" class="btn btn-info" value="Aléatoire">
+        <div class="d-flex justify-content-center">
+            <form method="post" action="index.php?page=exercices" class="row w-100"> 
+                <input type="submit" class="btn btn-info col-lg m-3" value="Liste d'exercices"> <!--Lors du clic sur l'un des boutons, l'apparence de celui-ci change pour montrer à l'utilisateur qu'il est dessus, et cela va changer le contenu de la page-->
+                <input type="submit" class="btn btn-info col-lg m-3" value="Aléatoire">
             </form>
         </div>
-        <br>
-        <div class="row">
-            <form class="col-md-12 recherche" method="post" action="index.php?page=exercices"> <!--On réalise ici le champ texte, le bouton pour rechercher ainsi que la liste déroulante des muscles qu'il est possible de travailler afin de filtrer les exercices-->
-                <input class="form-control col-md-3" type="text" placeholder="Rechercher exercice">
-                <input type="submit" class="btn btn-info col-md-3" value="Rechercher">
-                <select class="custom-select col-md-3" name="Muscle" size=1>
+        <hr>
+        <div class="d-flex justify-content-center">
+            <form class="row w-100" method="post" action="index.php?page=exercices"> <!--On réalise ici le champ texte, le bouton pour rechercher ainsi que la liste déroulante des muscles qu'il est possible de travailler afin de filtrer les exercices-->
+                <input class="form-control col-lg m-3" type="text" placeholder="Rechercher exercice">
+                <select class="custom-select col-lg m-3" name="Muscle" size=1>
                     <option>Liste muscles
                 </select>
+                <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
             </form>
         </div>
     </div>
     <br>
     <div class="row">
         <!--Les lignes suivantes (jusqu'au "<ul>") correspondent aux exercices générés aléatoirement, donc si clic sur "Aléatoire" : il faudra donc masquer cette partie du code si clic sur liste d'exercices-->
-        <div class="col-md-6 aleatoire">
-            
+        <div class="col-md liste_exercices text-center">
+                <h2 class="my-2">Liste d'exercices</h2>
                 <?php foreach($pageFill['exercice'] as $exercice){?>   <!--On va parcourir la liste contenant les 3 exo affichés aléatoirement-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row nom_image">
-                                <h1><strong><?=$exercice['name']?></strong></h1> <!--On met en titre le nom de l'exercice correspondant-->
-                                <img href="<?=$exercice['picture']?>"/> <!--On affiche l'image de l'exercice correspondant-->
-                            </div>
-                            <div class="row">
-                                <p>Calories consommées : <?=$exercice['calories']?> kcal pour 1h</p> <!--On affiche le nombre de calories consommées pour l'exercice correspondant-->
-                            </div>
-                            <form class="d-flex justify-content-center" method="post" action="index.php?page=sport"> <!--Au clic sur le bouton de réalisation de l'exercice, la page va être actualisée-->
-                                <input type="text" name="ID_exo" value="<?=$exercice['id']?>" hidden/> <!--Permet de retrouver l'id de l'exercice correspondant (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
-                                <input type="submit" class="btn btn-success" value="Je réalise cet exercice"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser l'exercice correspondant, sera notamment utile pour le module santé-->
-                            </form>
+                    <div>
+                        <div class="nom_image">
+                            <div class="d-flex justify-content-center my-3"><h3><strong><?=$exercice['name']?></strong></h3></div>
+                            <div class="d-flex justify-content-center"><img alt="img_sport" href="<?=$exercice['picture']?>"/></div>
+                                <!--On met en titre le nom de l'exercice correspondant-->
+                                <!--On affiche l'image de l'exercice correspondant-->
                         </div>
+                        <p class="text-center">Calories consommées : <?=$exercice['calories']?> kcal pour 1h</p> <!--On affiche le nombre de calories consommées pour l'exercice correspondant-->
+                        
+                        <form class="d-flex justify-content-center" method="post" action="index.php?page=sport"> <!--Au clic sur le bouton de réalisation de l'exercice, la page va être actualisée-->
+                            <input type="text" name="ID_exo" value="<?=$exercice['id']?>" hidden/> <!--Permet de retrouver l'id de l'exercice correspondant (que l'utilisateur aura choisi), ceci est caché à l'utilisateur-->
+                            <input type="submit" class="btn btn-success" value="Ajouter à ma séance"> <!--Bouton qui permet d'indiquer que l'utilisateur souhaite réaliser l'exercice correspondant, sera notamment utile pour le module santé-->
+                        </form>
                     </div>
                         
                 <?php }?>
             
         </div>
-        <!--Les lignes suivantes (jusqu'au </ul>) correspondent à la liste d'exercice, donc si clic sur "Liste d'exercices" : il faudra donc masquer cette partie du code si clic sur "Aléatoire"-->
-        <div class="col-md-6 liste_exercices">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul> <!--On liste ici tous les exercices avec la possibilité de les ajouter à la séance d'entraînement-->
-                        <?php foreach($pageFill['exercice'] as $exercice) { ?>
-                            <li>
-                                <div class="row nom_image">
-                                    <h1><strong><?=$exercice['name']?></strong></h1>
-                                    Image
-                                </div>
-                                <div class="row d-flex justify-content-center">
-                                    <form method="post" action="index.php?page=exercices">
-                                        <input type="submit" class="btn btn-info" value="Ajouter"> <!--Le bouton permettant d'ajouter l'exercice à la séance-->
-                                        <input type="submit" class="btn btn-success" value="Je réalise cet exercice">
-                                    </form>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <aside class="col-md-6 seances">
-            <h1>Séances d'entraînement</h1>
+        <div class="col-md seances text-center">
+            <h2 class="my-2">Séances d'entraînement</h2>
             <form method="post" action="index.php?page=exercices">
                 <input type="submit" class="btn btn-info" value="Nouvelle séance"> <!--Le bouton permettant de créer une nouvelle séance-->
-                <input type="submit" class="btn btn-danger" value="Supprimer séance"> <!--Le bouton permettant de supprimer une séance-->
             </form>
-            <div class="seance">
-                <h1>Séance 1</h1>   
+            <div class="seance mt-4">
+                <h3>Séance 1</h3>   
                 
                 <div class="col-md-12">
                     <ul>
@@ -90,8 +69,9 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <form method="post" action="index.php?page=exercices">
-                        <input type="submit" class="btn btn-info" value="Modifier séance"> <!--Le bouton permettant de modifier une séance-->
                         <input type="submit" class="btn btn-success" value="Réaliser séance"> <!--Le bouton permettant d'indiquer que l'utilisateur réalise la séance-->
+                        <input type="submit" class="btn btn-info" value="Modifier séance"> <!--Le bouton permettant de modifier une séance-->
+                        <input type="submit" class="btn btn-danger" value="Supprimer séance"> <!--Le bouton permettant de supprimer une séance-->
                     </form>
                 </div>
             </div>

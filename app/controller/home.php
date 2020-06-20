@@ -1,13 +1,4 @@
 <?php
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
-require_once('app/controller/sport.php');
-require_once('app/controller/health.php');
-require_once('app/controller/news.php');
-require_once('app/controller/weather.php');
-require_once('app/controller/activities.php');
-//require_once('app/controller/cooking.php');
-
 $healthCond = $_SESSION['user']->getHeight() != null ? true : false;
 $weatherCond = $_SESSION['user']->getTown()->getId() != null ? true : false;
 

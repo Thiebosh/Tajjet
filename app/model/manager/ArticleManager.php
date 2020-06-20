@@ -8,7 +8,7 @@ class ArticleManager extends Manager {
         
         $request = parent::prepareAndExecute($query);
 
-        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $line){
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
             $result[] = new Article($line);
         }
         

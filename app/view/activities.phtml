@@ -1,36 +1,36 @@
 <?php ob_start();?>
 
-    <div class="entete">
+    <div class="text-center">
         <h1>Programme télé </h1>
         <h2><?php echo(date("l d M Y"))?></h2>
+        <hr>
     </div>
-    
-    <div class="heure_filtre">
-        Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé :
-        <form method="post" action="index.php?page=activities"> <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
-            <input  type="time" name="heure">
-            <input type="submit" class="btn btn-primary" value="Filtrer">
-        </form>
+    <div class="container">
+        <div class="heure_filtre text-center">
+            <form method="post" action="index.php?page=activities"> <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
+                <label for="heure">Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé :</label>    
+                <input  type="time" name="heure" id="heure">
+                <input type="submit" class="btn btn-primary" value="Filtrer">
+            </form>
+        </div>
+        <hr>
+        <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
+                                                                On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->
+            <ul>
+                <?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
+                    <li> 
+                        <strong><?=$programme['channel']?></strong> 
+                        <?=$programme['program'][$i]['title']?>
+                        <?=$programme['program'][$i]['begin']?>
+                        <?=$programme['program'][$i]['end']?>
+                        <br>
+                        <em>Synopsis : <?=$programme['program'][$i]['synopsis']?> </em>
+                    </li>
+                <?php } ?>
+            </ul>
+            <br>
+        <?php } ?>
     </div>
-    <hr>
-    <?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
-                                                            On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->
-        <ul>
-            <?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
-                
-                <li> <strong><?=$programme['channel']?></strong> 
-                    <?=$programme['program'][$i]['title']?>
-                    <?=$programme['program'][$i]['begin']?>
-                    <?=$programme['program'][$i]['end']?>
-                    <em>Synopsis : <?=$programme['program'][$i]['synopsis']?> </em>
-                </li>
-                <br>
-            <?php } ?>
-        </ul>
-        <hr class="col-lg-4 sep">
-        <br>
-    <?php } ?>
-
 
 
 

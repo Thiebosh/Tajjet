@@ -1,45 +1,7 @@
-.entete
-{
-    display: flex;
-    flex-direction: row;
-    
-   
-}
-
-.titre
-{
-    align-self: center;
-}
-
-.liste_jours
-{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-
-.jour h1
-{
-    font-size: 1.7em;
-}
-.jour h2
-{
-    font-size: 1.3em;
-    
-}
-
 .card
 {
     background-color: #64c4ed;
 }
-
-article h1,.card h2
-{
-    text-align: center;
-    font-family: 'Balsamiq Sans', sans-serif;
-}
-
 
 
 .card-header

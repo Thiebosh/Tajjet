@@ -44,8 +44,12 @@ $errMsg['controller']['login']['password']  = $errMsg['controller']['login']['un
 $errMsg['controller']['register']['password']   = 'Mots de passes différents.';
 $errMsg['controller']['register']['login']      = 'Nom d\'utilisateur déjà utilisé.';
 $errMsg['controller']['register']['db']         = 'Problème d\'enregistrement, veuillez réessayer.';
+$errMsg['controller']['register']['town']       = 'Ville introuvable : vérifiez son écriture.';
 
 
 $errMsg['controller']['profil']['password'] = $errMsg['controller']['register']['password'];
 $errMsg['controller']['profil']['login']    = $errMsg['controller']['register']['login'];
 $errMsg['controller']['profil']['db']       = $errMsg['controller']['register']['db'];
+$errMsg['controller']['profil']['town']     = $errMsg['controller']['register']['town'];
+
+$errMsg['controller']['cooking']['recipe']  = 'Aucune recette trouvée.';

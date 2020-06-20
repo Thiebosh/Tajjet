@@ -1,14 +1,8 @@
-.titre
-{
-    text-align: center;
-    font-family: 'Balsamiq Sans', sans-serif;;
-}
-
 .graphes,.saisie
 {
     border:1px solid black;
     text-align: center;
-    background-color: #5f6caf;
+    background-color: #FFF;
 }
 
 article
@@ -27,4 +21,8 @@ article
 .tab
 {
     justify-content: center;
+}
+
+.graph-container {
+    margin: 0;
 }
