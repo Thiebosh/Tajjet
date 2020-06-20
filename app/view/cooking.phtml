@@ -45,15 +45,18 @@
             </div>
             <hr>
             <div class="row text-center">
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3">
                     <p class="note">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
                 </div>
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3">
                     <p class="difficulty">Difficulté : <?= \ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()) ?></p>
                 </div>
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3">
                     <p class="price">Budget : <?= \ForceUTF8\Encoding::toUTF8($recipe->getPrice()) ?></p>
                 </div>
+                <div class="col-md-3 mt-3">
+                    <p class="price">Personne : <?= \ForceUTF8\Encoding::toUTF8($recipe->getNbPerson()) ?></p>
+                </div>                
             </div>
             <hr>
             <div class="row mb-3">
