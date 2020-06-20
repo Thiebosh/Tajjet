@@ -5,12 +5,12 @@ require_once("Channel.php");
 
 class TVprogram extends Entity {
     //attributes
-    private $_title;
-    private $_synopsis;
-    private $_begin;
-    private $_genre; 
+    protected  $_title;
+    protected  $_synopsis;
+    protected  $_begin;
+    protected  $_genre; 
 
-    private $_Channel;//objet Channel
+    protected  $_Channel;//objet Channel
 
 
     //methods
@@ -24,6 +24,14 @@ class TVprogram extends Entity {
         parent::__destruct();
     }
 
+    public function objectToJson() {
+        $tmp = $this;
+        $tmp->_Channel = ($tmp->_Channel)->objectToJson();
+        $tmp->_synopsis = \ForceUTF8\Encoding::toUTF8($tmp->_synopsis);
+        $tmp->_title = \ForceUTF8\Encoding::toUTF8($tmp->_title);
+        $tmp->_genre = \ForceUTF8\Encoding::toUTF8($tmp->_genre);
+        return json_encode(get_object_vars($tmp));
+    }
 
     //getters
     public function getTitle() {
@@ -47,6 +55,10 @@ class TVprogram extends Entity {
     }
 
     //setters
+    public function setID_TVprogram($id) {
+        $this->setId($id);
+    }
+
     public function setTitle($title) {
         if (is_string($title)) $this->_title = $title;
     }
@@ -59,11 +71,11 @@ class TVprogram extends Entity {
         if (is_string($begin)) $this->_begin = $begin;
     }
 
-    public function setGenre($Genre) {
+    public function setGenre($genre) {
         if (is_string($genre)) $this->_genre = $genre;
     }
 
     public function setChannel($channel) {
-        if ($channel instanceof Channel) $this->_Channe = $channel;
+        if ($channel instanceof Channel) $this->_Channel = $channel;
     }
 }

@@ -2,9 +2,16 @@
 require_once(__DIR__."/../model/manager/TypeManager.php");
 require_once(__DIR__."/../model/manager/RecipeManager.php");
 
-//array("Entrées","Plats","Dessert","Amuses bouches","Sauces","Accompagnements","Boissons");
 $typeList = (new TypeManager)->readAll();
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $recipe = "result";
+    //calories a deduire de health
+}
+else {
+    $recipe = (new RecipeManager)->readAlea();
+}
+//plat avec espace et type en dernier, concaténé
 /*
 formulaire {
     checker
@@ -32,28 +39,3 @@ concaténer type (pas d'espace)
     
 }
 */
-//$recipe = (new RecipeManager)->readLast7Days($_SESSION['user']->getId());
-
-
-
-
-
-
-
-
-$pageFill['recipe'] = array("id"=>1,
-                            "titre" => "préparation de cookies",
-                            "picture" => "url ou path",
-                            "prepTime" => 120,
-                            "cookTime" => 30,
-                            "steps" => "blablabla",
-                            "items" => array(array("name"=>"carotte(s)",
-                                                    "quantity"=>3
-                                                ),
-                                                array("name"=>"farine",
-                                                    "quantity"=>"500 g"
-                                                )
-                                                
-                                        )
-                            );
-

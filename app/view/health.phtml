@@ -1,11 +1,8 @@
 <?php ob_start(); ?>
- 
     <div class="col-lg-12 text-center">
         <h1>Votre état de santé</h1>
         <hr>
     </div>
-        
-    
 
     <article class="container">
         <div class="row w-100 graph-container">
@@ -15,7 +12,7 @@
 
                 <div class="d-flex justify-content-center my-2">
                     <div class="row w-100">
-                        <button class="col-lg mx-2 btn btn-primary" id="weightChart">Poid</button>
+                        <button class="col-lg mx-2 btn btn-primary" id="weightChart">Poids</button>
                         <button class="col-lg mx-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
                         <button class="col-lg mx-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
                     </div>   
@@ -30,9 +27,6 @@
                     <br>
                     <label for="weight">Poids</label>
                     <input required type="number" class="form-control" name="weight" step=".1">
-                    <br>
-                    <label for="calories">Calories</label>
-                    <input required type="number" class="form-control" name="calories">
                     <br>
                     <div>
                         <input class="btn btn-success" type="submit" value="Enregistrer">
@@ -57,18 +51,18 @@
                 <tbody>
                     <tr>
                         <td>
-                            Votre IMC est de <strong><?=$pageFill['records'][0]['imc']?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                            Votre IMC est de <strong><?= htmlspecialchars($pageFill['records'][0]['imc']) ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
                         </td>
                         <td>
-                            <?=$commIMC?>
+                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                        Pour votre taille, le poids idéal est de : <strong><?=$pageFill['user']['lorentz']['idealWeigth']?> kg.</strong>
+                        Pour votre taille, le poids idéal est de : <strong><?= htmlspecialchars($pageFill['user']['lorentz']['idealWeigth']) ?> kg.</strong>
                         </td>
                         <td>
-                            <?=$commDiff?>
+                            <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
 
                         </td>
                     </tr>
@@ -77,16 +71,16 @@
                             Vous avez dormi ... heures cette nuit
                         </td>
                         <td>
-                            <?=$commSleepTod?>
+                            <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
                         </td>
 
                     </tr>
                     <tr>
                         <td>
-                           Vous avez dormi en moyenne <?=$temps_moyen?> au cours des 7 dernier jours
+                           Vous avez dormi en moyenne <?= htmlspecialchars($temps_moyen) ?> au cours des 7 dernier jours
                         </td>
                         <td>
-                            <?=$commRythme?>
+                            <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
                         </td>
                     </tr>
 
@@ -103,7 +97,7 @@
             data: {
                 labels: ['12/06/2020', '13/06/2020', '14/06/2020', '15/06/2020', '16/06/2020', '17/06/2020',],
                 datasets: [{
-                    label: 'Poid par jour',
+                    label: 'Poids par jour',
                     data: [60, 62, 63, 65, 62, 63],
                     borderColor: [
                         'rgba(0, 0, 0, 1)'
@@ -159,4 +153,5 @@
         });         
 
     </script>
+
 <?php $sectionContent = ob_get_clean();
