@@ -3,7 +3,6 @@
 
 //1. determine page a afficher
 if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
-
     switch (filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING)) {
         case 'upload_db':
             if (!is_readable($scriptName['sql'])) display_error($errMsg['index']['sqlFile']['notSet']);
