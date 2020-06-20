@@ -108,14 +108,14 @@ if ($listHealth !== false) {
     unset($tab_somm, $temps_moyen, $rythme, $compteur);
 }
 
-
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
 else $health = "{}";
 
 
 ?>
+
 <script>
- var variableRecuperee = <?= json_encode($listHealth) ?>;
+    var variableRecuperee = <?= json_encode($listHealth) ?>;
 </script>
 
  <?php

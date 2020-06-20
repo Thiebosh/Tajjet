@@ -4,27 +4,25 @@
             <h1>Actualité</h1> 
             <hr>           
             <div class="row article"> 
-            
-                    <ul>
-                        <?php for($i=1; $i<sizeof($pageFill['source'])+1;++$i) { ?>  <!--On va ici afficher chaque temps de lecture de l'article associé avec la source accessible en cliquant sur "Article"-->
-                            <div class="row ligne_article">
-                                <li>
-                                    <div class="card col-lg-12">
-                                        <div class="card-header">
-                                            <a href="<?=$pageFill['source'][$i-1]['URL']?>"><button class="btn btn-primary">Article <?=$i?></button></a>
-                                            <?=$pageFill['source'][$i-1]['readingTime']?> min <!--Ici, on va chercher dans un premier temps l'URL correspondant à l'article associé, et ce grâce à l'indice de l'itération
-                                                                                                                                                                    Dans un second temps, on va chercher le temps de lecture estimé qui est un autre sous-champ de notre variable-->
-                                        </div>
-                                        <br>
-                                        <p>
-                                            <?=$pageFill['summary']?>
-                                        </p>
+                <ul>
+                    <?php for($i=1; $i<sizeof($pageFill['source'])+1;++$i) { ?>  <!--On va ici afficher chaque temps de lecture de l'article associé avec la source accessible en cliquant sur "Article"-->
+                        <div class="row ligne_article">
+                            <li>
+                                <div class="card col-lg-12">
+                                    <div class="card-header">
+                                        <a href="<?=$pageFill['source'][$i-1]['URL']?>"><button class="btn btn-primary">Article <?=$i?></button></a>
+                                        <?=$pageFill['source'][$i-1]['readingTime']?> min <!--Ici, on va chercher dans un premier temps l'URL correspondant à l'article associé, et ce grâce à l'indice de l'itération
+                                                                                                                                                                Dans un second temps, on va chercher le temps de lecture estimé qui est un autre sous-champ de notre variable-->
                                     </div>
-                                </li>
-                            </div>
-                        <?php } ?>
-                    </ul>   
-                        
+                                    <br>
+                                    <p>
+                                        <?=$pageFill['summary']?>
+                                    </p>
+                                </div>
+                            </li>
+                        </div>
+                    <?php } ?>
+                </ul>   
             </div>
         </article>
 

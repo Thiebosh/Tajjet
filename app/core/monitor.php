@@ -33,9 +33,9 @@ foreach ($tables as $ligne) {
                 }
                 break;
 
-            case "meteo" :
-                require(__DIR__."/../model/manager/TownManager.php");
-                $towns = (new TownManager)->readAll();
+            // case "meteo" :
+            //     require(__DIR__."/../model/manager/TownManager.php");
+            //     $towns = (new TownManager)->readAll();
 
                 if ($towns != false) {
                     foreach ($towns as $moduleArgs) {
@@ -51,7 +51,7 @@ foreach ($tables as $ligne) {
     }
 }
 
-var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <-");
+var_dump("dé commentez moi ! quand le renouvellement sera ok. Me trouver? ici <- (ligne 57 monitor)");
 /*
 foreach (array_unique(array_column($tables, 'idFreq')) as $idFreq) {
     (new DBMonitor)->updateOutdatedFrequency($idFreq);
