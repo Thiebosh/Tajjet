@@ -25,26 +25,21 @@
             <div class="col-md-6 infos_perso">
                 <h1>Informations personnelles</h1>
                 <hr>
+                <label for="avatar">Avatar</label>
+                <form method="post" action="index.php?user=profile" enctype="multipart/form-data">
+                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
                 
-                <div>
-                    <label for="avatar">Avatar</label>
-                    
-                    <form method="post" action="index.php?user=profile" enctype="multipart/form-data">
-                        <input type="file" name="avatar" accept=".png">
-                        <input type="submit" name="import">
-                    </form>
-                </div>
-                <form method="post" action="index.php?user=profile">
+                    <br>
+                    <br>
                     <?php 
                         if(isset($erreur)){
-                            echo($erreur);
+                            htmlspecialchars($erreur);
                         }
 
-                        if(isset($avatar))
-                        {
-                            echo($avatar);
-                        }
-                    ?>
+                        if(isset($avatar)) { ?>
+                            <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
+                        <?php } ?>
+                   
                     <p>
                         <br>
                         <label for="birthDate">Votre date de naissance</label><br>
@@ -56,9 +51,8 @@
                         <label for="town">Votre ville</label><br>
                         <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
                     </p>
-                    
                     <p class="d-flex justify-content-center">
-                        <input type="submit" class="btn btn-outline-success" value="Modifier mes informations personnelles"/>
+                        <input type="submit" class="btn btn-outline-success" name="modif" value="Modifier mes informations personnelles"/>
                     </p>
                 </form>  
             </div>
