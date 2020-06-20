@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>
-                           Vous avez dormi en moyenne <?= htmlspecialchars($temps_moyen) ?> au cours des 7 dernier jours
+                           Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 dernier jours
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
