@@ -1,7 +1,7 @@
 div{
     margin:auto;
 }
-label,#inscr p
+label,#inscr p, .bold
 {
     font-weight:bold;
 }
@@ -17,4 +17,3 @@ label,#inscr p
     background-color: #0A6DA3;
     border-color:#0A6DA3;;
 }
-
