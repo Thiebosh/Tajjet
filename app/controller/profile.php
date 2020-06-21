@@ -16,26 +16,39 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if($import && !$stop) { //Si l'utilisateur a importé un fichier
             $dir="resource/image/avatars";
-            if(!$ex){ //Si le dossier avatars n'existe pas, on le crée, on y ajoute le fichier et on le renomme avec le nom de l'utilisateur
-                $creation=mkdir($dir,0777,true);
-                if($creation){
-                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
-                    if($retour) {
-                        rename($dir.'/' . $trustedPost['avatar'],$dir.'/' .$nom);
-                        $avatar=$dir.'/' . $nom;
-                    } 
-                }
+            if(isset($erreur)){
+                $error=$erreur;
+                
             }
-            else{ //Si le dossier avatars existe, on regarde s'il existe déjà un avatar pour l'utilisateur, si oui on le supprime puis on le remplace
-                if(file_exists($dir.$nom)){
-                    unlink($dir.'/'.$nom);
+            else{
+                if(!$ex){ //Si le dossier avatars n'existe pas, on le crée, on y ajoute le fichier et on le renomme avec le nom de l'utilisateur
+                    $creation=mkdir($dir,0777,true);
+                    if($creation){
+                        
+                        $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                        if($retour) {
+                            rename($dir.'/' . $trustedPost['avatar'],$dir.'/' .$nom);
+                            $avatar=$dir.'/' . $nom;
+                        } 
+                    }
                 }
-                $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$nom);
-                    if($retour) {
-                    $avatar=$dir.'/' . $nom;
-                    } 
+                else{ //Si le dossier avatars existe, on regarde s'il existe déjà un avatar pour l'utilisateur, si oui on le supprime puis on le remplace
+                    
+                    for($i=0;$i<sizeof(scandir($dir));++$i){ //On parcourt le dossier et si un avatar pour l'utilisateur est déjà présent, on le supprime (peu importe le format)
+                        
+                        if(file_exists($dir.'/'.$nom_non_ext.$extensions[$i])){
+                            unlink($dir.'/'.$nom_non_ext.$extensions[$i]);
+                            
+                        }
+                    }
+                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$nom);
+                        if($retour) {
+                        $avatar=$dir.'/' . $nom;
+                        } 
+                }
             }
         }
+        
         
             
         
