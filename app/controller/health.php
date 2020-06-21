@@ -7,26 +7,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId());
 
     {
-        if (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) {
+        if ( (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) && (isset($trustedPost['weight']) && $trustedPost['weight'] !== false)) {
             if (!$health) {
                 $init = array("id_user" => $_SESSION['user']->getId(),
+                                "weight"=>$trustedPost['weight'],
                                 "sleep" => $trustedPost['sleepTime']);
                 (new HealthManager)->createTodayRecord(new Health($init));
             }
             else {
-                $health->setSleep($trustedPost['sleepTime']);
-                (new HealthManager)->updateTodayRecord($health);
-            }
-        }
-
-        if (isset($trustedPost['weight']) && $trustedPost['weight'] !== false) {
-            if (!$health) {
-                $init = array("id_user" => $_SESSION['user']->getId(),
-                                "weight" => $trustedPost['weight']);
-                (new HealthManager)->createTodayRecord(new Health($init));
-            }
-            else {
                 $health->setWeight($trustedPost['weight']);
+                $health->setSleep($trustedPost['sleepTime']);
                 (new HealthManager)->updateTodayRecord($health);
             }
         }
@@ -89,7 +79,7 @@ if ($listHealth !== false) {
 
 
     //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) if ($health->getSleep() != 0) $lastSleepTime[] = $health->getSleep();
+    foreach ($listHealth as $health) if ($health->getSleep() != false) $lastSleepTime[] = $health->getSleep();
 
     $tab_somm=somm($lastSleepTime);
 
