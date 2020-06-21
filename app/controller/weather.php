@@ -10,6 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($trustedPost['town']) && $trustedPost['town'] !== false) {
         require_once(__DIR__."/../model/manager/TownManager.php");
 
+        $trustedPost['town'] = skip_accents(ucfirst($trustedPost['town']));
+
         $town = (new TownManager)->searchByName($trustedPost['town']);
         if ($town !== false) $idTown = $town->getId();
         else {

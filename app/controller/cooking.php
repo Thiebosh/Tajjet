@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //premier form
 }
 else {
-    $recipe = (new RecipeManager)->readAlea();
+    $recipe = (new RecipeManager)->readRandom();
 }
 /*
 formulaire {
