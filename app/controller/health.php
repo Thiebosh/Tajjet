@@ -107,9 +107,10 @@ if ($listHealth !== false) {
     unset($tab_somm, $rythme, $compteur);
 }
 
-if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
-else $json = "{}";
+if ($listHealth !== false) foreach ($listHealth as $health) $data[] = $health->objectToJson();
+else $data = "{}";
 
+$data = (json_encode($data);
 
 /*
 //fait en js : nécessite sexe (bouton radio)
