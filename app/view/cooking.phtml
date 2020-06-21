@@ -6,6 +6,7 @@
     <div class="d-flex justify-content-center">
         <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+                <option>Type de préparation</option>
                 <?php foreach($typeList as $type) { ?>
                     <option><?= htmlspecialchars($type->getLabel()) ?></option>
                 <?php } ?>
@@ -72,13 +73,13 @@
                     <p class="note">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="difficulty">Difficulté : <?= \ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()) ?></p>
+                    <p class="difficulty">Difficulté : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getDifficulty())) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="price">Budget : <?= \ForceUTF8\Encoding::toUTF8($recipe->getPrice()) ?></p>
+                    <p class="price">Budget : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice())) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="price">Personne : <?= \ForceUTF8\Encoding::toUTF8($recipe->getNbPerson()) ?></p>
+                    <p class="price">Personne : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getNbPerson())) ?></p>
                 </div>                
             </div>
             <hr>
@@ -119,7 +120,7 @@
                     <?php 
                     $test = str_replace("'", "&#146", $recipe->getIngredients());
                     ?>
-                    <button class="btn btn-success" onclick="downloadFile('<?= $test ?>')">Je télécharge la liste d'ingrédient</button>
+                    <button class="btn btn-success" onclick="downloadFile('<?= htmlspecialchars($test) ?>')">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>

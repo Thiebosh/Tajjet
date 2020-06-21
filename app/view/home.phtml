@@ -12,14 +12,14 @@
                     <div class="card card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="<?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
                             <a class="col-lg mt-2" href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
-                                <button class="btn btn-link btn-lg">
-                                    <?= $card["display"] ?>
+                                <button class="col-lg-12 btn btn-primary <?= !$card["active"] ? 'inactive in-btn' : '' ?>">
+                                    <?= htmlspecialchars($card["display"]) ?><br>
                                 </button>
                             </a>
                         </div>
                         <div class="card-body">
                         <?php if(!$card["active"]){ ?>
-                                <p class="inval">Veuillez renseigner votre <?=$card["missing"]?> dans votre profil</p>
+                                <p class="inval">Veuillez renseigner votre <?=htmlspecialchars($card["missing"])?> dans votre profil</p>
                             <?php } 
                             else { ?>
                                 <?php switch ($card["link"]) {
@@ -44,26 +44,26 @@
                                     <?php break;
         
                                     case "weather": ?>
-                                        Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C à <?= $weather->getTown()->getLabel() ?>
+                                        Il fait actuellement <?= htmlspecialchars(intval($weather->getFeltTemp())) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
                                         <br>
-                                        Etat du ciel : <?= $weather->getSky()->getLabel() ?>
+                                        Etat du ciel : <?= htmlspecialchars($weather->getSky()->getLabel()) ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails la météo de la semaine
                                     <?php break;
         
                                     case "activities": ?>
-                                        Aujourd'hui, regardez < ?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
+                                        Aujourd'hui, regardez <?= htmlspecialchars('"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' )?>
                                         <br>
-                                        à < ?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
-                                        sur < ?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
+                                        à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                        sur <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel())) ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails le programme du jour
                                     <?php break;
         
                                     case "cooking": ?>
-                                        Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= \ForceUTF8\Encoding::toUTF8($cooking->getName()) ?> et dégustez un bon plat
+                                        Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?> et dégustez un bon plat
                                         <!--<br>
                                         <img class="col-lg-6" src="< ?= htmlspecialchars($cooking->getPicture()) ?>" alt="Image recette">
                                         -->
