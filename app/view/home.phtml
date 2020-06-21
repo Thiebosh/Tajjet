@@ -52,11 +52,13 @@
                                         Retrouvez plus en détails la météo de la semaine
                                     <?php break;
         
-                                    case "activities": ?>
-                                        Aujourd'hui, regardez < ?= htmlspecialchars('"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' )?>
-                                        <br>
-                                        à < ?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
-                                        sur < ?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel())) ?>
+                                    case "activities": 
+                                        if ($activities != false) { ?>
+                                            Aujourd'hui, regardez <?= htmlspecialchars('"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' )?>
+                                            <br>
+                                            à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                            sur <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel())) ?>
+                                        <?php } else echo("Pas de programme dans l'heure."); ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails le programme du jour
