@@ -17,7 +17,7 @@
     
     <article class="recette">
         <div classe="col-md-12 text-center">
-            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= htmlspecialchars($recipe->getName()) ?></h1></div>
+            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
             <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= htmlspecialchars($recipe->getPicture()) ?>" alt="Image recette"></div>
             
             <div class="row my-4" id="times">

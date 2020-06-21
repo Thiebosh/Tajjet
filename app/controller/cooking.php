@@ -24,36 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     
-    //si recherche, plat avec espace et type en dernier, concaténé
-    //premier form
-}
-else {
-    $recipe = (new RecipeManager)->readRandom();
-}
-/*
-formulaire {
-    checker
-    if (nom != null) {
-        $recipe = (new RecipeManager)->searchByName($trustedPost['name']);
-        if ($recipe == false) {
-            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['name'], $output, $return);
-            if (end($output) != '0') $recipe = (new RecipeManager)->readByName(end($output));
-            else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['recipe'];
-            unset($output);
-        }
+    if (isset($trustedPost['search']) && isset($trustedPost['type'])) {
+        //$trustedPost['search'] = skip_accents(ucfirst($trustedPost['search']));
 
+        require_once(__DIR__."/../model/manager/TypeManager.php");
 
-concaténer type (pas d'espace)
-        
-        $town = (new TownManager)->searchByName($trustedPost['town']);
-        if ($town !== false) $_SESSION['user']->setTown($town);
-        else {
-            exec('"'.$config['Python']['executable'].'" core/module_meteo.py '.$trustedPost['town'], $output, $return);
-            if (end($output) == '0') $_SESSION['user']->setTown((new TownManager)->readByName($trustedPost['town']));
-            else $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['town'];
+        $idType =  (new TypeManager)->readByName($trustedPost['type'])->getId();
+        $recipe = (new RecipeManager)->searchByName($trustedPost['search'], $idType);
+
+        if ($recipe === false) {
+            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ', '', $trustedPost['type']), $output, $return);
+            var_dump($output);
+            if (end($output) != '1') $recipe = (new RecipeManager)->readByName(skip_accents(\ForceUTF8\Encoding::toUTF8(end($output))), $idType);
+            else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['search'];
             unset($output);
         }
     }
-    
 }
-*/
+
+if (!isset($recipe) || $recipe == null) $recipe = (new RecipeManager)->readRandom();

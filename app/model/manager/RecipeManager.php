@@ -17,11 +17,13 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
     }
 
 
-    public function readByName($name) {//full name
+    public function readByName($name, $type) {//full name
+        var_dump($name);
         $query = 'SELECT * 
                     FROM Recipe 
-                    WHERE Name = :name';
-        $table = array('name' => $name);
+                    WHERE Name = :name
+                    AND ID_type = :type';
+        $table = array('name' => $name, 'type' => $type);
 
         $request = parent::prepareAndExecute($query, $table);
         
@@ -45,18 +47,17 @@ class RecipeManager extends Manager {//pattern CRUD : create, read, update, dele
     }
 
 
-    public function searchByName($name) {//approx name
+    public function searchByName($name, $type) {//approx name
         $query = 'SELECT * 
                     FROM Recipe 
-                    WHERE LOWER(Name) LIKE LOWER(:search)';
-        $table = array('search' => '%'.$name.'%');
+                    WHERE ID_type = :type
+                    AND LOWER(Name) LIKE LOWER(:search)';
+        $table = array('search' => '%'.$name.'%', 'type' => $type);
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach($request->fetchALL(PDO::FETCH_ASSOC) as $line){
-            $result[] = new Recipe($line);
-        }
-
-        return $result;
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return (count($result) != 0) ? new Recipe($result[0]) : false;
     }
 }

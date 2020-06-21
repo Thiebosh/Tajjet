@@ -25,6 +25,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             array('name' => 'tv'),
                             array('name' => 'sport'),
                             array('name' => 'news', 'param' => 'fr'),
+                            array('name' => 'meteo', 'param' => 'Lille'),
                             array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
                         );
 
