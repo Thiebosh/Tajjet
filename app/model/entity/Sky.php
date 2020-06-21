@@ -5,6 +5,9 @@ class Sky extends Entity {
     //attributes
     private $_label;
 
+    private static $conversion = array("Clouds" => "Nuageux",
+                                        "Rain" => "Pluvieux",
+                                        "Clear" => "Dégagé");
 
     //methods
 
@@ -25,7 +28,13 @@ class Sky extends Entity {
 
 
     //setters
+    public function setID_Sky($id) {
+        $this->setId($id);
+    }
+
     public function setLabel($label) {
-        if (is_string($label)) $this->_label = $label;
+        if (is_string($label)) {
+            $this->_label = isset(self::$conversion[$label]) ? self::$conversion[$label] : $label;
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 //1. charge fonctions bdd
-require(__DIR__."/../model/monitor/DBMonitor.php");
+require_once(__DIR__."/../model/monitor/DBMonitor.php");
 
 
 //2. controle tables avec dates d'expiration

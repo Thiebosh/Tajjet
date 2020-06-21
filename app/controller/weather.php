@@ -1,24 +1,27 @@
 <?php
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
+require_once(__DIR__."/../model/manager/WeatherManager.php");
+
+$idTown = $_SESSION['user']->getID_Town();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require(__DIR__."/../checker/$pageName.php");
+
+    
+    if (isset($trustedPost['town']) && $trustedPost['town'] !== false) {
+        require_once(__DIR__."/../model/manager/TownManager.php");
+
+        $trustedPost['town'] = skip_accents(ucfirst($trustedPost['town']));
+
+        $town = (new TownManager)->searchByName($trustedPost['town']);
+        if ($town !== false) $idTown = $town->getId();
+        else {
+            exec('"'.$config['Python']['executable'].'" core/module_meteo.py '.$trustedPost['town'], $output, $return);
+            if (end($output) == '0') $idTown = ((new TownManager)->readByName($trustedPost['town']))->getId();
+            else $trustedPost['errMsgs'][] = $errMsg['controller']['weather']['town'];
+            unset($output);
+        }
+    }
+}
 
 
-//2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
-//call managers functions (load data here)
-$pageFill['townList'] = array("ville1", "ville2");
-$pageFill['townName'] = "ville";
-$pageFill['minTemp'] = 5;
-$pageFill['maxTemp'] = 25;
-$pageFill['feltTemp'] = 12;
-$pageFill['humidity'] = 40;
-$pageFill['pressure'] = 12;
-$pageFill['sky'] = "pluvieux";
-$aujourdhui=date("d");
-$mois=date("M");
-$annee=date("Y");
-
-
-//3. transforme donnees (post traitement)
-//tranformations goes here
-$pageFill['moyTemp'] = ($pageFill['minTemp'] + $pageFill['maxTemp']) / 2;
+$weatherList = $idTown != null ? (new WeatherManager)->readByIdTown($idTown) : false;

@@ -7,7 +7,7 @@
         <form class="w-100 row" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($typeList as $type) { ?>
-                    <option><?= $type->getLabel() ?>
+                    <option><?= htmlspecialchars($type->getLabel()) ?>
                 <?php } ?>
             </select>
             <input require class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
@@ -17,28 +17,28 @@
     
     <article class="recette">
         <div classe="col-md-12 text-center">
-            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= $recipe->getName() ?></h1></div>
-            <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= $recipe->getPicture() ?>" alt="Image recette"></div>
+            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
+            <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= htmlspecialchars($recipe->getPicture()) ?>" alt="Image recette"></div>
             
             <div class="row my-4" id="times">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12" id="timeGlobal">
-                            Temps total : <?= intval(explode(':',$recipe->getTotalTime())[0]) ?> heure(s)
-                            et <?= intval(explode(':',$recipe->getTotalTime())[1]) ?> minute(s)
+                            Temps total : <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[0]) ?> heure(s)
+                            et <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[1]) ?> minute(s)
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6" id="timePrep">
                             Temps de préparation :
-                            <?= intval(explode(':',$recipe->getPreparationTime())[0]) ?> heure(s)
-                            et <?= intval(explode(':',$recipe->getPreparationTime())[1]) ?> minute(s)
+                            <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[0]) ?> heure(s)
+                            et <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[1]) ?> minute(s)
                         </div>
                         <div class="col-md-6" id="timeCook">
                             Temps de cuisson : 
-                            <?= intval(explode(':',$recipe->getCookingTime())[0]) ?> heure(s)
-                            et <?= intval(explode(':',$recipe->getCookingTime())[1]) ?> minute(s)
+                            <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[0]) ?> heure(s)
+                            et <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[1]) ?> minute(s)
                         </div>
                     </div>
                 </div>
@@ -69,14 +69,16 @@
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= $i.'. '.\ForceUTF8\Encoding::toUTF8($line) ?></li>
+                                    <li><?= htmlspecialchars($i.'. '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>
-                    <form method="post" action="index.php?page=home"><!--soit ça soit message de confirmation au rechargement-->
-                        <input type="hidden" name="calories" value="<?= $recipe->getCalories() ?>">
-                        <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
-                    </form>
+                    <?php if (!isset($trustedPost['recipeID'])) { ?>
+                        <form method="post" action="index.php?page=cooking">
+                            <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
+                            <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
+                        </form>
+                    <?php } else echo("J'ai déjà préparé cette recette"); ?>
                 </div>
                 <div class="col-md text-center">
                     <h2>Liste des ingrédients :</h2> 
@@ -87,7 +89,7 @@
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= '* '.\ForceUTF8\Encoding::toUTF8($line) ?></li>
+                                    <li><?= htmlspecialchars('* '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>
@@ -100,7 +102,7 @@
         </div>
     </article>
     <script>
-        function downloadFile(data, name = 'file', type = 'text/plain') {
+        function downloadFile(data, name = 'listeIngredients', type = 'text/plain') {
             const { createElement } = document
             const { URL: { createObjectURL, revokeObjectURL }, setTimeout } = window
             

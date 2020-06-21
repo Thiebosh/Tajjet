@@ -6,7 +6,7 @@ class TownManager extends Manager {//pattern CRUD : create, read, update, delete
     public function create($label) {
         $query = 'INSERT INTO Town(Label) 
                     VALUES(:label)';
-        $table = array('label' => $label);
+        $table = array('label' => $this->skip_accents($label));
 
         $request = parent::prepareAndExecute($query, $table);
 
