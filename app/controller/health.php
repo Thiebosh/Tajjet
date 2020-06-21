@@ -110,7 +110,7 @@ if ($listHealth !== false) {
 if ($listHealth !== false) foreach ($listHealth as $health) $data[] = $health->objectToJson();
 else $data = "{}";
 
-$data = (json_encode($data);
+$data = json_encode($data);
 
 /*
 //fait en js : nécessite sexe (bouton radio)
