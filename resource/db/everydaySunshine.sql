@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 18 juin 2020 à 16:11
+-- Généré le :  Dim 21 juin 2020 à 14:01
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `frequency` (
 --
 
 INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
-(1, 1, '2020-06-19 00:00:00'),
-(2, 0.12, '2020-06-19 00:00:00');
+(1, 1, '2020-06-22 00:00:00'),
+(2, 0.12, '2020-06-22 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -128,15 +128,15 @@ CREATE TABLE IF NOT EXISTS `program` (
 DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `NbPerson` int(11) NOT NULL,
   `PreparationTime` time NOT NULL,
   `CookingTime` time NOT NULL,
   `TotalTime` time NOT NULL,
   `Score` float NOT NULL,
-  `Price` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Price` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `Difficulty` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Ingredients` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,

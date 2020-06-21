@@ -36,7 +36,7 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
     public function readAll() {
         $query = 'SELECT * FROM Sport';
 
-        $request = parent::prepareAndExecute($query, $table);
+        $request = parent::prepareAndExecute($query);
         
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
