@@ -79,7 +79,7 @@ if (isset($_POST['town'])) {
 
 
 //si un "false" existe dans le tableau, avec comparaison des types
-if(isset($trustePost)){
+if(isset($trustedPost)){
     if (in_array(false, $trustedPost, true)) $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];
 }
 //garde les false pour afficher class erreur

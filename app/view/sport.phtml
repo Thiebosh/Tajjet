@@ -1,5 +1,4 @@
 <?php 
-
 function exerciceDisplay($sport) {
     ob_start();?>
         <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
@@ -12,8 +11,6 @@ function exerciceDisplay($sport) {
     <?php return ob_get_clean();
 }
 
-
-
 ob_start();?>
     <div class="text-center">
         <h1>Votre séance de sport :</h1>
@@ -22,10 +19,7 @@ ob_start();?>
 
     <div class="menu">
         <div class="d-flex justify-content-center">
-            <form method="post" action="index.php?page=sport" class="row w-100 mb-0">
-                <input type="hidden" name="all" value="true">
-                <input type="submit" class="btn btn-info col-lg m-3" value="Voir tous les exercices"> 
-            </form>
+            <a class="btn btn-info col-lg m-3" href="index.php?page=sport">Voir tous les exercices</a> 
             <form method="post" action="index.php?page=sport" class="row w-100 mb-0"> 
                 <input type="hidden" name="random" value="true">
                 <input type="submit" class="btn btn-info col-lg m-3" value="Voir un exercice aléatoire">
@@ -35,7 +29,7 @@ ob_start();?>
         <div class="d-flex justify-content-center">
             <form class="row w-100" method="post" action="index.php?page=sport">
                 <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout">
-                <select class="custom-select col-lg m-3" name="Muscle" size=1>
+                <select class="custom-select col-lg m-3" name="muscle" size=1>
                     <?php foreach ($muscleList as $muscle) { ?>
                         <option><?= $muscle->getLabel() ?></option>
                     <?php } ?>
@@ -63,7 +57,7 @@ ob_start();?>
         <div class="col-md seances text-center py-3">
             <h2 class="my-2">Séance d'entraînement</h2>
             <div class="mt-4">
-                <form method="post" action="index.php?page=exercices">
+                <form method="post" action="index.php?page=sport">
                     <ul class="seance">
                         <?php if ($seanceList != false ) {
                             foreach ($seanceList as $sport) { ?> <!--On liste les exercices associés à la séance-->
@@ -75,6 +69,7 @@ ob_start();?>
                         } ?>
                     </ul>
                     <div class="d-flex justify-content-center">
+                        <input type="hidden" name="save" value="true"><!--save/do-->
                         <input type="submit" class="btn btn-info" value="Enregistrer séance">
                         &nbsp;
                         <input type="submit" class="btn btn-success" value="Réaliser séance">
@@ -85,7 +80,6 @@ ob_start();?>
     </div>
     <script>
         (function($){
-            
             $("button").click(function(){
                 if($(this).hasClass('btn-success')) {
                     cloneParent = $(this).parent().clone(true, true)
