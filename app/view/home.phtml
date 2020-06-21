@@ -24,10 +24,10 @@
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
-                                        <?=$pageFill['exercice'][0]['name']?>
+                                        < ?=$pageFill['exercice'][0]['name']?>
                                         <br>    
                                         <br>
-                                        <?=$pageFill['exercice'][0]['picture']?>
+                                        < ?=$pageFill['exercice'][0]['picture']?>
                                     <?php break; 
         
                                     case "health":?>
@@ -44,21 +44,32 @@
                                     <?php break;
         
                                     case "weather": ?>
-                                        Il fait actuellement <?=$pageFill['feltTemp']?>°C à <?=$pageFill['townName']?>
+                                        Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C à <?= $weather->getTown()->getLabel() ?>
+                                        <br>
+                                        Etat du ciel : <?= $weather->getSky()->getLabel() ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails la météo de la semaine
                                     <?php break;
         
                                     case "activities": ?>
-                                        Aujourd'hui sur <?=$pageFill['indoor'][0]['channel']?> à <?=$pageFill['indoor'][0]['program'][0]['begin']?>, regardez <?=$pageFill['indoor'][0]['program'][0]['title']?>
-                                    <br>
-                                    <br>
+                                        Aujourd'hui, regardez <?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
+                                        <br>
+                                        à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                        sur <?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
+                                        <br>
+                                        <br>
+                                        Retrouvez plus en détails le programme du jour
                                     <?php break;
         
                                     case "cooking": ?>
-                                        Vous ne savez pas quoi cuisiner pour ce soir ? Consulter notre recette de "nom_recette" et déguster un bon plat
-                                    <br>
+                                        Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= $cooking->getName() ?> et dégustez un bon plat
+                                        <!--<br>
+                                        <img class="col-lg-6" src="< ?= htmlspecialchars($cooking->getPicture()) ?>" alt="Image recette">
+                                        -->
+                                        <br>
+                                        <br>
+                                        Retrouvez plus en détails cette recette ou une autre
                                     <?php break;
                                     
                                 } ?>

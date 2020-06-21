@@ -22,4 +22,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-$weatherList = $_SESSION['user']->getID_Town() != null ? (new WeatherManager)->readByIdTown($idTown) : false;
+$weatherList = $idTown != null ? (new WeatherManager)->readByIdTown($idTown) : false;
