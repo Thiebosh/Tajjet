@@ -38,9 +38,26 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
 
         $request = parent::prepareAndExecute($query);
         
-        $result = $request->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line){
+        //all sport
+        foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $line) {
+            $query = 'SELECT ID_muscle FROM Work WHERE ID_sport = :id';
+            $table = array("id" => $line['ID_sport']);
+
+            $request = parent::prepareAndExecute($query, $table);
+
+            //muscles id for sport
+            foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $idMuscle) {
+                $query = 'SELECT * FROM Muscle WHERE ID_muscle = :id';
+                $table = array("id" => $idMuscle);
+    
+                $request = parent::prepareAndExecute($query, $table);
+                
+                //muscles entity for sport
+                foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $muscle) {
+                    $line['muscles'][] = new Muscle($muscle);
+                }
+            }
+
             $result[] = new Sport($line);
         }
         

@@ -18,7 +18,7 @@
         <hr>
         <div class="d-flex justify-content-center">
             <form class="row w-100" method="post" action="index.php?page=sport">
-                <input required class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice">
+                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout">
                 <select class="custom-select col-lg m-3" name="Muscle" size=1>
                     <?php foreach ($muscleList as $muscle) { ?>
                         <option><?= $muscle->getLabel() ?></option>
@@ -30,16 +30,20 @@
     </div>
     <br>
     <div class="row">
-        <!--Les lignes suivantes (jusqu'au "<ul>") correspondent aux exercices générés aléatoirement, donc si clic sur "Aléatoire" : il faudra donc masquer cette partie du code si clic sur liste d'exercices-->
         <div class="col-md liste_exercices text-center py-3">
             <h2 class="my-2">Liste d'exercices</h2>
             <div class="mt-4">
                 <ul class="liste">
-                    <?php foreach($pageFill['exercice'] as $exercice){?>   <!--On va parcourir la liste contenant les 3 exo affichés aléatoirement-->       
+                    <?php foreach($sportList as $sport) {?>
+                        <hr>
                         <li class="my-4">
-                            <div class="d-flex justify-content-center my-3"><h4><?=$exercice['name']?></h4></div> <!--Nom + image des exercices -->
-                            <div class="d-flex justify-content-center"><img alt="img_sport" href="<?=$exercice['picture']?>"/></div>
-                            <p class="text-center">Calories consommées : <?=$exercice['calories']?> kcal pour 1h</p>
+                            <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
+                            <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= $sport->getPicture() ?>" width="40%"/></div>
+                            <?php foreach($sport->getMuscles() as $muscle) {?>
+                                <span class="btn"><?= $muscle->getLabel() ?></span>
+                            <?php }?>
+                            <p class="text-center">Calories consommées : <?= $sport->getCalories() ?> kcal pour 1h</p>
+                            <br>
                             <button class="btn btn-success">Ajouter à ma séance</button>
                         </li>
                     <?php }?>
