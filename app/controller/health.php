@@ -57,24 +57,36 @@ if ($listHealth !== false) {
 
     //Commentaire selon temps de sommeil enregistré et age
     if ($_SESSION['user']->getBirthDate() !== null) {
-        $age = Age($_SESSION['user']->getBirthDate());
-        $sleepTime = $listHealth[0]->getSleep();//verif 0 == plus recent
+        if($_SESSION['user']->getBirthDate() =="0000-00-00")
+        {
+            $commSleepTod="Veuillez entrer votre date de naissance en cliquant sur Mon Profil";
+        }
+        
+        else{
+            $age = Age($_SESSION['user']->getBirthDate());
+            $sleepTime = $listHealth[0]->getSleep();//verif 0 == plus recent
 
-        //if ($sleepTime == null) 
-        if (($age <= 17 && $sleepTime < 8) ||
-            (17 < $age && $sleepTime < 7)) {
-            $commSleepTod="Vous n'avez pas assez dormi cette nuit, il faut dormir plus.";
-        }
-        else if (($age <= 17 && $sleepTime < 10) ||
-            (17 < $age && $age <= 64 && $sleepTime < 9) ||
-            (65 < $age && $sleepTime < 8)) {
-            $commSleepTod="Vous avez dormi suffisamment cette nuit, vous devez vous sentir en forme. ";
-        }
-        else {
-            $commSleepTod="Vous avez trop dormi cette nuit, évitez de dépasser le temps de sommeil maximum recommandé. ";
-        }
+            //if ($sleepTime == null) 
+            if (($age <= 17 && $sleepTime < 8) ||
+                (17 < $age && $sleepTime < 7)) {
+                $commSleepTod="Vous n'avez pas assez dormi cette nuit, il faut dormir plus.";
+            }
+            else if (($age <= 17 && $sleepTime < 10) ||
+                (17 < $age && $age <= 64 && $sleepTime < 9) ||
+                (65 < $age && $sleepTime < 8)) {
+                $commSleepTod="Vous avez dormi suffisamment cette nuit, vous devez vous sentir en forme. ";
+            }
+            else {
+                $commSleepTod="Vous avez trop dormi cette nuit, évitez de dépasser le temps de sommeil maximum recommandé. ";
+            }
 
-        unset($age, $sleepTime);
+            unset($age, $sleepTime);
+
+        }
+        
+        
+            
+        
     }
 
 
