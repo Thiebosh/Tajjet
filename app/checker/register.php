@@ -13,6 +13,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//ch
         $extensions = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
         $taille = filesize($_FILES['avatar']['tmp_name']); //On récupère la taille et l'extension du fichier
         $extension = strrchr($_FILES['avatar']['name'], '.'); 
+        $nom=$trustedPost['name'].$extension;
         $dir="resource/image/avatars";
         if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
             $ex=false;

@@ -3,6 +3,7 @@ require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Health.php");
 
 class HealthManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
+   
     public function createTodayRecord($health) {
         $query = 'INSERT INTO Health(RecordDate, Weight, Calories, Sleep, ID_user)
                     VALUES(NOW(), :weight, :calories, :sleep, :id)';
@@ -16,8 +17,9 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         return $this->readTodayRecord($health->getIdUser());//add id
     }
 
+    
 
-    public function readTodayRecord($userId) {
+    public function readTodayRecord($idUser) {
         $query = "SELECT * 
                     FROM Health 
                     WHERE RecordDate = NOW()
@@ -27,9 +29,10 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
-
+        
         return (count($result) != 0) ? new Health($result[0]) : false;
     }
+    
 
 
     public function readLast7Days($idUser) {
@@ -49,6 +52,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
 
         return (count($result) != 0) ? $result : false;
     }
+    
 
 
     public function updateTodayRecord($health) {
