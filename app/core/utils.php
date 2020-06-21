@@ -62,7 +62,12 @@ function somm($last7daysSleepTime) {
             ++$hmoy;
             $mmoy=$mmoy-60;
     }
-
+    if(0<$hmoy && $hmoy<10){ //On affiche le 0 avant l'heure
+        $hmoy="0".$hmoy;
+    }
+    if(0<=$mmoy && $mmoy<10){ //On affiche le 0 avant les minutes
+        $mmoy="0".$mmoy;
+    }
     $temps_moyen="$hmoy"."h"."$mmoy";
 
     $retour=array();
