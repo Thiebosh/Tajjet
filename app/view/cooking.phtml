@@ -24,21 +24,43 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12" id="timeGlobal">
-                            Temps total : <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[1]) ?> minute(s)
+                            Temps total : 
+                            <?php
+                                $tmp = explode(':',$recipe->getTotalTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6" id="timePrep">
                             Temps de préparation :
-                            <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[1]) ?> minute(s)
+                            <?php
+                                $tmp = explode(':',$recipe->getPreparationTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
                         <div class="col-md-6" id="timeCook">
-                            Temps de cuisson : 
-                            <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[1]) ?> minute(s)
+                            Temps de cuisson :
+                            <?php
+                                $tmp = explode(':',$recipe->getCookingTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : ''); 
+                            ?>
                         </div>
                     </div>
                 </div>
