@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
     <div class="text-center">
-        <h1>Météo de <?= $weatherList != false ? $weatherList[0]->getTown()->getLabel() : '' ?></h1>
+        <h1>Météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?></h1>
         <hr>
     </div>
     <article>
@@ -28,23 +28,23 @@
                         <div class="jour card">
                             <div class="card-header">
                                 <h2>
-                                    <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
+                                    <?= htmlspecialchars(intval(explode('-',explode(' ',$weather->getForecast())[0])[2])).'/'.
                                         explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
                                 </h2>
                                 <h2>
-                                    <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
+                                    <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>
                                 </h2>
                             </div>
                             <div class="p-3">
                                 <div class="text-center">
-                                    <h3>Temps : <?= $weather->getSky()->getLabel() ?></h3>
+                                    <h3>Temps : <?= htmlspecialchars($weather->getSky()->getLabel()) ?></h3>
                                     <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
                                 </div>
                                 <p>
-                                    Température : <?= $weather->getMinTemp() ?> °C </br>
-                                    Température <strong>ressentie</strong> : <?= $weather->getFeltTemp() ?> °C </br>
-                                    Humidité : <?= $weather->getHumidity() ?> % </br>
-                                    Pression : <?= $weather->getPressure() ?> hPa </br>
+                                    Température : <?= htmlspecialchars($weather->getMinTemp()) ?> °C </br>
+                                    Température <strong>ressentie</strong> : <?= htmlspecialchars($weather->getFeltTemp()) ?> °C </br>
+                                    Humidité : <?= htmlspecialchars($weather->getHumidity()) ?> % </br>
+                                    Pression : <?= htmlspecialchars($weather->getPressure()) ?> hPa </br>
                                 </p>
                             </div>
                         </div>
