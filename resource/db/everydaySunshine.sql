@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 21 juin 2020 à 14:07
+-- Généré le :  Dim 21 juin 2020 à 22:38
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `frequency` (
   `NumberOfDays` float NOT NULL,
   `NextDate` datetime NOT NULL,
   PRIMARY KEY (`ID_frequency`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `frequency`
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `frequency` (
 
 INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
 (1, 1, '2020-06-22 00:00:00'),
-(2, 0.12, '2020-06-22 00:00:00');
-(3, 1, '2020-06-22 01:00:00'),
+(2, 0.12, '2020-06-22 00:00:00'),
+(3, 1, '2020-06-22 01:00:00');
 
 -- --------------------------------------------------------
 
@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `ID_type` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `type`
@@ -249,9 +249,7 @@ CREATE TABLE IF NOT EXISTS `type` (
 INSERT INTO `type` (`ID_type`, `Label`) VALUES
 (1, 'entree'),
 (2, 'plat principal'),
-(3, 'accompagnement'),
-(4, 'amuse gueule'),
-(5, 'sauce');
+(3, 'dessert');
 
 -- --------------------------------------------------------
 
@@ -266,6 +264,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
+  `Sex` tinyint(1) DEFAULT NULL,
   `ID_town` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
   KEY `FK_User_ID_town` (`ID_town`)
@@ -281,8 +280,7 @@ DROP TABLE IF EXISTS `weather`;
 CREATE TABLE IF NOT EXISTS `weather` (
   `ID_weather` int(11) NOT NULL AUTO_INCREMENT,
   `Forecast` datetime NOT NULL,
-  `MinTemp` float NOT NULL,
-  `MaxTemp` float NOT NULL,
+  `Temp` float NOT NULL,
   `FeltTemp` float NOT NULL,
   `Humidity` float NOT NULL,
   `Pressure` float NOT NULL,
