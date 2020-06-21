@@ -28,9 +28,13 @@ class TVprogramManager extends Manager {//pattern CRUD : create, read, update, d
 
         $request = parent::prepareAndExecute($query);
 
-        $result = $request->fetchAll(PDO::FETCH_ASSOC)[0];
-        $result['Channel'] = (new ChannelManager)->readById($result['ID_channel']);
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if ($result != false) {
+            $result = $result[0];
+            $result['Channel'] = (new ChannelManager)->readById($result['ID_channel']);
 
-        return new TVprogram($result);
+            return new TVprogram($result);
+        }
+        return false;
     }
 }
