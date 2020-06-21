@@ -10,12 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($trustedPost['random'])) $sportList = array((new SportManager)->readRandom());
     else if (isset($trustedPost['muscle'])) {
-        if (!isset($trustedPost['search'])) {
-            $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
-        }
+        if (!isset($trustedPost['search'])) $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
         else {
-            //if ($trustedPost['muscle'] == "Default") //$sportList = recherche sur nom
-            //else //$sportList = recherche sur nom avec filtre catégorie. Peut drop erreur "aucun résulat pour votre recherche"
+            if ($trustedPost['muscle'] == "Default") $sportList = (new SportManager)->searchByName($trustedPost['search']);
+            else $sportList = (new SportManager)->searchByNameAndMuscle($trustedPost['muscle'], $trustedPost['search']);
         }
     }
     else if (isset($trustedPost['action'])) {
@@ -32,4 +30,3 @@ if (!isset($sportList) || $sportList == false) {
     if (isset($sportList) && $sportList == false) $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];//aucun résultat pour votre recherche
     $sportList = (new SportManager)->readAll();
 }
-

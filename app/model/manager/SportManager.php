@@ -107,20 +107,64 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
     }
 
 
-
-    public function readByName($name) {
+    public function searchByName($name) {
         $query = 'SELECT * 
                     FROM Sport 
-                    WHERE Label = :label';
-        $table = array('label' => $name);
+                    WHERE LOWER(Label) LIKE LOWER(:label)';
+        $table = array('label' => '%'.$name.'%');
 
         $request = parent::prepareAndExecute($query, $table);
         
-        foreach($request->fetchALL(PDO::FETCH_ASSOC) as $line){
-            $result[] = new Sport($line);
-        }
+        $request = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        if (count($request) > 0) {
+            foreach ($request as $line) {
+                $line['muscles'] = $this->getMuscles($line['ID_sport']);
 
+                $result[] = new Sport($line);
+            }
+
+            return $result;
+        }
+        
+        return false;
+    }
+
+
+    public function searchByNameAndMuscle($muscle, $name) {
+        $query = 'SELECT ID_sport FROM Work WHERE ID_muscle = :id';
+        $table = array("id" => (new MuscleManager)->readByName($muscle)->getId());
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        //all sport
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $idSport) {
+            $tmp = $this->readByIdAndName($idSport, $name);
+            if ($tmp != false) $result[] = $tmp;
+        }
+        
         return $result;
+    }
+
+
+    public function readByIdAndName($id, $name) {
+        $query = 'SELECT * 
+                    FROM Sport 
+                    WHERE ID_sport = :id
+                    AND LOWER(Label) LIKE LOWER(:label)';
+        $table = array('id' => $id, 'label' => '%'.$name.'%');
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) > 0) {
+            $result = $result[0];
+            $result['muscles'] = $this->getMuscles($result['ID_sport']);
+
+            return new Sport($result);
+        }
+        
+        return false;
     }
 }
 
