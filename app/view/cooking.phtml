@@ -7,10 +7,10 @@
         <form class="w-100 row" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($typeList as $type) { ?>
-                    <option><?= htmlspecialchars($type->getLabel()) ?>
+                    <option><?= htmlspecialchars($type->getLabel()) ?></option>
                 <?php } ?>
             </select>
-            <input require class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
+            <input required class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
             <input class="col-lg btn btn-primary m-3 buttonNav" type="submit" value="Rechercher">
         </form>
     </div>

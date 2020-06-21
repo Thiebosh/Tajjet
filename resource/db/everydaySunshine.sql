@@ -129,21 +129,21 @@ DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
-  `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Picture` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
   `NbPerson` int(11) NOT NULL,
   `PreparationTime` time NOT NULL,
   `CookingTime` time NOT NULL,
   `TotalTime` time NOT NULL,
   `Score` float NOT NULL,
-  `Price` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
-  `Ingredients` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `Price` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
+  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
+  `Steps` text CHARACTER SET latin1 COLLATE utf8_general_ci,
+  `Ingredients` text CHARACTER SET latin1 COLLATE utf8_general_ci,
   `Calories` float NOT NULL,
   `ID_type` int(11) NOT NULL,
   PRIMARY KEY (`ID_recipe`),
   KEY `FK_Recipe_ID_type` (`ID_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `town` (
   `ID_town` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`ID_town`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 

@@ -1,4 +1,3 @@
-
 <?php ob_start();?>
     <div class="text-center">
         <h1>Votre séance de sport :</h1>
@@ -7,17 +6,23 @@
 
     <div class="menu">
         <div class="d-flex justify-content-center">
-            <form method="post" action="index.php?page=exercices" class="row w-100 mb-0"> 
-                <input type="submit" class="btn btn-info col-lg m-3" value="Liste d'exercices"> <!--Lors du clic sur l'un des boutons, l'apparence de celui-ci change pour montrer à l'utilisateur qu'il est dessus, et cela va changer le contenu de la page-->
+            <form method="post" action="index.php?page=sport" class="row w-100 mb-0">
+                <input type="hidden" name="all" value="true">
+                <input type="submit" class="btn btn-info col-lg m-3" value="Tous les exercices"> 
+            </form>
+            <form method="post" action="index.php?page=sport" class="row w-100 mb-0"> 
+                <input type="hidden" name="random" value="true">
                 <input type="submit" class="btn btn-info col-lg m-3" value="Aléatoire">
             </form>
         </div>
         <hr>
         <div class="d-flex justify-content-center">
-            <form class="row w-100" method="post" action="index.php?page=exercices"> <!--On réalise ici le champ texte, le bouton pour rechercher ainsi que la liste déroulante des muscles qu'il est possible de travailler afin de filtrer les exercices-->
-                <input class="form-control col-lg m-3" type="text" placeholder="Rechercher exercice">
+            <form class="row w-100" method="post" action="index.php?page=sport">
+                <input required class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice">
                 <select class="custom-select col-lg m-3" name="Muscle" size=1>
-                    <option>Liste muscles</option>
+                    <?php foreach ($muscleList as $muscle) { ?>
+                        <option><?= $muscle->getLabel() ?></option>
+                    <?php } ?>
                 </select>
                 <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
             </form>
@@ -44,22 +49,23 @@
         <div class="col-md seances text-center py-3">
             <h2 class="my-2">Séance d'entraînement</h2>
             <div class="mt-4">
-                <ul class="seance">
-                    <?php for($j=0;$j<sizeof($pageFill['seance'][0]['exercices']); ++$j) { ?> <!--On liste les exercices associés à la séance-->
-                        <li class="my-4">
-                            <div class="d-flex justify-content-center my-3"><h4><?=$pageFill['seance'][0]['exercices'][$j]['name']?></h4></div> <!--Nom + image des exercices -->
-                            <div class="d-flex justify-content-center"><img alt="img_sport" href="<?=$pageFill['seance'][0]['exercices'][$j]['image']?>"/></div>
-                            <p class="text-center">Calories consommées : <?=$pageFill['seance'][0]['exercices'][$j]['calories']?> kcal pour 1h</p>
-                            <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
-                        </li>
-                    <?php } ?>
-                </ul>
-                <div class="d-flex justify-content-center">
-                    <form method="post" action="index.php?page=exercices">
-                        <input type="submit" class="btn btn-info" value="Enregistrer séance"> <!--Le bouton permettant de modifier une séance-->
-                        <input type="submit" class="btn btn-success" value="Réaliser séance"> <!--Le bouton permettant d'indiquer que l'utilisateur réalise la séance-->
-                    </form>
-                </div>
+                <form method="post" action="index.php?page=exercices">
+                    <ul class="seance">
+                        <?php for($j=0;$j<sizeof($pageFill['seance'][0]['exercices']); ++$j) { ?> <!--On liste les exercices associés à la séance-->
+                            <li class="my-4">
+                                <input type="hidden" name="idExo" value="<?= $pageFill['seance'][0]['exercices'][$j]['id'] ?>">
+                                <div class="d-flex justify-content-center my-3"><h4><?=$pageFill['seance'][0]['exercices'][$j]['name']?></h4></div> <!--Nom + image des exercices -->
+                                <div class="d-flex justify-content-center"><img alt="img_sport" href="<?=$pageFill['seance'][0]['exercices'][$j]['image']?>"/></div>
+                                <p class="text-center">Calories consommées : <?=$pageFill['seance'][0]['exercices'][$j]['calories']?> kcal pour 1h</p>
+                                <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="btn btn-info" value="Enregistrer séance">
+                        <input type="submit" class="btn btn-success" value="Réaliser séance">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
