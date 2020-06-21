@@ -23,7 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         else {
-            require_once("HealthManager.php");
+            require_once(__DIR__."/../model/manager/HealthManager.php");
+            $calories = 300;
+            
+            if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
+                $init = array("id_user" => $_SESSION['user']->getId(),
+                                "calories" => -$calories);
+                (new HealthManager)->createTodayRecord(new Health($init));
+            }
+            else {
+                $health->setCalories($health->getCalories() - $calories);
+                (new HealthManager)->updateTodayRecord($health);
+            }
         }
     }
 }

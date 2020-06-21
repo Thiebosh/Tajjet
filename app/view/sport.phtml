@@ -2,6 +2,7 @@
 function exerciceDisplay($sport) {
     ob_start();?>
         <input type="hidden" name="exo" value="<?= $sport->getId() ?>">
+        <input type="hidden" name="calories" value="<?= $sport->getCalories() ?>">
         <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
         <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= $sport->getPicture() ?>" width="40%"/></div>
         <?php foreach($sport->getMuscles() as $muscle) {?>
