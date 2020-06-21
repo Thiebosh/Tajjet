@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `frequency` (
 INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
 (1, 1, '2020-06-22 00:00:00'),
 (2, 0.12, '2020-06-22 00:00:00');
+(3, 1, '2020-06-22 01:00:00'),
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `renewal` (
 
 INSERT INTO `renewal` (`ID_renewal`, `ModuleName`, `ID_frequency`) VALUES
 (1, 'meteo', 1),
-(2, 'tv', 1),
+(2, 'tv', 3),
 (3, 'news', 2);
 
 -- --------------------------------------------------------
