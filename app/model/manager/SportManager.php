@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__."/../abstract/Manager.php");
 require_once(__DIR__."/../entity/Sport.php");
+require_once("MuscleManager.php");
 
 class SportManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
     private function getMuscles($idSport) {
@@ -12,15 +13,7 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         $list = array();
         //muscles id for sport
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $idMuscle) {
-            $query = 'SELECT * FROM Muscle WHERE ID_muscle = :id';
-            $table = array("id" => $idMuscle);
-
-            $request = parent::prepareAndExecute($query, $table);
-            
-            //muscles entity for sport
-            foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $muscle) {
-                $list[] = new Muscle($muscle);
-            }
+            $list[] = (new MuscleManager)->readById($idMuscle);
         }
 
         return count($list) > 0 ? $list : false;
@@ -84,6 +77,37 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
     }
 
 
+    public function readById($id) {
+        $query = 'SELECT * 
+                    FROM Sport 
+                    WHERE ID_sport = :id';
+        $table = array('id' => $id);
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC)[0];
+        $result['muscles'] = $this->getMuscles($result['ID_sport']);
+        
+        return new Sport($result);
+    }
+
+
+    public function readByMuscle($muscle) {
+        $query = 'SELECT ID_sport FROM Work WHERE ID_muscle = :id';
+        $table = array("id" => (new MuscleManager)->readByName($muscle)->getId());
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        //all sport
+        foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $idSport) {
+            $result[] = $this->readById($idSport);
+        }
+        
+        return $result;
+    }
+
+
+
     public function readByName($name) {
         $query = 'SELECT * 
                     FROM Sport 
@@ -97,20 +121,6 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         }
 
         return $result;
-    }
-
-
-    public function readById($id) {
-        $query = 'SELECT * 
-                    FROM Sport 
-                    WHERE ID_sport = :id';
-        $table = array('id' => $id);
-
-        $request = parent::prepareAndExecute($query, $table);
-        
-        $result = $request->fetchAll(PDO::FETCH_ASSOC);
-        
-        return new Sport($result[0]);
     }
 }
 

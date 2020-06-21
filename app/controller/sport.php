@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($trustedPost['random'])) $sportList = array((new SportManager)->readRandom());
     else if (isset($trustedPost['muscle'])) {
         if (!isset($trustedPost['search'])) {
-            //$sportList = tous les sports du muscle
+            $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
         }
         else {
             //if ($trustedPost['muscle'] == "Default") //$sportList = recherche sur nom
