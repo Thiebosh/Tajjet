@@ -3,7 +3,7 @@
         <h1>Votre état de santé</h1>
         <hr>
     </div>
-
+    
     <article class="container">
         <div class="row w-100 graph-container">
             <div class="col-lg-8 graphes my-2">
@@ -85,8 +85,8 @@
                     <?php if (isset($commSleepTod)) { ?>
                         <td>
                             Vous avez dormi 
-                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0]) : '') ?>
-                            heures cette nuit
+                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '') ?>
+                            cette nuit
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
@@ -101,7 +101,7 @@
                 <tr>
                     <?php if (isset($temps_moyen)) { ?>
                         <td>
-                            Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 dernier jours
+                            Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 derniers jours
                         </td>
                         <td>
                             <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
