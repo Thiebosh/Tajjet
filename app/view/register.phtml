@@ -1,4 +1,8 @@
 <?php ob_start(); ?>
+    <div class="text-center">
+        <h1>Inscription</h1>
+        <hr>
+    </div>
     <div class="d-flex justify-content-center">
         <div class="mt-4 col-md-3">
             <form method="post" action="index.php?user=register" enctype="multipart/form-data">
@@ -13,6 +17,7 @@
                     <input required type="password" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
                     <br>
                     <label for="avatar" class="ml-1">Avatar</label>
+                    <br>
                     <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
                     <br>
                     <br>
@@ -24,8 +29,19 @@
                     <br>
                     <label for="town" class="ml-1">Ville</label><br>
                     <input type="text" class="form-control" name="town" placeholder="Ville" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
-                </p>
-                <br>
+                    <p class="bold">Votre sexe (à la naissance)</p>
+                    <div class="text-center">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femme" value="femme">
+                            <label class="form-check-label" for="femme">Femme</label>
+                        </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="homme" value="homme">
+                            <label class="form-check-label" for="homme">Homme</label>
+                        </div>
+                    </div>
+                </p>                        
+                
                 <p class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Inscription"/>
                 </p>
