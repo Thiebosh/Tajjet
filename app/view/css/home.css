@@ -1,14 +1,6 @@
 button
 {
-    margin:auto;
     color: white;
-}
-
-.card
-{
-    background-color: #e1f4f3;
-    margin:0px 3px 0px 3px;
-    text-align: center;
 }
 
 .inactive 
