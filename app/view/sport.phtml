@@ -13,7 +13,6 @@ function exerciceDisplay($sport) {
 }
 
 ob_start();?>
-
     <div class="text-center">
         <h1>Votre séance de sport :</h1>
         <hr>
@@ -33,10 +32,12 @@ ob_start();?>
                 <select class="custom-select col-lg m-3" name="muscle" size=1>
                     <option>Default</option>
                     <?php foreach ($muscleList as $muscle) { ?>
-                        <option><?= $muscle->getLabel() ?></option>
+                        <option <?= isset($trustedPost['muscle']) && $trustedPost['muscle'] == $muscle->getLabel() ? 'selected' : '' ?>>
+                            <?= $muscle->getLabel() ?>
+                        </option>
                     <?php } ?>
                 </select>
-                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout">
+                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout" value="<?= isset($trustedPost['search']) ? $trustedPost['search'] : '' ?>">
                 <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
             </form>
         </div>
