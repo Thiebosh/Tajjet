@@ -52,7 +52,7 @@ ob_start();?>
                     <?php foreach($sportList as $sport) {?>
                         <hr>
                         <li class="my-4">
-                            <?= htmlspecialchars(exerciceDisplay($sport)) ?>
+                            <?= exerciceDisplay($sport) ?>
                             <button class="btn btn-success">Ajouter à ma séance</button>
                         </li>
                     <?php }?>
