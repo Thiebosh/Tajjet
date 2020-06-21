@@ -71,11 +71,10 @@ ob_start();?>
                         } ?>
                     </ul>
                     <div class="d-flex justify-content-center">
-                        <input type="hidden" name="" value="true"><!--save/do-->
-                        <input type="hidden" name="nbExo" value="<?= count($seanceList) ?>"><!--save/do-->
-                        <input type="submit" class="btn btn-info" value="Enregistrer séance">
-                        &nbsp;
-                        <input type="submit" class="btn btn-success" value="Réaliser séance">
+                        <input type="hidden" value="true">
+                        <input type="hidden" name="nbExo">
+                        <input type="" class="btn btn-info mr-2" value="Enregistrer séance" id="saveInput">
+                        <input type="" class="btn btn-success" value="Réaliser séance" id="doInput">
                     </div>
                 </form>
             </div>
@@ -83,19 +82,47 @@ ob_start();?>
     </div>
     <script>
         (function($){
+            var i = 0
             $("button").click(function(){
                 if($(this).hasClass('btn-success')) {
                     cloneParent = $(this).parent().clone(true, true)
+
                     cloneButton = cloneParent[0].children[cloneParent[0].children.length - 1]
-                    
                     cloneButton.className = cloneButton.className.replace('success', 'danger')
                     $(cloneButton).text("Supprimer l'exercice de la séance")
+
                     cloneParent.appendTo( ".seance")
                 } else if($(this).hasClass('btn-danger')){
                     $(this).parent().remove()
                 }
-                
             });
+
+            $("#doInput").click(function(){
+                for(var i = 0; i < $(".seance").children().length; i++) {
+                    liChild = $(".seance").children()[i]
+                    inputLi = $(liChild).children()[0]
+                    inputLiName = $(inputLi).attr("name");
+                    inputLiName += i
+                    $(inputLi).attr("name", inputLiName);
+                }
+                
+                $("input[name='nbExo']").val($(".seance").children().length)
+                $("input[value='true']").attr("name", "do")
+            });
+
+            $("#saveInput").click(function(){
+                for(var i = 0; i < $(".seance").children().length; i++) {
+                    liChild = $(".seance").children()[i]
+                    inputLi = $(liChild).children()[0]
+                    inputLiName = $(inputLi).attr("name");
+                    inputLiName += i
+                    $(inputLi).attr("name", inputLiName);
+                }
+
+                $( "input[name='nbExo']").val($(".seance").children().length)
+                $( "input[value='true']").attr("name", "save")
+            });
+
         })(jQuery);
     </script>
 <?php $sectionContent=ob_get_clean();
