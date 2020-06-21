@@ -3,6 +3,7 @@
 .vs/
 .vscode/
 config.json
+resource/image/avatars/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

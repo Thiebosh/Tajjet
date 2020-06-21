@@ -17,6 +17,20 @@ class TypeManager extends Manager {//pattern CRUD : create, read, update, delete
     }
 
 
+    public function readByName($name) {
+        $query = "SELECT * 
+                    FROM Type 
+                    WHERE Label = :name";
+        $table = array('name' => $name);
+
+        $request = parent::prepareAndExecute($query, $table);
+
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return new Type($result[0]);
+    }
+
+
     public function readAll() {
         $query = "SELECT * 
                     FROM Type 

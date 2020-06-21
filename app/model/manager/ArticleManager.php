@@ -14,5 +14,16 @@ class ArticleManager extends Manager {
         
         return $result;
     }
+
+    public function readRandom() {
+        $query = "SELECT * 
+                    FROM Article 
+                    ORDER BY RAND()
+                    LIMIT 1";
+
+        $request = parent::prepareAndExecute($query);
+
+        return new Article($request->fetchAll(PDO::FETCH_ASSOC)[0]);
+    }
 }
 

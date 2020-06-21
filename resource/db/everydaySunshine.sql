@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `ID_article` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Summary` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Pays` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `URL` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
@@ -127,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `program` (
 DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Name` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `NbPerson` int(11) NOT NULL,
   `PreparationTime` time NOT NULL,
@@ -205,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `sport` (
 DROP TABLE IF EXISTS `town`;
 CREATE TABLE IF NOT EXISTS `town` (
   `ID_town` int(11) NOT NULL AUTO_INCREMENT,
-  `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Label` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`ID_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
