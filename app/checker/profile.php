@@ -29,7 +29,7 @@ if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fic
     }
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {
-        $erreur = 'Votre fichier doit être de type png, gif, jpg ou jpeg';
+        $erreur = 'Votre fichier doit être de type png, gif ou jpeg';
     }
     if(!isset($erreur) && !$stop){
 
