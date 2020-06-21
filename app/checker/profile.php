@@ -4,8 +4,8 @@ if (isset($_POST['username'])) {
 }
 
 if (isset($_FILES['avatar']['name'])) { //Si l'utilisateur a importé un fichier
-    $trustedPost['import']=true;
-    $trustedPost['stop']=false;
+    $import=true;
+    $stop=false;
     $taille_maxi=600000;
     $trustedPost['extensions'] = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
     $taille = filesize($_FILES['avatar']['tmp_name']); //On récupère la taille et l'extension du fichier
@@ -14,13 +14,13 @@ if (isset($_FILES['avatar']['name'])) { //Si l'utilisateur a importé un fichier
     $trustedPost['username_ext_file']=$_SESSION['user']->getName().$extension;
     $dir="resource/image/avatars";
     if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
-        $trustedPost['exist']=false;
+        $exist=false;
     }
     elseif(file_exists($dir)){
-        $trustedPost['exist']=true;
+        $exist=true;
     }
     if($_FILES['avatar']['name']==''){ //Si modification des infos personnelles sans changement d'avatar
-        $trustedPost['stop']=true;
+        $stop=true;
     }
 
     if($taille>$taille_maxi){
@@ -29,7 +29,7 @@ if (isset($_FILES['avatar']['name'])) { //Si l'utilisateur a importé un fichier
     if(!in_array($extension, $trustedPost['extensions'])){ //Si l'extension n'est pas dans le tableau
         $trustedPost['error'] = 'Votre fichier doit être de type png, gif ou jpeg';
     }
-    if(!isset($trustedPost['error']) && !$trustedPost['stop']){
+    if(!isset($trustedPost['error']) && !$stop){
 
         $trustedPost['avatar']=$_FILES['avatar']['name'];
     }
