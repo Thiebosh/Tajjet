@@ -44,8 +44,8 @@
                 $('#tvList').empty()
 
                 heureFiltre = $(this).siblings('#heure')[0].value
-                console.log(heureFiltre)
                 heureFiltre = heureFiltre.split(':')
+                console.log(heureFiltre)
 
                 var dateBefore = new Date()
                 dateBefore.setHours(heureFiltre[0])
@@ -63,8 +63,9 @@
                         var dateTvProgram = new Date();
                         dateTvProgram.setHours(time[0])
                         dateTvProgram.setMinutes(time[1])
-
+                        
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            
                             var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
                             $('#tvList').append(liToAdd)
                         }
@@ -78,7 +79,7 @@
                         dateTvProgram.setMinutes(time[1])
 
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
+                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['started'][i]._synopsis + "</li>")
                             $('#tvList').append(liToAdd)
                         }
                     }

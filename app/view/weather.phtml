@@ -36,11 +36,12 @@
                                 </h2>
                             </div>
                             <div class="p-4">
-                                <h3>Temps : <?= $weather->getSky()->getLabel() ?></h3>
-                                <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
+                                <div class="text-center">
+                                    <h3>Temps : <?= $weather->getSky()->getLabel() ?></h3>
+                                    <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
+                                </div>
                                 <p>
-                                    Température <strong>min</strong> : <?= $weather->getMinTemp() ?> °C </br>
-                                    Température <strong>max</strong> : <?= $weather->getMaxTemp() ?> °C </br>
+                                    Température : <?= $weather->getMinTemp() ?> °C </br>
                                     Température <strong>ressentie</strong> : <?= $weather->getFeltTemp() ?> °C </br>
                                     Humidité : <?= $weather->getHumidity() ?> % </br>
                                     Pression : <?= $weather->getPressure() ?> hPa </br>
