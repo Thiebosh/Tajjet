@@ -32,3 +32,6 @@ $activities = (new TVprogramManager)->readRandomNow();
 
 require_once(__DIR__."/../model/manager/ArticleManager.php");
 $news = (new ArticleManager)->readRandom();
+
+require_once(__DIR__."/../model/manager/SportManager.php");
+$sport = (new SportManager)->readRandom();
