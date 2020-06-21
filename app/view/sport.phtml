@@ -30,12 +30,13 @@ ob_start();?>
         <hr>
         <div class="d-flex justify-content-center">
             <form class="row w-100" method="post" action="index.php?page=sport">
-                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout">
                 <select class="custom-select col-lg m-3" name="muscle" size=1>
+                    <option>Default</option>
                     <?php foreach ($muscleList as $muscle) { ?>
                         <option><?= $muscle->getLabel() ?></option>
                     <?php } ?>
                 </select>
+                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout">
                 <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
             </form>
         </div>
@@ -71,8 +72,8 @@ ob_start();?>
                         } ?>
                     </ul>
                     <div class="d-flex justify-content-center">
-                        <input type="hidden" name="" value="true"><!--save/do-->
-                        <input type="hidden" name="nbExo" value="<?= count($seanceList) ?>"><!--save/do-->
+                        <input type="hidden" name="" value="true"><!--save or do-->
+                        <input type="hidden" name="nbExo">
                         <input type="submit" class="btn btn-info" value="Enregistrer séance">
                         &nbsp;
                         <input type="submit" class="btn btn-success" value="Réaliser séance">
