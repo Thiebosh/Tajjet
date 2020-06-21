@@ -1,18 +1,18 @@
 <?php ob_start();?>
     <article class="theme">
-        <h1>Actualité</h1> 
+        <h1>Actualités</h1> 
         <hr>
         <div class="container"> 
             <ul>
                 <?php foreach ($articleList as $article) { ?>
-                    <li class="my-3">
-                        <div class="card col-lg-12">
+                    <li class="my-3 p-3">
+                        <div class="card col-lg-12 p-0">
                             <div class="card-header">
-                                <a href="<?= $article->getURL() ?>"><?= $article->getTitre() ?></a>
+                                <a href="<?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getURL())) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getTitre())) ?></a>
                                 <p class="mb-0">Temps aproximatif de l'article : <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec</p>
                             </div>
                             <br>
-                            <p>
+                            <p class="p-3">
                                 <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getSummary())) ?>
                             </p>
                         </div>
