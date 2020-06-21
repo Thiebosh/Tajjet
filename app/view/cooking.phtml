@@ -69,25 +69,27 @@
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= htmlspecialchars($i).'. '.\ForceUTF8\Encoding::toUTF8(htmlspecialchars($line)) ?></li>
+                                    <li><?= htmlspecialchars($i.'. '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>
-                    <form method="post" action="index.php?page=home"><!--soit ça soit message de confirmation au rechargement-->
-                        <input type="hidden" name="calories" value="<?= htmlspecialchars($recipe->getCalories()) ?>">
-                        <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
-                    </form>
+                    <?php if (!isset($trustedPost['recipeID'])) { ?>
+                        <form method="post" action="index.php?page=cooking">
+                            <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
+                            <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
+                        </form>
+                    <?php } else echo("J'ai déjà préparé cette recette"); ?>
                 </div>
                 <div class="col-md text-center">
                     <h2>Liste des ingrédients :</h2> 
                     <ul>
                         <?php 
                             $i = 0;
-                            $lines = explode('<br>',htmlspecialchars($recipe->getIngredients()));
+                            $lines = explode('<br>',$recipe->getIngredients());
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= '* '.\ForceUTF8\Encoding::toUTF8($line) ?></li>
+                                    <li><?= htmlspecialchars('* '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>

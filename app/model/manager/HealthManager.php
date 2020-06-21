@@ -13,16 +13,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
 
         $request = parent::prepareAndExecute($query, $table);
 
-
-        $query = 'SELECT *
-                    FROM Health 
-                    WHERE RecordDate = NOW()';
-        
-        $request = parent::prepareAndExecute($query);
-
-        $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
-
-        return new Health($result[0]);//gagne un id
+        return $this->readTodayRecord($health->getIdUser());//add id
     }
 
 

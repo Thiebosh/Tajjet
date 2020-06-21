@@ -1,6 +1,6 @@
 <?php
-if (isset($_POST[''])) {
-    $trustedPost['sleepTime'] = filter_input(INPUT_POST, 'sleepTime', FILTER_VALIDATE_INT);
+if (isset($_POST['recipeID'])) {
+    $trustedPost['recipeID'] = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT);
 }
 
 

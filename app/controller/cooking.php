@@ -5,13 +5,22 @@ require_once(__DIR__."/../model/manager/RecipeManager.php");
 $typeList = (new TypeManager)->readAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $recipe = "result";
-    //calories a deduire de health
+    require(__DIR__."/../checker/$pageName.php");
+
+    if (isset($trustedPost['recipeID']) && $trustedPost['recipeID'] != false) {
+        $recipe = (new RecipeManager)->readByID($trustedPost['recipeID']);
+        
+        require_once(__DIR__."/../model/manager/HealthManager.php");
+        
+        //calories a deduire de health si health du jour existe
+    }
+
+    
+    //si recherche, plat avec espace et type en dernier, concaténé
 }
 else {
     $recipe = (new RecipeManager)->readAlea();
 }
-//plat avec espace et type en dernier, concaténé
 /*
 formulaire {
     checker
