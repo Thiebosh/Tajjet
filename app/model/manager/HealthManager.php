@@ -6,7 +6,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
    
     public function createTodayRecord($health) {
         $query = 'INSERT INTO Health(RecordDate, Weight, Calories, Sleep, ID_user)
-                    VALUES(NOW(), :weight, :calories, :sleep, :id)';
+                    VALUES(CURDATE(), :weight, :calories, :sleep, :id)';
         $table = array('id'         => $health->getIdUser(),
                         'calories'  => ($health->getCalories()  != null) ? $health->getCalories()   : PDO::PARAM_NULL,
                         'sleep'     => ($health->getSleep()     != null) ? $health->getSleep()      : PDO::PARAM_NULL,
@@ -22,14 +22,14 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
     public function readTodayRecord($idUser) {
         $query = "SELECT * 
                     FROM Health 
-                    WHERE RecordDate = NOW()
+                    WHERE RecordDate = CURDATE()
                     AND ID_user = :id";
-        $table = array('id' => $userId);
+        $table = array('id' => $idUser);
 
         $request = parent::prepareAndExecute($query, $table);
 
         $result = $request->fetchAll(PDO::FETCH_ASSOC);//fetchAll => close cursor implicite
-        
+
         return (count($result) != 0) ? new Health($result[0]) : false;
     }
     
@@ -39,7 +39,7 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
         $query = "SELECT * 
                     FROM Health 
                     WHERE ID_user = :id
-                    AND RecordDate > DATE_SUB(NOW(), INTERVAL 7 DAY)
+                    AND RecordDate > DATE_SUB(CURDATE(), INTERVAL 7 DAY)
                     ORDER BY RecordDate";
         $table = array('id' => $idUser);
 
@@ -62,9 +62,8 @@ class HealthManager extends Manager {//pattern CRUD : create, read, update, dele
                     SET Weight = :weight, 
                         Calories = :calories, 
                         Sleep = :sleep
-                    WHERE ID_user = :id
-                    AND RecordDate = NOW()';
-        $table = array('id'         => $health->getIdUser(),
+                    WHERE ID_health = :id';
+        $table = array('id'         => $health->getId(),
                         'calories'  => ($health->getCalories()  != null) ? $health->getCalories()   : PDO::PARAM_NULL,
                         'sleep'     => ($health->getSleep()     != null) ? $health->getSleep()      : PDO::PARAM_NULL,
                         'weight'    => ($health->getWeight()    != null) ? $health->getWeight()     : PDO::PARAM_NULL);

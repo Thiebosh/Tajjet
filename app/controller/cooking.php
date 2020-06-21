@@ -7,16 +7,25 @@ $typeList = (new TypeManager)->readAll();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__."/../checker/$pageName.php");
 
-    if (isset($trustedPost['recipeID']) && $trustedPost['recipeID'] != false) {
+    if (isset($trustedPost['recipeID']) && $trustedPost['recipeID'] != false) {//prepare recette
         $recipe = (new RecipeManager)->readByID($trustedPost['recipeID']);
         
         require_once(__DIR__."/../model/manager/HealthManager.php");
-        
-        //calories a deduire de health si health du jour existe
+
+        if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
+            $init = array("id_user" => $_SESSION['user']->getId(),
+                            "calories" => $recipe->getCalories());
+            (new HealthManager)->createTodayRecord(new Health($init));//pb doublonnage
+        }
+        else {
+            $health->setCalories($health->getCalories() + $recipe->getCalories());
+            (new HealthManager)->updateTodayRecord($health);
+        }
     }
 
     
     //si recherche, plat avec espace et type en dernier, concaténé
+    //premier form
 }
 else {
     $recipe = (new RecipeManager)->readAlea();
