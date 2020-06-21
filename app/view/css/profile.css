@@ -18,7 +18,7 @@ div{
     text-align:center;
     
 }
-label,#inscr p
+label,#inscr p, .bold
 {
     font-weight:bold;
 }

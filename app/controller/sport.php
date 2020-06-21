@@ -1,45 +1,48 @@
 <?php
-//1. verifie entrees utilisateur ici (get/post)
-//require("../checker/$pageName.php");
+require_once(__DIR__."/../model/manager/MuscleManager.php");
+require_once(__DIR__."/../model/manager/SportManager.php");
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require(__DIR__."/../checker/$pageName.php");
+    
+    if (isset($trustedPost['random'])) $sportList = array((new SportManager)->readRandom());
+    else if (isset($trustedPost['muscle'])) {
+        if (!isset($trustedPost['search'])) $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
+        else {
+            if ($trustedPost['muscle'] == "Default") $sportList = (new SportManager)->searchByName($trustedPost['search']);
+            else $sportList = (new SportManager)->searchByNameAndMuscle($trustedPost['muscle'], $trustedPost['search']);
+        }
+    }
+    else if (isset($trustedPost['action'])) {
+        if ($trustedPost['action'] == 'save') {
+            
+            (new SportManager)->resetProgram($_SESSION['user']->getId());
 
-//2. appels bdd
-//load bdd functions : require("../model/manager/*needed*.php");
-//call managers functions (load data here)
-$pageFill['exercice'] = array(
-                            array("id" => 1,
-                                    "name" => "Développé couché",
-                                    "picture" => "url ou path",
-                                    "calories" => 234,
-                                    "muscles" => array("muscle1", "muscle2", "muscle3")
-                                ),
+            foreach ($trustedPost['listExo'] as $exo) {
+                (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
+            }
+        }
+        else {
+            require_once(__DIR__."/../model/manager/HealthManager.php");
+            $calories = 300;
+            
+            if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
+                $init = array("id_user" => $_SESSION['user']->getId(),
+                                "calories" => -$calories);
+                (new HealthManager)->createTodayRecord(new Health($init));
+            }
+            else {
+                $health->setCalories($health->getCalories() - $calories);
+                (new HealthManager)->updateTodayRecord($health);
+            }
+        }
+    }
+}
 
-                            array("id" => 2,
-                                    "name" => "Tractions",
-                                    "picture" => "url ou path",
-                                    "calories" => 864,
-                                    "muscles" => array("muscle2", "muscle4")
-                                )
-                            );
+if (!isset($sportList) || $sportList == false) {
+    if (isset($sportList) && $sportList == false) $trustedPost['errMsgs'][] = $errMsg['checker']['form']['filter'];//aucun résultat pour votre recherche
+    $sportList = (new SportManager)->readAll();
+}
 
-$pageFill['seance']=array(
-                        array("id"=>1,
-                            "exercices"=>array(
-                                                array("id"=>1,
-                                                    "name"=>"Développé couché",
-                                                    "image"=>"Image développé couché",
-                                                    "calories" => 234),
-                                                array("id"=>2,
-                                                    "name"=>"Tractions",
-                                                    "image"=>"Image tractions",
-                                                    "calories" => 86)
-                            
-                                            )
-
-                            ),
-
-
-                        );
-
-//3. transforme donnees (post traitement)
-//tranformations goes here
+$seanceList = (new SportManager)->readSeance($_SESSION['user']->getId()); //evolue selon le form
+$muscleList = (new MuscleManager)->readAll();

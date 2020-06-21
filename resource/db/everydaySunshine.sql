@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 18 juin 2020 à 16:11
+-- Généré le :  Dim 21 juin 2020 à 22:38
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -64,15 +64,16 @@ CREATE TABLE IF NOT EXISTS `frequency` (
   `NumberOfDays` float NOT NULL,
   `NextDate` datetime NOT NULL,
   PRIMARY KEY (`ID_frequency`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `frequency`
 --
 
 INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
-(1, 1, '2020-06-19 00:00:00'),
-(2, 0.12, '2020-06-19 00:00:00');
+(1, 1, '2020-06-22 00:00:00'),
+(2, 0.12, '2020-06-22 00:00:00'),
+(3, 1, '2020-06-22 01:00:00');
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `program` (
 DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE IF NOT EXISTS `recipe` (
   `ID_recipe` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Picture` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `NbPerson` int(11) NOT NULL,
   `PreparationTime` time NOT NULL,
@@ -158,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `renewal` (
   `ID_frequency` int(11) NOT NULL,
   PRIMARY KEY (`ID_renewal`),
   KEY `FK_Renewal_ID_frequency` (`ID_frequency`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `renewal`
@@ -166,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `renewal` (
 
 INSERT INTO `renewal` (`ID_renewal`, `ModuleName`, `ID_frequency`) VALUES
 (1, 'meteo', 1),
-(2, 'tv', 1),
+(2, 'tv', 3),
 (3, 'news', 2);
 
 -- --------------------------------------------------------
@@ -206,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `sport` (
 DROP TABLE IF EXISTS `town`;
 CREATE TABLE IF NOT EXISTS `town` (
   `ID_town` int(11) NOT NULL AUTO_INCREMENT,
-  `Label` varchar(255) CHARACTER SET latin1 COLLATE utf8_general_ci NOT NULL,
+  `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_town`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -239,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `ID_type` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `type`
@@ -248,9 +249,7 @@ CREATE TABLE IF NOT EXISTS `type` (
 INSERT INTO `type` (`ID_type`, `Label`) VALUES
 (1, 'entree'),
 (2, 'plat principal'),
-(3, 'accompagnement'),
-(4, 'amuse gueule'),
-(5, 'sauce');
+(3, 'dessert');
 
 -- --------------------------------------------------------
 
@@ -265,6 +264,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `BirthDate` date DEFAULT NULL,
   `Height` float DEFAULT NULL,
+  `Sex` tinyint(1) DEFAULT NULL,
   `ID_town` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
   KEY `FK_User_ID_town` (`ID_town`)
@@ -280,8 +280,7 @@ DROP TABLE IF EXISTS `weather`;
 CREATE TABLE IF NOT EXISTS `weather` (
   `ID_weather` int(11) NOT NULL AUTO_INCREMENT,
   `Forecast` datetime NOT NULL,
-  `MinTemp` float NOT NULL,
-  `MaxTemp` float NOT NULL,
+  `Temp` float NOT NULL,
   `FeltTemp` float NOT NULL,
   `Humidity` float NOT NULL,
   `Pressure` float NOT NULL,

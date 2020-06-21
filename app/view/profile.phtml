@@ -16,7 +16,7 @@
                         <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
                     </p>
                     
-                    <p class="d-flex justify-content-center">
+                    <p class="d-flex justify-content-center mt-4">
                         <input type="submit" class="btn btn-outline-success" value="Modifier mes identifiants"/>
                     </p>
                 </form>
@@ -32,9 +32,9 @@
                     <br>
                     <br>
                     <?php 
-                        if(isset($error)){  ?>
+                        if(isset($erreur)){  ?>
                             <span class="erreur">
-                                <?=htmlspecialchars($error)?>
+                                <?=htmlspecialchars($erreur)?>
                             </span>
                         
                         <?php }
@@ -52,8 +52,17 @@
                         <br>
                         <label for="town">Votre ville</label><br>
                         <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
+                        <p class="bold">Votre sexe (à la naissance)</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femme" value="femme">
+                            <label class="form-check-label" for="femme">Femme</label>
+                        </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="homme" value="homme">
+                            <label class="form-check-label" for="homme">Homme</label>
+                        </div>
                     </p>
-                    <p class="d-flex justify-content-center">
+                    <p class="d-flex justify-content-center mt-4">
                         <input type="submit" class="btn btn-outline-success" name="modif" value="Modifier mes informations personnelles"/>
                     </p>
                 </form>  

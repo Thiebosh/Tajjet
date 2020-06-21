@@ -4,14 +4,15 @@
         <hr>
     </div>
     <div class="d-flex justify-content-center">
-        <form class="w-100 row" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
+        <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <?php foreach($typeList as $type) { ?>
-                    <option><?= htmlspecialchars($type->getLabel()) ?>
+                    <option><?= htmlspecialchars($type->getLabel()) ?></option>
                 <?php } ?>
             </select>
-            <input require class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
+            <input required class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
             <input class="col-lg btn btn-primary m-3 buttonNav" type="submit" value="Rechercher">
+            <a class="col-lg btn btn-primary m-3 buttonNav">Recette aléatoire</a>
         </form>
     </div>
     
@@ -24,21 +25,43 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12" id="timeGlobal">
-                            Temps total : <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[1]) ?> minute(s)
+                            Temps total : 
+                            <?php
+                                $tmp = explode(':',$recipe->getTotalTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6" id="timePrep">
                             Temps de préparation :
-                            <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[1]) ?> minute(s)
+                            <?php
+                                $tmp = explode(':',$recipe->getPreparationTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
                         <div class="col-md-6" id="timeCook">
-                            Temps de cuisson : 
-                            <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[1]) ?> minute(s)
+                            Temps de cuisson :
+                            <?php
+                                $tmp = explode(':',$recipe->getCookingTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : ''); 
+                            ?>
                         </div>
                     </div>
                 </div>

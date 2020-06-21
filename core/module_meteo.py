@@ -47,8 +47,7 @@ try:
     for j in range(0, len(data['list'])): 
         Forecast = data['list'][j]['dt_txt']      
         label = data['list'][j]['weather'][0]['main']
-        MinTemp = data['list'][j]['main']['temp_min']
-        MaxTemp = data['list'][j]['main']['temp_max']
+        Temp = data['list'][j]['main']['temp_max']
         FeltTemp = data['list'][j]['main']['feels_like']
         Humidity = data['list'][j]['main']['humidity']
         Pressure = data['list'][j]['main']['pressure']
@@ -91,8 +90,8 @@ try:
         myresult = mycursor.fetchall()
         id_sky = myresult[0][0]
 
-        sql = "INSERT INTO weather (Forecast, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure, id_sky, id_town) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (Forecast, MinTemp, MaxTemp, FeltTemp, Humidity, Pressure, id_sky, id_town)
+        sql = "INSERT INTO weather (Forecast, Temp, FeltTemp, Humidity, Pressure, id_sky, id_town) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        val = (Forecast, Temp, FeltTemp, Humidity, Pressure, id_sky, id_town)
         mycursor.execute(sql, val)
 
         mydb.commit()
