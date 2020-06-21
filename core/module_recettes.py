@@ -144,13 +144,11 @@ class Marmiton(object):
 
         return data
 
-
 aqt = ""
 for i in range(1, len(sys.argv) - 1):
     aqt += sys.argv[i] + " "
 
 dt = sys.argv[len(sys.argv) - 1]
-dt = dt.replace(' ', '')
 # Search :
 query_options = {
   "aqt": aqt,      # Query keywords - separated by a white space
@@ -205,20 +203,13 @@ if(error != True):
     adr = (detailed_recipe['name'], )
     mycursor.execute(sql, adr)
 
-    if mycursor.rowcount == 0:        
+    if mycursor.rowcount == 0:    
+        if(dt == "platprincipal"):
+            dt = "plat principal"
+
         sql = "SELECT id_type FROM type WHERE label=%s"
         adr = (dt, )
         mycursor.execute(sql, adr)
-
-        if(mycursor.rowcount == 0):
-            sql = "INSERT INTO type (label) VALUES (%s)"
-            adr = (dt, )
-            mycursor.execute(sql, adr)
-            mydb.commit()
-
-            sql = "SELECT id_type FROM type WHERE label=%s"
-            adr = (dt, )
-            mycursor.execute(sql, adr)
 
         myresult = mycursor.fetchall()
         id_type = myresult[0][0]
