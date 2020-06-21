@@ -4,7 +4,7 @@ if (isset($_POST['random'])) $trustedPost['random'] = true;
 else if (isset($_POST['muscle'])) {
     $trustedPost['muscle'] = filter_input(INPUT_POST, 'muscle', FILTER_SANITIZE_STRING);
 
-    if (isset($_POST['search'])) $trustedPost['search'] = true;
+    if (isset($_POST['search'])) $trustedPost['search'] = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
 }
 else if (isset($_POST['nbExo']) && (isset($_POST['save']) || isset($_POST['do']))) {
     $trustedPost['action'] = isset($_POST['save']) ? 'save' : 'do';

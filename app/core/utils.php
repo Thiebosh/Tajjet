@@ -27,7 +27,7 @@ function somm($last7daysSleepTime) {
 
     for($i=0;$i<sizeof($last7daysSleepTime); ++$i) {
         array_push($decomp,explode(':',$last7daysSleepTime[$i]));
-
+        
         array_push($heures, $decomp[$i][0] );
         array_push($minutes, $decomp[$i][1]);
         if($i>0 && ( 1<abs($heures[$i-1]-$heures[$i]) )) {
@@ -39,26 +39,40 @@ function somm($last7daysSleepTime) {
         }
     }
 
-    $heure_moyenne=(round  ( (array_sum($heures))/(sizeof($heures)),2));
-    $min_moyenne=(array_sum($minutes))/(sizeof($minutes));
-    $temps_moyen=$heure_moyenne+($min_moyenne/60);
-    
-    $hmoy=explode('.',$heure_moyenne)[0];
-    
-    if(sizeof(explode('.',$heure_moyenne))==2 ){
-        $mmoy=round(60*explode('.',$temps_moyen)[1]/100);
+    $heure_moyenne=round  ( (array_sum($heures))/(sizeof($heures)),2); //moyenne des heures
+    $min_moyenne=round((array_sum($minutes))/(sizeof($minutes)),2); //moyenne des minutes
+
+    $liste_separee_heures_moyennes=explode('.',$heure_moyenne);
+    $hmoy=$liste_separee_heures_moyennes[0]; //on sépare juste la partie entière des heures
+
+
+    if(sizeof($liste_separee_heures_moyennes)==2 ){ //si partie décimale (1 seule décimale) aux heures moyennes
+        $mmoy=$min_moyenne+round(60*$liste_separee_heures_moyennes[1]/10);
         
     }
-    elseif(sizeof(explode('.',$heure_moyenne))==1 ){
-        $mmoy=round(60*explode('.',$temps_moyen)[0]/100);
+    elseif(sizeof($liste_separee_heures_moyennes)==3 ){ //si 2 décimales aux heures moyennes
+        $decimales=implode($liste_separee_heures_moyennes[1],$liste_separee_heures_moyennes[2]);
+        $mmoy=$min_moyenne+round(60*$decimales/100);
     }
-   // echo(var_dump($mmoy));
+    elseif(sizeof($liste_separee_heures_moyennes)==1 ){ //si non
+        $mmoy=$min_moyenne;
+    }
+
+    while($mmoy>=60){
+            ++$hmoy;
+            $mmoy=$mmoy-60;
+    }
+    
+    if(0<=$mmoy && $mmoy<10){ //On affiche le 0 avant les minutes
+        $mmoy="0".$mmoy;
+    }
     $temps_moyen="$hmoy"."h"."$mmoy";
 
     $retour=array();
     array_push($retour,$temps_moyen);
     array_push($retour,$rythme);
     array_push($retour,$compteur);
+
     return $retour;
 }
 

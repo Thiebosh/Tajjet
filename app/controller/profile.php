@@ -14,14 +14,14 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else $_SESSION['user']->setName($trustedPost['name']);
         }
         
-        if(isset($trustedPost['import'])&&$trustedPost['import']==true && isset($trustedPost['stop']) &&$trustedPost['stop']==false) { //Si l'utilisateur a importé un fichier
+        if(isset($import)&&$import==true && isset($stop) &&$stop==false) { //Si l'utilisateur a importé un fichier
             $dir="resource/image/avatars";
             if(isset($trustedPost['error'])){
                 $erreur=$trustedPost['error'];
                 
             }
             else{
-                if(!$trustedPost['exist']){ //Si le dossier avatars n'existe pas, on le crée, on y ajoute le fichier et on le renomme avec le nom de l'utilisateur
+                if(!$exist){ //Si le dossier avatars n'existe pas, on le crée, on y ajoute le fichier et on le renomme avec le nom de l'utilisateur
                     $creation=mkdir($dir,0777,true);
                     if($creation){
                         
@@ -48,7 +48,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
-        elseif(isset($trustedPost['stop'])&&$trustedPost['stop']==true ){ //Si l'utilisateur modifie ses informations personnelles sans importer d'avatar
+        elseif(isset($stop)&& $stop==true ){ //Si l'utilisateur modifie ses informations personnelles sans importer d'avatar
             if (!(isset($_FILES['avatar']['name'])) || $_FILES['avatar']['name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
                 $dir="resource/image/avatars";
                 $trouve=false;

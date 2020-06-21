@@ -2,28 +2,39 @@
 require_once(__DIR__."/../model/manager/MuscleManager.php");
 require_once(__DIR__."/../model/manager/SportManager.php");
 
-$muscleList = (new MuscleManager)->readAll();
-$seanceList = (new SportManager)->readSeance($_SESSION['user']->getId());
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require(__DIR__."/../checker/$pageName.php");
     
     if (isset($trustedPost['random'])) $sportList = array((new SportManager)->readRandom());
     else if (isset($trustedPost['muscle'])) {
-        if (!isset($trustedPost['search'])) {
-            $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
-        }
+        if (!isset($trustedPost['search'])) $sportList = (new SportManager)->readByMuscle($trustedPost['muscle']);//tous les sports du muscle
         else {
-            //if ($trustedPost['muscle'] == "Default") //$sportList = recherche sur nom
-            //else //$sportList = recherche sur nom avec filtre catégorie. Peut drop erreur "aucun résulat pour votre recherche"
+            if ($trustedPost['muscle'] == "Default") $sportList = (new SportManager)->searchByName($trustedPost['search']);
+            else $sportList = (new SportManager)->searchByNameAndMuscle($trustedPost['muscle'], $trustedPost['search']);
         }
     }
     else if (isset($trustedPost['action'])) {
         if ($trustedPost['action'] == 'save') {
-            //enregistrement mémoire
+            
+            (new SportManager)->resetProgram($_SESSION['user']->getId());
+
+            foreach ($trustedPost['listExo'] as $exo) {
+                (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
+            }
         }
         else {
-            require_once("HealthManager.php");
+            require_once(__DIR__."/../model/manager/HealthManager.php");
+            $calories = 300;
+            
+            if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
+                $init = array("id_user" => $_SESSION['user']->getId(),
+                                "calories" => -$calories);
+                (new HealthManager)->createTodayRecord(new Health($init));
+            }
+            else {
+                $health->setCalories($health->getCalories() - $calories);
+                (new HealthManager)->updateTodayRecord($health);
+            }
         }
     }
 }
@@ -33,3 +44,5 @@ if (!isset($sportList) || $sportList == false) {
     $sportList = (new SportManager)->readAll();
 }
 
+$seanceList = (new SportManager)->readSeance($_SESSION['user']->getId()); //evolue selon le form
+$muscleList = (new MuscleManager)->readAll();

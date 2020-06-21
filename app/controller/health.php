@@ -7,26 +7,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId());
 
     {
-        if (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) {
+        if ( (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) && (isset($trustedPost['weight']) && $trustedPost['weight'] !== false)) {
             if (!$health) {
                 $init = array("id_user" => $_SESSION['user']->getId(),
+                                "weight"=>$trustedPost['weight'],
                                 "sleep" => $trustedPost['sleepTime']);
                 (new HealthManager)->createTodayRecord(new Health($init));
             }
             else {
-                $health->setSleep($trustedPost['sleepTime']);
-                (new HealthManager)->updateTodayRecord($health);
-            }
-        }
-
-        if (isset($trustedPost['weight']) && $trustedPost['weight'] !== false) {
-            if (!$health) {
-                $init = array("id_user" => $_SESSION['user']->getId(),
-                                "weight" => $trustedPost['weight']);
-                (new HealthManager)->createTodayRecord(new Health($init));
-            }
-            else {
                 $health->setWeight($trustedPost['weight']);
+                $health->setSleep($trustedPost['sleepTime']);
                 (new HealthManager)->updateTodayRecord($health);
             }
         }
@@ -67,29 +57,41 @@ if ($listHealth !== false) {
 
     //Commentaire selon temps de sommeil enregistré et age
     if ($_SESSION['user']->getBirthDate() !== null) {
-        $age = Age($_SESSION['user']->getBirthDate());
-        $sleepTime = $listHealth[0]->getSleep();//verif 0 == plus recent
+        if($_SESSION['user']->getBirthDate() =="0000-00-00")
+        {
+            $commSleepTod="Veuillez entrer votre date de naissance en cliquant sur Mon Profil";
+        }
+        
+        else{
+            $age = Age($_SESSION['user']->getBirthDate());
+            $sleepTime = $listHealth[0]->getSleep();//verif 0 == plus recent
 
-        //if ($sleepTime == null) 
-        if (($age <= 17 && $sleepTime < 8) ||
-            (17 < $age && $sleepTime < 7)) {
-            $commSleepTod="Vous n'avez pas assez dormi cette nuit, il faut dormir plus.";
-        }
-        else if (($age <= 17 && $sleepTime < 10) ||
-            (17 < $age && $age <= 64 && $sleepTime < 9) ||
-            (65 < $age && $sleepTime < 8)) {
-            $commSleepTod="Vous avez dormi suffisamment cette nuit, vous devez vous sentir en forme. ";
-        }
-        else {
-            $commSleepTod="Vous avez trop dormi cette nuit, évitez de dépasser le temps de sommeil maximum recommandé. ";
-        }
+            //if ($sleepTime == null) 
+            if (($age <= 17 && $sleepTime < 8) ||
+                (17 < $age && $sleepTime < 7)) {
+                $commSleepTod="Vous n'avez pas assez dormi cette nuit, il faut dormir plus.";
+            }
+            else if (($age <= 17 && $sleepTime < 10) ||
+                (17 < $age && $age <= 64 && $sleepTime < 9) ||
+                (65 < $age && $sleepTime < 8)) {
+                $commSleepTod="Vous avez dormi suffisamment cette nuit, vous devez vous sentir en forme. ";
+            }
+            else {
+                $commSleepTod="Vous avez trop dormi cette nuit, évitez de dépasser le temps de sommeil maximum recommandé. ";
+            }
 
-        unset($age, $sleepTime);
+            unset($age, $sleepTime);
+
+        }
+        
+        
+            
+        
     }
 
 
     //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) if ($health->getSleep() != 0) $lastSleepTime[] = $health->getSleep();
+    foreach ($listHealth as $health) if ($health->getSleep() != false) $lastSleepTime[] = $health->getSleep();
 
     $tab_somm=somm($lastSleepTime);
 
