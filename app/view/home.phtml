@@ -21,7 +21,6 @@
                         <?php if(!$card["active"]){ ?>
                                 <p class="inval">Veuillez renseigner votre <?=$card["missing"]?> dans votre profil</p>
                             <?php } 
-                            
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
@@ -54,10 +53,10 @@
                                     <?php break;
         
                                     case "activities": ?>
-                                        Aujourd'hui, regardez <?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
+                                        Aujourd'hui, regardez < ?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
                                         <br>
-                                        à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
-                                        sur <?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
+                                        à < ?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                        sur < ?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails le programme du jour

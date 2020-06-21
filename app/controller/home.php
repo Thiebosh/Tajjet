@@ -25,10 +25,10 @@ if ($weatherCond) {
 require_once(__DIR__."/../model/manager/RecipeManager.php");
 $cooking = (new RecipeManager)->readRandom();
 
-
+/*
 require_once(__DIR__."/../model/manager/TVprogramManager.php");
 $activities = (new TVprogramManager)->readRandomNow();
-
+*/
 
 require_once(__DIR__."/../model/manager/ArticleManager.php");
 $news = (new ArticleManager)->readRandom();

@@ -33,6 +33,7 @@ tv_feed = feedparser.parse('https://webnext.fr/templates/webnext_exclusive/views
 if (len(tv_feed.entries) == 0) :
     print('1')
 else :
+    print(tv_feed)
     mycursor = mydb.cursor(buffered=True)
 
     sql = "DELETE FROM tvprogram"
