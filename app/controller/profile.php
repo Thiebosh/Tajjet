@@ -89,7 +89,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 require(__DIR__."/../checker/$pageName.php");
-if (!$import || $_FILES['avatar']['tmp_name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
+if (!$import || $_FILES['avatar']['name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
     $dir="resource/image/avatars";
     $trouve=false;
     if($ex){ //Si le dossier avatars existe, on va chercher l'avatar déjà existant
