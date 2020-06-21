@@ -26,10 +26,8 @@
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
-                                        < ?=$pageFill['exercice'][0]['name']?>
-                                        <br>    
-                                        <br>
-                                        < ?=$pageFill['exercice'][0]['picture']?>
+                                        <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
+                                        <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
                                     <?php break; 
         
                                     case "health":?>
