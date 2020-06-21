@@ -32,7 +32,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             foreach ($modules as $module) {
                 if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
                 else {
-                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);             
+                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);
                     unset($output);
                 }
             }
