@@ -52,7 +52,7 @@
                     <tr>
                         <?php if (isset($imc)) { ?>
                             <td>
-                                Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? $imc : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                                Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? number_format (floatval($imc), 1) : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
                             </td>
 
                             <td>
