@@ -38,7 +38,7 @@ $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
 if ($listHealth !== false) {
     //imc
-    if ($_SESSION['user']->getHeight() != null && $listHealth[0]->getWeight() != null) {
+    if ($_SESSION['user']->getHeight() != 0 && $listHealth[0]->getWeight() != 0) {
         $imc = $listHealth[0]->getWeight() / pow($_SESSION['user']->getHeight(), 2);
 
         if ($imc !== false) {
@@ -89,7 +89,7 @@ if ($listHealth !== false) {
 
 
     //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) if ($health->getSleep() != null) $lastSleepTime[] = $health->getSleep();
+    foreach ($listHealth as $health) if ($health->getSleep() != 0) $lastSleepTime[] = $health->getSleep();
 
     $tab_somm=somm($lastSleepTime);
 

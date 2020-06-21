@@ -49,9 +49,6 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         
-        
-            
-        
         if (isset($trustedPost['password'], $trustedPost['passwordConf']) && 
             $trustedPost['password'] !== false && $trustedPost['passwordConf'] !== false) {
             if ($trustedPost['password'] != $trustedPost['passwordConf']) {
