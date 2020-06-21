@@ -9,18 +9,18 @@
         <div class="row <?= $first? 'mt-4' : '' ?>">
             <?php foreach($line as $card) { ?>
                 <div class="col-lg">
-                    <div class="mt-2 card <?= !$card["active"] ? 'inactive' : '' ?>">
+                    <div class="card card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="<?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
                             <a class="col-lg mt-2" href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
-                                <button class="col-lg-12 btn btn-primary <?= !$card["active"] ? 'inactive in-btn' : '' ?>">
-                                    <?= $card["display"] ?><br>
+                                <button class="btn btn-link btn-lg">
+                                    <?= $card["display"] ?>
                                 </button>
                             </a>
                         </div>
+                        <div class="card-body">
                         <?php if(!$card["active"]){ ?>
                                 <p class="inval">Veuillez renseigner votre <?=$card["missing"]?> dans votre profil</p>
                             <?php } 
-                            
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
@@ -35,11 +35,12 @@
                                     <?php break;
         
                                     case "news":?>
-                                        <a href="<?= htmlspecialchars($news->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($news->getTitle()))) ?></a>
-                                        <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($news->getSummary())) ?>
-                                        <br>
-                                        <br>
-                                        Retrouvez plus d'actualités résumées
+                                        <h4 class="cart-title"><a href="<?= htmlspecialchars($news->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($news->getTitle()))) ?></a></h4>
+                                        <p class="card-text">
+                                            <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($news->getSummary())) ?>
+                                            <br><br>
+                                            Retrouvez plus d'actualités résumées
+                                        </p>
                                     <?php break;
         
                                     case "weather": ?>
@@ -52,10 +53,10 @@
                                     <?php break;
         
                                     case "activities": ?>
-                                        Aujourd'hui, regardez <?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
+                                        Aujourd'hui, regardez < ?= '"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).'"' ?>
                                         <br>
-                                        à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
-                                        sur <?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
+                                        à < ?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                        sur < ?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?>
                                         <br>
                                         <br>
                                         Retrouvez plus en détails le programme du jour
@@ -72,7 +73,8 @@
                                     <?php break;
                                     
                                 } ?>
-                            <?php } ?>   
+                            <?php } ?>
+                        </div>   
                     </div>
                 </div>
             <?php } ?>

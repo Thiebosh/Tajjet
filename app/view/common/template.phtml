@@ -6,9 +6,9 @@
     <title>EverydaySunshine - <?= htmlspecialchars(ucfirst($pageName)) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="app/view/common/css/normalize.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="app/view/common/css/template.css"/><!-- memes valeurs css par defaut pour tous les navigateurs -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous"> 
     
-    <link rel="stylesheet" href="app/view/common/css/template.css"/><!-- style de la partie template + declaration variables -->
     <?php if (file_exists(__DIR__."/../css/$pageName.css")) { ?>
         <link rel="stylesheet" href="app/view/css/<?= htmlspecialchars($pageName) ?>.css"/><!-- style de la partie section -->
     <?php } ?>
@@ -26,7 +26,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
             <a class="navbar-brand" href="index.php?page=home">Your Everyday Sunshine</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
