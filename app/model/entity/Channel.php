@@ -18,7 +18,9 @@ class Channel extends Entity {
     }
 
     public function objectToJson() {
-        return json_encode(get_object_vars($this));
+        $tmp = $this;
+        $tmp->_label = \ForceUTF8\Encoding::toUTF8($tmp->_label);
+        return json_encode(get_object_vars($tmp));
     }
 
     //getters

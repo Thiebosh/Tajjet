@@ -16,31 +16,38 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if($import && !$stop) { //Si l'utilisateur a importé un fichier
             $dir="resource/image/avatars";
-            if(!$ex){
-                $creation=mkdir($dir,0777,true);
-                if($creation){
-                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
-                    if($retour) {
-                        $avatar=$dir.'/' . $trustedPost['avatar'];
-                    } 
-                }
+            if(isset($erreur)){
+                $error=$erreur;
+                
             }
             else{
-                if(!file_exists($dir.$trustedPost['avatar'])){ //Si l'avatar n'a pas déjà été importé, alors on l'importe
-                    if(sizeof(scandir($dir))>2){ //Il y a déjà un fichier dans le dossier : on le supprime
-                        $name=scandir($dir)[2];
-                        unlink($dir.'/'.$name);
+                if(!$ex){ //Si le dossier avatars n'existe pas, on le crée, on y ajoute le fichier et on le renomme avec le nom de l'utilisateur
+                    $creation=mkdir($dir,0777,true);
+                    if($creation){
+                        
+                        $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
+                        if($retour) {
+                            rename($dir.'/' . $trustedPost['avatar'],$dir.'/' .$nom);
+                            $avatar=$dir.'/' . $nom;
+                        } 
                     }
-                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$trustedPost['avatar']);
-                    if($retour) {
-                    $avatar=$dir.'/' . $trustedPost['avatar'];
-                    } 
+                }
+                else{ //Si le dossier avatars existe, on regarde s'il existe déjà un avatar pour l'utilisateur, si oui on le supprime puis on le remplace
+                    
+                    for($i=0;$i<sizeof(scandir($dir));++$i){ //On parcourt le dossier et si un avatar pour l'utilisateur est déjà présent, on le supprime (peu importe le format)
+                        
+                        if(file_exists($dir.'/'.$nom_non_ext.$extensions[$i])){
+                            unlink($dir.'/'.$nom_non_ext.$extensions[$i]);
+                            
+                        }
+                    }
+                    $retour = copy($_FILES['avatar']['tmp_name'], $dir.'/'.$nom);
+                        if($retour) {
+                        $avatar=$dir.'/' . $nom;
+                        } 
                 }
             }
-            
         }
-        
-            
         
         if (isset($trustedPost['password'], $trustedPost['passwordConf']) && 
             $trustedPost['password'] !== false && $trustedPost['passwordConf'] !== false) {
@@ -79,12 +86,20 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 require(__DIR__."/../checker/$pageName.php");
-if (!$import || $_FILES['avatar']['tmp_name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
+if (!$import || $_FILES['avatar']['name']=='') { //S'il n'y a pas eu de nouvel import ou si modification de données personnelles sans changement d'avatar
     $dir="resource/image/avatars";
+    $trouve=false;
     if($ex){ //Si le dossier avatars existe, on va chercher l'avatar déjà existant
-        $name=scandir($dir)[2];
-        if(file_exists($dir."/".$name)){ 
-            $avatar=$dir.'/' . $name;
+
+        for($i=0;$i<sizeof(scandir($dir));++$i ){ //On parcourt le dossier avatars
+            if(explode('.',scandir($dir)[$i])[0]==$nom_sans_ext){
+                $avatar=$dir.'/'.$nom_sans_ext.'.'.explode('.',scandir($dir)[$i])[1];
+                $trouve=true;
+                
+            }
+            if($trouve==false){ //Sinon, l'avatar correspond à l'avatar par défaut
+                $avatar="resource/image/defaultavatar.jpg";
+            }
         }
     }
     else{ //Sinon, l'avatar correspond à l'avatar par défaut

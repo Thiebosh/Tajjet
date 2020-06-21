@@ -5,37 +5,41 @@ require_once(__DIR__."/../model/manager/RecipeManager.php");
 $typeList = (new TypeManager)->readAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $recipe = "result";
-    //calories a deduire de health
-}
-else {
-    $recipe = (new RecipeManager)->readAlea();
-}
-//plat avec espace et type en dernier, concaténé
-/*
-formulaire {
-    checker
-    if (nom != null) {
-        $recipe = (new RecipeManager)->searchByName($trustedPost['name']);
-        if ($recipe == false) {
-            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['name'], $output, $return);
-            if (end($output) != '0') $recipe = (new RecipeManager)->readByName(end($output));
-            else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['recipe'];
-            unset($output);
-        }
+    require(__DIR__."/../checker/$pageName.php");
 
-
-concaténer type (pas d'espace)
+    if (isset($trustedPost['recipeID']) && $trustedPost['recipeID'] != false) {//prepare recette
+        $recipe = (new RecipeManager)->readByID($trustedPost['recipeID']);
         
-        $town = (new TownManager)->searchByName($trustedPost['town']);
-        if ($town !== false) $_SESSION['user']->setTown($town);
+        require_once(__DIR__."/../model/manager/HealthManager.php");
+
+        if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
+            $init = array("id_user" => $_SESSION['user']->getId(),
+                            "calories" => $recipe->getCalories());
+            (new HealthManager)->createTodayRecord(new Health($init));//pb doublonnage
+        }
         else {
-            exec('"'.$config['Python']['executable'].'" core/module_meteo.py '.$trustedPost['town'], $output, $return);
-            if (end($output) == '0') $_SESSION['user']->setTown((new TownManager)->readByName($trustedPost['town']));
-            else $trustedPost['errMsgs'][] = $errMsg['controller']['profil']['town'];
+            $health->setCalories($health->getCalories() + $recipe->getCalories());
+            (new HealthManager)->updateTodayRecord($health);
+        }
+    }
+
+    
+    if (isset($trustedPost['search']) && isset($trustedPost['type'])) {
+        //$trustedPost['search'] = skip_accents(ucfirst($trustedPost['search']));
+
+        require_once(__DIR__."/../model/manager/TypeManager.php");
+
+        $idType =  (new TypeManager)->readByName($trustedPost['type'])->getId();
+        $recipe = (new RecipeManager)->searchByName($trustedPost['search'], $idType);
+
+        if ($recipe === false) {
+            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ', '', $trustedPost['type']), $output, $return);
+            var_dump($output);
+            if (end($output) != '1') $recipe = (new RecipeManager)->readByName(skip_accents(\ForceUTF8\Encoding::toUTF8(end($output))), $idType);
+            else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['search'];
             unset($output);
         }
     }
-    
 }
-*/
+
+if (!isset($recipe) || $recipe == null) $recipe = (new RecipeManager)->readRandom();

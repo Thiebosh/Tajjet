@@ -12,29 +12,77 @@
             <button class="btn btn-primary">Filtrer</button>
         </div>
         <hr>
-        < ?php foreach($pageFill['indoor'] as $programme) { ?>   <!--On va parcourir la liste contenant les programmes de chaque chaîne
-                                                                On va afficher la chaîne, le programme ainsi que l'heure de début et de fin et le synopsis-->
-            <ul>
-                < ?php for($i=0;$i<sizeof($programme['program']);++$i) {?>
-                    <li> 
-                        <strong>< ?=$programme['channel']?></strong> 
-                        < ?=$programme['program'][$i]['title']?>
-                        < ?=$programme['program'][$i]['begin']?>
-                        < ?=$programme['program'][$i]['end']?>
-                        <br>
-                        <em>Synopsis : < ?=$programme['program'][$i]['synopsis']?> </em>
-                    </li>
-                < ?php } ?>
-            </ul>
-            <br>
-        < ?php } ?>
+        <ul id="tvList">
+            <p class="text-center">Choisissez une horaire pour avoir les information des programme tv autour de cette horaire</p>
+        </ul>
+        <br>
     </div>
     <script>
-        var variableRecuperee = <?= $data ?>;
-
+        
         (function($){
+            function addMinutes(date, minutes) {
+                return new Date(date.getTime() + minutes*60000);
+            }
+
+            var variableRecuperee = <?= $data ?>;
+            console.log(variableRecuperee)
+            
+            if(variableRecuperee['notStarted'] != undefined) {
+                for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
+                    variableRecuperee['notStarted'][i] = JSON.parse(variableRecuperee['notStarted'][i])
+                    variableRecuperee['notStarted'][i]._Channel = JSON.parse(variableRecuperee['notStarted'][i]._Channel)
+                }
+            }
+            if(variableRecuperee['started'] != undefined) {
+                for (var i = 0; i < variableRecuperee['started'].length; i++) {
+                    variableRecuperee['started'][i] = JSON.parse(variableRecuperee['started'][i])
+                    variableRecuperee['started'][i]._Channel = JSON.parse(variableRecuperee['started'][i]._Channel)
+                }
+            }
+
             $("button").click(function(){
+                $('#tvList').empty()
+
                 heureFiltre = $(this).siblings('#heure')[0].value
+                console.log(heureFiltre)
+                heureFiltre = heureFiltre.split(':')
+
+                var dateBefore = new Date()
+                dateBefore.setHours(heureFiltre[0])
+                dateBefore.setMinutes(heureFiltre[1])
+                dateBefore = addMinutes(dateBefore, -30)
+                
+                var dateAfter = new Date()
+                dateAfter.setHours(heureFiltre[0])
+                dateAfter.setMinutes(heureFiltre[1])
+                dateAfter = addMinutes(dateAfter, 30)
+
+                if(variableRecuperee['notStarted'] != undefined) {
+                    for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
+                        var time = variableRecuperee['notStarted'][i]._begin.split(':')
+                        var dateTvProgram = new Date();
+                        dateTvProgram.setHours(time[0])
+                        dateTvProgram.setMinutes(time[1])
+
+                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
+                            $('#tvList').append(liToAdd)
+                        }
+                    }
+                }
+                if(variableRecuperee['started'] != undefined) {
+                    for (var i = 0; i < variableRecuperee['started'].length; i++) {
+                        var time = variableRecuperee['started'][i]._begin.split(':')
+                        var dateTvProgram = new Date();
+                        dateTvProgram.setHours(time[0])
+                        dateTvProgram.setMinutes(time[1])
+
+                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
+                            $('#tvList').append(liToAdd)
+                        }
+                    }
+                }
             });
         })(jQuery);
 

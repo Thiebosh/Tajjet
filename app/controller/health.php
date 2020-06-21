@@ -9,8 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         if (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) {
             if (!$health) {
-                $init = array("idUser" => $_SESSION['user']->getId(),
-                                "recordDate" => date("Y-m-d"),
+                $init = array("id_user" => $_SESSION['user']->getId(),
                                 "sleep" => $trustedPost['sleepTime']);
                 (new HealthManager)->createTodayRecord(new Health($init));
             }
@@ -22,8 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (isset($trustedPost['weight']) && $trustedPost['weight'] !== false) {
             if (!$health) {
-                $init = array("idUser" => $_SESSION['user']->getId(),
-                                "recordDate" => date("Y-m-d"),
+                $init = array("id_user" => $_SESSION['user']->getId(),
                                 "weight" => $trustedPost['weight']);
                 (new HealthManager)->createTodayRecord(new Health($init));
             }
@@ -35,13 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
 $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
 
 if ($listHealth !== false) {
     //imc
-    if ($_SESSION['user']->getHeight() != null && $listHealth[0]->getWeight() != null) {
+    if ($_SESSION['user']->getHeight() != 0 && $listHealth[0]->getWeight() != 0) {
         $imc = $listHealth[0]->getWeight() / pow($_SESSION['user']->getHeight(), 2);
 
         if ($imc !== false) {
@@ -92,7 +89,7 @@ if ($listHealth !== false) {
 
 
     //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) if ($health->getSleep() != null) $lastSleepTime[] = $health->getSleep();
+    foreach ($listHealth as $health) if ($health->getSleep() != 0) $lastSleepTime[] = $health->getSleep();
 
     $tab_somm=somm($lastSleepTime);
 
@@ -107,7 +104,7 @@ if ($listHealth !== false) {
         $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez ainsi pour rester en forme.";
     }
 
-    unset($tab_somm, $temps_moyen, $rythme, $compteur);
+    unset($tab_somm, $rythme, $compteur);
 }
 
 if ($listHealth !== false) foreach ($listHealth as $health) $json[] = $health->objectToJson();
