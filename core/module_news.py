@@ -84,7 +84,7 @@ if(len(data['articles']) >= 20):
 
                     readingTime = "00:" + str(minute) + ":" + str(seconde)
                 
-                    sql = "INSERT INTO article (Summary, Titre, url, Pays, readingTime) VALUES (%s, %s, %s, %s, %s)"
+                    sql = "INSERT INTO article (Summary, Title, url, Pays, readingTime) VALUES (%s, %s, %s, %s, %s)"
                     val = (summary, title, url, country, readingTime)
                     mycursor.execute(sql, val)
 

@@ -3,7 +3,7 @@ require_once(__DIR__."/../abstract/Entity.php");
 
 class Article extends Entity {
     //attributes
-    private $_titre;
+    private $_title;
     private $_URL;
     private $_readingTime;
     private $_summary;
@@ -22,8 +22,8 @@ class Article extends Entity {
 
 
     //getters
-    public function getTitre() {
-        return $this->_titre;
+    public function getTitle() {
+        return $this->_title;
     }
 
     public function getURL() {
@@ -44,8 +44,8 @@ class Article extends Entity {
         $this->setId($id);
     }
     
-    public function setTitre($titre) {
-        if (is_string($titre)) $this->_titre = $titre;
+    public function setTitle($title) {
+        if (is_string($title)) $this->_title = $title;
     }
 
     public function setURL($url) {

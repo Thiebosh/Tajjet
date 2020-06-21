@@ -22,4 +22,22 @@ class WeatherManager extends Manager {
         
         return $result;
     }
+
+    public function readNowByIdTown($idTown) {
+        $query = 'SELECT * 
+                    FROM Weather 
+                    WHERE ID_town = :id
+                    AND Forecast > NOW()
+                    ORDER bY Forecast
+                    LIMIT 1';
+        $table = array('id' => $idTown);
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        $line = $request->fetchAll(PDO::FETCH_ASSOC)[0];
+        $line['town'] = (new TownManager)->readById($line['ID_town']);
+        $line['sky'] = (new SkyManager)->readById($line['ID_sky']);
+        
+        return new Weather($line);
+    }
 }

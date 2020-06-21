@@ -38,9 +38,11 @@
                                     <?php break;
         
                                     case "news":?>
-                                        Découvrez l'actualité en résumé et retrouvez les liens pour plus d'informations
+                                        <a href="<?= htmlspecialchars($news->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($news->getTitle()))) ?></a>
+                                        <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($news->getSummary())) ?>
                                         <br>
                                         <br>
+                                        Retrouvez plus d'actualités résumées
                                     <?php break;
         
                                     case "weather": ?>

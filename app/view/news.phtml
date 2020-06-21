@@ -8,8 +8,8 @@
                     <li class="my-3 p-3">
                         <div class="card col-lg-12 p-0">
                             <div class="card-header">
-                                <a href="<?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getURL())) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getTitre())) ?></a>
-                                <p class="mb-0">Temps aproximatif de l'article : <?= explode(':',$article->getReadingTime())[1] ?> min <?= explode(':',$article->getReadingTime())[2] ?> sec</p>
+                                <a href="<?= htmlspecialchars($article->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($article->getTitle()))) ?></a>
+                                <p class="mb-0">Temps aproximatif de l'article : <?= intval(explode(':',$article->getReadingTime())[1]) ?> min <?= intval(explode(':',$article->getReadingTime())[2]) ?> sec</p>
                             </div>
                             <p class="p-3">
                                 <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getSummary())) ?>
