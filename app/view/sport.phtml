@@ -52,7 +52,7 @@ ob_start();?>
                     <?php foreach($sportList as $sport) {?>
                         <hr>
                         <li class="my-4">
-                            <?= htmlspecialchars(exerciceDisplay($sport)) ?>
+                            <?= exerciceDisplay($sport) ?>
                             <button class="btn btn-success">Ajouter à ma séance</button>
                         </li>
                     <?php }?>
@@ -76,8 +76,9 @@ ob_start();?>
                     <div class="d-flex justify-content-center">
                         <input type="hidden" name="" value="true"><!--save or do-->
                         <input type="hidden" name="nbExo">
+                        <input type="hidden" name="totalCalories">
                         <input type="submit" class="btn btn-info mr-2" value="Enregistrer séance" id="saveInput">
-                        <input type="submit" class="btn btn-success" value="Réaliser séance" id="doInput">
+                        <input type="" class="btn btn-success" value="Réaliser séance" id="doInput">
                     </div>
                 </form>
             </div>
@@ -100,19 +101,6 @@ ob_start();?>
                 }
             });
 
-            $("#doInput").click(function(){
-                for(var i = 0; i < $(".seance").children().length; i++) {
-                    liChild = $(".seance").children()[i]
-                    inputLi = $(liChild).children()[0]
-                    inputLiName = $(inputLi).attr("name");
-                    inputLiName += i
-                    $(inputLi).attr("name", inputLiName);
-                }
-                
-                $("input[name='nbExo']").val($(".seance").children().length)
-                $("input[value='true']").attr("name", "do")
-            });
-
             $("#saveInput").click(function(){
                 for(var i = 0; i < $(".seance").children().length; i++) {
                     liChild = $(".seance").children()[i]
@@ -126,6 +114,24 @@ ob_start();?>
                 $( "input[value='true']").attr("name", "save")
             });
 
+            $("#doInput").click(function(){
+                var totalCalories = 0
+                for(var i = 0; i < $(".seance").children().length; i++) {
+                    liChild = $(".seance").children()[i]
+                    inputExoLi = $(liChild).children()[0]
+                    inputExoLiName = $(inputExoLi).attr("name");
+                    inputExoLiName += i
+                    $(inputExoLi).attr("name", inputExoLiName);
+                
+                    inputCaloryLi = $(liChild).children()[1]
+                    inputCaloryLiVal = $(inputCaloryLi).val();
+                    totalCalories += parseInt(inputCaloryLiVal)
+                }
+                
+                $("input[name='nbExo']").val($(".seance").children().length)
+                $("input[name='totalCalories']").val(totalCalories)
+                $("input[value='true']").attr("name", "do")
+            });
         })(jQuery);
     </script>
 <?php $sectionContent=ob_get_clean();
