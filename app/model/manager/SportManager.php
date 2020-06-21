@@ -31,5 +31,19 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         
         return new Sport($result[0]);
     }
+
+
+    public function readAll($id) {
+        $query = 'SELECT * 
+                    FROM Sport 
+                    WHERE ID_sport = :id';
+        $table = array('id' => $id);
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        
+        return new Sport($result[0]);
+    }
 }
 

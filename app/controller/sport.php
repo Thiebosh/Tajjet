@@ -4,9 +4,9 @@ require_once(__DIR__."/../model/manager/SportManager.php");
 
 $muscleList = (new MuscleManager)->readAll();
 
+$sportList = (new MuscleManager)->readAll();
 
-
-
+var_dump($sportList);
 
 //2. appels bdd
 //load bdd functions : require("../model/manager/*needed*.php");
