@@ -72,9 +72,9 @@
                                     <?php break;
         
                                     case "cooking": ?>
-                                        <h4 class="cart-title">Recette proposé : <?= \ForceUTF8\Encoding::toUTF8($cooking->getName()) ?></h4>
+                                        <h4 class="cart-title">Recette proposée : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?></h4>
                                         <p class="card-text"> 
-                                            Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= \ForceUTF8\Encoding::toUTF8($cooking->getName()) ?> et dégustez un bon plat
+                                            Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?> et dégustez un bon plat
                                             <!--<br>
                                             <img class="col-lg-6" src="< ?= htmlspecialchars($cooking->getPicture()) ?>" alt="Image recette">
                                             -->
