@@ -6,6 +6,7 @@
     <div class="d-flex justify-content-center">
         <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+                <option>Type de préparation</option>
                 <?php foreach($typeList as $type) { ?>
                     <option><?= htmlspecialchars($type->getLabel()) ?></option>
                 <?php } ?>
