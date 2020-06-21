@@ -6,6 +6,4 @@ $muscleList = (new MuscleManager)->readAll();
 
 $sportList = (new SportManager)->readAll();
 
-//var_dump($sportList);
-
-//données de la seance
+$seanceList = (new SportManager)->readSeance($_SESSION['user']->getId());

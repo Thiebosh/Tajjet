@@ -55,18 +55,24 @@
             <div class="mt-4">
                 <form method="post" action="index.php?page=exercices">
                     <ul class="seance">
-                        <?php for($j=0;$j<sizeof($pageFill['seance'][0]['exercices']); ++$j) { ?> <!--On liste les exercices associés à la séance-->
-                            <li class="my-4">
-                                <input type="hidden" name="idExo" value="<?= $pageFill['seance'][0]['exercices'][$j]['id'] ?>">
-                                <div class="d-flex justify-content-center my-3"><h4><?=$pageFill['seance'][0]['exercices'][$j]['name']?></h4></div> <!--Nom + image des exercices -->
-                                <div class="d-flex justify-content-center"><img alt="img_sport" href="<?=$pageFill['seance'][0]['exercices'][$j]['image']?>"/></div>
-                                <p class="text-center">Calories consommées : <?=$pageFill['seance'][0]['exercices'][$j]['calories']?> kcal pour 1h</p>
-                                <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
-                            </li>
-                        <?php } ?>
+                        <?php if ($seanceList != false ) {
+                            foreach ($seanceList as $sport) { ?> <!--On liste les exercices associés à la séance-->
+                                <li class="my-4">
+                                    <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
+                                    <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= $sport->getPicture() ?>" width="40%"/></div>
+                                    <?php foreach($sport->getMuscles() as $muscle) {?>
+                                        <span class="btn"><?= $muscle->getLabel() ?></span>
+                                    <?php }?>
+                                    <p class="text-center">Calories consommées : <?= $sport->getCalories() ?> kcal pour 1h</p>
+                                    <br>
+                                    <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
+                                </li>
+                        <?php }
+                        } ?>
                     </ul>
                     <div class="d-flex justify-content-center">
                         <input type="submit" class="btn btn-info" value="Enregistrer séance">
+                        &nbsp;
                         <input type="submit" class="btn btn-success" value="Réaliser séance">
                     </div>
                 </form>
