@@ -39,7 +39,7 @@
                         
                         <?php }
                         if(isset($avatar)) { ?>
-                            <img class="user_avatar" src="<?=$avatar?>">
+                            <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
                         <?php } ?>
                    
                     <p>

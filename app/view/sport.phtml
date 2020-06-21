@@ -1,14 +1,14 @@
 <?php 
 function exerciceDisplay($sport) {
     ob_start();?>
-        <input type="hidden" name="exo" value="<?= $sport->getId() ?>">
-        <input type="hidden" name="calories" value="<?= $sport->getCalories() ?>">
-        <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
-        <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= $sport->getPicture() ?>" width="40%"/></div>
+        <input type="hidden" name="exo" value="<?= htmlspecialchars($sport->getId()) ?>">
+        <input type="hidden" name="calories" value="<?= htmlspecialchars($sport->getCalories()) ?>">
+        <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
+        <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
         <?php foreach($sport->getMuscles() as $muscle) {?>
-            <span class="muscle"><?= $muscle->getLabel() ?></span>
+            <span class="muscle"><?= htmlspecialchars($muscle->getLabel()) ?></span>
         <?php }?>
-        <p class="text-center">Calories consommées : <?= $sport->getCalories() ?> kcal pour 1h</p>
+        <p class="text-center">Calories consommées : <?= htmlspecialchars($sport->getCalories()) ?> kcal pour 1h</p>
         <br>                    
     <?php return ob_get_clean();
 }
@@ -34,11 +34,11 @@ ob_start();?>
                     <option>Default</option>
                     <?php foreach ($muscleList as $muscle) { ?>
                         <option <?= isset($trustedPost['muscle']) && $trustedPost['muscle'] == $muscle->getLabel() ? 'selected' : '' ?>>
-                            <?= $muscle->getLabel() ?>
+                            <?= htmlspecialchars($muscle->getLabel()) ?>
                         </option>
                     <?php } ?>
                 </select>
-                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout" value="<?= isset($trustedPost['search']) ? $trustedPost['search'] : '' ?>">
+                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout" value="<?= isset($trustedPost['search']) ? htmlspecialchars($trustedPost['search']) : '' ?>">
                 <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
             </form>
         </div>
@@ -67,7 +67,7 @@ ob_start();?>
                         <?php if ($seanceList != false ) {
                             foreach ($seanceList as $sport) { ?> <!--On liste les exercices associés à la séance-->
                                 <li class="my-4">
-                                    <?= exerciceDisplay($sport) ?>
+                                    <?= htmlspecialchars(exerciceDisplay($sport)) ?>
                                     <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
                                 </li>
                         <?php }
@@ -76,8 +76,9 @@ ob_start();?>
                     <div class="d-flex justify-content-center">
                         <input type="hidden" name="" value="true"><!--save or do-->
                         <input type="hidden" name="nbExo">
+                        <input type="hidden" name="totalCalories">
                         <input type="submit" class="btn btn-info mr-2" value="Enregistrer séance" id="saveInput">
-                        <input type="submit" class="btn btn-success" value="Réaliser séance" id="doInput">
+                        <input type="" class="btn btn-success" value="Réaliser séance" id="doInput">
                     </div>
                 </form>
             </div>
@@ -100,19 +101,6 @@ ob_start();?>
                 }
             });
 
-            $("#doInput").click(function(){
-                for(var i = 0; i < $(".seance").children().length; i++) {
-                    liChild = $(".seance").children()[i]
-                    inputLi = $(liChild).children()[0]
-                    inputLiName = $(inputLi).attr("name");
-                    inputLiName += i
-                    $(inputLi).attr("name", inputLiName);
-                }
-                
-                $("input[name='nbExo']").val($(".seance").children().length)
-                $("input[value='true']").attr("name", "do")
-            });
-
             $("#saveInput").click(function(){
                 for(var i = 0; i < $(".seance").children().length; i++) {
                     liChild = $(".seance").children()[i]
@@ -126,6 +114,24 @@ ob_start();?>
                 $( "input[value='true']").attr("name", "save")
             });
 
+            $("#doInput").click(function(){
+                var totalCalories = 0
+                for(var i = 0; i < $(".seance").children().length; i++) {
+                    liChild = $(".seance").children()[i]
+                    inputExoLi = $(liChild).children()[0]
+                    inputExoLiName = $(inputExoLi).attr("name");
+                    inputExoLiName += i
+                    $(inputExoLi).attr("name", inputExoLiName);
+                
+                    inputCaloryLi = $(liChild).children()[1]
+                    inputCaloryLiVal = $(inputCaloryLi).val();
+                    totalCalories += parseInt(inputCaloryLiVal)
+                }
+                
+                $("input[name='nbExo']").val($(".seance").children().length)
+                $("input[name='totalCalories']").val(totalCalories)
+                $("input[value='true']").attr("name", "do")
+            });
         })(jQuery);
     </script>
 <?php $sectionContent=ob_get_clean();

@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `frequency` (
 INSERT INTO `frequency` (`ID_frequency`, `NumberOfDays`, `NextDate`) VALUES
 (1, 1, '2020-06-22 00:00:00'),
 (2, 0.12, '2020-06-22 00:00:00'),
-(3, 1, '2020-06-22 01:00:00');
+(3, 1, '2020-06-22 02:00:00');
 
 -- --------------------------------------------------------
 

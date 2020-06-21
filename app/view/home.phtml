@@ -14,14 +14,14 @@
                             <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
                                 <button class="btn btn-link">
                                     <h2 class="mb-0">
-                                        <?= $card["display"] ?>
-                                    </h1>
+                                        <?= htmlspecialchars($card["display"]) ?><br>
+                                    </h2>
                                 </button>
                             </a>
                         </div>
                         <div class="card-body">
                         <?php if(!$card["active"]){ ?>
-                                <p class="inval">Veuillez renseigner votre <?=$card["missing"]?> dans votre profil</p>
+                                <p class="inval">Veuillez renseigner votre <?=htmlspecialchars($card["missing"])?> dans votre profil</p>
                             <?php } 
                             else { ?>
                                 <?php switch ($card["link"]) {
@@ -49,17 +49,23 @@
                                     case "weather": ?>
                                         <h4 class="cart-title">Météo de <?= $weather->getTown()->getLabel() ?></h4>
                                         <p class="card-text">
-                                            Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C
+                                        Il fait actuellement <?= htmlspecialchars(intval($weather->getFeltTemp())) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
                                             <br>
-                                            Etat du ciel : <?= $weather->getSky()->getLabel() ?>
-                                            <br>
-                                            <br>
-                                            Retrouvez plus en détails la météo de la semaine
+                                        Etat du ciel : <?= htmlspecialchars($weather->getSky()->getLabel()) ?>
+                                        <br>
+                                        <br>
+                                        Retrouvez plus en détails la météo de la semaine
                                         </p>
                                     <?php break;
         
-                                    case "activities": ?>
-                                        <h4 class="cart-title">Aujourd'hui, regardez < ?='"'.\ForceUTF8\Encoding::toUTF8($activities->getTitle()).' "' ?> à < ?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> sur < ?= \ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel()) ?></h4>
+                                    case "activities":
+                                        if ($activities != false) { ?>
+                                            <h4 class="cart-title">
+                                                Aujourd'hui, regardez <?='"'.htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getTitle())).' "' ?> 
+                                                à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                                sur <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel())) ?>
+                                            </h4>
+                                        <?php } else echo("Pas de programme dans l'heure."); ?>
                                         <p class="card-text">
                                             Retrouvez plus en détails le programme du jour
                                         </p>
