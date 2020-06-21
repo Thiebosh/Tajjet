@@ -166,5 +166,21 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
         
         return false;
     }
+
+    public function resetProgram($idUser) {
+        $query = 'DELETE FROM Program
+                    WHERE ID_user = :id';
+        $table = array('id' => $idUser);
+
+        $request = parent::prepareAndExecute($query, $table);
+    }
+
+    public function addToProgram($idUser, $idExo) {
+        $query = 'INSERT INTO Program(ID_user, ID_sport)
+                    VALUES(:user, :sport)';
+        $table = array('user' => $idUser, 'sport' => $idExo);
+
+        $request = parent::prepareAndExecute($query, $table);
+    }
 }
 
