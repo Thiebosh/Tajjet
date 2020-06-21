@@ -11,7 +11,7 @@
                     <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
                     <label for="password" class="ml-1">Mot de passe</label><br>
-                    <input required type="password" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
+                    <input required type="password" minlength="8" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
                 </p>
                 <br>
                 <p class="d-flex justify-content-center">
