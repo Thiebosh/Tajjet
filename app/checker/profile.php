@@ -4,50 +4,37 @@ if (isset($_POST['username'])) {
 }
 
 if (isset($_FILES['avatar']['name'])) { //Si l'utilisateur a importé un fichier
-    $import=true;
-    $stop=false;
+    $trustedPost['import']=true;
+    $trustedPost['stop']=false;
     $taille_maxi=600000;
-    $extensions = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
+    $trustedPost['extensions'] = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
     $taille = filesize($_FILES['avatar']['tmp_name']); //On récupère la taille et l'extension du fichier
     $extension = strrchr($_FILES['avatar']['name'], '.');
-    $nom_sans_ext= $_SESSION['user']->getName();
-    $nom=$_SESSION['user']->getName().$extension;
+    $trustedPost['username']= $_SESSION['user']->getName();
+    $trustedPost['username_ext_file']=$_SESSION['user']->getName().$extension;
     $dir="resource/image/avatars";
     if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
-        $ex=false;
+        $trustedPost['exist']=false;
     }
     elseif(file_exists($dir)){
-        $ex=true;
+        $trustedPost['exist']=true;
     }
     if($_FILES['avatar']['name']==''){ //Si modification des infos personnelles sans changement d'avatar
-        $stop=true;
+        $trustedPost['stop']=true;
     }
 
-    if($taille>$taille_maxi)
-    {
-        $erreur = 'Votre fichier dépasse la taille maximale';
+    if($taille>$taille_maxi){
+        $trustedPost['error'] = 'Votre fichier dépasse la taille maximale';
     }
-    if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-    {
-        $erreur = 'Votre fichier doit être de type png, gif ou jpeg';
+    if(!in_array($extension, $trustedPost['extensions'])){ //Si l'extension n'est pas dans le tableau
+        $trustedPost['error'] = 'Votre fichier doit être de type png, gif ou jpeg';
     }
-    if(!isset($erreur) && !$stop){
+    if(!isset($trustedPost['error']) && !$trustedPost['stop']){
 
         $trustedPost['avatar']=$_FILES['avatar']['name'];
     }
     
 
-}
-elseif(!isset($_FILES['avatar']['name'])){
-    $import=false;
-    $nom_sans_ext=$_SESSION['user']->getName();
-    $dir="resource/image/avatars";
-    if(!file_exists($dir)){
-        $ex=false;
-    }
-    elseif(file_exists($dir)){
-        $ex=true;
-    }
 }
 
 if (isset($_POST['password'], $_POST['passwordConf'])) {
