@@ -6,8 +6,8 @@ else if (isset($_POST['muscle'])) {
 
     if (isset($_POST['search'])) $trustedPost['search'] = true;
 }
-else if (isset($_POST[''])) {
-
+else if (isset($_POST['nbExo']) && (isset($_POST['save']) || isset($_POST['do']))) {
+    
 }
 
 

@@ -1,6 +1,7 @@
 <?php 
 function exerciceDisplay($sport) {
     ob_start();?>
+        <input type="hidden" name="exo" value="<?= $sport->getId() ?>">
         <div class="d-flex justify-content-center my-3"><h4><?= $sport->getLabel() ?></h4></div> <!--Nom + image des exercices -->
         <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= $sport->getPicture() ?>" width="40%"/></div>
         <?php foreach($sport->getMuscles() as $muscle) {?>
@@ -69,7 +70,8 @@ ob_start();?>
                         } ?>
                     </ul>
                     <div class="d-flex justify-content-center">
-                        <input type="hidden" name="save" value="true"><!--save/do-->
+                        <input type="hidden" name="" value="true"><!--save/do-->
+                        <input type="hidden" name="nbExo" value="<?= count($seanceList) ?>"><!--save/do-->
                         <input type="submit" class="btn btn-info" value="Enregistrer séance">
                         &nbsp;
                         <input type="submit" class="btn btn-success" value="Réaliser séance">
