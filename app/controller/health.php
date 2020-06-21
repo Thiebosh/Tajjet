@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         if (isset($trustedPost['sleepTime']) && $trustedPost['sleepTime'] !== false) {
             if (!$health) {
-                $init = array("idUser" => $_SESSION['user']->getId(),
+                $init = array("id_user" => $_SESSION['user']->getId(),
                                 "recordDate" => date("Y-m-d"),
                                 "sleep" => $trustedPost['sleepTime']);
                 (new HealthManager)->createTodayRecord(new Health($init));
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (isset($trustedPost['weight']) && $trustedPost['weight'] !== false) {
             if (!$health) {
-                $init = array("idUser" => $_SESSION['user']->getId(),
+                $init = array("id_user" => $_SESSION['user']->getId(),
                                 "recordDate" => date("Y-m-d"),
                                 "weight" => $trustedPost['weight']);
                 (new HealthManager)->createTodayRecord(new Health($init));
@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 
 $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
