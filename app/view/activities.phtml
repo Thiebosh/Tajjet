@@ -25,14 +25,15 @@
             }
 
             var variableRecuperee = <?= $data ?>;
-            console.log(variableRecuperee)
             
+
             if(variableRecuperee['notStarted'] != undefined) {
                 for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
                     variableRecuperee['notStarted'][i] = JSON.parse(variableRecuperee['notStarted'][i])
                     variableRecuperee['notStarted'][i]._Channel = JSON.parse(variableRecuperee['notStarted'][i]._Channel)
                 }
             }
+            
             if(variableRecuperee['started'] != undefined) {
                 for (var i = 0; i < variableRecuperee['started'].length; i++) {
                     variableRecuperee['started'][i] = JSON.parse(variableRecuperee['started'][i])
@@ -45,7 +46,6 @@
 
                 heureFiltre = $(this).siblings('#heure')[0].value
                 heureFiltre = heureFiltre.split(':')
-                console.log(heureFiltre)
 
                 var dateBefore = new Date()
                 dateBefore.setHours(heureFiltre[0])
