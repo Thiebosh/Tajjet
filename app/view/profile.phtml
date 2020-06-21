@@ -32,12 +32,11 @@
                     <br>
                     <br>
                     <?php 
-                        if(isset($erreur)){
-                            htmlspecialchars($erreur);
+                        if(isset($error)){ 
+                            echo(htmlspecialchars($error));
                         }
-                        
                         if(isset($avatar)) { ?>
-                            <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
+                            <img class="user_avatar" src="<?=$avatar?>">
                         <?php } ?>
                    
                     <p>

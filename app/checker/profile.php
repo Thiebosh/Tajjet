@@ -9,7 +9,8 @@ if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fic
     $taille_maxi=600000;
     $extensions = array('.png', '.gif', '.jpg', '.jpeg',".JPG");
     $taille = filesize($_FILES['avatar']['tmp_name']); //On récupère la taille et l'extension du fichier
-    $extension = strrchr($_FILES['avatar']['name'], '.'); 
+    $extension = strrchr($_FILES['avatar']['name'], '.');
+    $nom_non_ext= $_SESSION['user']->getName();
     $nom=$_SESSION['user']->getName().$extension;
     $dir="resource/image/avatars";
     if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
@@ -31,6 +32,7 @@ if (isset($_FILES['avatar']['tmp_name'])) { //Si l'utilisateur a importé un fic
         $erreur = 'Votre fichier doit être de type png, gif, jpg ou jpeg';
     }
     if(!isset($erreur) && !$stop){
+
         $trustedPost['avatar']=$_FILES['avatar']['name'];
     }
     
