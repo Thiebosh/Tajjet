@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 21 juin 2020 à 14:01
+-- Généré le :  Dim 21 juin 2020 à 14:07
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `frequency` (
   `NumberOfDays` float NOT NULL,
   `NextDate` datetime NOT NULL,
   PRIMARY KEY (`ID_frequency`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `frequency`
@@ -135,8 +135,8 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `CookingTime` time NOT NULL,
   `TotalTime` time NOT NULL,
   `Score` float NOT NULL,
-  `Price` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `Difficulty` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `Price` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `Difficulty` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `Steps` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Ingredients` text CHARACTER SET latin1 COLLATE latin1_general_ci,
   `Calories` float NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `renewal` (
   `ID_frequency` int(11) NOT NULL,
   PRIMARY KEY (`ID_renewal`),
   KEY `FK_Renewal_ID_frequency` (`ID_frequency`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `renewal`
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `ID_type` int(11) NOT NULL AUTO_INCREMENT,
   `Label` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Déchargement des données de la table `type`
