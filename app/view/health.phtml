@@ -62,12 +62,12 @@
                     <?php } ?>
                 </tr>
                 <tr> 
-                    <?php if (isset($commDiff)) { ?>
+                    <?php if (isset($lorentzWeight)) { ?>
                         <td>
-                            Pour votre taille, le poids idéal est de : <strong><?= $lorentzWeigth ?>kg.</strong>
+                            Pour votre taille, le poids idéal est de : <strong><?= $lorentzWeight ?>kg.</strong>
                         </td>
                         <td>
-                        <?= isset($commDiff) ? htmlspecialchars($commDiff) : 'Entrez votre poids du jour pour plus d\'information' ?>
+                        <?= isset($commDiff) ? htmlspecialchars($commDiff) : 'Entrez votre poids du jour pour plus d\'informations' ?>
 
                         </td>
                     <?php } 
@@ -91,7 +91,7 @@
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez renseigner votre date de naissance dans votre profil et vos heures de sommeil du jour pour plus d'information.
+                            Veuillez renseigner votre date de naissance dans votre profil et vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>
@@ -106,7 +106,7 @@
                     <?php }
                     else { ?>
                         <td colspan ="2">
-                            Veuillez renseigner vos heures de sommeil du jour pour plus d'information.
+                            Veuillez renseigner vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>

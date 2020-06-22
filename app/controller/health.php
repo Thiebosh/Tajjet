@@ -25,6 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $listHealth = (new HealthManager)->readLast7Days($_SESSION['user']->getId());
 
+if ($_SESSION['user']->getHeight() != 0 && $_SESSION['user']->getSex() != null) { //Même si l'utilisateur n'a pas saisi de nouvelles données (poids/temps de sommeil), si le sexe et la taille sont saisies, on affiche le podis idéal
+    $size = $_SESSION['user']->getHeight() * 100;
+    $lorentzWeight = ($size - 100) - (($size - 150) / ($_SESSION['user']->getSex() == "homme" ? 4 : 2.5));
+    unset($size);
+}
 
 if ($listHealth !== false) {
     //imc
@@ -58,12 +63,9 @@ if ($listHealth !== false) {
     //lorentz
     if ($_SESSION['user']->getHeight() != 0 && $_SESSION['user']->getSex() != null) {
         //Différence entre le poids idéal et le poids enregistré et commentaire
-        $size = $_SESSION['user']->getHeight() * 100;
-        $lorentzWeigth = ($size - 100) - (($size - 150) / ($_SESSION['user']->getSex() == "homme" ? 4 : 2.5));
-        unset($size);
-
+        
         if ($listHealth[0]->getWeight() != 0) {        
-            $diff_weight = $listHealth[0]->getWeight() - $lorentzWeigth;
+            $diff_weight = $listHealth[0]->getWeight() - $lorentzWeight;
             
             if( abs($diff_weight) <= 5) {   
                 $commDiff="C'est très bien, vous êtes très proche du poids idéal pour votre taille ! Restez comme ça !";
@@ -130,6 +132,7 @@ if ($listHealth !== false) {
         unset($tab_somm, $rythme, $compteur);
     }
 }
+
 
 
 if ($listHealth !== false) foreach ($listHealth as $health) $data[] = $health->objectToJson();
