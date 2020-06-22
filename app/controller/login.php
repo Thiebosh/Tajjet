@@ -1,4 +1,7 @@
 <?php
+if(isset($_GET["inscript"]) && $_GET["inscript"]==true){
+    $confirm="Votre inscription a bien été prise en compte";
+}
 if (isset($_SESSION["user"])) header('Location: index.php');//changer nom de page suffirait?
 
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {

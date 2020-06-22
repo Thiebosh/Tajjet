@@ -4,3 +4,14 @@ label, .bold
     font-size:0.8203125rem;
     font-weight:bold;
 }
+
+.mandatory
+{
+    color:red;
+}
+
+.info_mandat
+{
+    font-size:0.8203125rem;
+    font-style: italic;
+}
