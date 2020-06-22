@@ -11,7 +11,7 @@
                 <div class="col-lg">
                     <div class="card card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
-                            <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
+                            <a class="col-lg mt-2 " href="<?= 'index.php?page=profile#'.($card["link"]=="health"? 'height':'town') ?>">
                                 <button class="btn btn-link">
                                     <h2 class="mb-0">
                                         <?= htmlspecialchars($card["display"]) ?><br>
