@@ -5,11 +5,10 @@
     </div>
     <div class="d-flex justify-content-center mx-auto">
         <div class="mt-4 col-md-3">
-        <div class="info_mandat">Les champs suivis de <span class="mandatory">*</span> sont obligatoires</div><br>
             <form method="post" action="index.php?user=register" enctype="multipart/form-data">
                 <p>
                     <label for="username" class="ml-1">Nom d'utilisateur <span class="mandatory">*</span></label><br>
-                    <input required type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
+                    <input required type="text" minlength="4" class="form-control" name="username" placeholder="Nom d'utilisateur" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                     <br>
                     <label for="password" class="ml-1">Mot de passe <span class="mandatory">*</span></label><br>
                     <input required type="password" minlength="8" class="form-control" name="password" placeholder="Mot de passe" value="<?= isset($trustedPost['password']) ? htmlspecialchars($trustedPost['password']) : '' ?>">
@@ -18,8 +17,9 @@
                     <input required type="password" minlength="8" class="form-control" name="passwordConf" placeholder="Confirmer le mot de passe" value="<?= isset($trustedPost['passwordConf']) ? htmlspecialchars($trustedPost['passwordConf']) : '' ?>">
                     <br>
                     <label for="avatar" class="ml-1">Avatar</label>
-                    <br>
-                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
+                    <div class="text-center">
+                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
+                    </div>
                     <br>
                     <br>
                     <label for="birth" class="ml-1">Date de naissance</label><br>
@@ -43,7 +43,8 @@
                             <label class="form-check-label" for="homme">Homme</label>
                         </div>
                     </div>
-                </p>                        
+                </p>
+                <div class="info_mandat">Les champs suivis de <span class="mandatory">*</span> sont obligatoires</div><br>
                 
                 <p class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Inscription"/>

@@ -6,8 +6,10 @@
     <?php 
         $first = true;
         foreach($grid as $line) { ?>
-        <div class="row <?= $first? 'mt-4' : '' ?>">
-            <?php foreach($line as $card) { ?>
+        <div class="row <?= $first ? 'mt-4' : '' ?>">
+            <?php 
+                $first = false;
+                foreach($line as $card) { ?>
                 <div class="col-lg">
                     <div class="card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
@@ -94,7 +96,5 @@
                 </div>
             <?php } ?>
         </div>
-    <?php 
-        $first = false;
-        } ?>
+    <?php } ?>
 <?php $sectionContent = ob_get_clean();
