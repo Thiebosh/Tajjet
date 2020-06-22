@@ -22,6 +22,24 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             }
         break;
 
+        case 'upload_backup_db':
+            if (!is_readable($scriptName['sql'])) display_error($errMsg['index']['sqlFile']['notSet']);
+            else {
+                require_once('vendor/SqlImport/Import.php');
+
+                new vendor\SqlImport\Import($scriptName['sql'], 
+                                            $config['DB']['connexion']['username'], 
+                                            $config['DB']['connexion']['password'], 
+                                            $config['DB']['setup']['DBname'], 
+                                            $config['DB']['setup']['characterSet'], 
+                                            $config['DB']['setup']['classification'],
+                                            'localhost',
+                                            true, true);
+                header('Location: index.php');
+
+            }
+        break;
+
         case 'fill_db'://premier / unique remplissage : appelle les scripts un a un
             $modules = array(
                             array('name' => 'tv'),
@@ -42,6 +60,16 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
         case 'download_db':
             echo("todo - wip<br><br>");
+            
+            require_once('vendor/SqlExport/Export.php');
+            
+            Export_Database('localhost',
+                            $config['DB']['connexion']['username'],
+                            $config['DB']['connexion']['password'],
+                            $config['DB']['setup']['DBname'],
+                            false,
+                            "mybackup.sql");
+            
         break;
 
         default:

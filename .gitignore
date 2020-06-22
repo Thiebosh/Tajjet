@@ -4,6 +4,7 @@
 .vscode/
 config.json
 resource/image/avatars/*
+resource/db/Backup/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
