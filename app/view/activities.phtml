@@ -2,9 +2,22 @@
 setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
 
     <div class="text-center">
-        <h1>Programme télé </h1>
-        
+        <h1>Consultez le programme télé pour trouver une occupation !</h1>
         <h2><?=ucwords(strftime("%A %d %B %G"))?></h2>
+        <?php if (isset($weather)) { ?>
+            <br>
+            <?php if ($weather->getSky()->getLabel() == "Dégagé") { ?>
+                <h5>
+                    Mais puisqu'il fait beau à <?= htmlspecialchars($weather->getTown()->getLabel()) ?>, vous pourriez aussi sortir.
+                    <?php if ($weather->getFeltTemp() > 15) { ?>
+                        <br>
+                        En plus, la température ressentie est de <?= intval($weather->getFeltTemp()) ?>°C !
+                    <?php } ?>
+                </h5>
+            <?php } else { ?>
+                <h5>Surtout vu le temps à <?= htmlspecialchars($weather->getTown()->getLabel()) ?>...</h5>
+            <?php } ?>
+        <?php } ?>
         <hr>
     </div>
     <div class="container">

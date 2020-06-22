@@ -12,3 +12,9 @@ if (isset($activitiesListNotStarted)) $data["notStarted"] = $activitiesListNotSt
 if (isset($activitiesListStarted)) $data["started"] = $activitiesListStarted;
 
 $data = json_encode($data);
+
+
+if ($_SESSION['user']->getTown()->getId() != null) {
+    require_once(__DIR__."/../model/manager/WeatherManager.php");
+    $weather = (new WeatherManager)->readNowByIdTown($_SESSION['user']->getTown()->getId());
+}
