@@ -16,3 +16,13 @@ header{
     height:50px;
     width:50px;
 }
+
+.nav-item {
+    font-size: 1rem;
+}
+
+@media (min-width: 576px) {
+    nav {
+        height: 50px;
+    }
+}

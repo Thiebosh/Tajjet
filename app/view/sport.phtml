@@ -5,9 +5,9 @@ function exerciceDisplay($sport) {
         <input type="hidden" name="calories" value="<?= htmlspecialchars($sport->getCalories()) ?>">
         <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
         <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
-        <div class="my-2">
+        <div class="my-3">
             <?php foreach($sport->getMuscles() as $muscle) {?>
-                <span class="muscle"><?= htmlspecialchars($muscle->getLabel()) ?></span>
+                <span class="muscle py-2 px-3"><?= htmlspecialchars($muscle->getLabel()) ?></span>
             <?php }?>
         </div>
         <p class="text-center">Calories consommées : <?= htmlspecialchars($sport->getCalories()) ?> kcal pour 1h</p>               
