@@ -33,21 +33,21 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                         unset($output);
                     }
                 }
+                unset($_SESSION['user']);
             }
         break;
 
         case 'load_backup_db':
-            $dir="resource/db/Backup";
+            $dir="resource/db/Backup/";
             $backup_name="EverydaySunshine_backup.sql";
             if(!file_exists($dir)){
                 echo("Aucun backup");
                 }
             else{
-                if (!is_readable($backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
+                if (!is_readable($dir.$backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
                 else {
                     require_once('vendor/SqlImport/Import.php');
-
-                    new vendor\SqlImport\Import($backup_name, 
+                    new vendor\SqlImport\Import($dir.$backup_name, 
                                                 $config['DB']['connexion']['username'], 
                                                 $config['DB']['connexion']['password'], 
                                                 $config['DB']['setup']['DBname'], 
