@@ -5,11 +5,12 @@ function exerciceDisplay($sport) {
         <input type="hidden" name="calories" value="<?= htmlspecialchars($sport->getCalories()) ?>">
         <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
         <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
-        <?php foreach($sport->getMuscles() as $muscle) {?>
-            <span class="muscle"><?= htmlspecialchars($muscle->getLabel()) ?></span>
-        <?php }?>
-        <p class="text-center">Calories consommées : <?= htmlspecialchars($sport->getCalories()) ?> kcal pour 1h</p>
-        <br>                    
+        <div class="my-2">
+            <?php foreach($sport->getMuscles() as $muscle) {?>
+                <span class="muscle"><?= htmlspecialchars($muscle->getLabel()) ?></span>
+            <?php }?>
+        </div>
+        <p class="text-center">Calories consommées : <?= htmlspecialchars($sport->getCalories()) ?> kcal pour 1h</p>               
     <?php return ob_get_clean();
 }
 
@@ -21,10 +22,10 @@ ob_start();?>
 
     <div class="menu">
         <div class="d-flex justify-content-center">
-            <a class="btn btn-info col-lg m-3" href="index.php?page=sport">Voir tous les exercices</a> 
+            <a class="btn btn-primary col-lg m-3" href="index.php?page=sport">Voir tous les exercices</a> 
             <form method="post" action="index.php?page=sport" class="col-lg"> 
                 <input type="hidden" name="random" value="true">
-                <input type="submit" class="btn btn-info col-lg m-3" value="Voir un exercice aléatoire">
+                <input type="submit" class="btn btn-primary col-lg m-3" value="Voir un exercice aléatoire">
             </form>
         </div>
         <hr>
@@ -39,19 +40,18 @@ ob_start();?>
                     <?php } ?>
                 </select>
                 <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout" value="<?= isset($trustedPost['search']) ? htmlspecialchars($trustedPost['search']) : '' ?>">
-                <input type="submit" class="btn btn-info col-lg m-3" value="Rechercher">
+                <input type="submit" class="btn btn-primary col-lg m-3" value="Rechercher">
             </form>
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-md liste_exercices text-center py-3">
-            <h2 class="my-2">Liste d'exercices</h2>
+    <div class="row jumbotron p-2">
+        <div class="col-md text-center py-3">
+            <h2 class="my-2 font-weight-bold">Liste d'exercices</h2>
             <div class="mt-4">
-                <ul class="liste">
+                <ul class="liste list-group">
                     <?php foreach($sportList as $sport) {?>
-                        <hr>
-                        <li class="my-4">
+                        <li class="my-1 list-group-item">
                             <?= exerciceDisplay($sport) ?>
                             <button class="btn btn-success">Ajouter à ma séance</button>
                         </li>
@@ -60,13 +60,13 @@ ob_start();?>
             </div>
         </div>
         <div class="col-md seances text-center py-3">
-            <h2 class="my-2">Séance d'entraînement</h2>
+            <h2 class="my-2 font-weight-bold">Séance d'entraînement</h2>
             <div class="mt-4">
                 <form method="post" action="index.php?page=sport">
-                    <ul class="seance">
+                    <ul class="seance list-group">
                         <?php if ($seanceList != false ) {
                             foreach ($seanceList as $sport) { ?> <!--On liste les exercices associés à la séance-->
-                                <li class="my-4">
+                                <li class="my-1 list-group">
                                     <?= htmlspecialchars(exerciceDisplay($sport)) ?>
                                     <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
                                 </li>

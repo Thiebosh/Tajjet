@@ -9,7 +9,7 @@
         <div class="row <?= $first? 'mt-4' : '' ?>">
             <?php foreach($line as $card) { ?>
                 <div class="col-lg">
-                    <div class="card card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
+                    <div class="card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
                             <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
                                 <button class="btn btn-link">
