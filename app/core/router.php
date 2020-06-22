@@ -17,6 +17,8 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                                             $config['DB']['setup']['classification'],
                                             'localhost',
                                             true, true);
+
+                header('Location: index.php?action=fill_db');
             }
         break;
 
