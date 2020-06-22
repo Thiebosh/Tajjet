@@ -29,14 +29,16 @@
                     <br>
                     <label for="town" class="ml-1">Ville</label><br>
                     <input type="text" class="form-control" name="town" placeholder="Ville" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
-                    <p class="bold">Votre sexe (à la naissance)</p>
+                    <p class="bold">Votre sexe (actuel)</p>
                     <div class="text-center">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femme" value="femme">
+                            <input class="form-check-input" type="radio" name="sex" id="femme" value="femme" 
+                            <?= isset($trustedPost['sex']) && $trustedPost['sex'] == "femme" ? 'checked' : '' ?>>
                             <label class="form-check-label" for="femme">Femme</label>
                         </div>
                             <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="homme" value="homme">
+                            <input class="form-check-input" type="radio" name="sex" id="homme" value="homme" 
+                            <?= isset($trustedPost['sex']) && $trustedPost['sex'] == "homme" ? 'checked' : '' ?>>
                             <label class="form-check-label" for="homme">Homme</label>
                         </div>
                     </div>

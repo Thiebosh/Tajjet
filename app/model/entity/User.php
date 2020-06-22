@@ -10,11 +10,14 @@ class User extends Entity {
     private $_password;
     private $_birthDate = null;
     private $_height = null;
+    private $_sex = null;
     private $_idTown = null;
 
     private $_Town;//instance de Town
     private $_Sports;//liste d'instances de Sport (programme)
 
+    private static $conversionBoolString = array(true => "femme",
+                                                false => "homme");
 
     //methods
 
@@ -46,6 +49,14 @@ class User extends Entity {
 
     public function getHeight() {
         return $this->_height;
+    }
+
+    public function getSex() {
+        return self::$conversionBoolString[$this->_sex];
+    }
+
+    public function getBoolSex() {
+        return $this->_sex;
     }
 
     public function getID_Town() {
@@ -81,6 +92,11 @@ class User extends Entity {
     public function setHeight($height) {
         $height = Entity::stringToFloat($height);
         if (is_float($height)) $this->_height = $height;
+    }
+    
+    public function setSex($sex) {
+        if (is_string($sex) && $sex != '0' && $sex != '1') $sex = array_flip(self::$conversionBoolString)[$sex];
+        $this->_sex = boolval($sex);
     }
 
     public function setID_town($idTown) {

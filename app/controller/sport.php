@@ -22,17 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
             }
         }
-        else {
+        else if (isset($trustedPost['totalCalories'])) {
             require_once(__DIR__."/../model/manager/HealthManager.php");
-            $calories = 300;
             
             if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
                 $init = array("id_user" => $_SESSION['user']->getId(),
-                                "calories" => -$calories);
+                                "calories" => -$trustedPost['totalCalories']);
                 (new HealthManager)->createTodayRecord(new Health($init));
             }
             else {
-                $health->setCalories($health->getCalories() - $calories);
+                $health->setCalories($health->getCalories() - $trustedPost['totalCalories']);
                 (new HealthManager)->updateTodayRecord($health);
             }
         }
