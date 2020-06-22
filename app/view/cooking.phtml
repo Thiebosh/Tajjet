@@ -1,44 +1,67 @@
 <?php ob_start();?>
-    <div class="col-lg-12 text-center">
+    <div class="text-center">
         <h1>Chercher une recette</h1>
         <hr>
     </div>
-    <div class="d-flex justify-content-center">
-        <form class="w-100 row" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
+    <div class="d-flex justify-content-center mb-3">
+        <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+                <option>Type de préparation</option>
                 <?php foreach($typeList as $type) { ?>
-                    <option><?= htmlspecialchars($type->getLabel()) ?>
+                    <option><?= htmlspecialchars($type->getLabel()) ?></option>
                 <?php } ?>
             </select>
-            <input require class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
+            <input required class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
             <input class="col-lg btn btn-primary m-3 buttonNav" type="submit" value="Rechercher">
+            <a class="col-lg btn btn-primary m-3 buttonNav">Recette aléatoire</a>
         </form>
     </div>
-    
-    <article class="recette">
+    <article class="jumbotron p-2">
         <div classe="col-md-12 text-center">
-            <div class="d-flex justify-content-center my-3"><h1 id="nom_recette"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
+            <div class="d-flex justify-content-center my-3"><h1 class="font-weight-bold"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
             <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= htmlspecialchars($recipe->getPicture()) ?>" alt="Image recette"></div>
             
-            <div class="row my-4" id="times">
+            <div class="row my-4 text-center">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-12" id="timeGlobal">
-                            Temps total : <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getTotalTime()))[1]) ?> minute(s)
+                        <div class="col-md-12 font-weight-bold h4">
+                            Temps total : 
+                            <?php
+                                $tmp = explode(':',$recipe->getTotalTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6" id="timePrep">
+                        <div class="col-md-6 h5">
                             Temps de préparation :
-                            <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getPreparationTime()))[1]) ?> minute(s)
+                            <?php
+                                $tmp = explode(':',$recipe->getPreparationTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : '');
+                            ?>
                         </div>
-                        <div class="col-md-6" id="timeCook">
-                            Temps de cuisson : 
-                            <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[0]) ?> heure(s)
-                            et <?= intval(explode(':',htmlspecialchars($recipe->getCookingTime()))[1]) ?> minute(s)
+                        <div class="col-md-6 h5">
+                            Temps de cuisson :
+                            <?php
+                                $tmp = explode(':',$recipe->getCookingTime());
+                                $h = intval($tmp[0]);
+                                $m = intval($tmp[1]);
+                            
+                                echo($h > 0 ? htmlspecialchars($h)." heure".($h > 1 ? 's' : '') : '');
+                                echo($h > 0 && $m > 0 ? " et " : '');
+                                echo($m > 0 ? htmlspecialchars($m)." minute".($m > 1 ? 's' : '') : ''); 
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -46,23 +69,23 @@
             <hr>
             <div class="row text-center">
                 <div class="col-md-3 mt-3">
-                    <p class="note">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
+                    <p class="font-weight-bold">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="difficulty">Difficulté : <?= \ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()) ?></p>
+                    <p class="font-weight-bold">Difficulté : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getDifficulty())) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="price">Budget : <?= \ForceUTF8\Encoding::toUTF8($recipe->getPrice()) ?></p>
+                    <p class="font-weight-bold">Budget : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice())) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="price">Personne : <?= \ForceUTF8\Encoding::toUTF8($recipe->getNbPerson()) ?></p>
+                    <p class="font-weight-bold">Personne : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getNbPerson())) ?></p>
                 </div>                
             </div>
             <hr>
-            <div class="row mb-3">
-                <div class="col-md text-center">
-                    <h2>Etapes de préparation :</h2>    
-                    <ul>
+            <div class="row my-3">
+                <div class="col-md mb-5">
+                    <h2 class="text-center">Etapes de préparation :</h2>    
+                    <ul class="p-4">
                         <?php 
                             $i = 0;
                             $lines = explode('<br>',$recipe->getSteps());
@@ -74,15 +97,20 @@
                         } ?>
                     </ul>
                     <?php if (!isset($trustedPost['recipeID'])) { ?>
-                        <form method="post" action="index.php?page=cooking">
+                        <form method="post" action="index.php?page=cooking" class="text-center">
                             <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
                             <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
                         </form>
-                    <?php } else echo("J'ai déjà préparé cette recette"); ?>
+                    <?php 
+                    } else { ?> 
+                    <p class="text-center">
+                        J'ai déjà préparé cette recette 
+                    </p>
+                    <?php } ?>
                 </div>
-                <div class="col-md text-center">
+                <div class="col-md text-center mb-5">
                     <h2>Liste des ingrédients :</h2> 
-                    <ul>
+                    <ul class="p-4">
                         <?php 
                             $i = 0;
                             $lines = explode('<br>',$recipe->getIngredients());
@@ -96,7 +124,7 @@
                     <?php 
                     $test = str_replace("'", "&#146", $recipe->getIngredients());
                     ?>
-                    <button class="btn btn-success" onclick="downloadFile('<?= $test ?>')">Je télécharge la liste d'ingrédient</button>
+                    <button class="btn btn-success" onclick="downloadFile('<?= htmlspecialchars($test) ?>')">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>

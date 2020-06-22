@@ -6,8 +6,7 @@ PRIMARY KEY (ID_sky)) ENGINE=InnoDB;
 DROP TABLE IF EXISTS Weather ;
 CREATE TABLE Weather (ID_weather INT AUTO_INCREMENT NOT NULL,
 Forecast DATETIME,
-MinTemp FLOAT,
-MaxTemp FLOAT,
+Temp FLOAT,
 FeltTemp FLOAT,
 Humidity FLOAT,
 Pressure FLOAT,
@@ -21,6 +20,7 @@ Name VARCHAR(255),
 Password VARCHAR(255),
 BirthDate DATE,
 Height FLOAT,
+Sex BOOLEAN,
 ID_town INT,
 PRIMARY KEY (ID_user)) ENGINE=InnoDB;
 
