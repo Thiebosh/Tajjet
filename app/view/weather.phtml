@@ -41,7 +41,7 @@
                                     <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
                                 </div>
                                 <p>
-                                    Température : <?= htmlspecialchars($weather->getMinTemp()) ?> °C </br>
+                                    Température : <?= htmlspecialchars($weather->getTemp()) ?> °C </br>
                                     Température <strong>ressentie</strong> : <?= htmlspecialchars($weather->getFeltTemp()) ?> °C </br>
                                     Humidité : <?= htmlspecialchars($weather->getHumidity()) ?> % </br>
                                     Pression : <?= htmlspecialchars($weather->getPressure()) ?> hPa </br>
