@@ -26,10 +26,8 @@
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
-                                        < ?=$pageFill['exercice'][0]['name']?>
-                                        <br>    
-                                        <br>
-                                        < ?=$pageFill['exercice'][0]['picture']?>
+                                        <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
+                                        <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
                                     <?php break; 
         
                                     case "health":?>
@@ -72,9 +70,9 @@
                                     <?php break;
         
                                     case "cooking": ?>
-                                        <h4 class="cart-title">Recette proposé : <?= \ForceUTF8\Encoding::toUTF8($cooking->getName()) ?></h4>
+                                        <h4 class="cart-title">Recette proposée : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?></h4>
                                         <p class="card-text"> 
-                                            Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= \ForceUTF8\Encoding::toUTF8($cooking->getName()) ?> et dégustez un bon plat
+                                            Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?> et dégustez un bon plat
                                             <!--<br>
                                             <img class="col-lg-6" src="< ?= htmlspecialchars($cooking->getPicture()) ?>" alt="Image recette">
                                             -->

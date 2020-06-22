@@ -53,6 +53,9 @@ if (isset($_POST['username'], $_POST['password'], $_POST['passwordConf'])) {//ch
     if (isset($_POST['town'])) {
         $trustedPost['town'] = filter_input(INPUT_POST, 'town', FILTER_SANITIZE_STRING);
     }
+    if (isset($_POST['sex'])) {
+        $trustedPost['sex'] = filter_input(INPUT_POST, 'sex', FILTER_CALLBACK, ['options' => function($sex) { return $sex == "homme" || $sex == "femme" ? $sex : false; }]);
+    }
 
 
     //si un "false" existe dans le tableau, avec comparaison des types
