@@ -23,7 +23,6 @@ else if (isset($_POST['nbExo']) && (isset($_POST['save']) || isset($_POST['do'])
             else echo("oubli<br>");
         }
     }
-    else echo("probleme<br>");
 }
 
 

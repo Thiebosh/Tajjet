@@ -17,9 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($trustedPost['action'] == 'save') {
             
             (new SportManager)->resetProgram($_SESSION['user']->getId());
-
-            foreach ($trustedPost['listExo'] as $exo) {
-                (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
+            if($trustedPost['nbExo']!=0){
+                foreach ($trustedPost['listExo'] as $exo) {
+                    (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
+                }
             }
         }
         else if (isset($trustedPost['totalCalories'])) {
