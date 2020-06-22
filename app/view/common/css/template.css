@@ -26,3 +26,7 @@ header{
         height: 50px;
     }
 }
+
+h1 img {
+    width: 70px;
+}
