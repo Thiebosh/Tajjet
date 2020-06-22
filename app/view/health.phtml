@@ -48,33 +48,31 @@
                 <tr>
                     <?php if (isset($imc)) { ?>
                         <td>
-                            Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? number_format (floatval($imc), 1) : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                            Votre IMC est de <strong><?= number_format(floatval($imc), 1) ?></strong>
                         </td>
-
                         <td>
-                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
+                            <?= htmlspecialchars($commIMC) ?>
                         </td> 
-                        
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer votre poids dans pour pouvoir calculer votre IMC.
+                            Veuillez renseigner votre taille dans votre profil et votre poids du jour pour connaître votre IMC.
                         </td>
                     <?php } ?>
                 </tr>
                 <tr> 
-                    <?php if (isset($commDiff)) { ?>
+                    <?php if (isset($lorentzWeight)) { ?>
                         <td>
-                            Pour votre taille, le poids idéal est de : <strong> < calcul en js avec taille et sexe > kg.</strong>
+                            Pour votre taille, le poids idéal est de : <strong><?= $lorentzWeight ?>kg.</strong>
                         </td>
                         <td>
-                        <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
+                        <?= isset($commDiff) ? htmlspecialchars($commDiff) : 'Entrez votre poids du jour pour plus d\'informations' ?>
 
                         </td>
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer votre taille et votre sexe en cliquant sur Mon Profil. 
+                            Veuillez renseigner votre taille et votre sexe dans votre profil pour connaître votre poids idéal.
                         </td>
                     <?php } ?>
                     
@@ -83,31 +81,31 @@
                     <?php if (isset($commSleepTod)) { ?>
                         <td>
                             Vous avez dormi 
-                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '') ?>
+                            <?= $listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '' ?>
                             cette nuit
                         </td>
                         <td>
-                            <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
+                            <?= htmlspecialchars($commSleepTod) ?>
                         </td>
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer vos heures de sommeil de cette nuit.
+                            Veuillez renseigner votre date de naissance dans votre profil et vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>
                 <tr>
                     <?php if (isset($temps_moyen)) { ?>
                         <td>
-                            Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 derniers jours
+                            Vous avez dormi en moyenne <?= htmlspecialchars($temps_moyen) ?> au cours des 7 derniers jours
                         </td>
                         <td>
-                            <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
+                            <?= htmlspecialchars($commRythme) ?>
                         </td>
                     <?php }
                     else { ?>
                         <td colspan ="2">
-                            Veulliez entrer vos heures de sommeil.
+                            Veuillez renseigner vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>

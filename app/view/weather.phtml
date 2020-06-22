@@ -28,7 +28,7 @@
                         <div class="card text-black bg-info">
                             <div class="card-header text-center">
                                 <h2 class="m-0">
-                                    <?= htmlspecialchars(intval(explode('-',explode(' ',$weather->getForecast())[0])[2])).'/'.
+                                    <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
                                         explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
                                         à 
                                         <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>h

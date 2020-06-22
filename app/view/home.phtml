@@ -11,7 +11,8 @@
                 <div class="col-lg">
                     <div class="card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
-                            <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : ''/*'index.php?page=profile#'.($card["link"]=="health"? 'height':'town')*/ ?>">
+                            <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : 'index.php?page=profile#'.($card["link"]=="health"? 'height':'town') ?>">
+                      
                                 <button class="btn btn-link">
                                     <h2 class="mb-0">
                                         <?= htmlspecialchars($card["display"]) ?><br>
@@ -47,7 +48,7 @@
                                     case "weather": ?>
                                         <h4 class="cart-title">Météo de <?= $weather->getTown()->getLabel() ?></h4>
                                         <p class="card-text">
-                                        Il fait actuellement <?= htmlspecialchars(intval($weather->getFeltTemp())) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
+                                        Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
                                             <br>
                                         Etat du ciel : <?= htmlspecialchars($weather->getSky()->getLabel()) ?>
                                         <br>
@@ -60,7 +61,7 @@
                                         if ($activities != false) { ?>
                                             <h4 class="cart-title">
                                                 Aujourd'hui, regardez <?='"'.htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getTitle())).' "' ?> 
-                                                à <?= htmlspecialchars(intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1]) ?> 
+                                                à <?= intval(explode(':',$activities->getBegin())[0])."h".explode(':',$activities->getBegin())[1] ?> 
                                                 sur <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($activities->getChannel()->getLabel())) ?>
                                             </h4>
                                         <?php } else echo("Pas de programme dans l'heure."); ?>
