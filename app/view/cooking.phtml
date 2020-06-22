@@ -80,7 +80,7 @@
                     <p class="font-weight-bold">Difficulté : <?= ucfirst(htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()))) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="font-weight-bold">Budget : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice())) ?></p>
+                    <p class="font-weight-bold">Budget : <?= ucfirst(htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice()))) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
                     <p class="font-weight-bold">Quantités pour <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getNbPerson())) ?> personne(s)</p>
