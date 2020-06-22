@@ -79,26 +79,26 @@
             header('Content-Type: application/octet-stream');   
             header("Content-Transfer-Encoding: Binary");
             header("Content-disposition: attachment; filename=\"".$backup_name."\"");
+            echo($content);
         }
         else
         {
-            
-        } 
-        /*$dir="resource/db/Backup";
-        $backup_path=$dir.'/'.$backup_name;
-        if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
-            $creation=mkdir($dir,0777,true);
-            if($creation){
-                header("Content-type: ".$dir);
-                header("Content-disposition: attachment; filename=\"".$backup_name."\"");
-        }
-        else{
-            if(file_exists($backup_path)){
-                unlink($backup_path);
+            $dir="resource/db/Backup";
+            $backup_path=$dir.'/'.$backup_name;
+            if(!file_exists($dir)){ 
+                $creation=mkdir($dir,0777,true);
+                if($creation){ //On met le fichier dans le dossier Backup
+                    file_put_contents($backup_path,$content);
+                }
             }
-            header("Content-disposition: attachment; filename=\"".$dir.'/'.$backup_name."\"");
-        }*/
+            else{
+                if(file_exists($backup_path)){
+                    unlink($backup_path);
+                }
+                file_put_contents($backup_path,$content);//On met le fichier dans le dossier Backup
+            }
+        }
         
-        echo $content; exit;
+        
     }
 
