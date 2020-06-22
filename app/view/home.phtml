@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
     <div class="text-center">
-        <h1>Page d'Accueil</h1>
+        <h1>Bienvenue sur Your Everyday Sunshine !</h1>
         <hr>
     </div>
     <?php 
@@ -12,7 +12,6 @@
                     <div class="card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
                             <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : 'index.php?page=profile#'.($card["link"]=="health"? 'height':'town') ?>">
-                      
                                 <button class="btn btn-link">
                                     <h2 class="mb-0">
                                         <?= htmlspecialchars($card["display"]) ?><br>
@@ -27,13 +26,21 @@
                             else { ?>
                                 <?php switch ($card["link"]) {
                                     case "sport":?>
-                                        <div class="d-flex justify-content-center my-3"><h4><?= htmlspecialchars($sport->getLabel()) ?></h4></div> <!--Nom + image des exercices -->
-                                        <div class="d-flex justify-content-center"><img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/></div>
+                                        <div class="text-center">
+                                            <h4 class="cart-title"><?= htmlspecialchars($sport->getLabel()) ?></h4>
+                                            <img alt="img_sport" src="<?= htmlspecialchars($sport->getPicture()) ?>" width="40%"/>
+                                        </div>
+                                        <br>
+                                        Retrouvez plus d'exercices dans ce module.
                                     <?php break; 
         
                                     case "health":?>
                                         <h4 class="cart-title">Votre suivi de santé</h4>
-                                        Retrouvez un suivi de votre état de santé à travers votre activité sur ce site et les informations que vous avez renseignés.
+                                        <p class="card-text">
+                                            Votre poids idéal est de <?= htmlspecialchars($lorentzWeight) ?>kg.
+                                            <br><br>
+                                            Retrouvez un suivi de votre état de santé à travers votre activité sur ce site et les informations que vous avez renseignés.
+                                        </p>
                                     <?php break;
         
                                     case "news":?>
@@ -41,19 +48,19 @@
                                         <p class="card-text">
                                             <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($news->getSummary())) ?>
                                             <br><br>
-                                            Retrouvez plus d'actualités résumées
+                                            Retrouvez plus d'actualités résumées dans ce module.
                                         </p>
                                     <?php break;
         
                                     case "weather": ?>
                                         <h4 class="cart-title">Météo de <?= $weather->getTown()->getLabel() ?></h4>
                                         <p class="card-text">
-                                        Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
+                                            Il fait actuellement <?= intval($weather->getFeltTemp()) ?>°C à <?= htmlspecialchars($weather->getTown()->getLabel())?>
                                             <br>
-                                        Etat du ciel : <?= htmlspecialchars($weather->getSky()->getLabel()) ?>
-                                        <br>
-                                        <br>
-                                        Retrouvez plus en détails la météo de la semaine
+                                            Etat du ciel : <?= htmlspecialchars($weather->getSky()->getLabel()) ?>
+                                            <br>
+                                            <br>
+                                            Retrouvez plus en détails la météo de la semaine dans ce module.
                                         </p>
                                     <?php break;
         
@@ -66,7 +73,7 @@
                                             </h4>
                                         <?php } else echo("Pas de programme dans l'heure."); ?>
                                         <p class="card-text">
-                                            Retrouvez plus en détails le programme du jour
+                                            Retrouvez plus en détails le programme du jour dans ce module.
                                         </p>
                                     <?php break;
         
@@ -74,12 +81,9 @@
                                         <h4 class="cart-title">Recette proposée : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?></h4>
                                         <p class="card-text"> 
                                             Vous ne savez pas quoi cuisiner pour ce soir ? Consultez notre recette de <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($cooking->getName())) ?> et dégustez un bon plat
-                                            <!--<br>
-                                            <img class="col-lg-6" src="< ?= htmlspecialchars($cooking->getPicture()) ?>" alt="Image recette">
-                                            -->
                                             <br>
                                             <br>
-                                            Retrouvez plus en détails cette recette ou une autre
+                                            Retrouvez plus en détails cette recette ou une autre dans ce module.
                                         </p>
                                     <?php break;
                                     

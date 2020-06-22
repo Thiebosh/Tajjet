@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
     <div class="text-center">
-        <h1>Météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?></h1>
+        <h1>Programmez vos sorties avec la météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?> !</h1>
         <hr>
     </div>
     <article>
@@ -19,8 +19,6 @@
         </div>
         <br>
         <?php if ($weatherList != false) {
-            //$i = 5;
-            //foreach ($weatherList as $weather) { 
             echo('<div class="row">');
             for ($i = 0; $i < count($weatherList); $i++) {
                 $weather = $weatherList[$i]; ?>
@@ -28,15 +26,15 @@
                         <div class="card text-black bg-info">
                             <div class="card-header text-center">
                                 <h2 class="m-0">
-                                    <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
-                                        explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
-                                        à 
-                                        <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
+                                    Le <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
+                                    explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
+                                    à 
+                                    <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
                                 </h2>
                             </div>
                             <div class="p-3">
                                 <div class="text-center mb-2">
-                                    <h3><strong>Temps : </strong><?= htmlspecialchars($weather->getSky()->getLabel()) ?></h3>
+                                    <h3><strong>Ciel <?= htmlspecialchars($weather->getSky()->getLabel()) ?></strong></h3>
                                     <img class="weatherImg" src="resource/image/weather/full/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
                                 </div>
                                 <p>

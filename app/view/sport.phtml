@@ -16,18 +16,18 @@ function exerciceDisplay($sport) {
 
 ob_start();?>
     <div class="text-center">
-        <h1>Votre séance de sport :</h1>
+        <h1>Entrenetez votre corps !</h1>
         <hr>
     </div>
 
     <div class="menu">
         <div class="d-flex justify-content-center row">
             <div class="col-lg my-2">
-                <a class="btn btn-primary w-100" href="index.php?page=sport">Voir tous les exercices</a> 
+                <a class="btn btn-primary w-100" href="index.php?page=sport">Tous les exercices</a> 
             </div>
             <form method="post" action="index.php?page=sport" class="col-lg my-2"> 
                 <input type="hidden" name="random" value="true">
-                <input type="submit" class="btn btn-primary w-100" value="Voir un exercice aléatoire">
+                <input type="submit" class="btn btn-primary w-100" value="Exercice aléatoire">
             </form>
         </div>
         <hr>
@@ -41,7 +41,7 @@ ob_start();?>
                         </option>
                     <?php } ?>
                 </select>
-                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Rechercher exercice, vide pour tout" value="<?= isset($trustedPost['search']) ? htmlspecialchars($trustedPost['search']) : '' ?>">
+                <input class="form-control col-lg m-3" type="text" name="search" placeholder="Votre recherche, tout par défaut" value="<?= isset($trustedPost['search']) ? htmlspecialchars($trustedPost['search']) : '' ?>">
                 <input type="submit" class="btn btn-primary col-lg m-3" value="Rechercher">
             </form>
         </div>
@@ -64,23 +64,23 @@ ob_start();?>
         <div class="col-md seances text-center py-3">
             <h2 class="my-2 font-weight-bold">Séance d'entraînement</h2>
             <div class="mt-4">
-                <form method="post" action="index.php?page=sport">
+                <form method="post" action="index.php?page=sport#anchorSeance">
                     <ul class="seance list-group">
-                        <?php if ($seanceList != false ) {
+                        <?php if ($seanceList != false) {
                             foreach ($seanceList as $sport) { ?>
-                                <li class="my-1 list-group">
+                                <li class="my-1 list-group-item">
                                     <?= exerciceDisplay($sport) ?>
                                     <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
                                 </li>
                         <?php }
                         } ?>
                     </ul>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center" id="anchorSeance">
                         <input type="hidden" name="" value="true"><!--save or do-->
                         <input type="hidden" name="nbExo">
                         <input type="hidden" name="totalCalories">
-                        <input type="submit" class="btn btn-info mr-2" value="Enregistrer séance" id="saveInput">
-                        <input type="submit" class="btn btn-success" value="Réaliser séance" id="doInput">
+                        <input type="submit" id="saveInput" class="btn btn-info mr-2" value="<?= isset($trustedPost['action']) && $trustedPost['action'] == 'save' ? 'Séance enregistrée' : 'Enregistrer la séance' ?>">
+                        <input type="submit" id="doInput" class="btn btn-success" value="<?= isset($trustedPost['action']) && $trustedPost['action'] == 'do' ? 'Séance réalisée' : 'Réaliser la séance' ?>">
                     </div>
                 </form>
             </div>
