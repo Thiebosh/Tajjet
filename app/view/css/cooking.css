@@ -9,3 +9,9 @@ a:not([href]).buttonNav {
 article div hr {
     border-top: 1px solid black;
 }
+
+.err
+{
+    font-weight: bold;
+    color:red;
+}

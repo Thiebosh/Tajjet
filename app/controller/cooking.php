@@ -40,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($output);
         }
     }
+    elseif($trustedPost['type']=="Type de préparation"){
+        $erreur="Veuillez sélectionner un type de préparation";
+    }
 }
 
 if (!isset($recipe) || $recipe == null) $recipe = (new RecipeManager)->readRandom();
