@@ -5,7 +5,7 @@
     </div>
     <article>
         <div class="d-flex justify-content-center">
-            <div class="card carte_ville">
+            <div class="card text-black bg-light">
                 <div class="card-header">
                     Envie de voir la météo d'une autre ville ?
                 </div>
@@ -25,19 +25,19 @@
             for ($i = 0; $i < count($weatherList); $i++) {
                 $weather = $weatherList[$i]; ?>
                     <div class="col-md-3 my-3">
-                        <div class="jour card">
+                        <div class="card text-black bg-info">
                             <div class="card-header">
                                 <h2>
                                     <?= htmlspecialchars(intval(explode('-',explode(' ',$weather->getForecast())[0])[2])).'/'.
                                         explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
                                 </h2>
                                 <h2>
-                                    <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>
+                                    <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>h
                                 </h2>
                             </div>
                             <div class="p-3">
                                 <div class="text-center">
-                                    <h3>Temps : <?= htmlspecialchars($weather->getSky()->getLabel()) ?></h3>
+                                    <h3><strong>Temps : </strong><?= htmlspecialchars($weather->getSky()->getLabel()) ?></h3>
                                     <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
                                 </div>
                                 <p>
