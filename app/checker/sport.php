@@ -10,6 +10,8 @@ else if (isset($_POST['nbExo']) && (isset($_POST['save']) || isset($_POST['do'])
     $trustedPost['action'] = isset($_POST['save']) ? 'save' : 'do';
 
     $trustedPost['nbExo'] = filter_input(INPUT_POST, 'nbExo', FILTER_VALIDATE_INT);
+    
+    if (isset($_POST["totalCalories"])) $trustedPost['totalCalories'] = filter_input(INPUT_POST, 'totalCalories', FILTER_VALIDATE_FLOAT);
 
     if ($trustedPost['nbExo'] != false) {
         for ($i = 0; $i < $trustedPost['nbExo']; ++$i) {

@@ -65,9 +65,9 @@ ob_start();?>
                 <form method="post" action="index.php?page=sport">
                     <ul class="seance list-group">
                         <?php if ($seanceList != false ) {
-                            foreach ($seanceList as $sport) { ?> <!--On liste les exercices associés à la séance-->
+                            foreach ($seanceList as $sport) { ?>
                                 <li class="my-1 list-group">
-                                    <?= htmlspecialchars(exerciceDisplay($sport)) ?>
+                                    <?= exerciceDisplay($sport) ?>
                                     <button class="btn btn-danger">Supprimer l'exercice de la séance</button>
                                 </li>
                         <?php }
@@ -78,7 +78,7 @@ ob_start();?>
                         <input type="hidden" name="nbExo">
                         <input type="hidden" name="totalCalories">
                         <input type="submit" class="btn btn-info mr-2" value="Enregistrer séance" id="saveInput">
-                        <input type="" class="btn btn-success" value="Réaliser séance" id="doInput">
+                        <input type="submit" class="btn btn-success" value="Réaliser séance" id="doInput">
                     </div>
                 </form>
             </div>

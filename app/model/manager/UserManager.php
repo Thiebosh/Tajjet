@@ -6,12 +6,13 @@ require_once("TownManager.php");
 
 class UserManager extends Manager {//pattern CRUD : create, read, update, delete + methodes pratiques
     public function create($user) {
-        $query = 'INSERT INTO User(Name, Password, BirthDate, Height'.($user->getID_Town() != null ? ', ID_town' : '').')
-                    VALUES(:name, :password, :birthDate, :height'.($user->getID_Town() != null ? ', :town' : '').')';
+        $query = 'INSERT INTO User(Name, Password, BirthDate, Height, Sex'.($user->getID_Town() != null ? ', ID_town' : '').')
+                    VALUES(:name, :password, :birthDate, :height, :sex'.($user->getID_Town() != null ? ', :town' : '').')';
         $table = array('name'       => $user->getName(),
                         'password'  => $user->getPassword(),
                         'birthDate' => ($user->getBirthDate()   != null) ? $user->getBirthDate()    : PDO::PARAM_NULL,
-                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL);
+                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL,
+                        'sex'       => ($user->getBoolSex()     != null) ? $user->getBoolSex()      : PDO::PARAM_NULL);
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
         $request = parent::prepareAndExecute($query, $table);
@@ -51,14 +52,16 @@ class UserManager extends Manager {//pattern CRUD : create, read, update, delete
                     SET Name = :name, 
                         Password = :password, 
                         BirthDate = :birthDate, 
-                        Height = :height
+                        Height = :height,
+                        Sex = :sex
                         '.($user->getID_Town() != null ? ', ID_town = :town' : '').'
                     WHERE ID_user = :idUser';
         $table = array('idUser'     => $user->getId(),
                         'name'      => $user->getName(),
                         'password'  => $user->getPassword(),
                         'birthDate' => ($user->getBirthDate()   != null) ? $user->getBirthDate()    : PDO::PARAM_NULL,
-                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL);
+                        'height'    => ($user->getHeight()      != null) ? $user->getHeight()       : PDO::PARAM_NULL,
+                        'sex'       => ($user->getBoolSex()     != null) ? $user->getBoolSex()      : PDO::PARAM_NULL);
 
         if ($user->getID_Town() != null) $table['town'] = $user->getID_Town();
 
