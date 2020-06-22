@@ -33,7 +33,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!(new UserManager)->create(new User($trustedPost))) {
                     $trustedPost['errMsgs'][] = $errMsg['controller']['register']['db'];
                 }
-                else header('Location: index.php?user=login');
+                else header('Location: index.php?user=login&inscript=true');
             }
         }
     }

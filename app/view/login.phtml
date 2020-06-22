@@ -4,7 +4,14 @@
         <hr>
     </div>
     <div class="d-flex justify-content-center">
+    
         <div class="mt-4 col-lg-3">
+            <div class="confirmation_inscription">
+            <?php if(isset($confirm)){
+                    echo(htmlspecialchars($confirm));
+                }?>
+            </div>
+            <br>
             <form method="post" action="index.php?user=login">
                 <p> 
                     <label for="username" class="ml-1">Nom d'utilisateur</label><br>
