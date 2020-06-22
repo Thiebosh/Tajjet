@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     
-    if (isset($trustedPost['search']) && isset($trustedPost['type'])) {
+    if (isset($trustedPost['search']) && isset($trustedPost['type']) && $trustedPost['type']!="Type de préparation") {
         $trustedPost['type'] = strtolower(skip_accents($trustedPost['type']));
 
         require_once(__DIR__."/../model/manager/TypeManager.php");
