@@ -43,6 +43,10 @@ class Sport extends Entity {
 
 
     //setters
+    public function setID_sport($id) {
+        $this->setId($id);
+    }
+    
     public function setLabel($label) {
         if (is_string($label)) $this->_label = $label;
     }
@@ -58,7 +62,7 @@ class Sport extends Entity {
 
     public function setMuscles($muscles) {
         unset($this->_Muscles);
-        foreach ($muscles as $muscle) addMuscle($muscle);
+        foreach ($muscles as $muscle) $this->addMuscle($muscle);
     }
 
     public function addMuscle($muscle) {

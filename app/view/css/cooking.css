@@ -1,68 +1,11 @@
-
-#ingredients_recette h1,#possession h1
-{
-    font-size: 2em;
-    text-align:center;
-}
-
-#plats{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    
-}
-
 li{
     list-style-type: none;
 }
 
-#recipe
-{
-    justify-content: center;
-}
-#times
-{
-    text-align:center;
-    font-weight: bold;
-    font-size:1.2em;
+a:not([href]).buttonNav {
+    color: white;
 }
 
-#timeGlobal
-{    
-    font-size: 1.5em;
-}
-
-#prepBouton
-{
-    text-align: center;
-}
-
-#nom_recette
-{
-    font-family: 'Balsamiq Sans', sans-serif;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.recette
-{
-    border:2px solid black;
-    background-color:#ffb677;
-}
-
-.list_ingredient {
-    height: 38px;
-    padding: 7px;
-}
-
-.input_number_ingredient {
-    width: 50px;
-    height: 38px;
-}
-
-#number_person {
-    width: 50px;
+article div hr {
+    border-top: 1px solid black;
 }

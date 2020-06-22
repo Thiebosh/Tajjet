@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($recipe === false) {
             exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ', '', $trustedPost['type']), $output, $return);
-            var_dump($output);
             if (end($output) != '1') $recipe = (new RecipeManager)->readByName(skip_accents(\ForceUTF8\Encoding::toUTF8(end($output))), $idType);
             else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['search'];
             unset($output);

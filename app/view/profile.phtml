@@ -10,13 +10,13 @@
                         <input type="text" class="form-control" name="username" placeholder="<?= htmlspecialchars($_SESSION['user']->getName()) ?>" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
                         <br>
                         <label for="password">Mot de passe</label><br>
-                        <input type="password" class="form-control" name="password" placeholder="Nouveau mot de passe">
+                        <input type="password" minlength="8" class="form-control" name="password" placeholder="Nouveau mot de passe">
                         <br>
                         <label for="passwordConf">Confirmer le mot de passe</label><br>
-                        <input type="password" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
+                        <input type="password" minlength="8" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
                     </p>
                     
-                    <p class="d-flex justify-content-center">
+                    <p class="d-flex justify-content-center mt-4">
                         <input type="submit" class="btn btn-outline-success" value="Modifier mes identifiants"/>
                     </p>
                 </form>
@@ -32,14 +32,14 @@
                     <br>
                     <br>
                     <?php 
-                        if(isset($error)){  ?>
+                        if(isset($erreur)){  ?>
                             <span class="erreur">
-                                <?=htmlspecialchars($error)?>
+                                <?=htmlspecialchars($erreur)?>
                             </span>
                         
                         <?php }
                         if(isset($avatar)) { ?>
-                            <img class="user_avatar" src="<?=$avatar?>">
+                            <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
                         <?php } ?>
                    
                     <p>
@@ -52,8 +52,17 @@
                         <br>
                         <label for="town">Votre ville</label><br>
                         <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
+                        <p class="bold">Votre sexe (actuel)</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="femme" value="femme" <?= $_SESSION['user']->getSex() == "femme" ? 'checked' : '' ?>>
+                            <label class="form-check-label" for="femme">Femme</label>
+                        </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="homme" value="homme" <?= $_SESSION['user']->getSex() == "homme" ? 'checked' : '' ?>>
+                            <label class="form-check-label" for="homme">Homme</label>
+                        </div>
                     </p>
-                    <p class="d-flex justify-content-center">
+                    <p class="d-flex justify-content-center mt-4">
                         <input type="submit" class="btn btn-outline-success" name="modif" value="Modifier mes informations personnelles"/>
                     </p>
                 </form>  

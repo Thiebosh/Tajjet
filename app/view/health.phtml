@@ -3,7 +3,6 @@
         <h1>Votre état de santé</h1>
         <hr>
     </div>
-
     <article class="container">
         <div class="row w-100 graph-container">
             <div class="col-lg-8 graphes my-2">
@@ -38,99 +37,115 @@
     </article>
     
     <br>
-    
-    <div class="row tab">
-        <div class="col-lg-8 ">
-            <table class="table table-dark table-bordered text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">Informations</th>
-                        <th scope="col">Commentaire</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <?php if (isset($imc)) { ?>
-                            <td>
-                                Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? number_format (floatval($imc), 1) : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
-                            </td>
+    <div class="container">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Informations</th>
+                    <th scope="col">Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <?php if (isset($imc)) { ?>
+                        <td>
+                            Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? number_format (floatval($imc), 1) : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                        </td>
 
-                            <td>
-                                <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
-                            </td> 
-                            
-                        <?php } 
-                        else { ?>
-                            <td colspan="2">
-                                Veuillez entrer votre poids dans pour pouvoir calculer votre IMC.
-                            </td>
-                        <?php } ?>
-                    </tr>
-                    <tr> 
-                        <?php if (isset($commDiff)) { ?>
-                            <td>
-                                Pour votre taille, le poids idéal est de : <strong> < calcul en js avec taille et sexe > kg.</strong>
-                            </td>
-                            <td>
-                            <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
-
-                            </td>
-                        <?php } 
-                        else { ?>
-                            <td colspan="2">
-                                Veuillez entrer votre taille en cliquant sur mon profil. 
-                            </td>
-                        <?php } ?>
+                        <td>
+                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
+                        </td> 
                         
-                    </tr>
-                    <tr>
-                        <?php if (isset($commSleepTod)) { ?>
-                            <td>
-                                Vous avez dormi 
-                                <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0]) : '') ?>
-                                heures cette nuit
-                            </td>
-                            <td>
-                                <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
-                            </td>
-                        <?php } 
-                        else { ?>
-                            <td colspan="2">
-                                Veuillez entrer vos heures de sommeil de cette nuit.
-                            </td>
-                        <?php } ?>
-                    </tr>
-                    <tr>
-                        <?php if (isset($temps_moyen)) { ?>
-                            <td>
-                                Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 dernier jours
-                            </td>
-                            <td>
-                                <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
-                            </td>
-                        <?php }
-                        else { ?>
-                            <td colspan ="2">
-                                Veulliez entrer vos heures de sommeil.
-                            </td>
-                        <?php } ?>
-                    </tr>
+                    <?php } 
+                    else { ?>
+                        <td colspan="2">
+                            Veuillez entrer votre poids dans pour pouvoir calculer votre IMC.
+                        </td>
+                    <?php } ?>
+                </tr>
+                <tr> 
+                    <?php if (isset($commDiff)) { ?>
+                        <td>
+                            Pour votre taille, le poids idéal est de : <strong> < calcul en js avec taille et sexe > kg.</strong>
+                        </td>
+                        <td>
+                        <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
 
-                </tbody>
-            </table>
-        </div>
+                        </td>
+                    <?php } 
+                    else { ?>
+                        <td colspan="2">
+                            Veuillez entrer votre taille et votre sexe en cliquant sur Mon Profil. 
+                        </td>
+                    <?php } ?>
+                    
+                </tr>
+                <tr>
+                    <?php if (isset($commSleepTod)) { ?>
+                        <td>
+                            Vous avez dormi 
+                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '') ?>
+                            cette nuit
+                        </td>
+                        <td>
+                            <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
+                        </td>
+                    <?php } 
+                    else { ?>
+                        <td colspan="2">
+                            Veuillez entrer vos heures de sommeil de cette nuit.
+                        </td>
+                    <?php } ?>
+                </tr>
+                <tr>
+                    <?php if (isset($temps_moyen)) { ?>
+                        <td>
+                            Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 derniers jours
+                        </td>
+                        <td>
+                            <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
+                        </td>
+                    <?php }
+                    else { ?>
+                        <td colspan ="2">
+                            Veulliez entrer vos heures de sommeil.
+                        </td>
+                    <?php } ?>
+                </tr>
+
+            </tbody>
+        </table>
     </div>
     <script>
-        var variableRecuperee = <?= json_encode($listHealth) ?>;
-        console.log(variableRecuperee)
-        
+        var variableRecuperee = <?= $data ?>;
+        var userDate = []
+        var userWeight = []
+        var userSleep = []
+        var userCalory = []
+
+        if(!$.isEmptyObject(variableRecuperee)) {
+            for (var i = 0; i < variableRecuperee.length; i++) {
+                variableRecuperee[i] = JSON.parse(variableRecuperee[i])
+                
+                splitedDate = variableRecuperee[i]._recordDate.split("-")
+                userDate.push(splitedDate[2] + "/" + splitedDate[1] + "/" + splitedDate[0])
+
+                userWeight.push(parseFloat(variableRecuperee[i]._weight))
+
+                splitedSleep = variableRecuperee[i]._sleep.split(":")
+                userSleep.push(parseFloat(splitedSleep[0] + "." + String(parseInt(splitedSleep[1]) * 100 / 60)))
+                
+                userCalory.push(parseFloat(variableRecuperee[i]._calories))
+            }
+        }
+
         var config = {
             type: 'line',
             data: {
-                labels: ['12/06/2020', '13/06/2020', '14/06/2020', '15/06/2020', '16/06/2020', '17/06/2020',],
+                labels: userDate,
                 datasets: [{
                     label: 'Poids par jour',
-                    data: [60, 62, 63, 65, 62, 63],
+                    data: userWeight,
                     borderColor: [
                         'rgba(0, 0, 0, 1)'
                     ],
@@ -160,7 +175,7 @@
         document.getElementById('weightChart').addEventListener('click', function(){
             config.data.datasets.forEach(function(dataset) {
                 dataset.label = 'Poids par jour';
-				dataset.data = [60, 62, 63, 65, 62, 63];
+				dataset.data = userWeight;
 			});
 
             window.myLine.update()
@@ -169,7 +184,7 @@
         document.getElementById('sleepChart').addEventListener('click', function(){
             config.data.datasets.forEach(function(dataset) {
                 dataset.label = 'Temps de sommeil par jour';
-				dataset.data = [7, 8, 9, 6, 5, 9];
+				dataset.data = userSleep;
 			});
 
             window.myLine.update()
@@ -178,7 +193,7 @@
         document.getElementById('caloryChart').addEventListener('click', function(){
             config.data.datasets.forEach(function(dataset) {
                 dataset.label = 'Calories ingérées par jour';
-				dataset.data = [2000, 2300, 2100, 1990, 1880, 2310];
+				dataset.data = userCalory;
 			});
 
             window.myLine.update()

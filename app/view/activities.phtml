@@ -7,7 +7,7 @@
     <div class="container">
         <div class="heure_filtre text-center">
             <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
-            <span>Saisissez l'heure pour laquelle vous souhaitez avoir le programme télé :</span>    
+            <span>Saisissez l'heure à laquelle vous souhaitez avoir le programme télé (30 dernières et prochaines minutes) :</span>
             <input  type="time" name="heure" id="heure">
             <button class="btn btn-primary">Filtrer</button>
         </div>
@@ -25,14 +25,15 @@
             }
 
             var variableRecuperee = <?= $data ?>;
-            console.log(variableRecuperee)
             
+
             if(variableRecuperee['notStarted'] != undefined) {
                 for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
                     variableRecuperee['notStarted'][i] = JSON.parse(variableRecuperee['notStarted'][i])
                     variableRecuperee['notStarted'][i]._Channel = JSON.parse(variableRecuperee['notStarted'][i]._Channel)
                 }
             }
+            
             if(variableRecuperee['started'] != undefined) {
                 for (var i = 0; i < variableRecuperee['started'].length; i++) {
                     variableRecuperee['started'][i] = JSON.parse(variableRecuperee['started'][i])
@@ -44,7 +45,6 @@
                 $('#tvList').empty()
 
                 heureFiltre = $(this).siblings('#heure')[0].value
-                console.log(heureFiltre)
                 heureFiltre = heureFiltre.split(':')
 
                 var dateBefore = new Date()
@@ -63,8 +63,9 @@
                         var dateTvProgram = new Date();
                         dateTvProgram.setHours(time[0])
                         dateTvProgram.setMinutes(time[1])
-
+                        
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            
                             var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
                             $('#tvList').append(liToAdd)
                         }
@@ -78,7 +79,7 @@
                         dateTvProgram.setMinutes(time[1])
 
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
+                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['started'][i]._synopsis + "</li>")
                             $('#tvList').append(liToAdd)
                         }
                     }

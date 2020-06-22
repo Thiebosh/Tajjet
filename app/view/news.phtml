@@ -1,23 +1,30 @@
 <?php ob_start();?>
-    <article class="theme">
-        <h1>Actualités</h1> 
+    <div class="text-center">
+        <h1 class="text-center">Actualités</h1> 
         <hr>
+    </div>
+    <article>
         <div class="container"> 
-            <ul>
-                <?php foreach ($articleList as $article) { ?>
-                    <li class="my-3 p-3">
-                        <div class="card col-lg-12 p-0">
-                            <div class="card-header">
-                                <a href="<?= htmlspecialchars($article->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($article->getTitle()))) ?></a>
-                                <p class="mb-0">Temps aproximatif de l'article : <?= intval(explode(':',$article->getReadingTime())[1]) ?> min <?= intval(explode(':',$article->getReadingTime())[2]) ?> sec</p>
-                            </div>
-                            <p class="p-3">
-                                <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getSummary())) ?>
-                            </p>
-                        </div>
-                    </li>
-                <?php } ?>
-            </ul>   
+            <?php foreach ($articleList as $article) { ?>
+                <div class="card bg-light p-0 my-4 text-center">
+                    <div class="card-header">
+                        <a href="<?= htmlspecialchars($article->getURL()) ?>"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8(strtoupper($article->getTitle()))) ?></a>
+                        <p class="mb-0">Temps de lecture aproximatif de l'article : 
+                        <?php
+                            $tmp = explode(':',$article->getReadingTime());
+                            $m = intval($tmp[1]);
+                            $s = intval($tmp[2]);
+                        
+                            echo($m > 0 ? htmlspecialchars($m)." min " : '');
+                            echo($m > 0 && $s > 0 ? " et " : '');
+                            echo($s > 0 ? htmlspecialchars($s)." sec" : '');
+                        ?>                                
+                    </div>
+                    <p class="p-3">
+                        <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($article->getSummary())) ?>
+                    </p>
+                </div>
+            <?php } ?>
         </div>
     </article>
 <?php $sectionContent=ob_get_clean();

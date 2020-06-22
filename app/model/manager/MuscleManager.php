@@ -10,12 +10,20 @@ class MuscleManager extends Manager {//pattern CRUD : create, read, update, dele
         $table = array('id' => $idMuscle);
 
         $request = parent::prepareAndExecute($query, $table);
-
-        $result = $request->fetchAll(PDO::FETCH_ASSOC);
         
-        return new Muscle($result[0]);
+        return new Muscle($request->fetchAll(PDO::FETCH_ASSOC)[0]);
     }
 
+    public function readByName($name) {
+        $query = "SELECT * 
+                    FROM Muscle 
+                    WHERE Label = :label";
+        $table = array('label' => $name);
+
+        $request = parent::prepareAndExecute($query, $table);
+        
+        return new Muscle($request->fetchAll(PDO::FETCH_ASSOC)[0]);
+    }
 
     public function readAll() {
         $query = "SELECT * 

@@ -18,9 +18,10 @@ div{
     text-align:center;
     
 }
-label,#inscr p
+label,#inscr p, .bold
 {
     font-weight:bold;
+    font-size:0.8203125rem;
 }
 
 .form-control,.custom-file-label
