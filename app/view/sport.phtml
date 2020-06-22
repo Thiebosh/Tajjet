@@ -21,11 +21,13 @@ ob_start();?>
     </div>
 
     <div class="menu">
-        <div class="d-flex justify-content-center">
-            <a class="btn btn-primary col-lg m-3" href="index.php?page=sport">Voir tous les exercices</a> 
-            <form method="post" action="index.php?page=sport" class="col-lg"> 
+        <div class="d-flex justify-content-center row">
+            <div class="col-lg my-2">
+                <a class="btn btn-primary w-100" href="index.php?page=sport">Voir tous les exercices</a> 
+            </div>
+            <form method="post" action="index.php?page=sport" class="col-lg my-2"> 
                 <input type="hidden" name="random" value="true">
-                <input type="submit" class="btn btn-primary col-lg m-3" value="Voir un exercice aléatoire">
+                <input type="submit" class="btn btn-primary w-100" value="Voir un exercice aléatoire">
             </form>
         </div>
         <hr>

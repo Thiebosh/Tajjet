@@ -3,41 +3,40 @@
         <h1>Votre état de santé</h1>
         <hr>
     </div>
-    <article class="container">
-        <div class="row w-100 graph-container">
-            <div class="col-lg-8 graphes my-2">
-                <h2 class="my-2">Graphique santé</h2>
+    <article class="container jumbotron p-2">
+        <div class="row w-100 m-0">
+            <div class="col-lg graphes my-2">
+                <h2 class="my-2 font-weight-bold text-center">Graphique santé</h2>
                 <canvas id="graph"></canvas>
 
                 <div class="d-flex justify-content-center my-2">
                     <div class="row w-100">
-                        <button class="col-lg mx-2 btn btn-primary" id="weightChart">Poids</button>
-                        <button class="col-lg mx-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
-                        <button class="col-lg mx-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="weightChart">Poids</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
                     </div>   
                 </div>
             </div>
-            <div class="offset-lg-1 col-lg-3 saisie my-2">
-                <h2 class="my-2">Aujourd'hui</h2>
-                <br>
-                <form method="post" action="index.php?page=health">
-                    <label for="sleepTime">Heures de sommeil</label>
-                    <input required type="time" class="form-control" name="sleepTime">
-                    <br>
-                    <label for="weight">Poids</label>
-                    <input required type="number" class="form-control" name="weight" step=".1">
-                    <br>
-                    <div>
-                        <input class="btn btn-success" type="submit" value="Enregistrer">
+            <div class="col-lg-3">
+                <h2 class="my-2 font-weight-bold text-center">Aujourd'hui</h2>
+                <div class="row h-75">
+                    <div class="my-auto mx-auto col-lg">
+                        <form method="post" action="index.php?page=health" class="my-auto text-center">
+                            <label for="sleepTime">Heures de sommeil</label>
+                            <input required type="time" class="form-control" name="sleepTime">
+                            <br>
+                            <label for="weight">Poids</label>
+                            <input required type="number" class="form-control" name="weight" step=".1">
+                            <br>
+                            <div>
+                                <input class="btn btn-success" type="submit" value="Enregistrer">
+                            </div>
+                            <br>
+                        </form>
                     </div>
-                    <br>
-                </form>
+                </div>
             </div>
         </div>
-    </article>
-    
-    <br>
-    <div class="container">
         <table class="table table-bordered text-center">
             <thead class="thead-dark">
                 <tr>
@@ -45,7 +44,7 @@
                     <th scope="col">Commentaire</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="">
                 <tr>
                     <?php if (isset($imc)) { ?>
                         <td>
@@ -115,7 +114,8 @@
 
             </tbody>
         </table>
-    </div>
+    </article>
+        
     <script>
         var variableRecuperee = <?= $data ?>;
         var userDate = []
