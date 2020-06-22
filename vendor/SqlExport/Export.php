@@ -9,7 +9,6 @@
 
    //or add 5th parameter(array) of specific tables:    array("mytable1","mytable2","mytable3") for multiple tables
 
-    
 
     function Export_Database($host,$user,$pass,$name,  $tables=false, $backup_name=false )
     {
@@ -92,8 +91,8 @@
                 unlink($backup_path);
             }
             header("Content-disposition: attachment; filename=\"".$dir.'/'.$backup_name."\"");
-        }
+        }*/
         
-        echo $content; exit;*/
+        echo $content; exit;
     }
 
