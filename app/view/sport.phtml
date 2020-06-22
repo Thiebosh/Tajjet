@@ -101,6 +101,8 @@ ob_start();?>
                     $(cloneButton).text("Supprimer l'exercice de la séance")
 
                     cloneParent.appendTo( ".seance")
+
+                    $('#saveInput').val("Enregistrer la séance")
                 } else if($(this).hasClass('btn-danger')){
                     $(this).parent().remove()
                 }
