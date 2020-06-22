@@ -41,13 +41,13 @@ if ($listHealth !== false) {
                 $commIMC="Attention ! Vous êtes en insuffisance pondérale (maigreur), il vous faut gagner du poids !";
             } 
             else if ($imc <= 25) {   
-                $commIMC="Très bien ! Vous entrez dans la catégorie Corpulence Normale, votre poids correspond à votre taille !";
+                $commIMC="Très bien ! Vous entrez dans la catégorie 'Corpulence Normale', votre poids correspond globalement à votre taille !";
             } 
             else if ($imc <= 30) { 
                 $commIMC="Attention ! Vous êtes en surpoids, il vous faut perdre du poids !";
             } 
             else if ($imc <= 35) { 
-                $commIMC="Attention ! Vous êtes obèse, prenez soin de votre corps et éliminez le surplus !";
+                $commIMC="Attention ! Vous êtes considérés obèse, prenez soin de votre corps et éliminez le surplus !";
             } 
             else if ($imc <= 40) { 
                 $commIMC="Attention ! Vous avez atteint une obésité sévère, il devient urgent de faire quelque chose ! Consultez un médecin.";
@@ -71,7 +71,7 @@ if ($listHealth !== false) {
                 $commDiff="C'est très bien, vous êtes très proche du poids idéal pour votre taille ! Restez comme ça !";
             } 
             else if(abs($diff_weight) <= 10) {   
-                $commDiff="Vous vous éloignez du poids idéal pour votre taille mais cela reste correcte, attention à ne pas vous en écarter davantage.";
+                $commDiff="Vous vous éloignez du poids idéal pour votre taille mais cela reste correct, attention à ne pas vous en écarter davantage.";
             }     
             else { 
                 $commDiff="Vous êtes trop loin du poids idéal pour votre taille, rapprochez vous-en pour ne pas mettre en danger votre santé.";
@@ -85,7 +85,7 @@ if ($listHealth !== false) {
     if ($_SESSION['user']->getBirthDate() !== null) {
         if($_SESSION['user']->getBirthDate() =="0000-00-00")
         {
-            $commSleepTod="Veuillez entrer votre date de naissance en cliquant sur Mon Profil";
+            $commSleepTod="Veuillez entrer votre date de naissance depuis votre profil.";
         }
         
         else{
@@ -123,7 +123,7 @@ if ($listHealth !== false) {
         $compteur=$tab_somm[2];
 
         if($rythme==false || ($rythme==true && (3<=$compteur))){
-            $commRythme="Votre rythme de sommeil est irrégulier, essayez de maintenir des heures de couché et de levée constantes.";
+            $commRythme="Votre rythme de sommeil est irrégulier, essayez de stabiliser vos heures de sommeil et vos horaires.";
         }
         else{
             $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez ainsi pour rester en forme.";
