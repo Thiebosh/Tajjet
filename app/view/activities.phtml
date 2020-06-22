@@ -1,7 +1,10 @@
-<?php ob_start();?>
+<?php ob_start();
+setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
+
     <div class="text-center">
         <h1>Programme télé </h1>
-        <h2><?php echo(date("l d M Y"))?></h2>
+        
+        <h2><?=ucwords(strftime("%A %d %B %G"))?></h2>
         <hr>
     </div>
     <div class="container">
