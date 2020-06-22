@@ -34,7 +34,7 @@ class TypeManager extends Manager {//pattern CRUD : create, read, update, delete
     public function readAll() {
         $query = "SELECT * 
                     FROM Type 
-                    ORDER BY Label";
+                    ORDER BY ID_type";
                     
         $request = parent::prepareAndExecute($query);
 

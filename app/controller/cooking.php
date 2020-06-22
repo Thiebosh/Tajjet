@@ -25,15 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
     if (isset($trustedPost['search']) && isset($trustedPost['type'])) {
-        //$trustedPost['search'] = skip_accents(ucfirst($trustedPost['search']));
+        $trustedPost['type'] = strtolower(skip_accents($trustedPost['type']));
 
         require_once(__DIR__."/../model/manager/TypeManager.php");
 
         $idType =  (new TypeManager)->readByName($trustedPost['type'])->getId();
         $recipe = (new RecipeManager)->searchByName($trustedPost['search'], $idType);
 
+        $trustedPost['type'] = str_replace(' ','',$trustedPost['type']);
         if ($recipe === false) {
-            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ','',strtolower($trustedPost['type'])), $output, $return);
+            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.$trustedPost['type'], $output, $return);
             if (end($output) != '1') $recipe = (new RecipeManager)->readByName(skip_accents(\ForceUTF8\Encoding::toUTF8(end($output))), $idType);
             else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['search'];
             unset($output);
