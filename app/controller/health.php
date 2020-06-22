@@ -53,6 +53,30 @@ if ($listHealth !== false) {
         }
         //garde imc pour l'afficher
     }
+    
+
+    //lorentz
+    if ($_SESSION['user']->getHeight() != 0 && $_SESSION['user']->getSex() != null) {
+        //Différence entre le poids idéal et le poids enregistré et commentaire
+        $size = $_SESSION['user']->getHeight() * 100;
+        $lorentzWeigth = ($size - 100) - (($size - 150) / ($_SESSION['user']->getSex() == "homme" ? 4 : 2.5));
+        unset($size);
+
+        if ($listHealth[0]->getWeight() != 0) {        
+            $diff_weight = $listHealth[0]->getWeight() - $lorentzWeigth;
+            
+            if( abs($diff_weight) <= 5) {   
+                $commDiff="C'est très bien, vous êtes très proche du poids idéal pour votre taille ! Restez comme ça !";
+            } 
+            else if(abs($diff_weight) <= 10) {   
+                $commDiff="Vous vous éloignez du poids idéal pour votre taille mais cela reste correcte, attention à ne pas vous en écarter davantage.";
+            }     
+            else { 
+                $commDiff="Vous êtes trop loin du poids idéal pour votre taille, rapprochez vous-en pour ne pas mettre en danger votre santé.";
+            } 
+        }
+        
+    }
 
 
     //Commentaire selon temps de sommeil enregistré et age
@@ -83,54 +107,32 @@ if ($listHealth !== false) {
             unset($age, $sleepTime);
 
         }
-        
-        
-            
-        
     }
 
 
-    //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
-    foreach ($listHealth as $health) if ($health->getSleep() != false) $lastSleepTime[] = $health->getSleep();
+    {
+        //Temps moyen de sommeil sur la dernière semaine + commentaire rythme
+        foreach ($listHealth as $health) if ($health->getSleep() != false) $lastSleepTime[] = $health->getSleep();
 
-    $tab_somm=somm($lastSleepTime);
+        $tab_somm=somm($lastSleepTime);
 
-    $temps_moyen=$tab_somm[0];
-    $rythme=$tab_somm[1];
-    $compteur=$tab_somm[2];
+        $temps_moyen=$tab_somm[0];
+        $rythme=$tab_somm[1];
+        $compteur=$tab_somm[2];
 
-    if($rythme==false || ($rythme==true && (3<=$compteur))){
-        $commRythme="Votre rythme de sommeil est irrégulier, essayez de maintenir des heures de couché et de levée constantes.";
+        if($rythme==false || ($rythme==true && (3<=$compteur))){
+            $commRythme="Votre rythme de sommeil est irrégulier, essayez de maintenir des heures de couché et de levée constantes.";
+        }
+        else{
+            $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez ainsi pour rester en forme.";
+        }
+
+        unset($tab_somm, $rythme, $compteur);
     }
-    else{
-        $commRythme="Très bien, vous avez réussi à garder un temps de sommeil constant sur les 7 derniers jours, continuez ainsi pour rester en forme.";
-    }
-
-    unset($tab_somm, $rythme, $compteur);
 }
+
 
 if ($listHealth !== false) foreach ($listHealth as $health) $data[] = $health->objectToJson();
 else $data = "{}";
-
 $data = json_encode($data);
 
-/*
-//fait en js : nécessite sexe (bouton radio)
-
-//Différence entre le poids idéal et le poids enregistré et commentaire
-$size = $_SESSION['user']->getHeight() * 100;
-$lorentzWeigth = ($size - 100) - (($size - 150) / ($sexe == "homme" ? 4 : 2.5));
-$diff_weight = $listHealth[0]->getWeight() - $lorentzWeigth;
-
-if( abs($diff_weight) <= 5) {   
-    $commDiff="C'est très bien, vous êtes très proche du poids idéal pour votre taille ! Restez comme ça !";
-} 
-else if(abs($diff_weight) <= 10) {   
-    $commDiff="Vous vous éloignez du poids idéal pour votre taille mais cela reste correcte, attention à ne pas vous en écarter davantage.";
-}     
-else { 
-    $commDiff="Vous êtes trop loin du poids idéal pour votre taille, rapprochez vous-en pour ne pas mettre en danger votre santé.";
-} 
-
-unset($size, $diff_weight);//garde lorentz pour l'afficher
-*/
