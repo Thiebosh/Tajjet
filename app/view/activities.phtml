@@ -22,14 +22,13 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
     </div>
     <div class="container">
         <div class="heure_filtre text-center">
-            <span>Saisissez l'heure à laquelle vous souhaitez avoir le programme télé (+/-30 minutes) :</span>
+            <span>Saisissez l'heure à laquelle vous souhaitez avoir le programme télé (+/-15 minutes) :</span>
             <input type="time" name="heure" id="heure">
             <button class="btn btn-primary">Filtrer</button>
         </div>
-        <hr>
-        <ul id="tvList">
-            <p class="text-center">Choisissez un horaire pour connaître les programme tv autour de cet horaire.</p>
-        </ul>
+        <div id="tvList" class="text-center">
+            <p class="text-center w-100 mt-5">Choisissez un horaire pour connaître les programme tv autour de cet horaire.</p>
+        </div>
         <br>
     </div>
     <script>
@@ -65,12 +64,26 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
                 var dateBefore = new Date()
                 dateBefore.setHours(heureFiltre[0])
                 dateBefore.setMinutes(heureFiltre[1])
-                dateBefore = addMinutes(dateBefore, -30)
+                dateBefore = addMinutes(dateBefore, -15)
                 
                 var dateAfter = new Date()
                 dateAfter.setHours(heureFiltre[0])
                 dateAfter.setMinutes(heureFiltre[1])
-                dateAfter = addMinutes(dateAfter, 30)
+                dateAfter = addMinutes(dateAfter, 15)
+
+                if(variableRecuperee['started'] != undefined) {
+                    for (var i = 0; i < variableRecuperee['started'].length; i++) {
+                        var time = variableRecuperee['started'][i]._begin.split(':')
+                        var dateTvProgram = new Date();
+                        dateTvProgram.setHours(time[0])
+                        dateTvProgram.setMinutes(time[1])
+
+                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            var liToAdd = $("<div class='card text-black bg-light mt-4'><div class='card-header text-center'><h2 class='m-0'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span></h2></div><div class='p-3'><em>" + variableRecuperee['started'][i]._synopsis + " </div>")
+                            $('#tvList').append(liToAdd)
+                        }
+                    }
+                }
 
                 if(variableRecuperee['notStarted'] != undefined) {
                     for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
@@ -80,21 +93,7 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
                         dateTvProgram.setMinutes(time[1])
                         
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
-                            $('#tvList').append(liToAdd)
-                        }
-                    }
-                }
-                if(variableRecuperee['started'] != undefined) {
-                    for (var i = 0; i < variableRecuperee['started'].length; i++) {
-                        var time = variableRecuperee['started'][i]._begin.split(':')
-                        var dateTvProgram = new Date();
-                        dateTvProgram.setHours(time[0])
-                        dateTvProgram.setMinutes(time[1])
-
-                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['started'][i]._synopsis + "</li>")
+                            var liToAdd = $("<div class='card text-black bg-light mt-4'><div class='card-header text-center'><h2 class='m-0'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span></h2></div><div class='p-3'><em>" + variableRecuperee['notStarted'][i]._synopsis + " </div>")
                             $('#tvList').append(liToAdd)
                         }
                     }

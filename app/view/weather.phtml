@@ -18,7 +18,8 @@
             </div> 
         </div>
         <br>
-        <?php if ($weatherList != false) {
+        <?php 
+        if ($weatherList != false) {
             echo('<div class="row">');
             for ($i = 0; $i < count($weatherList); $i++) {
                 $weather = $weatherList[$i]; ?>
@@ -47,7 +48,7 @@
                         </div>
                     </div>
                 <?php 
-                if ($i + 1 % 3 == 0 && $i != 0) { echo('</div><hr><div class="row">'); } ?>
+                if ($i + 1 % 3 == 0 && $i != 0) { echo('</div><div class="row">'); } ?>
             <?php }
             echo("</div>");
         } ?>
