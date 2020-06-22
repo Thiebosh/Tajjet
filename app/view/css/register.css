@@ -1,19 +1,6 @@
-div{
-    margin:auto;
-}
-label,#inscr p, .bold
+
+label, .bold
 {
+    font-size:0.8203125rem;
     font-weight:bold;
-}
-
-.form-control,.custom-file-label
-{
-    text-align:left;
-}
-
-.btn-info
-{
-    
-    background-color: #0A6DA3;
-    border-color:#0A6DA3;;
 }

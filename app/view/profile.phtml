@@ -1,72 +1,73 @@
 <?php ob_start(); ?>
-        <div class="infos d-flex justify-content-center">
-
-            <div class="col-md-6 infos_compte">
-                <h1>Informations de compte</h1>
-                <hr>
-                <form method="post" action="index.php?user=profile">
-                    <p>
-                        <label for="username">Nom d'utilisateur</label><br>
-                        <input type="text" class="form-control" name="username" placeholder="<?= htmlspecialchars($_SESSION['user']->getName()) ?>" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
-                        <br>
-                        <label for="password">Mot de passe</label><br>
-                        <input type="password" minlength="8" class="form-control" name="password" placeholder="Nouveau mot de passe">
-                        <br>
-                        <label for="passwordConf">Confirmer le mot de passe</label><br>
-                        <input type="password" minlength="8" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
-                    </p>
-                    
-                    <p class="d-flex justify-content-center mt-4">
-                        <input type="submit" class="btn btn-outline-success" value="Modifier mes identifiants"/>
-                    </p>
-                </form>
-            </div>
-            
-            <div class="col-md-6 infos_perso">
-                <h1>Informations personnelles</h1>
-                <hr>
-                <label for="avatar">Avatar</label>
-                <form method="post" action="index.php?user=profile" enctype="multipart/form-data">
-                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
-                
-                    <br>
-                    <br>
-                    <?php 
-                        if(isset($erreur)){  ?>
-                            <span class="erreur">
-                                <?=htmlspecialchars($erreur)?>
-                            </span>
+        <div class="infos d-flex justify-content-center mx-auto">
+            <div class="col-lg-4">
+                <div class="infos_compte">
+                    <h2 class="text-center">Informations de compte</h1>
+                    <hr>
+                    <form method="post" action="index.php?user=profile">
+                        <p>
+                            <label for="username">Nom d'utilisateur</label><br>
+                            <input type="text" class="form-control" name="username" placeholder="<?= htmlspecialchars($_SESSION['user']->getName()) ?>" value="<?= isset($trustedPost['name']) ? htmlspecialchars($trustedPost['name']) : '' ?>">
+                            <br>
+                            <label for="password">Mot de passe</label><br>
+                            <input type="password" minlength="8" class="form-control" name="password" placeholder="Nouveau mot de passe">
+                            <br>
+                            <label for="passwordConf">Confirmer le mot de passe</label><br>
+                            <input type="password" minlength="8" class="form-control" name="passwordConf" placeholder="Confirmer le nouveau mot de passe">
+                        </p>
                         
-                        <?php }
-                        if(isset($avatar)) { ?>
-                            <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
-                        <?php } ?>
-                   
-                    <p>
+                        <p class="d-flex justify-content-center mt-4">
+                            <input type="submit" class="btn btn-outline-success" value="Modifier mes identifiants"/>
+                        </p>
+                    </form>
+                </div>
+                <div class="infos_perso mt-5">
+                    <h2 class="text-center">Informations personnelles</h1>
+                    <hr>
+                    <label for="avatar">Avatar</label>
+                    <form method="post" action="index.php?user=profile" enctype="multipart/form-data">
+                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg, .gif">
+                    
                         <br>
-                        <label for="birthDate">Votre date de naissance</label><br>
-                        <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
                         <br>
-                        <label for="height">Votre taille</label><br>
-                        <input type="text" class="form-control" name="height" id="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight())?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
-                        <br>
-                        <label for="town">Votre ville</label><br>
-                        <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
-                        <p class="bold">Votre sexe (actuel)</p>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sex" id="femme" value="femme" <?= $_SESSION['user']->getSex() == "femme" ? 'checked' : '' ?>>
-                            <label class="form-check-label" for="femme">Femme</label>
-                        </div>
+                        <?php 
+                            if(isset($erreur)){  ?>
+                                <span class="erreur">
+                                    <?=htmlspecialchars($erreur)?>
+                                </span>
+                            
+                            <?php }
+                            if(isset($avatar)) { ?>
+                                <img class="user_avatar" src="<?=htmlspecialchars($avatar)?>">
+                            <?php } ?>
+                    
+                        <p>
+                            <br>
+                            <label for="birthDate">Votre date de naissance</label><br>
+                            <input type="date" class="form-control" name="birthDate" value="<?= htmlspecialchars(isset($trustedPost['birthDate']) ? $trustedPost['birthDate'] : $_SESSION['user']->getBirthDate() != null ? $_SESSION['user']->getBirthDate() : '') ?>">
+                            <br>
+                            <label for="height">Votre taille</label><br>
+                            <input type="text" class="form-control" name="height" id="height" placeholder="<?= htmlspecialchars($_SESSION['user']->getHeight())?>" value="<?= isset($trustedPost['height']) ? htmlspecialchars($trustedPost['height']) : '' ?>">
+                            <br>
+                            <label for="town">Votre ville</label><br>
+                            <input type="text" class="form-control" name="town" id="town" placeholder="<?= htmlspecialchars($_SESSION['user']->getTown()->getLabel()) ?>" value="<?= isset($trustedPost['town']) ? htmlspecialchars($trustedPost['town']) : '' ?>">
+                            <p class="bold mt-4">Votre sexe (actuel)</p>
                             <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sex" id="homme" value="homme" <?= $_SESSION['user']->getSex() == "homme" ? 'checked' : '' ?>>
-                            <label class="form-check-label" for="homme">Homme</label>
-                        </div>
-                    </p>
-                    <p class="d-flex justify-content-center mt-4">
-                        <input type="submit" class="btn btn-outline-success" name="modif" value="Modifier mes informations personnelles"/>
-                    </p>
-                </form>  
+                                <input class="form-check-input" type="radio" name="sex" id="femme" value="femme" <?= $_SESSION['user']->getSex() == "femme" ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="femme">Femme</label>
+                            </div>
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sex" id="homme" value="homme" <?= $_SESSION['user']->getSex() == "homme" ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="homme">Homme</label>
+                            </div>
+                        </p>
+                        <p class="d-flex justify-content-center mt-4">
+                            <input type="submit" class="btn btn-outline-success" name="modif" value="Modifier mes informations personnelles"/>
+                        </p>
+                    </form>  
+                </div>
             </div>
+        </div>  
 <?php $sectionContent=ob_get_clean();
 
 //ajouter script js pour afficher formulaire (ou champs et bouton de validation) avec un clic bouton "modifier mes données" ?

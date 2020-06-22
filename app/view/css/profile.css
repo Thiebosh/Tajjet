@@ -1,53 +1,10 @@
 
-.infos_perso,.infos_compte
-{
-    
-    
-    margin:10px auto 10px auto;
-    padding:5px;
-      
-}
-
-.btn-outline-primary
-{
-    margin:0px 1px 5px 0px;
-}
-
-div{
-    margin:auto;
-    text-align:center;
-    
-}
-label,#inscr p, .bold
+label, .bold
 {
     font-weight:bold;
     font-size:0.8203125rem;
 }
 
-.form-control,.custom-file-label
-{
-    
-    text-align:left;
-}
-
-.btn-info
-{
-    
-    background-color: #0A6DA3;
-    border-color:#0A6DA3;;
-}
-
-.infos
-{
-    display:flex;
-    flex-direction: column;
-}
-
-form
-{
-    margin:10px auto 10px auto;
-    padding:5px;
-}
 
 .user_avatar
 {
