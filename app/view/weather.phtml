@@ -28,11 +28,11 @@
                         <div class="card text-black bg-info">
                             <div class="card-header">
                                 <h2>
-                                    <?= htmlspecialchars(intval(explode('-',explode(' ',$weather->getForecast())[0])[2])).'/'.
+                                    <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
                                         explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
                                 </h2>
                                 <h2>
-                                    <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>h
+                                    <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
                                 </h2>
                             </div>
                             <div class="p-3">

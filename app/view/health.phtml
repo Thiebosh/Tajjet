@@ -82,7 +82,7 @@
                     <?php if (isset($commSleepTod)) { ?>
                         <td>
                             Vous avez dormi 
-                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '') ?>
+                            <?= $listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '' ?>
                             cette nuit
                         </td>
                         <td>
