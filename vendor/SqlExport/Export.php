@@ -10,7 +10,7 @@
    //or add 5th parameter(array) of specific tables:    array("mytable1","mytable2","mytable3") for multiple tables
 
 
-    function Export_Database($host,$user,$pass,$name,  $tables=false, $backup_name=false )
+    function Export_Database($host,$user,$pass,$name,  $tables=false, $backup_name=false, $isclient)
     {
         $mysqli = new mysqli($host,$user,$pass,$name); 
         $mysqli->select_db($name); 
@@ -75,9 +75,15 @@
         }
         //$backup_name = $backup_name ? $backup_name : $name."___(".date('H-i-s')."_".date('d-m-Y').")__rand".rand(1,11111111).".sql";
         $backup_name = $backup_name ? $backup_name : $name.".sql";
-        header('Content-Type: application/octet-stream');   
-        header("Content-Transfer-Encoding: Binary");
-        header("Content-disposition: attachment; filename=\"".$backup_name."\""); 
+        if($isclient){
+            header('Content-Type: application/octet-stream');   
+            header("Content-Transfer-Encoding: Binary");
+            header("Content-disposition: attachment; filename=\"".$backup_name."\"");
+        }
+        else
+        {
+            
+        } 
         /*$dir="resource/db/Backup";
         $backup_path=$dir.'/'.$backup_name;
         if(!file_exists($dir)){ //On vérifie si le dossier avatars existe
