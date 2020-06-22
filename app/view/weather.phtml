@@ -1,6 +1,9 @@
 <?php ob_start(); ?>
     <div class="text-center">
-        <h1>Programmez vos sorties avec la météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?> !</h1>
+        <h1>
+            <img alt="icon" src="resource/image/weather.png"/>
+            Programmez vos sorties avec la météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?> !
+        </h1>
         <hr>
     </div>
     <article>
