@@ -23,10 +23,12 @@
                     <div class="my-auto mx-auto col-lg">
                         <form method="post" action="index.php?page=health" class="my-auto text-center">
                             <label for="sleepTime">Heures de sommeil</label>
-                            <input required type="time" class="form-control" name="sleepTime">
+                            <input required type="time" class="form-control" name="sleepTime" 
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getSleep() != 0 ? $listHealth[0]->getSleep() : '00:00' ?>">
                             <br>
                             <label for="weight">Poids</label>
-                            <input required type="number" class="form-control" name="weight" step=".1">
+                            <input required type="number" class="form-control" name="weight" step="0.5" 
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getWeight() != 0 ? $listHealth[0]->getWeight() : '50' ?>">
                             <br>
                             <div>
                                 <input class="btn btn-success" type="submit" value="Enregistrer">
@@ -63,7 +65,7 @@
                 <tr> 
                     <?php if (isset($lorentzWeight)) { ?>
                         <td>
-                            Pour votre taille, le poids idéal est de : <strong><?= $lorentzWeight ?>kg.</strong>
+                            Pour votre taille, le poids idéal est de <strong><?= $lorentzWeight ?>kg</strong>
                         </td>
                         <td>
                         <?= isset($commDiff) ? htmlspecialchars($commDiff) : 'Entrez votre poids du jour pour plus d\'informations' ?>
