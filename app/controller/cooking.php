@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $recipe = (new RecipeManager)->searchByName($trustedPost['search'], $idType);
 
         if ($recipe === false) {
-            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ', '', $trustedPost['type']), $output, $return);
+            exec('"'.$config['Python']['executable'].'" core/module_recettes.py '.$trustedPost['search'].' '.str_replace(' ','',strtolower($trustedPost['type'])), $output, $return);
             if (end($output) != '1') $recipe = (new RecipeManager)->readByName(skip_accents(\ForceUTF8\Encoding::toUTF8(end($output))), $idType);
             else $trustedPost['errMsgs'][] = $errMsg['controller']['cooking']['search'];
             unset($output);
