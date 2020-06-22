@@ -14,6 +14,7 @@
                     <div class="card bg-light mb-3 <?= !$card["active"] ? 'inactive' : '' ?>">
                         <div class="text-center <?= !$card["active"] ? 'card-header nonehr' : 'card-header' ?>">
                             <a class="col-lg mt-2 " href="<?= $card["active"] ? 'index.php?page='.$card["link"] : 'index.php?page=profile#'.($card["link"]=="health"? 'height':'town') ?>">
+                                <img alt="icon" src="resource/image/<?= htmlspecialchars($card["link"]) ?>.png"/>
                                 <button class="btn btn-link">
                                     <h2 class="mb-0">
                                         <?= htmlspecialchars($card["display"]) ?><br>
