@@ -6,8 +6,7 @@ require_once("Sky.php");
 class Weather extends Entity {
     //attributes
     private $_forecast;
-    private $_minTemp;
-    private $_maxTemp;
+    private $_temp;
     private $_feltTemp;
     private $_humidity;
     private $_pressure;
@@ -32,12 +31,8 @@ class Weather extends Entity {
         return $this->_forecast;
     }
 
-    public function getMinTemp() {
-        return $this->_minTemp;
-    }
-
-    public function getMaxTemp() {
-        return $this->_maxTemp;
+    public function getTemp() {
+        return $this->_temp;
     }
 
     public function getFeltTemp() {
@@ -70,14 +65,9 @@ class Weather extends Entity {
         if (is_string($forecast)) $this->_forecast = $forecast;
     }
 
-    public function setMinTemp($temp) {
+    public function setTemp($temp) {
         $temp = Entity::stringToFloat($temp);
-        if (is_float($temp)) $this->_minTemp = $temp;
-    }
-
-    public function setMaxTemp($temp) {
-        $temp = Entity::stringToFloat($temp);
-        if (is_float($temp)) $this->_maxTemp = $temp;
+        if (is_float($temp)) $this->_temp = $temp;
     }
 
     public function setFeltTemp($temp) {

@@ -3,7 +3,7 @@
         <h1>Chercher une recette</h1>
         <hr>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-3">
         <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
             <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
                 <option>Type de préparation</option>
@@ -16,7 +16,6 @@
             <a class="col-lg btn btn-primary m-3 buttonNav">Recette aléatoire</a>
         </form>
     </div>
-    <hr>
     <article class="jumbotron p-2">
         <div classe="col-md-12 text-center">
             <div class="d-flex justify-content-center my-3"><h1 class="font-weight-bold"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
@@ -102,8 +101,11 @@
                             <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
                             <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
                         </form>
-                    <?php } else { ?>
-                        J'ai déjà préparé cette recette
+                    <?php 
+                    } else { ?> 
+                    <p class="text-center">
+                        J'ai déjà préparé cette recette 
+                    </p>
                     <?php } ?>
                 </div>
                 <div class="col-md text-center mb-5">
