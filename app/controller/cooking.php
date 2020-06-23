@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($output);
         }
     }
-    elseif($trustedPost['type']=="Type de préparation"){
+    elseif(isset($trustedPost['type']) && $trustedPost['type']=="Type de préparation"){
         $erreur="Veuillez sélectionner un type de préparation";
     }
 }
