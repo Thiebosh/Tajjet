@@ -5,6 +5,9 @@ class Type extends Entity {
     //attributes
     private $_label;
 
+    private static $conversion = array("entree" => "Entrée",
+                                        "plat principal" => "Plat principal",
+                                        "dessert" => "Dessert");
 
     //methods
 
@@ -23,6 +26,10 @@ class Type extends Entity {
         return $this->_label;
     }
 
+    public function getDBLabel() {
+        return array_flip(self::$conversionBoolString)[$this->_label];
+    }
+
 
     //setters
     public function setID_type($id) {
@@ -30,6 +37,8 @@ class Type extends Entity {
     }
 
     public function setLabel($label) {
-        if (is_string($label)) $this->_label = $label;
+        if (is_string($label)) {
+            $this->_label = isset(self::$conversion[$label]) ? self::$conversion[$label] : $label;
+        }
     }
 }

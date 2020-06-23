@@ -1,6 +1,9 @@
 <?php ob_start(); ?>
     <div class="text-center">
-        <h1>Météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?></h1>
+        <h1>
+            <img alt="icon" src="resource/image/weather.png"/>
+            Programmez vos sorties avec la météo de <?= $weatherList != false ? htmlspecialchars($weatherList[0]->getTown()->getLabel()) : '' ?> !
+        </h1>
         <hr>
     </div>
     <article>
@@ -18,27 +21,25 @@
             </div> 
         </div>
         <br>
-        <?php if ($weatherList != false) {
-            //$i = 5;
-            //foreach ($weatherList as $weather) { 
-            echo('<hr><div class="row">');
+        <?php 
+        if ($weatherList != false) {
+            echo('<div class="row">');
             for ($i = 0; $i < count($weatherList); $i++) {
                 $weather = $weatherList[$i]; ?>
                     <div class="col-md-3 my-3">
                         <div class="card text-black bg-info">
-                            <div class="card-header">
-                                <h2>
-                                    <?= htmlspecialchars(intval(explode('-',explode(' ',$weather->getForecast())[0])[2])).'/'.
-                                        explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
-                                </h2>
-                                <h2>
-                                    <?= htmlspecialchars(intval(explode(':',explode(' ',$weather->getForecast())[1])[0])) ?>h
+                            <div class="card-header text-center">
+                                <h2 class="m-0">
+                                    Le <?= intval(explode('-',explode(' ',$weather->getForecast())[0])[2]).'/'.
+                                    explode('-',explode(' ',$weather->getForecast())[0])[1] ?>
+                                    à 
+                                    <?= intval(explode(':',explode(' ',$weather->getForecast())[1])[0]) ?>h
                                 </h2>
                             </div>
                             <div class="p-3">
-                                <div class="text-center">
-                                    <h3><strong>Temps : </strong><?= htmlspecialchars($weather->getSky()->getLabel()) ?></h3>
-                                    <img class="col-lg-6" src="resource/image/weather/light/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
+                                <div class="text-center mb-2">
+                                    <h3><strong>Ciel <?= htmlspecialchars($weather->getSky()->getLabel()) ?></strong></h3>
+                                    <img class="weatherImg" src="resource/image/weather/<?= htmlspecialchars($weather->getSky()->getLabel()) ?>" alt="Image ciel">
                                 </div>
                                 <p>
                                     Température : <?= htmlspecialchars($weather->getTemp()) ?> °C </br>
@@ -50,7 +51,7 @@
                         </div>
                     </div>
                 <?php 
-                if ($i + 1 % 3 == 0 && $i != 0) { echo('</div><hr><div class="row">'); } ?>
+                if ($i + 1 % 3 == 0 && $i != 0) { echo('</div><div class="row">'); } ?>
             <?php }
             echo("</div>");
         } ?>

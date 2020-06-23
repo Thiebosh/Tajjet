@@ -1,20 +1,36 @@
-<?php ob_start();?>
+<?php ob_start();
+setlocale (LC_TIME, 'fr_FR.utf8','fra');?>
     <div class="text-center">
-        <h1>Programme télé </h1>
-        <h2><?php echo(date("l d M Y"))?></h2>
+        <h1>
+            <img alt="icon" src="resource/image/activities.png"/>
+            Consultez le programme télé pour trouver une occupation !
+        </h1>
+        <h2><?=ucwords(strftime("%A %d %B %G"))?></h2>
+        <?php if (isset($weather)) { ?>
+            <br>
+            <?php if ($weather->getSky()->getLabel() == "Dégagé") { ?>
+                <h5>
+                    Mais puisqu'il fait beau à <?= htmlspecialchars($weather->getTown()->getLabel()) ?>, vous pourriez aussi sortir.
+                    <?php if ($weather->getFeltTemp() > 15) { ?>
+                        <br>
+                        En plus, la température ressentie est de <?= intval($weather->getFeltTemp()) ?>°C !
+                    <?php } ?>
+                </h5>
+            <?php } else { ?>
+                <h5>Surtout vu le temps à <?= htmlspecialchars($weather->getTown()->getLabel()) ?>...</h5>
+            <?php } ?>
+        <?php } ?>
         <hr>
     </div>
     <div class="container">
         <div class="heure_filtre text-center">
-            <!--On donne la possibilité de saisir l'heure pour filtrer l'affichage du programme télé-->
-            <span>Saisissez l'heure à laquelle vous souhaitez avoir le programme télé (30 dernières et prochaines minutes) :</span>
-            <input  type="time" name="heure" id="heure">
+            <span>Saisissez l'heure à laquelle vous souhaitez avoir le programme télé (+/-15 minutes) :</span>
+            <input type="time" name="heure" id="heure">
             <button class="btn btn-primary">Filtrer</button>
         </div>
-        <hr>
-        <ul id="tvList">
-            <p class="text-center">Choisissez une horaire pour avoir les information des programme tv autour de cette horaire</p>
-        </ul>
+        <div id="tvList" class="text-center">
+            <p class="text-center w-100 mt-5">Choisissez un horaire pour connaître les programme tv autour de cet horaire.</p>
+        </div>
         <br>
     </div>
     <script>
@@ -50,12 +66,26 @@
                 var dateBefore = new Date()
                 dateBefore.setHours(heureFiltre[0])
                 dateBefore.setMinutes(heureFiltre[1])
-                dateBefore = addMinutes(dateBefore, -30)
+                dateBefore = addMinutes(dateBefore, -15)
                 
                 var dateAfter = new Date()
                 dateAfter.setHours(heureFiltre[0])
                 dateAfter.setMinutes(heureFiltre[1])
-                dateAfter = addMinutes(dateAfter, 30)
+                dateAfter = addMinutes(dateAfter, 15)
+
+                if(variableRecuperee['started'] != undefined) {
+                    for (var i = 0; i < variableRecuperee['started'].length; i++) {
+                        var time = variableRecuperee['started'][i]._begin.split(':')
+                        var dateTvProgram = new Date();
+                        dateTvProgram.setHours(time[0])
+                        dateTvProgram.setMinutes(time[1])
+
+                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
+                            var liToAdd = $("<div class='card text-black bg-light mt-4'><div class='card-header text-center'><h2 class='m-0'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span></h2></div><div class='p-3'><em>" + variableRecuperee['started'][i]._synopsis + " </div>")
+                            $('#tvList').append(liToAdd)
+                        }
+                    }
+                }
 
                 if(variableRecuperee['notStarted'] != undefined) {
                     for (var i = 0; i < variableRecuperee['notStarted'].length; i++) {
@@ -65,21 +95,7 @@
                         dateTvProgram.setMinutes(time[1])
                         
                         if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['notStarted'][i]._synopsis + "</li>")
-                            $('#tvList').append(liToAdd)
-                        }
-                    }
-                }
-                if(variableRecuperee['started'] != undefined) {
-                    for (var i = 0; i < variableRecuperee['started'].length; i++) {
-                        var time = variableRecuperee['started'][i]._begin.split(':')
-                        var dateTvProgram = new Date();
-                        dateTvProgram.setHours(time[0])
-                        dateTvProgram.setMinutes(time[1])
-
-                        if(dateBefore < dateTvProgram && dateAfter > dateTvProgram) {
-                            var liToAdd = $("<li class='mt-2'><strong>" + variableRecuperee['started'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['started'][i]._title + "</u> - <span class='started'>" + time[0] + "h" + time[1] + "</span><br><em>" + variableRecuperee['started'][i]._synopsis + "</li>")
+                            var liToAdd = $("<div class='card text-black bg-light mt-4'><div class='card-header text-center'><h2 class='m-0'><strong>" + variableRecuperee['notStarted'][i]._Channel._label + "</strong> - <u class='title'>" + variableRecuperee['notStarted'][i]._title + "</u> - <span class='not-started'>" + time[0] + "h" + time[1] + "</span></h2></div><div class='p-3'><em>" + variableRecuperee['notStarted'][i]._synopsis + " </div>")
                             $('#tvList').append(liToAdd)
                         }
                     }

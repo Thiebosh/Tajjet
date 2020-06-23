@@ -1,24 +1,29 @@
 <?php ob_start();?>
     <div class="text-center">
-        <h1>Chercher une recette</h1>
+        <h1>
+            <img alt="icon" src="resource/image/cooking.png"/>
+            Trouvez la recette idéale !
+        </h1>
         <hr>
     </div>
     <div class="d-flex justify-content-center mb-3">
-        <form class="row w-100" method="post" action="index.php?page=cooking" id="plats"><!-- partie recherche seule -->
-            <select class="custom-select col-lg m-3" name="type" size=1> <!--Liste déroulante des types de plats (entrées,desserts...)-->
+        <form class="row w-100" method="post" action="index.php?page=cooking" id="plats">
+            <select class="custom-select col-lg m-3" name="type" size=1>
                 <option>Type de préparation</option>
                 <?php foreach($typeList as $type) { ?>
-                    <option><?= htmlspecialchars($type->getLabel()) ?></option>
+                    <option <?= isset($trustedPost['type']) && $trustedPost['type'] == ucfirst($type->getLabel()) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars(ucfirst($type->getLabel())) ?>
+                    </option>
                 <?php } ?>
             </select>
-            <input required class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette">
+            <input required class="col-lg form-control m-3" type="text" name="search" placeholder="Nom de recette" value="<?= isset($trustedPost['search']) ? $trustedPost['search'] : '' ?>">
             <input class="col-lg btn btn-primary m-3 buttonNav" type="submit" value="Rechercher">
-            <a class="col-lg btn btn-primary m-3 buttonNav">Recette aléatoire</a>
+            <a class="col-lg btn btn-primary m-3 buttonNav" href="index.php?page=cooking">Recette aléatoire</a>
         </form>
     </div>
     <article class="jumbotron p-2">
         <div classe="col-md-12 text-center">
-            <div class="d-flex justify-content-center my-3"><h1 class="font-weight-bold"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
+            <div class="d-flex justify-content-center my-3"><h1 class="font-weight-bold text-center"><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getName())) ?></h1></div>
             <div class="d-flex justify-content-center"><img class="col-lg-3" src="<?= htmlspecialchars($recipe->getPicture()) ?>" alt="Image recette"></div>
             
             <div class="row my-4 text-center">
@@ -72,13 +77,13 @@
                     <p class="font-weight-bold">Note : <?= htmlspecialchars($recipe->getScore()) ?>/5</p> 
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="font-weight-bold">Difficulté : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getDifficulty())) ?></p>
+                    <p class="font-weight-bold">Difficulté : <?= ucfirst(htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getDifficulty()))) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="font-weight-bold">Budget : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice())) ?></p>
+                    <p class="font-weight-bold">Budget : <?= ucfirst(htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getPrice()))) ?></p>
                 </div>
                 <div class="col-md-3 mt-3">
-                    <p class="font-weight-bold">Personne : <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getNbPerson())) ?></p>
+                    <p class="font-weight-bold">Quantités pour <?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($recipe->getNbPerson())) ?> personne(s)</p>
                 </div>                
             </div>
             <hr>
@@ -92,21 +97,14 @@
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= htmlspecialchars($i.'. '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
+                                    <li><strong><?= $i.'. ' ?></strong><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>
-                    <?php if (!isset($trustedPost['recipeID'])) { ?>
-                        <form method="post" action="index.php?page=cooking" class="text-center">
-                            <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
-                            <input type="submit" class="btn btn-success" value="Je prépare cette recette"/>
-                        </form>
-                    <?php 
-                    } else { ?> 
-                    <p class="text-center">
-                        J'ai déjà préparé cette recette 
-                    </p>
-                    <?php } ?>
+                    <form method="post" action="index.php?page=cooking#anchorPreparation" class="text-center" id="anchorPreparation">
+                        <input type="hidden" name="recipeID" value="<?= htmlspecialchars($recipe->getId()) ?>">
+                        <input type="submit" class="btn btn-success" value="<?= !isset($trustedPost['recipeID']) ? 'Je prépare' : 'J\'ai préparé' ?> cette recette"/>
+                    </form>
                 </div>
                 <div class="col-md text-center mb-5">
                     <h2>Liste des ingrédients :</h2> 
@@ -117,19 +115,20 @@
                             $limit = count($lines);
                             foreach ($lines as $line) { 
                                 if (++$i < $limit) { ?>
-                                    <li><?= htmlspecialchars('* '.\ForceUTF8\Encoding::toUTF8($line)) ?></li>
+                                    <li><strong><?= '* ' ?></strong><?= htmlspecialchars(\ForceUTF8\Encoding::toUTF8($line)) ?></li>
                                 <?php }    
                         } ?>
                     </ul>
                     <?php 
                     $test = str_replace("'", "&#146", $recipe->getIngredients());
                     ?>
-                    <button class="btn btn-success" onclick="downloadFile('<?= htmlspecialchars($test) ?>')">Je télécharge la liste d'ingrédient</button>
+                    <button class="btn btn-success" onclick="downloadFile('<?= \ForceUTF8\Encoding::toUTF8($test) ?>')">Je télécharge la liste d'ingrédient</button>
                 </div>
             </div>
         </div>
     </article>
     <script>
+        
         function downloadFile(data, name = 'listeIngredients', type = 'text/plain') {
             const { createElement } = document
             const { URL: { createObjectURL, revokeObjectURL }, setTimeout } = window

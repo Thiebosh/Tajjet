@@ -1,43 +1,47 @@
 <?php ob_start(); ?>
     <div class="col-lg-12 text-center">
-        <h1>Votre état de santé</h1>
+        <h1>
+            <img alt="icon" src="resource/image/health.png"/>
+            Votre état de santé
+        </h1>
         <hr>
     </div>
-    <article class="container">
-        <div class="row w-100 graph-container">
-            <div class="col-lg-8 graphes my-2">
-                <h2 class="my-2">Graphique santé</h2>
+    <article class="container jumbotron p-2">
+        <div class="row w-100 m-0">
+            <div class="col-lg graphes my-2">
+                <h2 class="my-2 font-weight-bold text-center">Graphique santé</h2>
                 <canvas id="graph"></canvas>
 
                 <div class="d-flex justify-content-center my-2">
                     <div class="row w-100">
-                        <button class="col-lg mx-2 btn btn-primary" id="weightChart">Poids</button>
-                        <button class="col-lg mx-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
-                        <button class="col-lg mx-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="weightChart">Poids</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
                     </div>   
                 </div>
             </div>
-            <div class="offset-lg-1 col-lg-3 saisie my-2">
-                <h2 class="my-2">Aujourd'hui</h2>
-                <br>
-                <form method="post" action="index.php?page=health">
-                    <label for="sleepTime">Heures de sommeil</label>
-                    <input required type="time" class="form-control" name="sleepTime">
-                    <br>
-                    <label for="weight">Poids</label>
-                    <input required type="number" class="form-control" name="weight" step=".1">
-                    <br>
-                    <div>
-                        <input class="btn btn-success" type="submit" value="Enregistrer">
+            <div class="col-lg-3">
+                <h2 class="my-2 font-weight-bold text-center">Aujourd'hui</h2>
+                <div class="row h-75">
+                    <div class="my-auto mx-auto col-lg">
+                        <form method="post" action="index.php?page=health" class="my-auto text-center">
+                            <label for="sleepTime">Heures de sommeil</label>
+                            <input required type="time" class="form-control" name="sleepTime" 
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getSleep() != 0 ? $listHealth[0]->getSleep() : '00:00' ?>">
+                            <br>
+                            <label for="weight">Poids</label>
+                            <input required type="number" class="form-control" name="weight" step="0.5" 
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getWeight() != 0 ? $listHealth[0]->getWeight() : '50' ?>">
+                            <br>
+                            <div>
+                                <input class="btn btn-success" type="submit" value="Enregistrer">
+                            </div>
+                            <br>
+                        </form>
                     </div>
-                    <br>
-                </form>
+                </div>
             </div>
         </div>
-    </article>
-    
-    <br>
-    <div class="container">
         <table class="table table-bordered text-center">
             <thead class="thead-dark">
                 <tr>
@@ -49,33 +53,31 @@
                 <tr>
                     <?php if (isset($imc)) { ?>
                         <td>
-                            Votre IMC est de <strong><?= htmlspecialchars(isset($imc) ? number_format (floatval($imc), 1) : '') ?></strong> <!--On va ici afficher l'IMC puis des messages différents selon l'IMC de l'utilisateur-->
+                            Votre IMC est de <strong><?= number_format(floatval($imc), 1) ?></strong>
                         </td>
-
                         <td>
-                            <?= htmlspecialchars(isset($commIMC) ? $commIMC : '') ?>
+                            <?= htmlspecialchars($commIMC) ?>
                         </td> 
-                        
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer votre poids dans pour pouvoir calculer votre IMC.
+                            Veuillez renseigner votre taille dans votre profil et votre poids du jour pour connaître votre IMC.
                         </td>
                     <?php } ?>
                 </tr>
                 <tr> 
-                    <?php if (isset($commDiff)) { ?>
+                    <?php if (isset($lorentzWeight)) { ?>
                         <td>
-                            Pour votre taille, le poids idéal est de : <strong> < calcul en js avec taille et sexe > kg.</strong>
+                            Pour votre taille, le poids idéal est de <strong><?= $lorentzWeight ?>kg</strong>
                         </td>
                         <td>
-                        <?= htmlspecialchars(isset($commDiff) ? $commDiff : '') ?>
+                        <?= isset($commDiff) ? htmlspecialchars($commDiff) : 'Entrez votre poids du jour pour plus d\'informations' ?>
 
                         </td>
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer votre taille et votre sexe en cliquant sur Mon Profil. 
+                            Veuillez renseigner votre taille et votre sexe dans votre profil pour connaître votre poids idéal.
                         </td>
                     <?php } ?>
                     
@@ -84,38 +86,39 @@
                     <?php if (isset($commSleepTod)) { ?>
                         <td>
                             Vous avez dormi 
-                            <?= htmlspecialchars($listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '') ?>
+                            <?= $listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '' ?>
                             cette nuit
                         </td>
                         <td>
-                            <?= htmlspecialchars(isset($commSleepTod) ? $commSleepTod : '') ?>
+                            <?= htmlspecialchars($commSleepTod) ?>
                         </td>
                     <?php } 
                     else { ?>
                         <td colspan="2">
-                            Veuillez entrer vos heures de sommeil de cette nuit.
+                            Veuillez renseigner votre date de naissance dans votre profil et vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>
                 <tr>
                     <?php if (isset($temps_moyen)) { ?>
                         <td>
-                            Vous avez dormi en moyenne <?= htmlspecialchars(isset($temps_moyen) ? $temps_moyen : '') ?> au cours des 7 derniers jours
+                            Vous avez dormi en moyenne <?= htmlspecialchars($temps_moyen) ?> au cours des 7 derniers jours
                         </td>
                         <td>
-                            <?= htmlspecialchars(isset($commRythme) ? $commRythme : '') ?>
+                            <?= htmlspecialchars($commRythme) ?>
                         </td>
                     <?php }
                     else { ?>
                         <td colspan ="2">
-                            Veulliez entrer vos heures de sommeil.
+                            Veuillez renseigner vos heures de sommeil du jour pour plus d'informations.
                         </td>
                     <?php } ?>
                 </tr>
 
             </tbody>
         </table>
-    </div>
+    </article>
+        
     <script>
         var variableRecuperee = <?= $data ?>;
         var userDate = []

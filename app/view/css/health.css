@@ -1,32 +1,8 @@
-.graphes,.saisie
-{
-    border:1px solid black;
-    text-align: center;
+
+tbody {
     background-color: #FFF;
 }
 
-article
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.saisie h1
-{
-    font-size:1.7em;
-    font-weight: bold;
-}
-
-.tab
-{
-    justify-content: center;
-}
-
-.graph-container {
-    margin: 0;
-}
-
-tbody {
+.graphes {
     background-color: #FFF;
 }

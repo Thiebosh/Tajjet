@@ -1,5 +1,5 @@
 <?php
-$healthCond = $_SESSION['user']->getHeight() != null ? true : false;
+$healthCond = $_SESSION['user']->getHeight() != null && $_SESSION['user']->getSex() ? true : false;
 $weatherCond = $_SESSION['user']->getTown()->getId() != null ? true : false;
 
 $grid = array(  array(  
@@ -11,7 +11,7 @@ $grid = array(  array(
                 array(  
                         array("link" => "news",         "display" => "Actualités",  "active" => true),
                         array("link" => "sport",        "display" => "Sport",       "active" => true),
-                        array("link" => "health",       "display" => "Santé",       "active" => $healthCond,    "missing" => "taille")
+                        array("link" => "health",       "display" => "Santé",       "active" => $healthCond,    "missing" => "taille et sexe")
                     )
                 );
 
@@ -19,6 +19,13 @@ $grid = array(  array(
 if ($weatherCond) {
     require_once(__DIR__."/../model/manager/WeatherManager.php");
     $weather = (new WeatherManager)->readNowByIdTown($_SESSION['user']->getTown()->getId());
+}
+
+
+if ($healthCond) {
+    $size = $_SESSION['user']->getHeight() * 100;
+    $lorentzWeight = intval(($size - 100) - (($size - 150) / ($_SESSION['user']->getSex() == "homme" ? 4 : 2.5)));
+    unset($size);
 }
 
 
