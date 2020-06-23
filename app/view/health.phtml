@@ -25,7 +25,7 @@
                 <div class="row h-75">
                     <div class="my-auto mx-auto col-lg">
                         <form method="post" action="index.php?page=health" class="my-auto text-center">
-                            <label for="sleepTime">Heures de sommeil</label>
+                            <label for="sleepTime">Temps de sommeil</label>
                             <input required type="time" class="form-control" name="sleepTime" 
                             value="<?= $listHealth !== false && isset($listHealth[0]) && end($listHealth)->getSleep() != 0 ? end($listHealth)->getSleep() : '00:00' ?>">
                             <br>
