@@ -16,7 +16,7 @@
                     <div class="row w-100">
                         <button class="col-lg mx-2 my-2 btn btn-primary" id="weightChart">Poids</button>
                         <button class="col-lg mx-2 my-2 btn btn-primary" id="sleepChart">Temps de sommeil</button>
-                        <button class="col-lg mx-2 my-2 btn btn-primary" id="caloryChart">Calories ingérées</button>
+                        <button class="col-lg mx-2 my-2 btn btn-primary" id="caloryChart">Calories</button>
                     </div>   
                 </div>
             </div>
@@ -195,7 +195,7 @@
         
         document.getElementById('caloryChart').addEventListener('click', function(){
             config.data.datasets.forEach(function(dataset) {
-                dataset.label = 'Calories ingérées par jour';
+                dataset.label = 'Calories par jour';
 				dataset.data = userCalory;
 			});
 
