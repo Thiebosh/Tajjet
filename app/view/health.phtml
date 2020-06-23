@@ -27,11 +27,11 @@
                         <form method="post" action="index.php?page=health" class="my-auto text-center">
                             <label for="sleepTime">Heures de sommeil</label>
                             <input required type="time" class="form-control" name="sleepTime" 
-                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getSleep() != 0 ? $listHealth[0]->getSleep() : '00:00' ?>">
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && end($listHealth)->getSleep() != 0 ? end($listHealth)->getSleep() : '00:00' ?>">
                             <br>
                             <label for="weight">Poids</label>
                             <input required type="number" class="form-control" name="weight" step="0.5" 
-                            value="<?= $listHealth !== false && isset($listHealth[0]) && $listHealth[0]->getWeight() != 0 ? $listHealth[0]->getWeight() : '50' ?>">
+                            value="<?= $listHealth !== false && isset($listHealth[0]) && end($listHealth)->getWeight() != 0 ? end($listHealth)->getWeight() : '50' ?>">
                             <br>
                             <div>
                                 <input class="btn btn-success" type="submit" value="Enregistrer">
@@ -86,7 +86,7 @@
                     <?php if (isset($commSleepTod)) { ?>
                         <td>
                             Vous avez dormi 
-                            <?= $listHealth !== false && $listHealth[0]->getSleep() != null ? intval(explode(':',$listHealth[0]->getSleep())[0])."h".explode(':',$listHealth[0]->getSleep())[1] : '' ?>
+                            <?= $listHealth !== false && end($listHealth)->getSleep() != null ? intval(explode(':',end($listHealth)->getSleep())[0])."h".explode(':',end($listHealth)->getSleep())[1] : '' ?>
                             cette nuit
                         </td>
                         <td>

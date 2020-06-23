@@ -60,6 +60,8 @@ if(len(data['articles']) >= 20):
                     if(len(totalChars) == 1):
                         readingTime = 0.0
                     else:
+                        if(totalChars == ''):
+                            totalChars = 0
                         readingTime = int(totalChars)/1750
 
                     print(readingTime)
