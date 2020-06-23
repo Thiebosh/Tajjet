@@ -27,7 +27,6 @@ foreach ($tables as $ligne) {
                 $pays = array("fr");
                 foreach ($pays as $moduleArgs) {
                     exec("\"$executable\" core/module_$moduleScript.py $moduleArgs", $output, $return);
-                    var_dump($output);
                     if ($return) display_error($errMsg['monitor']['refresh']['fail']);
                     unset($output);
                 }
