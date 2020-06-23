@@ -14,16 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     else if (isset($trustedPost['action'])) {
-        if ($trustedPost['action'] == 'save') {
-            
-            (new SportManager)->resetProgram($_SESSION['user']->getId());
-            if($trustedPost['nbExo']!=0){
-                foreach ($trustedPost['listExo'] as $exo) {
-                    (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
-                }
+        
+        (new SportManager)->resetProgram($_SESSION['user']->getId());
+        if($trustedPost['nbExo']!=0){
+            foreach ($trustedPost['listExo'] as $exo) {
+                (new SportManager)->addToProgram($_SESSION['user']->getId(), $exo);
             }
         }
-        else if (isset($trustedPost['totalCalories'])) {
+
+        if ($trustedPost['action'] == 'do' && isset($trustedPost['totalCalories'])) {
             require_once(__DIR__."/../model/manager/HealthManager.php");
             
             if (($health = (new HealthManager)->readTodayRecord($_SESSION['user']->getId())) == false) {
