@@ -33,6 +33,21 @@
             $res            =   $mysqli->query('SHOW CREATE TABLE '.$table); 
             $TableMLine     =   $res->fetch_row();
             $content        = (!isset($content) ?  '' : $content) . "\n\n".$TableMLine[1].";\n\n";
+            
+            
+            $debut = stripos($TableMLine[1],"CONSTRAINT");
+            if($debut){
+                $fin = stripos($TableMLine[1],"ENGINE",$debut)-1;
+
+                $constraints[$table] =substr($TableMLine[1], $debut-2,$fin-$debut);
+                
+                $TableMLine[1] = str_replace (",\n".$constraints[$table], "", $TableMLine[1]);
+                
+                $constraints[$table]="ADD\t".$constraints[$table];
+                $TableMLine[1] = "DROP TABLE IF EXISTS `$table`;\n".$TableMLine[1];
+                
+                
+            }
 
             for ($i = 0, $st_counter = 0; $i < $fields_amount;   $i++, $st_counter=0) 
             {
@@ -73,6 +88,13 @@
                 }
             } $content .="\n\n\n";
         }
+        
+        
+        foreach($constraints as $table => $value){
+            $TableMLine[1]=$TableMLine[1]."\nALTER TABLE `".$table."`\n".$value.";";
+        }
+        $TableMLine[1]=$TableMLine[1]."\nCOMMIT;";
+        
         //$backup_name = $backup_name ? $backup_name : $name."___(".date('H-i-s')."_".date('d-m-Y').")__rand".rand(1,11111111).".sql";
         $backup_name = $backup_name ? $backup_name : $name.".sql";
         if($isclient){
