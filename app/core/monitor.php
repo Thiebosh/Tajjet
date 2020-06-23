@@ -15,9 +15,10 @@ foreach ($tables as $ligne) {
     
     if (!file_exists("core/module_$moduleScript.py")) display_error($errMsg['index']['pythonFile']['notSet']);
     else {
+        echo($moduleScript.'<br>');
         switch($moduleScript) {
             case "tv":
-                exec("\"$executable\" core/module_$moduleScript.py 2>&1", $output, $return);
+                exec("\"$executable\" core/module_$moduleScript.py", $output, $return);
                 if ($return) display_error($errMsg['monitor']['refresh']['fail']);
                 unset($output);
                 break;
@@ -25,7 +26,8 @@ foreach ($tables as $ligne) {
             case "news":
                 $pays = array("fr");
                 foreach ($pays as $moduleArgs) {
-                    exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                    exec("\"$executable\" core/module_$moduleScript.py $moduleArgs", $output, $return);
+                    var_dump($output);
                     if ($return) display_error($errMsg['monitor']['refresh']['fail']);
                     unset($output);
                 }
@@ -38,7 +40,7 @@ foreach ($tables as $ligne) {
                 if ($towns != false) {
                     foreach ($towns as $town) {
                         $moduleArgs = $town->getLabel();
-                        exec("\"$executable\" core/module_$moduleScript.py 2>&1 $moduleArgs", $output, $return);
+                        exec("\"$executable\" core/module_$moduleScript.py $moduleArgs", $output, $return);
                         if ($return) display_error($errMsg['monitor']['refresh']['fail']);
                         unset($output);
                     }
