@@ -15,7 +15,6 @@ foreach ($tables as $ligne) {
     
     if (!file_exists("core/module_$moduleScript.py")) display_error($errMsg['index']['pythonFile']['notSet']);
     else {
-        echo($moduleScript.'<br>');
         switch($moduleScript) {
             case "tv":
                 exec("\"$executable\" core/module_$moduleScript.py", $output, $return);

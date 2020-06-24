@@ -37,7 +37,20 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
             }
         break;
 
-        case 'load_backup_db':
+        case 'backup_db':
+            
+            require_once('vendor/SqlExport/Export.php');
+            
+            Export_Database('localhost',
+                            $config['DB']['connexion']['username'],
+                            $config['DB']['connexion']['password'],
+                            $config['DB']['setup']['DBname'],
+                            false,
+                            "EverydaySunshine_backup.sql",
+                            false);
+        break;
+
+        case 'load_backup':
             $dir="resource/db/Backup/";
             $backup_name="EverydaySunshine_backup.sql";
             if(!file_exists($dir)){
@@ -62,7 +75,6 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
 
         case 'download_db':
-            
             require_once('vendor/SqlExport/Export.php');
             
             Export_Database('localhost',
@@ -72,28 +84,12 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             false,
                             "EverydaySunshine_backup.sql",
                             true);
-            
-        break;
-
-        case 'backup_db':
-            
-            require_once('vendor/SqlExport/Export.php');
-            
-            Export_Database('localhost',
-                            $config['DB']['connexion']['username'],
-                            $config['DB']['connexion']['password'],
-                            $config['DB']['setup']['DBname'],
-                            false,
-                            "EverydaySunshine_backup.sql",
-                            false);
-            
+            header("index.php");
         break;
 
         default:
             display_error($errMsg['router']['URL']['unknow']);
         break;
-
-        
     }
 
     $pageName = 'home';//page d'accueil, sait qu'elle existe

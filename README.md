@@ -1,6 +1,6 @@
 # YourEverydaySunshine (YES) - webApp by Tajjet Team
 
-Projet de 1ère année de cycle ingénieur, réalisé au 06/2020 par une équipe de [6 personnes](github.com/Thiebosh/Tajjet/pulse).
+Projet de 1ère année de cycle ingénieur, réalisé au 06/2020 par une équipe de [6 personnes](github.com/Thiebosh/Tajjet/pulse/monthly).
 
 
 ### Setup de votre environnement
@@ -46,15 +46,17 @@ La configuration du projet s'effectue dans le fichier config.json. Avant lanceme
 
 1. Lancer Wamp et attendre que les trois services soient actifs
 
-2. A la première utilisation, dans le navigateur, entrer l'url de monitoring localhost/\*yourPathBetweenWWWAndTajjetFolder\*/Tajjet/index.php?action=upload_db
+2. A la première utilisation, dans le navigateur, entrer l'url de monitoring localhost/\*yourPathBetweenWWWAndTajjetFolder\*/Tajjet/index.php?action=setup_db
 
 
 ### Monitoring de la base de données
 
-1. La base de données peut être administrée via 3 URL de monitoring :
-  * index.php?action=upload_db    : pour créer la base de données à partir du fichier sql ou recréer sa structure si elle existe déjà
-      * Appelle automatiquement index.php?action=fill_db
-  * index.php?action=fill_db      : pour initialiser la base de données (remplissage de tous les modules) à l'aide du core python
-  * index.php?action=download_db  : pour exporter la structure et les données de la base de données sous forme de fichier sql (todo)
+1. La base de données possède ses propres mécanismes de rafraichissement : le contenu des tables nécessitant un renouvellement se met à jour automatiquement : se référer aux tables Renewal et Frequency pour plus d'information.
 
-2. La base de données possède ses propres mécanismes de rafraichissement : le contenu des tables nécessitant un renouvellement se met à jour automatiquement : se référer aux tables Renewal et Frequency pour plus d'information.
+2. La base de données est administrable via 3 URL de monitoring :
+  * index.php?action=setup_db     : pour (re)créer la base de données à partir du fichier sql initial et la pré-remplir à l'aide du core python
+  * index.php?action=backup_db    : pour exporter un script sql (structure + données) sur le serveur
+  * index.php?action=load_backup  : pour importer le script sql de backup du serveur, s'il existe
+
+3. la base de données est exportable côté client via l'url index.php?action=download_db :
+  * point de départ vers une proposition de récupération des données propres à l'utilisateur, en respect de la loi RGPD
