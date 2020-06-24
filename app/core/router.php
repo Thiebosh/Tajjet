@@ -47,7 +47,8 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             $config['DB']['setup']['DBname'],
                             false,
                             "EverydaySunshine_backup.sql",
-                            false);
+                            false,
+                            array("article", "channel", "sky", "tvprogram", "weather"));
         break;
 
         case 'load_backup':
@@ -83,7 +84,8 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             $config['DB']['setup']['DBname'],
                             false,
                             "EverydaySunshine_backup.sql",
-                            true);
+                            true,
+                            array("article", "channel", "sky", "tvprogram", "weather"));
             header("index.php");
         break;
 
