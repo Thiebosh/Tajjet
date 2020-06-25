@@ -47,7 +47,7 @@ Manager::setDBData($config['DB']['setup']['DBname'],
                     $config['DB']['connexion']['password'],
                     $config['DB']['setup']['characterSet']);
 
-require_once('app/core/monitor.php');
+if (empty($_GET['action'])) require_once('app/core/monitor.php');
 
 
 //6. appelle le routeur et met fin au script

@@ -56,3 +56,4 @@ $errMsg['controller']['cooking']['recipe']  = 'Aucune recette trouvée.';
 
 
 $errMsg['controller']['weather']['town'] = $errMsg['controller']['register']['town'];
+$errMsg['backup']="Aucun backup";

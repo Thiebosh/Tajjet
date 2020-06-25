@@ -7,33 +7,42 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         case 'setup_db':
             if (!is_readable($scriptName['sql'])) display_error($errMsg['index']['sqlFile']['notSet']);
             else {
-                require_once('vendor/SqlImport/Import.php');
+                
+                if (!isset($_GET['part'])) {
+                    require_once('vendor/SqlImport/Import.php');
 
-                new vendor\SqlImport\Import($scriptName['sql'], 
-                                            $config['DB']['connexion']['username'], 
-                                            $config['DB']['connexion']['password'], 
-                                            $config['DB']['setup']['DBname'], 
-                                            $config['DB']['setup']['characterSet'], 
-                                            $config['DB']['setup']['classification'],
-                                            'localhost',
-                                            true, true);
+                    new vendor\SqlImport\Import($scriptName['sql'], 
+                                                $config['DB']['connexion']['username'], 
+                                                $config['DB']['connexion']['password'], 
+                                                $config['DB']['setup']['DBname'], 
+                                                $config['DB']['setup']['characterSet'], 
+                                                $config['DB']['setup']['classification'],
+                                                'localhost',
+                                                true, true);
 
-                $modules = array( //anciennement fill_db
-                    array('name' => 'tv'),
-                    array('name' => 'sport'),
-                    array('name' => 'news', 'param' => 'fr'),
-                    array('name' => 'meteo', 'param' => 'Lille'),
-                    array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
-                );
-
-                foreach ($modules as $module) {
-                    if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
-                    else {
-                        exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);
-                        unset($output);
-                    }
+                    
+                    header('Location: index.php?action=setup_db&part=2');
+                    
                 }
-                unset($_SESSION['user']);
+                else{
+                    $modules = array( //anciennement fill_db
+                        array('name' => 'tv'),
+                        array('name' => 'sport'),
+                        array('name' => 'news', 'param' => 'fr'),
+                        array('name' => 'meteo', 'param' => 'Lille'),
+                        array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
+                    );
+
+                    foreach ($modules as $module) {
+                        if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
+                        else {
+                            exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);
+                            unset($output);
+                        }
+                    }
+                    unset($_SESSION['user']);
+                    header('Location: index.php');
+                }
             }
         break;
 
@@ -46,32 +55,95 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             $config['DB']['connexion']['password'],
                             $config['DB']['setup']['DBname'],
                             false,
-                            "EverydaySunshine_backup.sql",
+                            "EverydaySunshine_backup",
                             false,
                             array("article", "channel", "sky", "tvprogram", "weather"));
         break;
 
         case 'load_backup':
             $dir="resource/db/Backup/";
-            $backup_name="EverydaySunshine_backup.sql";
-            if(!file_exists($dir)){
-                echo("Aucun backup");
-                }
-            else{
-                if (!is_readable($dir.$backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
-                else {
-                    require_once('vendor/SqlImport/Import.php');
-                    new vendor\SqlImport\Import($dir.$backup_name, 
-                                                $config['DB']['connexion']['username'], 
-                                                $config['DB']['connexion']['password'], 
-                                                $config['DB']['setup']['DBname'], 
-                                                $config['DB']['setup']['characterSet'], 
-                                                $config['DB']['setup']['classification'],
-                                                'localhost',
-                                                true, true);
+            if (!isset($_GET['part'])) {
+                $backup_name="EverydaySunshine_backupStructure.sql";
+                if(!file_exists($dir)) display_error($errorMsg);
+                else{
+                    if (!is_readable($dir.$backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
+                    else {
+                        require_once('vendor/SqlImport/Import.php');
+                        new vendor\SqlImport\Import($dir.$backup_name, 
+                                                    $config['DB']['connexion']['username'], 
+                                                    $config['DB']['connexion']['password'], 
+                                                    $config['DB']['setup']['DBname'], 
+                                                    $config['DB']['setup']['characterSet'], 
+                                                    $config['DB']['setup']['classification'],
+                                                    'localhost',
+                                                    true, true);
 
+                    }
                 }
+                header("Location: index.php?action=load_backup&part=2");
             }
+            else{
+                if($_GET['part']==2){
+                    $backup_name="EverydaySunshine_backupData.sql";
+                    if(!file_exists($dir)) display_error($errorMsg);
+                    else{
+                        if (!is_readable($dir.$backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
+                        else {
+                            require_once('vendor/SqlImport/Import.php');
+                            new vendor\SqlImport\Import($dir.$backup_name, 
+                                                        $config['DB']['connexion']['username'], 
+                                                        $config['DB']['connexion']['password'], 
+                                                        $config['DB']['setup']['DBname'], 
+                                                        $config['DB']['setup']['characterSet'], 
+                                                        $config['DB']['setup']['classification'],
+                                                        'localhost',
+                                                        false, false);
+
+                        }
+                    }
+                    header("Location: indexp.php?action=load_backup&part=3");
+                }
+                elseif($_GET['part']==3){
+                    $backup_name="EverydaySunshine_backupConstraints.sql";
+                    if(!file_exists($dir)) display_error($errorMsg);
+                    else{
+                        if (!is_readable($dir.$backup_name)) display_error($errMsg['index']['sqlFile']['notSet']);
+                        else {
+                            require_once('vendor/SqlImport/Import.php');
+                            new vendor\SqlImport\Import($dir.$backup_name, 
+                                                        $config['DB']['connexion']['username'], 
+                                                        $config['DB']['connexion']['password'], 
+                                                        $config['DB']['setup']['DBname'], 
+                                                        $config['DB']['setup']['characterSet'], 
+                                                        $config['DB']['setup']['classification'],
+                                                        'localhost',
+                                                        false, false);
+                                                        
+                            $modules = array( //anciennement fill_db
+                                array('name' => 'tv'),
+                                array('name' => 'sport'),
+                                array('name' => 'news', 'param' => 'fr'),
+                                array('name' => 'meteo', 'param' => 'Lille'),
+                                array('name' => 'recettes', 'param' => 'boeuf bourguignon platprincipal')
+                            );
+        
+                            foreach ($modules as $module) {
+                                if (!file_exists("core/module_".$module['name'].".py")) display_error($errMsg['index']['pythonFile']['notSet']);
+                                else {
+                                    exec('"'.$config['Python']['executable'].'" core/module_'.$module['name'].'.py '.(isset($module['param']) ? $module['param'] : ''), $output, $return);
+                                    unset($output);
+                                }
+                            }
+                            unset($_SESSION['user']);
+                            header('Location: index.php');
+
+                        }
+                    }
+                }
+                header("Location: index.php");
+            }
+            
+            
         break;
 
 
@@ -86,7 +158,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             "EverydaySunshine_backup.sql",
                             true,
                             array("article", "channel", "sky", "tvprogram", "weather"));
-            header("index.php");
+            header("Location: index.php");
         break;
 
         default:
