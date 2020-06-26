@@ -60,3 +60,11 @@ La configuration du projet s'effectue dans le fichier config.json. Avant lanceme
 
 3. la base de données est exportable côté client via l'url index.php?action=download_db :
   * point de départ vers une proposition de récupération des données propres à l'utilisateur, en respect de la loi RGPD
+
+
+
+### Visuels du site
+
+(wip - découper gif pour chaque module)
+
+![createFunction](https://github.com/Thiebosh/Tajjet/raw/master/readme_content/visuel.gif)
