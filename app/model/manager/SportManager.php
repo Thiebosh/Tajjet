@@ -93,6 +93,8 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
 
 
     public function readByMuscle($muscle) {
+        if($muscle == 'Default') return $this->readAll();
+
         $query = 'SELECT ID_sport FROM Work WHERE ID_muscle = :id';
         $table = array("id" => (new MuscleManager)->readByName($muscle)->getId());
 
@@ -132,10 +134,15 @@ class SportManager extends Manager {//pattern CRUD : create, read, update, delet
 
 
     public function searchByNameAndMuscle($muscle, $name) {
-        $query = 'SELECT ID_sport FROM Work WHERE ID_muscle = :id';
-        $table = array("id" => (new MuscleManager)->readByName($muscle)->getId());
+        $query = 'SELECT ID_sport FROM Work';
 
-        $request = parent::prepareAndExecute($query, $table);
+        if ($name != "Default") {
+            $query .= ' WHERE ID_muscle = :id';
+            $table = array("id" => (new MuscleManager)->readByName($muscle)->getId());
+
+            $request = parent::prepareAndExecute($query, $table);
+        }
+        else $request = parent::prepareAndExecute($query);
         
         //all sport
         foreach ($request->fetchAll(PDO::FETCH_COLUMN) as $idSport) {
