@@ -11,7 +11,7 @@ function Export_Database($host,$user,$pass,$name,  $tables=false, $backupName=fa
 
     $structure = '';
     $data = '';
-    $constraint_structure = '';
+    $constraintStructure = '';
     foreach ($target_tables as $table) {
 
         $result         = $mysqli->query('SELECT * FROM '.$table);  
@@ -36,7 +36,7 @@ function Export_Database($host,$user,$pass,$name,  $tables=false, $backupName=fa
         if (!in_array($table, $structureOnly)) {
             for ($i = 0, $st_counter = 0; $i < $fields_amount;   $i++, $st_counter=0) {
                 while($row = $result->fetch_row()) { //when started (and every after 100 command cycle):
-                    if ($st_counter%100 == 0 || $st_counter == 0 ) $data .= "\nINSERT INTO ".$table." VALUES";
+                    if ($st_counter%100 == 0 || $st_counter == 0 ) $data .= "INSERT INTO ".$table." VALUES";
                             
                     $data .= "\n(";
 
@@ -49,7 +49,7 @@ function Export_Database($host,$user,$pass,$name,  $tables=false, $backupName=fa
                     }
                     $data .=")";
                     //every after 100 command cycle [or at last line] ....p.s. but should be inserted 1 cycle eariler
-                    if ( (($st_counter+1)%100==0 && $st_counter!=0) || $st_counter+1==$rows_num) $data .= ";";
+                    if ( (($st_counter+1)%100==0 && $st_counter!=0) || $st_counter+1==$rows_num) $data .= ";\n";
                     else $data .= ",";
 
                     $st_counter++;
@@ -62,19 +62,19 @@ function Export_Database($host,$user,$pass,$name,  $tables=false, $backupName=fa
     
     if (isset($constraints)) {
         foreach($constraints as $table => $value) {
-            $constraint_structure .="\n\nALTER TABLE `".$table."`\n".$value.";";
+            $constraintStructure .="ALTER TABLE `".$table."`\n".$value.";\n\n";
         }
-        $constraint_structure .= "\nCOMMIT;";
+        $constraintStructure .= "COMMIT;";
     }
     
     //$backupName = $backupName ? $backupName : $name."___(".date('H-i-s')."_".date('d-m-Y').")__rand".rand(1,11111111).".sql";
     $backupName = $backupName ? $backupName : $name;
     if ($isClient) {
-        header('structure-Type: application/octet-stream');   
-        header("structure-Transfer-Encoding: Binary");
-        header("structure-disposition: attachment; filename=\"".$backupName."\"");
-        echo($structure);
-        exit();//test
+        header('Content-Type: application/octet-stream');   
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-disposition: attachment; filename=\"".$backupName."\"");
+        echo($structure.$data.$constraintStructure);//contenu du fichier, envoyé par header
+        exit();
     }
     else {
         $dir="resource/db/Backup";
@@ -112,15 +112,15 @@ function Export_Database($host,$user,$pass,$name,  $tables=false, $backupName=fa
         if(!file_exists($dir)){ 
             $creation=mkdir($dir,0777,true);
             if($creation){ //On met le fichier dans le dossier Backup_Constraints
-                if($constraint_structure!=''){
-                    file_put_contents($backup_path,$constraint_structure);
+                if($constraintStructure!=''){
+                    file_put_contents($backup_path,$constraintStructure);
                 }
             }
         }
         else {
             if(file_exists($backup_path)) unlink($backup_path);
-            if($constraint_structure!=''){
-                file_put_contents($backup_path,$constraint_structure);//On met le fichier dans le dossier Backup_Constraints
+            if($constraintStructure!=''){
+                file_put_contents($backup_path,$constraintStructure);//On met le fichier dans le dossier Backup_Constraints
             }
         }
     }

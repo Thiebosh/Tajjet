@@ -31,6 +31,7 @@ $errMsg['index']['pythonFile']['notSet']   = 'Script python introuvable.';
 $errMsg['monitor']['refresh']['fail'] = 'Echec de renouvellement des données.';
 
 $errMsg['router']['URL']['unknow'] = 'Erreur 404 : page introuvable.';
+$errMsg['router']['backup']['loadFail'] = 'Erreur backup : échec de rétablissement.';
 
 
 $errMsg['checker']['form']['filter']            = 'Valeurs incorrectes.';

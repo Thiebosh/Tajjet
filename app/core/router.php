@@ -61,6 +61,7 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
         break;
 
         case 'load_backup':
+            var_dump($_GET);
             $dir="resource/db/Backup/";
             if (!isset($_GET['part'])) {
                 $backup_name="EverydaySunshine_backupStructure.sql";
@@ -77,7 +78,6 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                                                     $config['DB']['setup']['classification'],
                                                     'localhost',
                                                     true, true);
-
                     }
                 }
                 header("Location: index.php?action=load_backup&part=2");
@@ -101,9 +101,9 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
 
                         }
                     }
-                    header("Location: indexp.php?action=load_backup&part=3");
+                    header("Location: index.php?action=load_backup&part=3");
                 }
-                elseif($_GET['part']==3){
+                else {
                     $backup_name="EverydaySunshine_backupConstraints.sql";
                     if(!file_exists($dir)) display_error($errorMsg);
                     else{
@@ -140,10 +140,8 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                         }
                     }
                 }
-                header("Location: index.php");
             }
-            
-            
+            display_error($errMsg['router']['backup']['loadFail']);//redirection dans chaque cas
         break;
 
 
@@ -158,7 +156,6 @@ if (!empty($_GET['action'])) {//!empty($var) <=> (isset($var) && $var!=false)
                             "EverydaySunshine_backup.sql",
                             true,
                             array("article", "channel", "sky", "tvprogram", "weather"));
-            header("Location: index.php");
         break;
 
         default:
